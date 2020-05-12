@@ -699,3 +699,4 @@ function borrowMoney(x) {
       blinkCounter++;
     }
   }
+}
