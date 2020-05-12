@@ -610,93 +610,93 @@ function borrowMoney(x) {
   if (x > maxDebt - debt) {
     debt += x;
   }
+ }
 
-  function payBack(x) {
-    var max = Math.min(debt, funds);
-    debt -= max;
-    funds -= max;
-  }
+function payBack(x) {
+  var max = Math.min(debt, funds);
+  debt -= max;
+  funds -= max;
+}
 
-  function togglePaperBuyer() {
-    paperBuyerOn = !paperBuyerOn
-    paperBuyerEl.innerHTML = paperBuyerOn ? "ON" : "OFF";
-  }
+function togglePaperBuyer() {
+  paperBuyerOn = !paperBuyerOn
+  paperBuyerEl.innerHTML = paperBuyerOn ? "ON" : "OFF";
+}
 
-  // Console stuff.
-  function displayMessage(msg) {
-    console.log(msg);
+// Console stuff.
+function displayMessage(msg) {
+  console.log(msg);
 
-    var newMsgEl = document.createElement("div");
-    newMsgEl.setAttribute("class", "consoleMsg");
-    newMsgEl.setAttribute("id", "consoleMsg");
-    newMsgEl.innerHTML = msg;
-    blink(newMsgEl);
+  var newMsgEl = document.createElement("div");
+  newMsgEl.setAttribute("class", "consoleMsg");
+  newMsgEl.setAttribute("id", "consoleMsg");
+  newMsgEl.innerHTML = msg;
+  blink(newMsgEl);
 
-    readoutDivEl.prepend(newMsgEl, readoutDivEl.firstChild);
-  }
+  readoutDivEl.prepend(newMsgEl, readoutDivEl.firstChild);
+}
 
-  // Project management functions.
-  function displayProjects(project) {
-    project.element = document.createElement("button");
-    project.element.style.opacity = 0;
-    project.element.setAttribute("id", project.id);
+// Project management functions.
+function displayProjects(project) {
+  project.element = document.createElement("button");
+  project.element.style.opacity = 0;
+  project.element.setAttribute("id", project.id);
 
-    project.element.onclick = function () {
-      project.effect();
-    };
+  project.element.onclick = function () {
+    project.effect();
+  };
 
-    project.element.setAttribute("class", "projectButton");
+  project.element.setAttribute("class", "projectButton");
 
-    projectsDivEl.appendChild(project.element, projectsDivEl.firstChild);
+  projectsDivEl.appendChild(project.element, projectsDivEl.firstChild);
 
-    var span = document.createElement("span");
-    span.style.fontWeight = "bold";
-    project.element.appendChild(span);
+  var span = document.createElement("span");
+  span.style.fontWeight = "bold";
+  project.element.appendChild(span);
 
-    var title = document.createTextNode(project.title);
-    span.appendChild(title);
+  var title = document.createTextNode(project.title);
+  span.appendChild(title);
 
-    var cost = document.createTextNode(project.priceTag);
-    project.element.appendChild(cost);
+  var cost = document.createTextNode(project.priceTag);
+  project.element.appendChild(cost);
 
-    var div = document.createElement("div");
-    project.element.appendChild(div);
+  var div = document.createElement("div");
+  project.element.appendChild(div);
 
-    var description = document.createTextNode(project.description);
-    project.element.appendChild(description);
+  var description = document.createTextNode(project.description);
+  project.element.appendChild(description);
 
-    blink(project.element);
-  }
+  blink(project.element);
+}
 
-  function manageProjects() {
-    for (var i = 0; i < projects.length; i++) {
-      if (projects[i].trigger() && projects[i].uses > 0) {
-        displayProjects(projects[i]);
-        projects[i].uses--;
-        activeProjects.push(projects[i]);
-      }
-    }
-    for (var i = 0; i < activeProjects.length; i++) {
-      activeProjects[i].element.disabled = !activeProjects[i].cost();
+function manageProjects() {
+  for (var i = 0; i < projects.length; i++) {
+    if (projects[i].trigger() && projects[i].uses > 0) {
+      displayProjects(projects[i]);
+      projects[i].uses--;
+      activeProjects.push(projects[i]);
     }
   }
+  for (var i = 0; i < activeProjects.length; i++) {
+    activeProjects[i].element.disabled = !activeProjects[i].cost();
+  }
+}
 
-  function blink(element) {
-    var blinkCounter = -5;
+function blink(element) {
+  var blinkCounter = -5;
+  toggleVisibility(element);
+
+  var handle = window.setInterval(function () {
     toggleVisibility(element);
+  }, 30);
 
-    var handle = window.setInterval(function () {
-      toggleVisibility(element);
-    }, 30);
-
-    function toggleVisibility(element) {
-      if (blinkCounter >= 10) {
-        clearInterval(handle);
-      } else {
-        element.style.opacity = blinkCounter / 10;
-      }
-
-      blinkCounter++;
+  function toggleVisibility(element) {
+    if (blinkCounter >= 10) {
+      clearInterval(handle);
+    } else {
+      element.style.opacity = blinkCounter / 10;
     }
+
+    blinkCounter++;
   }
 }
