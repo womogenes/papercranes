@@ -645,10 +645,4 @@ function blink(element){
 }
 
 
-
-
-
-
-
-
 //
