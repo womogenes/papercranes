@@ -1,4 +1,4 @@
-// Yoy! 
+// Yoy!
 var projects = [];
 var activeProjects = [];
 
