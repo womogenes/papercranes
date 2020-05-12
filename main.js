@@ -418,7 +418,8 @@ function spellf(userInput) {
     numToWorkOn = "" + userInput;
   }
 
-  // To check if spell has been called using a Number/String Object:   "123".spell()   123..spell()
+  // To check if spell has been called using a Number/String Object:
+  // "123".spell()   123..spell()
   else if (typeof this == "object") {
     numToWorkOn = this.toString();
   } else {
@@ -450,11 +451,11 @@ function spellf(userInput) {
   // Put limit check on the program, placevalue map should be increased to increase capacity
   if (numToWorkOn.length >= 303) {
     throw new Error("Number out of bonds!");
-  } else {
-    return convertToString(numToWorkOn);
   }
+  return convertToString(numToWorkOn);
 
-  // Recursie logic to break number into strings of length 3 each and recursively pronounce each
+  // Recursive logic to break number into strings of length 3
+  // and recursively pronounce each
   function convertToString(stringEquivalent) {
     if (stringEquivalent == 0) {
       return "0";
@@ -470,8 +471,7 @@ function spellf(userInput) {
 
         if (pronounce.toUpperCase() != "zero") {
           var num = Number(
-            subStr +
-            "." +
+            subStr + "." +
             stringEquivalent.substring(subStr.length, subStr.length + 2)
           );
           result = commify(num, 1) + placeValue[unitLookup] + " , " + result;
