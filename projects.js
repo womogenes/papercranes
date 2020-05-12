@@ -273,10 +273,3 @@ var project10 = {
 }
 
 projects.push(project10);
-
-
-
-
-
-
-// 
