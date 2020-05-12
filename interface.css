@@ -1,12 +1,27 @@
 
 
+:root {
+  --bg-color: #ffffff;
+  --outline-color: #000000;
+  --text-color: #000000;
+  --fill-color: #cccccc;
+  
+  --btn-bg-on: #eeeeee;
+  --btn-bg-hover: #f9f9f9;
+  --btn-bg-active: #cccccc;
+  --btn-outline-hover: #222222;
+  --btn-outline-active: #222222;
+}
+
 * {
 	font-family: "Inconsolata", "Consolas", monospace;
+  color: var(--text-color);
 }
 
 body {
 	font-size: 15px;
 	min-width: 100px;
+  background-color: var(--bg-color);
 }
 
 h2 {
@@ -15,8 +30,8 @@ h2 {
 hr {
 	margin-top: 4px;
 	margin-bottom: 3px;
-    border: thin solid #000;
-	background-color: #000;
+  border: thin solid var(--outline-color);
+	background-color: var(--outline-color);
 }
 
 div.scroll {
@@ -27,53 +42,54 @@ div.scroll {
 .button {
 	font-size: 13px;
 	border-radius: 5px;
-    border: thin solid #222;
+  border: thin solid var(--outline-color);
 	outline: none;
-	background: #eee;
+	background: var(--btn-bg-on);
 	
+  width: auto;
 	margin-top: 3px;
 	margin-bottom: 3px;
 }
 
 .button:hover {
-	background: #f9f9f9;
-    border: 1px solid #222;
+	background: var(--btn-bg-hover);
+  border: 1px solid var(--btn-outline-hover);
 	cursor: pointer;
 }
 
 .button:active {
-	background: #ccc;
-    border: 1px solid #222;
+	background: var(--btn-bg-active);
+  border: 1px solid var(--btn-outline-active);
 }
 
 .button:disabled {
-    opacity: 0.6;
-    border: 1px solid #555;
+  opacity: 0.6;
+  border: 1px solid #555;
 	cursor: auto;
 }
 
 .projectButton {
 	font-size: 13px;
-    border-radius: 10px;
-    border: 1px solid #000;
-    outline: none;
-	background: #eee;
+  border-radius: 10px;
+  border: 1px solid var(--outline-color);
+  outline: none;
+	background: var(--btn-bg-on);
 	display: block;
     
-    height: 70px;
-    width: 275px;
+  height: 70px;
+  width: 275px;
 	margin-top: 10px;
 }
 
 .projectButton:hover {
-    background: #f9f9f9;
-	border: 1px solid #222;
+  background: var(--btn-bg-hover);
+	border: 1px solid var(--btn-outline-hover);
 	cursor: pointer;
 }
 
 .projectButton:active {
-    background: #ccc;
-	border: 1px solid #222;
+  background: var(--btn-bg-active);
+	border: 1px solid var(--btn-outline-active);
 }
 
 .projectButton:disabled {
@@ -83,43 +99,43 @@ div.scroll {
 }
 
 .pulsate {
-    -webkit-animation: pulsate 0.7s ease-out;
-    -webkit-animation-iteration-count: infinite; 
-    opacity: 0.0;
+  -webkit-animation: pulsate 0.7s ease-out;
+  -webkit-animation-iteration-count: infinite; 
+  opacity: 0.0;
 }
 
 .toolTip {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .toolTip .toolTipText {
-    visibility: hidden;
-    width: 160px;
-    background-color: #c8c8c8;
-    color: #000;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 10px;
+  visibility: hidden;
+  width: 160px;
+  background-color: #c8c8c8;
+  color: #000;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 10px;
 	margin-bottom: 13px;
     
-    position: absolute;
-    z-index: 1;
-    bottom: 75%;
-    left: 50%;
-    margin-left: 0px;
+  position: absolute;
+  z-index: 1;
+  bottom: 75%;
+  left: 50%;
+  margin-left: 0px;
     
-    opacity: 0;
-    transition: opacity 1s;
+  opacity: 0;
+  transition: opacity 1s;
 }
 
 .toolTip:hover .toolTipText {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 
 #consoleDiv {
-    width: 100%;
+  width: 100%;
 	height: 100px;
 	margin-top: 35px;
 }
@@ -134,6 +150,7 @@ div#readoutDiv {
 	font-size: 90%;
 	padding: 5px;
 	height: 100%;
+  border: thin solid var(--outline-color);
 }
 
 #fundsDiv {
@@ -183,14 +200,14 @@ div#readoutDiv {
 #happinessProgress {
 	width: 275px;
 	height: 15px;
-	background-color: #fff;
-	border: thin solid #000;
+	background-color: var(--bg-color);
+	border: thin solid var(--outline-color);
 	margin-top: 5px;
 }
 
 #happinessMeter {
 	height: 100%;
-	background-color: #ccc;
+	background-color: var(--fill-color);
 	border: none;
 }
 
@@ -198,4 +215,19 @@ div#readoutDiv {
     #projectsColumn {
       float: left;
     }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #181818;
+    --outline-color: #dddddd;
+    --text-color: #eeeeee;
+    --fill-color: #555555;
+
+    --btn-bg-on: #111111;
+    --btn-bg-hover: #222222;
+    --btn-bg-active: #1e1e1e;
+    --btn-outline-hover: #cccccc;
+    --btn-outline-active: #aaaaaa;
+  }
 }
