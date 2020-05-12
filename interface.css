@@ -46,9 +46,9 @@ div.scroll {
 	outline: none;
 	background: var(--btn-bg-on);
 	
-  width: auto;
 	margin-top: 3px;
 	margin-bottom: 3px;
+  padding: 2px 4px;
 }
 
 .button:hover {
@@ -215,19 +215,4 @@ div#readoutDiv {
     #projectsColumn {
       float: left;
     }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-color: #181818;
-    --outline-color: #dddddd;
-    --text-color: #eeeeee;
-    --fill-color: #555555;
-
-    --btn-bg-on: #111111;
-    --btn-bg-hover: #222222;
-    --btn-bg-active: #1e1e1e;
-    --btn-outline-hover: #cccccc;
-    --btn-outline-active: #aaaaaa;
-  }
 }

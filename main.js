@@ -31,6 +31,9 @@ var prevCranes = cranes;
 var tick = 0;
 var prevTimer = Date.now();
 
+// Style variables.
+var theme = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)")) ? "Dark" : "Light";
+
 // DOM Elements.
 var hapinessMeterEl;
 var paperEl;
@@ -69,8 +72,10 @@ var paperBuyerDivEl;
 var paperBuyerEl;
 var craneCountCrunchedEl;
 
+var btnChangeThemeEl;
+
 function save() {
-  var save = {
+  var savedGame = {
     cranes: cranes,
     unsoldCranes: unsoldCranes,
     funds: funds,
@@ -114,13 +119,16 @@ function save() {
     savedActiveProjects[i] = activeProjects[i].id;
   }
 
-  localStorage.setItem("savedGame", JSON.stringify(save));
+  localStorage.setItem("savedGame", JSON.stringify(savedGame));
   localStorage.setItem("savedProjectUses", JSON.stringify(savedProjectUses));
   localStorage.setItem("savedProjectFlags", JSON.stringify(savedProjectFlags));
   localStorage.setItem(
     "savedActiveProjects",
     JSON.stringify(savedActiveProjects)
   );
+  
+  // Theme.
+  localStorage.setItem("theme", JSON.stringify(theme));
 }
 
 // Saving!
@@ -174,12 +182,55 @@ function load() {
         activeProjects.push(projects[i]);
       }
     }
+    
+    theme = JSON.parse(localStorage.getItem("theme")); // Theme.
+    
   } else {
     save();
   }
 }
 
 // localStorage.clear();
+
+function applyTheme() {
+  // Sets light or dark theme.
+  var root = document.documentElement;
+  
+  if (theme == "Light") {
+    root.style.setProperty("--bg-color", "#ffffff");
+    root.style.setProperty("--outline-color", "#000000");
+    root.style.setProperty("--text-color", "#000000");
+    root.style.setProperty("--fill-color", "#cccccc");
+    
+    root.style.setProperty("--btn-bg-on", "#eeeeee");
+    root.style.setProperty("--btn-bg-hover", "#f9f9f9");
+    root.style.setProperty("--btn-bg-active", "#cccccc");
+    root.style.setProperty("--btn-outline-hover", "#222222");
+    root.style.setProperty("--btn-outline-active", "#222222");
+    
+  } else if (theme == "Dark") {
+    root.style.setProperty("--bg-color", "#181818");
+    root.style.setProperty("--outline-color", "#dddddd");
+    root.style.setProperty("--text-color", "#eeeeee");
+    root.style.setProperty("--fill-color", "#555555");
+    
+    root.style.setProperty("--btn-bg-on", "#111111");
+    root.style.setProperty("--btn-bg-hover", "#222222");
+    root.style.setProperty("--btn-bg-active", "#1e1e1e");
+    root.style.setProperty("--btn-outline-hover", "#cccccc");
+    root.style.setProperty("--btn-outline-active", "#aaaaaa");
+  }
+}
+
+function changeTheme() {
+  if (theme == "Light") {
+    theme = "Dark";
+    
+  } else {
+    theme = "Light";
+  }
+  applyTheme();
+}
 
 function cacheDOMElements() {
   happinessMeterEl = document.getElementById("happinessMeter");
@@ -218,8 +269,12 @@ function cacheDOMElements() {
   paperBuyerDivEl = document.getElementById("paperBuyerDiv");
   paperBuyerEl = document.getElementById("paperBuyer");
   craneCountCrunchedEl = document.getElementById("craneCountCrunched");
+  
+  btnChangeThemeEl = document.getElementById("btnChangeTheme");
 
   load();
+  
+  applyTheme();
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
