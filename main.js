@@ -19,7 +19,6 @@ var jos = 0;
 var joCost = 100;
 var basePaperPrice = 15;
 var wishes = 0;
-var basePaperPrice = 15;
 
 var paperBuyerOn = false;
 
@@ -424,7 +423,6 @@ function spellf(userInput) {
     numToWorkOn = this.toString();
   } else {
     throw new Error("Invalid Input");
-    return;
   }
 
   if (numToWorkOn.indexOf("e+") !== -1) {
@@ -452,7 +450,6 @@ function spellf(userInput) {
   // Put limit check on the program, placevalue map should be increased to increase capacity
   if (numToWorkOn.length >= 303) {
     throw new Error("Number out of bonds!");
-    return;
   } else {
     return convertToString(numToWorkOn);
   }
@@ -535,11 +532,9 @@ function spellf(userInput) {
 }
 
 function restart() {
-  if (
-    confirm(
+  if (confirm(
       "Are you sure you want to restart? \nThis will clear all your progress. "
-    )
-  ) {
+    )) {
     localStorage.clear();
     location.reload();
   }
@@ -610,107 +605,97 @@ function increaseMarketing() {
 }
 
 function borrowMoney(x) {
-  if (x > maxDebt - debt) {
-    x = maxDebt - debt;
-  }
+  x = Math.min(x, maxDebt - debt);
   funds += x;
-  debt += x;
-}
-
-function payBack(x) {
-  var max = Math.min(debt, funds);
-  debt -= max;
-  funds -= max;
-}
-
-function togglePaperBuyer() {
-  if (paperBuyerOn) {
-    paperBuyerEl.innerHTML = "OFF";
-    paperBuyerOn = false;
-  } else {
-    paperBuyerEl.innerHTML = "ON";
-    paperBuyerOn = true;
+  if (x > maxDebt - debt) {
+    debt += x;
   }
-}
 
-// Console stuff.
-function displayMessage(msg) {
-  console.log(msg);
+  function payBack(x) {
+    var max = Math.min(debt, funds);
+    debt -= max;
+    funds -= max;
+  }
 
-  var newMsgEl = document.createElement("div");
-  newMsgEl.setAttribute("class", "consoleMsg");
-  newMsgEl.setAttribute("id", "consoleMsg");
-  newMsgEl.innerHTML = msg;
-  blink(newMsgEl);
+  function togglePaperBuyer() {
+    paperBuyerOn = !paperBuyerOn
+    paperBuyerEl.innerHTML = paperBuyerOn ? "ON" : "OFF";
+  }
 
-  readoutDivEl.prepend(newMsgEl, readoutDivEl.firstChild);
-}
+  // Console stuff.
+  function displayMessage(msg) {
+    console.log(msg);
 
-// Project management functions.
-function displayProjects(project) {
-  project.element = document.createElement("button");
-  project.element.style.opacity = 0;
-  project.element.setAttribute("id", project.id);
+    var newMsgEl = document.createElement("div");
+    newMsgEl.setAttribute("class", "consoleMsg");
+    newMsgEl.setAttribute("id", "consoleMsg");
+    newMsgEl.innerHTML = msg;
+    blink(newMsgEl);
 
-  project.element.onclick = function () {
-    project.effect();
-  };
+    readoutDivEl.prepend(newMsgEl, readoutDivEl.firstChild);
+  }
 
-  project.element.setAttribute("class", "projectButton");
+  // Project management functions.
+  function displayProjects(project) {
+    project.element = document.createElement("button");
+    project.element.style.opacity = 0;
+    project.element.setAttribute("id", project.id);
 
-  projectsDivEl.appendChild(project.element, projectsDivEl.firstChild);
+    project.element.onclick = function () {
+      project.effect();
+    };
 
-  var span = document.createElement("span");
-  span.style.fontWeight = "bold";
-  project.element.appendChild(span);
+    project.element.setAttribute("class", "projectButton");
 
-  var title = document.createTextNode(project.title);
-  span.appendChild(title);
+    projectsDivEl.appendChild(project.element, projectsDivEl.firstChild);
 
-  var cost = document.createTextNode(project.priceTag);
-  project.element.appendChild(cost);
+    var span = document.createElement("span");
+    span.style.fontWeight = "bold";
+    project.element.appendChild(span);
 
-  var div = document.createElement("div");
-  project.element.appendChild(div);
+    var title = document.createTextNode(project.title);
+    span.appendChild(title);
 
-  var description = document.createTextNode(project.description);
-  project.element.appendChild(description);
+    var cost = document.createTextNode(project.priceTag);
+    project.element.appendChild(cost);
 
-  blink(project.element);
-}
+    var div = document.createElement("div");
+    project.element.appendChild(div);
 
-function manageProjects() {
-  for (var i = 0; i < projects.length; i++) {
-    if (projects[i].trigger() && projects[i].uses > 0) {
-      displayProjects(projects[i]);
-      projects[i].uses--;
-      activeProjects.push(projects[i]);
+    var description = document.createTextNode(project.description);
+    project.element.appendChild(description);
+
+    blink(project.element);
+  }
+
+  function manageProjects() {
+    for (var i = 0; i < projects.length; i++) {
+      if (projects[i].trigger() && projects[i].uses > 0) {
+        displayProjects(projects[i]);
+        projects[i].uses--;
+        activeProjects.push(projects[i]);
+      }
+    }
+    for (var i = 0; i < activeProjects.length; i++) {
+      activeProjects[i].element.disabled = !activeProjects[i].cost();
     }
   }
-  for (var i = 0; i < activeProjects.length; i++) {
-    if (activeProjects[i].cost()) {
-      activeProjects[i].element.disabled = false;
-    } else {
-      activeProjects[i].element.disabled = true;
-    }
-  }
-}
 
-function blink(element) {
-  var blinkCounter = -5;
-  toggleVisibility(element);
-
-  var handle = window.setInterval(function () {
+  function blink(element) {
+    var blinkCounter = -5;
     toggleVisibility(element);
-  }, 30);
 
-  function toggleVisibility(element) {
-    if (blinkCounter >= 10) {
-      clearInterval(handle);
-    } else {
-      element.style.opacity = blinkCounter / 10;
+    var handle = window.setInterval(function () {
+      toggleVisibility(element);
+    }, 30);
+
+    function toggleVisibility(element) {
+      if (blinkCounter >= 10) {
+        clearInterval(handle);
+      } else {
+        element.style.opacity = blinkCounter / 10;
+      }
+
+      blinkCounter++;
     }
-
-    blinkCounter++;
   }
-}
