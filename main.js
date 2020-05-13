@@ -325,20 +325,22 @@ window.setInterval(function () {
 
   // Sell cranes.
   if (
-    Math.random() * 10 < demand ||
+    Math.random() * 50 < demand ||
     (cranePrice <= 0.01 && Math.random() > 0.7)
   ) {
     var amount = Math.ceil(demand);
+    
     if (cranePrice <= 0.01) {
       amount = Math.ceil(unsoldCranes / 10);
     }
     if (amount > unsoldCranes) {
       amount = unsoldCranes;
-      if (unsoldCranes < 0) {
-        amount = 0;
-      }
+    }
+    if (unsoldCranes < 1) {
+      amount = 0;
     }
     unsoldCranes -= amount;
+    
     funds += cranePrice * amount;
   }
 
@@ -674,9 +676,7 @@ function increaseMarketing() {
 function borrowMoney(x) {
   x = Math.min(x, maxDebt - debt);
   funds += x;
-  if (x > maxDebt - debt) {
-    debt += x;
-  }
+  debt += x;
 }
 
 function payBack(x) {
@@ -758,17 +758,16 @@ function manageProjects() {
 }
 
 function blink(element, targetOpacity) {
-  var blinkCounter = -5;
-  toggleVisibility(element);
+  var blinkCounter = -1;
 
   var handle = window.setInterval(function () {
     toggleVisibility(element);
-  }, 30);
+  }, 10);
 
   function toggleVisibility(element) {
-    if (blinkCounter > targetOpacity * 10 + 5) {
-      element.style.opacity = targetOpacity;
+    if (blinkCounter > targetOpacity * 10) {
       clearInterval(handle);
+      return;
 
     } else {
       element.style.opacity = blinkCounter / 10;
