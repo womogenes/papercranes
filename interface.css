@@ -23,6 +23,7 @@ body {
 	font-size: 15px;
 	min-width: 100px;
   background-color: var(--bg-color);
+  touch-action: manipulation;
 }
 
 h2 {
@@ -50,6 +51,8 @@ div.scroll {
 	margin-top: 3px;
 	margin-bottom: 3px;
   padding: 2px 4px;
+  
+  touch-action: manipulation;
 }
 
 .button:hover {
@@ -80,6 +83,8 @@ div.scroll {
   height: 70px;
   width: 275px;
 	margin-top: 10px;
+  
+  touch-action: manipulation;
 }
 
 .projectButton:hover {
