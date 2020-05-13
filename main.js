@@ -32,6 +32,10 @@ var tick = 0;
 var prevTimer = Date.now();
 
 var consoleHistory = [];
+// Style variables.
+var theme = (window.matchMedia
+             && window.matchMedia("(prefers-color-scheme: dark)").matches)
+             ? "Dark" : "Light";
 
 // DOM Elements.
 var hapinessMeterEl;
@@ -71,8 +75,10 @@ var paperBuyerDivEl;
 var paperBuyerEl;
 var craneCountCrunchedEl;
 
+var btnChangeThemeEl;
+
 function save() {
-  var save = {
+  var savedGame = {
     cranes: cranes,
     unsoldCranes: unsoldCranes,
     funds: funds,
@@ -115,7 +121,7 @@ function save() {
     savedActiveProjects[i] = activeProjects[i].id;
   }
 
-  localStorage.setItem("savedGame", JSON.stringify(save));
+  localStorage.setItem("savedGame", JSON.stringify(savedGame));
   localStorage.setItem("savedProjectUses", JSON.stringify(savedProjectUses));
   localStorage.setItem("savedProjectFlags", JSON.stringify(savedProjectFlags));
   localStorage.setItem(
@@ -123,6 +129,9 @@ function save() {
     JSON.stringify(savedActiveProjects)
   );
   localStorage.setItem("consoleHistory", JSON.stringify(consoleHistory));
+  
+  // Theme.
+  localStorage.setItem("theme", JSON.stringify(theme));
 }
 
 // Saving!
@@ -180,12 +189,55 @@ function load() {
       displayMessage(element);
     });
 
+    
+    theme = JSON.parse(localStorage.getItem("theme")); // Theme.
+    
   } else {
     save();
   }
 }
 
 // localStorage.clear();
+
+function applyTheme() {
+  // Sets light or dark theme.
+  var root = document.documentElement;
+  
+  if (theme == "Light") {
+    root.style.setProperty("--bg-color", "#ffffff");
+    root.style.setProperty("--outline-color", "#000000");
+    root.style.setProperty("--text-color", "#000000");
+    root.style.setProperty("--fill-color", "#cccccc");
+    
+    root.style.setProperty("--btn-bg-on", "#eeeeee");
+    root.style.setProperty("--btn-bg-hover", "#f9f9f9");
+    root.style.setProperty("--btn-bg-active", "#cccccc");
+    root.style.setProperty("--btn-outline-hover", "#222222");
+    root.style.setProperty("--btn-outline-active", "#222222");
+    
+  } else if (theme == "Dark") {
+    root.style.setProperty("--bg-color", "#181818");
+    root.style.setProperty("--outline-color", "#dddddd");
+    root.style.setProperty("--text-color", "#eeeeee");
+    root.style.setProperty("--fill-color", "#555555");
+    
+    root.style.setProperty("--btn-bg-on", "#111111");
+    root.style.setProperty("--btn-bg-hover", "#222222");
+    root.style.setProperty("--btn-bg-active", "#1e1e1e");
+    root.style.setProperty("--btn-outline-hover", "#cccccc");
+    root.style.setProperty("--btn-outline-active", "#aaaaaa");
+  }
+}
+
+function changeTheme() {
+  if (theme == "Light") {
+    theme = "Dark";
+    
+  } else {
+    theme = "Light";
+  }
+  applyTheme();
+}
 
 function cacheDOMElements() {
   happinessMeterEl = document.getElementById("happinessMeter");
@@ -224,8 +276,12 @@ function cacheDOMElements() {
   paperBuyerDivEl = document.getElementById("paperBuyerDiv");
   paperBuyerEl = document.getElementById("paperBuyer");
   craneCountCrunchedEl = document.getElementById("craneCountCrunched");
+  
+  btnChangeThemeEl = document.getElementById("btnChangeTheme");
 
   load();
+  
+  applyTheme();
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -300,10 +356,14 @@ window.setInterval(function () {
   if (!wishUnlocked && cranes > 999) {
     wishUnlocked = true;
     column0DivEl.hidden = false;
-    blink(column0DivEl);
+    blink(column0DivEl, 1.0);
   }
-
-  happinessMeterEl.style.width = Math.log(funds + wishes) + "%";
+  
+  if (funds >= 0.1) {
+    happinessMeterEl.style.width = Math.log(funds + wishes) + "%";
+  } else {
+    happinessMeterEl.style.width = "0%";
+  }
 
   cranesEl.innerHTML = commify(Math.round(cranes));
   cranePriceEl.innerHTML = monify(cranePrice);
@@ -640,7 +700,7 @@ function displayMessage(msg, dontSave) {
   newMsgEl.setAttribute("class", "consoleMsg");
   newMsgEl.setAttribute("id", "consoleMsg");
   newMsgEl.innerHTML = msg;
-  blink(newMsgEl);
+  blink(newMsgEl, 1.0);
 
   readoutDivEl.prepend(newMsgEl, readoutDivEl.firstChild);
 }
@@ -675,7 +735,11 @@ function displayProjects(project) {
   var description = document.createTextNode(project.description);
   project.element.appendChild(description);
 
-  blink(project.element);
+  if (project.cost()) {
+    blink(project.element, 1.0);
+  } else {
+    blink(project.element, 0.6);
+  }
 }
 
 function manageProjects() {
@@ -691,7 +755,7 @@ function manageProjects() {
   }
 }
 
-function blink(element) {
+function blink(element, targetOpacity) {
   var blinkCounter = -5;
   toggleVisibility(element);
 
@@ -700,8 +764,10 @@ function blink(element) {
   }, 30);
 
   function toggleVisibility(element) {
-    if (blinkCounter >= 10) {
+    if (blinkCounter > targetOpacity * 10 + 5) {      
+      element.style.opacity = targetOpacity;
       clearInterval(handle);
+      
     } else {
       element.style.opacity = blinkCounter / 10;
     }

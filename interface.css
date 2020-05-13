@@ -16,21 +16,23 @@
 * {
 	font-family: "Inconsolata", "Consolas", monospace;
   color: var(--text-color);
+  touch-action: manipulation;
 }
 
 body {
-	font-size: 15px;
 	min-width: 100px;
   background-color: var(--bg-color);
+  margin-left: 15px;
 }
 
-h2 {
+div {
+  touch-action: manipulation;
 }
 
 hr {
 	margin-top: 4px;
 	margin-bottom: 3px;
-  border: thin solid var(--outline-color);
+  border: 1px solid var(--outline-color);
 	background-color: var(--outline-color);
 }
 
@@ -42,13 +44,15 @@ div.scroll {
 .button {
 	font-size: 13px;
 	border-radius: 5px;
-  border: thin solid var(--outline-color);
+  border: 1px solid var(--outline-color);
 	outline: none;
 	background: var(--btn-bg-on);
 	
-  width: auto;
 	margin-top: 3px;
 	margin-bottom: 3px;
+  padding: 2px 4px;
+  
+  touch-action: manipulation;
 }
 
 .button:hover {
@@ -77,8 +81,10 @@ div.scroll {
 	display: block;
     
   height: 70px;
-  width: 275px;
+  width: 100%;
 	margin-top: 10px;
+  
+  touch-action: manipulation;
 }
 
 .projectButton:hover {
@@ -93,7 +99,7 @@ div.scroll {
 }
 
 .projectButton:disabled {
-	opacity: 0.4;
+	opacity: 0.6 !important;
 	border: 1px solid #555;
 	cursor: auto;
 }
@@ -137,7 +143,7 @@ div.scroll {
 #consoleDiv {
   width: 100%;
 	height: 100px;
-	margin-top: 35px;
+	margin-top: 40px;
 }
 
 div#consoleMsg {
@@ -150,7 +156,7 @@ div#readoutDiv {
 	font-size: 90%;
 	padding: 5px;
 	height: 100%;
-  border: thin solid var(--outline-color);
+  border: 1px solid var(--outline-color);
 }
 
 #fundsDiv {
@@ -201,7 +207,7 @@ div#readoutDiv {
 	width: 275px;
 	height: 15px;
 	background-color: var(--bg-color);
-	border: thin solid var(--outline-color);
+	border: 1px solid var(--outline-color);
 	margin-top: 5px;
 }
 
@@ -217,17 +223,14 @@ div#readoutDiv {
     }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-color: #181818;
-    --outline-color: #dddddd;
-    --text-color: #eeeeee;
-    --fill-color: #555555;
-
-    --btn-bg-on: #111111;
-    --btn-bg-hover: #222222;
-    --btn-bg-active: #1e1e1e;
-    --btn-outline-hover: #cccccc;
-    --btn-outline-active: #aaaaaa;
-  }
+@media only screen and (max-width: 400px) {
+    #column0, #column1, #column2, #column3, #projectsColumn {
+      width: 96%;
+    }
+    #consoleDiv {
+      width: 96%;
+    }
+    #menuDiv {
+      margin-right: 6%;
+    }
 }
