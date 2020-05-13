@@ -31,6 +31,8 @@ var prevCranes = cranes;
 var tick = 0;
 var prevTimer = Date.now();
 
+var consoleHistory = [];
+
 // DOM Elements.
 var hapinessMeterEl;
 var paperEl;
@@ -91,7 +93,6 @@ function save() {
     joCost: joCost,
     basePaperPrice: basePaperPrice,
     wishes: wishes,
-    basePaperPrice: basePaperPrice,
 
     paperBuyerOn: paperBuyerOn,
 
@@ -121,6 +122,7 @@ function save() {
     "savedActiveProjects",
     JSON.stringify(savedActiveProjects)
   );
+  localStorage.setItem("consoleHistory", JSON.stringify(consoleHistory));
 }
 
 // Saving!
@@ -174,6 +176,10 @@ function load() {
         activeProjects.push(projects[i]);
       }
     }
+    JSON.parse(localStorage.getItem("consoleHistory")).forEach(element => {
+      displayMessage(element);
+    });
+
   } else {
     save();
   }
@@ -243,7 +249,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   }
 
   // Initial messages.
-  displayMessage('Click "Fold Crane" to start making cranes.');
+  displayMessage('Click "Fold Crane" to start making cranes.', true);
 });
 
 // Game loop!
@@ -444,7 +450,6 @@ function spellf(userInput) {
   } else if (numToWorkOn.indexOf(".") !== -1) {
     var splittedDecimal = numToWorkOn.split(".");
     var leftNum = splittedDecimal[0];
-    var rightNum = splittedDecimal[1];
     numToWorkOn = leftNum;
   }
 
@@ -467,7 +472,7 @@ function spellf(userInput) {
     for (var k = strLength; k > 0; k = k - 3) {
       if (k - 3 <= 0) {
         var subStr = stringEquivalent.substring(k, k - 3);
-        pronounce = pronounceNum(subStr);
+        var pronounce = pronounceNum(subStr);
 
         if (pronounce.toUpperCase() != "zero") {
           var num = Number(
@@ -610,7 +615,7 @@ function borrowMoney(x) {
   if (x > maxDebt - debt) {
     debt += x;
   }
- }
+}
 
 function payBack(x) {
   var max = Math.min(debt, funds);
@@ -624,8 +629,12 @@ function togglePaperBuyer() {
 }
 
 // Console stuff.
-function displayMessage(msg) {
+function displayMessage(msg, dontSave) {
   console.log(msg);
+  if (!dontSave) {
+    consoleHistory.push(msg);
+  }
+
 
   var newMsgEl = document.createElement("div");
   newMsgEl.setAttribute("class", "consoleMsg");
