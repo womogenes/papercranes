@@ -1,38 +1,36 @@
-
-
 :root {
-  --bg-color: #ffffff;
-  --outline-color: #000000;
-  --text-color: #000000;
-  --fill-color: #cccccc;
-  
-  --btn-bg-on: #eeeeee;
-  --btn-bg-hover: #f9f9f9;
-  --btn-bg-active: #cccccc;
-  --btn-outline-hover: #222222;
-  --btn-outline-active: #222222;
+	--bg-color: #ffffff;
+	--outline-color: #000000;
+	--text-color: #000000;
+	--fill-color: #cccccc;
+
+	--btn-bg-on: #eeeeee;
+	--btn-bg-hover: #f9f9f9;
+	--btn-bg-active: #cccccc;
+	--btn-outline-hover: #222222;
+	--btn-outline-active: #222222;
 }
 
 * {
 	font-family: "Inconsolata", "Consolas", monospace;
-  color: var(--text-color);
-  touch-action: manipulation;
+	color: var(--text-color);
+	touch-action: manipulation;
 }
 
 body {
 	min-width: 100px;
-  background-color: var(--bg-color);
-  margin-left: 15px;
+	background-color: var(--bg-color);
+	margin-left: 15px;
 }
 
 div {
-  touch-action: manipulation;
+	touch-action: manipulation;
 }
 
 hr {
 	margin-top: 4px;
 	margin-bottom: 3px;
-  border: 1px solid var(--outline-color);
+	border: 1px solid var(--outline-color);
 	background-color: var(--outline-color);
 }
 
@@ -44,57 +42,57 @@ div.scroll {
 .button {
 	font-size: 13px;
 	border-radius: 5px;
-  border: 1px solid var(--outline-color);
+	border: 1px solid var(--outline-color);
 	outline: none;
 	background: var(--btn-bg-on);
-	
+
 	margin-top: 3px;
 	margin-bottom: 3px;
-  padding: 2px 4px;
-  
-  touch-action: manipulation;
+	padding: 2px 4px;
+
+	touch-action: manipulation;
 }
 
 .button:hover {
 	background: var(--btn-bg-hover);
-  border: 1px solid var(--btn-outline-hover);
+	border: 1px solid var(--btn-outline-hover);
 	cursor: pointer;
 }
 
 .button:active {
 	background: var(--btn-bg-active);
-  border: 1px solid var(--btn-outline-active);
+	border: 1px solid var(--btn-outline-active);
 }
 
 .button:disabled {
-  opacity: 0.6;
-  border: 1px solid #555;
+	opacity: 0.6;
+	border: 1px solid #555;
 	cursor: auto;
 }
 
 .projectButton {
 	font-size: 13px;
-  border-radius: 10px;
-  border: 1px solid var(--outline-color);
-  outline: none;
+	border-radius: 10px;
+	border: 1px solid var(--outline-color);
+	outline: none;
 	background: var(--btn-bg-on);
 	display: block;
-    
-  height: 70px;
-  width: 100%;
+
+	height: 70px;
+	width: 100%;
 	margin-top: 10px;
-  
-  touch-action: manipulation;
+
+	touch-action: manipulation;
 }
 
 .projectButton:hover {
-  background: var(--btn-bg-hover);
+	background: var(--btn-bg-hover);
 	border: 1px solid var(--btn-outline-hover);
 	cursor: pointer;
 }
 
 .projectButton:active {
-  background: var(--btn-bg-active);
+	background: var(--btn-bg-active);
 	border: 1px solid var(--btn-outline-active);
 }
 
@@ -105,43 +103,43 @@ div.scroll {
 }
 
 .pulsate {
-  -webkit-animation: pulsate 0.7s ease-out;
-  -webkit-animation-iteration-count: infinite; 
-  opacity: 0.0;
+	-webkit-animation: pulsate 0.7s ease-out;
+	-webkit-animation-iteration-count: infinite;
+	opacity: 0.0;
 }
 
 .toolTip {
-  position: relative;
-  display: inline-block;
+	position: relative;
+	display: inline-block;
 }
 
 .toolTip .toolTipText {
-  visibility: hidden;
-  width: 160px;
-  background-color: #c8c8c8;
-  color: #000;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 10px;
+	visibility: hidden;
+	width: 160px;
+	background-color: #c8c8c8;
+	color: #000;
+	text-align: center;
+	padding: 5px 0;
+	border-radius: 10px;
 	margin-bottom: 13px;
-    
-  position: absolute;
-  z-index: 1;
-  bottom: 75%;
-  left: 50%;
-  margin-left: 0px;
-    
-  opacity: 0;
-  transition: opacity 1s;
+
+	position: absolute;
+	z-index: 1;
+	bottom: 75%;
+	left: 50%;
+	margin-left: 0px;
+
+	opacity: 0;
+	transition: opacity 1s;
 }
 
 .toolTip:hover .toolTipText {
-  visibility: visible;
-  opacity: 1;
+	visibility: visible;
+	opacity: 1;
 }
 
 #consoleDiv {
-  width: 100%;
+	width: 100%;
 	height: 100px;
 	margin-top: 40px;
 }
@@ -156,7 +154,7 @@ div#readoutDiv {
 	font-size: 90%;
 	padding: 5px;
 	height: 100%;
-  border: 1px solid var(--outline-color);
+	border: 1px solid var(--outline-color);
 }
 
 #fundsDiv {
@@ -218,19 +216,26 @@ div#readoutDiv {
 }
 
 @media only screen and (max-width: 885px) {
-    #projectsColumn {
-      float: left;
-    }
+	#projectsColumn {
+		float: left;
+	}
 }
 
 @media only screen and (max-width: 400px) {
-    #column0, #column1, #column2, #column3, #projectsColumn {
-      width: 96%;
-    }
-    #consoleDiv {
-      width: 96%;
-    }
-    #menuDiv {
-      margin-right: 6%;
-    }
+
+	#column0,
+	#column1,
+	#column2,
+	#column3,
+	#projectsColumn {
+		width: 96%;
+	}
+
+	#consoleDiv {
+		width: 96%;
+	}
+
+	#menuDiv {
+		margin-right: 6%;
+	}
 }
