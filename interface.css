@@ -221,7 +221,7 @@ div#readoutDiv {
 	}
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 550px) {
 
 	#column0,
 	#column1,
