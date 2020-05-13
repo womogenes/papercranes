@@ -14,16 +14,15 @@
 }
 
 * {
-  font-size: 16;
 	font-family: "Inconsolata", "Consolas", monospace;
   color: var(--text-color);
+  
+  touch-action: manipulation;
 }
 
 body {
-	font-size: 15px;
 	min-width: 100px;
   background-color: var(--bg-color);
-  touch-action: manipulation;
 }
 
 h2 {
@@ -42,7 +41,7 @@ div.scroll {
 }
 
 .button {
-	font-size: 16px;
+	font-size: 13px;
 	border-radius: 5px;
   border: 1px solid var(--outline-color);
 	outline: none;
@@ -73,7 +72,7 @@ div.scroll {
 }
 
 .projectButton {
-	font-size: 16px;
+	font-size: 13px;
   border-radius: 10px;
   border: 1px solid var(--outline-color);
   outline: none;
