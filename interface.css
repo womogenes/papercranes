@@ -215,7 +215,7 @@ div#readoutDiv {
 	border: none;
 }
 
-@media only screen and (max-width: 885px) {
+@media only screen and (max-width: 892px) {
 	#projectsColumn {
 		float: left;
 	}
