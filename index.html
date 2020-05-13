@@ -8,10 +8,6 @@
     <link rel="icon" href="crane.ico">
     <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
     <style>
-        body {
-            background-color: black;
-        }
-
         img {
             display: block;
             margin-left: auto;
@@ -29,5 +25,11 @@
         <img src="dollarCrane.PNG" width=500 height=500>
     </a>
 </body>
+<script>
+    var theme = JSON.parse(localStorage.getItem("theme"));
+    if (theme != null) {
+        document.body.style.background = theme == "Light" ? "#ffffff" : "#181818";
+    }
+</script>
 
 </html>

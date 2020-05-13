@@ -197,7 +197,6 @@ function load() {
   }
 }
 
-// localStorage.clear();
 
 function applyTheme() {
   // Sets light or dark theme.
