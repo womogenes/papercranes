@@ -349,10 +349,14 @@ window.setInterval(function () {
   if (!wishUnlocked && cranes > 999) {
     wishUnlocked = true;
     column0DivEl.hidden = false;
-    blink(column0DivEl);
+    blink(column0DivEl, 1.0);
   }
-
-  happinessMeterEl.style.width = Math.log(funds + wishes) + "%";
+  
+  if (funds >= 0.1) {
+    happinessMeterEl.style.width = Math.log(funds + wishes) + "%";
+  } else {
+    happinessMeterEl.style.width = "0%";
+  }
 
   cranesEl.innerHTML = commify(Math.round(cranes));
   cranePriceEl.innerHTML = monify(cranePrice);
@@ -686,7 +690,7 @@ function displayMessage(msg) {
   newMsgEl.setAttribute("class", "consoleMsg");
   newMsgEl.setAttribute("id", "consoleMsg");
   newMsgEl.innerHTML = msg;
-  blink(newMsgEl);
+  blink(newMsgEl, 1.0);
 
   readoutDivEl.prepend(newMsgEl, readoutDivEl.firstChild);
 }
@@ -721,7 +725,11 @@ function displayProjects(project) {
   var description = document.createTextNode(project.description);
   project.element.appendChild(description);
 
-  blink(project.element);
+  if (project.cost()) {
+    blink(project.element, 1.0);
+  } else {
+    blink(project.element, 0.6);
+  }
 }
 
 function manageProjects() {
@@ -737,7 +745,7 @@ function manageProjects() {
   }
 }
 
-function blink(element) {
+function blink(element, targetOpacity) {
   var blinkCounter = -5;
   toggleVisibility(element);
 
@@ -746,8 +754,10 @@ function blink(element) {
   }, 30);
 
   function toggleVisibility(element) {
-    if (blinkCounter >= 10) {
+    if (blinkCounter >= targetOpacity * 10) {
       clearInterval(handle);
+      return;
+      
     } else {
       element.style.opacity = blinkCounter / 10;
     }
