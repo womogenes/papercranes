@@ -32,7 +32,9 @@ var tick = 0;
 var prevTimer = Date.now();
 
 // Style variables.
-var theme = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)")) ? "Dark" : "Light";
+var theme = (window.matchMedia
+             && window.matchMedia("(prefers-color-scheme: dark)").matches)
+             ? "Dark" : "Light";
 
 // DOM Elements.
 var hapinessMeterEl;
@@ -754,9 +756,9 @@ function blink(element, targetOpacity) {
   }, 30);
 
   function toggleVisibility(element) {
-    if (blinkCounter >= targetOpacity * 10) {
+    if (blinkCounter > targetOpacity * 10 + 5) {      
+      element.style.opacity = targetOpacity;
       clearInterval(handle);
-      return;
       
     } else {
       element.style.opacity = blinkCounter / 10;

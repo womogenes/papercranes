@@ -14,6 +14,7 @@
 }
 
 * {
+  font-size: 16;
 	font-family: "Inconsolata", "Consolas", monospace;
   color: var(--text-color);
 }
@@ -30,7 +31,7 @@ h2 {
 hr {
 	margin-top: 4px;
 	margin-bottom: 3px;
-  border: thin solid var(--outline-color);
+  border: 1px solid var(--outline-color);
 	background-color: var(--outline-color);
 }
 
@@ -40,9 +41,9 @@ div.scroll {
 }
 
 .button {
-	font-size: 13px;
+	font-size: 16px;
 	border-radius: 5px;
-  border: thin solid var(--outline-color);
+  border: 1px solid var(--outline-color);
 	outline: none;
 	background: var(--btn-bg-on);
 	
@@ -69,7 +70,7 @@ div.scroll {
 }
 
 .projectButton {
-	font-size: 13px;
+	font-size: 16px;
   border-radius: 10px;
   border: 1px solid var(--outline-color);
   outline: none;
@@ -150,7 +151,7 @@ div#readoutDiv {
 	font-size: 90%;
 	padding: 5px;
 	height: 100%;
-  border: thin solid var(--outline-color);
+  border: 1px solid var(--outline-color);
 }
 
 #fundsDiv {
@@ -201,7 +202,7 @@ div#readoutDiv {
 	width: 275px;
 	height: 15px;
 	background-color: var(--bg-color);
-	border: thin solid var(--outline-color);
+	border: 1px solid var(--outline-color);
 	margin-top: 5px;
 }
 
