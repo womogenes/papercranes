@@ -305,7 +305,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   }
 
   // Initial messages.
-  displayMessage('Click "Fold Crane" to start making cranes.', true);
+  displayMessage('Click "Fold Crane" to start making cranes.');
 });
 
 // Game loop!
