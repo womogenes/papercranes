@@ -18,9 +18,8 @@
 }
 
 body {
-	min-width: 100px;
 	background-color: var(--bg-color);
-	margin-left: 15px;
+	margin: auto 15px;
 }
 
 div {
@@ -228,11 +227,11 @@ div#readoutDiv {
 	#column2,
 	#column3,
 	#projectsColumn {
-		width: 96%;
+		width: 100%;
 	}
 
 	#consoleDiv {
-		width: 96%;
+		width: 100%;
 	}
 
 	#menuDiv {
