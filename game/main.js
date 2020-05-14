@@ -751,7 +751,7 @@ function manageProjects() {
       activeProjects.push(projects[i]);
     }
   }
-  for (var i = 0; i < activeProjects.length; i++) {
+  for (i = 0; i < activeProjects.length; i++) {
     activeProjects[i].element.disabled = !activeProjects[i].cost();
   }
 }
