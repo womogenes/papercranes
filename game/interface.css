@@ -188,6 +188,7 @@ div#readoutDiv {
 	float: right;
 	width: 275px;
 	margin-right: 15px;
+  margin-bottom: 50px;
 }
 
 #menuDiv {
