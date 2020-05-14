@@ -714,6 +714,7 @@ function displayProjects(project) {
 
   project.element.onclick = function () {
     project.effect();
+    project.uses--;
   };
 
   project.element.setAttribute("class", "projectButton");
@@ -747,7 +748,6 @@ function manageProjects() {
   for (var i = 0; i < projects.length; i++) {
     if (projects[i].trigger() && projects[i].uses > 0) {
       displayProjects(projects[i]);
-      projects[i].uses--;
       activeProjects.push(projects[i]);
     }
   }
