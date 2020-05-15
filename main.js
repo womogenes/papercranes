@@ -17,4 +17,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
   
   document.body.style.background = theme == "Light" ? "#ffffff" : "#181818";
+  
+  window.setInterval(resizeImage, 10);
 });
+
+
+function resizeImage() {
+  
+  var width = document.documentElement.clientWidth / 2;
+  var height = document.documentElement.clientHeight / 2;
+  
+  var imgSize = Math.max(Math.min(width, height, 300), 50);
+  console.log(imgSize);
+  
+  craneImageEl.width = imgSize;
+  craneImageEl.height = imgSize;
+  
+}
