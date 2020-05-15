@@ -98,7 +98,7 @@ div.scroll {
 }
 
 .projectButton:disabled {
-	opacity: 0.6 !important;
+	opacity: 0.6;
 	border: 1px solid #555;
 	cursor: auto;
 	/* touch-action: manipulation; */

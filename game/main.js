@@ -761,10 +761,11 @@ function blink(element, targetOpacity) {
 
   var handle = window.setInterval(function () {
     toggleVisibility(element);
-  }, 10);
+  }, 30);
 
   function toggleVisibility(element) {
     if (blinkCounter > targetOpacity * 10) {
+      element.style.opacity = null;
       clearInterval(handle);
       return;
 
