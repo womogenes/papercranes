@@ -175,7 +175,7 @@ function load() {
       localStorage.getItem("savedActiveProjects")
     );
 
-    for (var i = 0; i < projects.length; i++) {
+    for (var i = 0; i < loadProjectUses.length; i++) {
       projects[i].uses = loadProjectUses[i];
       projects[i].flag = loadProjectFlags[i];
     }

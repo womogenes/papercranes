@@ -40,14 +40,13 @@ div.scroll {
 }
 
 .button {
-	font-size: 13px;
+	font-size: 14px;
 	border-radius: 5px;
 	border: 1px solid var(--outline-color);
 	outline: none;
 	background: var(--btn-bg-on);
 
-	margin-top: 3px;
-	margin-bottom: 3px;
+	margin: 3px 2px;
 	padding: 2px 4px;
 
 	touch-action: manipulation;
@@ -72,7 +71,7 @@ div.scroll {
 }
 
 .projectButton {
-	font-size: 13px;
+  font-size: 14px;
 	border-radius: 10px;
 	border: 1px solid var(--outline-color);
 	outline: none;
@@ -153,7 +152,6 @@ div#consoleMsg {
 
 div#readoutDiv {
 	margin-top: 10px;
-	font-size: 90%;
 	padding: 5px;
 	height: 100%;
 	border: 1px solid var(--outline-color);
@@ -197,19 +195,19 @@ div#readoutDiv {
 	right: 0;
 	margin-left: 8px;
 	margin-top: 5px;
-	margin-right: 8px;
+  margin-right: 15px;
 }
 
 #happinessDiv {
-	width: 275px;
+  width: 275px;
 }
 
 #happinessProgress {
-	width: 275px;
+	width: 100%;
 	height: 15px;
 	background-color: var(--bg-color);
 	border: 1px solid var(--outline-color);
-	margin-top: 5px;
+	margin-top: 10px;
 }
 
 #happinessMeter {
@@ -233,12 +231,12 @@ div#readoutDiv {
 	#projectsColumn {
 		width: 100%;
 	}
+  
+  #happinessDiv {
+    width: 99%;
+  }
 
 	#consoleDiv {
 		width: 100%;
-	}
-
-	#menuDiv {
-		margin-right: 6%;
 	}
 }
