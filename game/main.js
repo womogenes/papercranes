@@ -1,3 +1,4 @@
+
 // Yoy!
 var cranes = 0;
 var unsoldCranes = 0;
@@ -107,7 +108,13 @@ function save() {
     wishUnlocked: wishUnlocked,
     paperBuyerUnlocked: paperBuyerUnlocked,
   };
+  
+  localStorage.setItem(
+    "savedGame",
+    JSON.stringify(savedGame)
+  );
 
+  // Deal with project stuff.
   var savedProjectUses = [];
   var savedProjectFlags = [];
   var savedActiveProjects = [];
@@ -116,25 +123,42 @@ function save() {
     savedProjectUses[i] = projects[i].uses;
     savedProjectFlags[i] = projects[i].flag;
   }
-
   for (var i = 0; i < activeProjects.length; i++) {
     savedActiveProjects[i] = activeProjects[i].id;
   }
-
-  localStorage.setItem("savedGame", JSON.stringify(savedGame));
-  localStorage.setItem("savedProjectUses", JSON.stringify(savedProjectUses));
-  localStorage.setItem("savedProjectFlags", JSON.stringify(savedProjectFlags));
+  localStorage.setItem(
+    "savedProjectUses",
+    JSON.stringify(savedProjectUses)
+  );
+  localStorage.setItem(
+    "savedProjectFlags",
+    JSON.stringify(savedProjectFlags)
+  );
   localStorage.setItem(
     "savedActiveProjects",
     JSON.stringify(savedActiveProjects)
   );
+  
+  // Deal with events.
+  var savedEventUses = [];
+  var savedEventFlags = [];
+  for (var i = 0; i < events.length; i++) {
+    savedEventUses[i] = events[i].uses;
+    savedEventFlags[i] = events[i].flag;
+  }
+  localStorage.setItem(
+    "savedEventUses",
+    JSON.stringify(savedEventUses)
+  );
+  localStorage.setItem(
+    "savedEventFlags",
+    JSON.stringify(savedEventFlags)
+  );
+  
   localStorage.setItem("consoleHistory", JSON.stringify(consoleHistory));
-
-  // Theme.
   localStorage.setItem("theme", JSON.stringify(theme));
 }
 
-// Saving!
 function load() {
   if (localStorage.getItem("savedGame") != null) {
     var savedGame = JSON.parse(localStorage.getItem("savedGame"));
@@ -167,6 +191,7 @@ function load() {
     wishUnlocked = savedGame.wishUnlocked;
     paperBuyerUnlocked = savedGame.paperBuyerUnlocked;
 
+    // Load project information.
     var loadProjectUses = JSON.parse(localStorage.getItem("savedProjectUses"));
     var loadProjectFlags = JSON.parse(
       localStorage.getItem("savedProjectFlags")
@@ -185,18 +210,31 @@ function load() {
         activeProjects.push(projects[i]);
       }
     }
-    JSON.parse(localStorage.getItem("consoleHistory")).forEach(element => {
-      displayMessage(element);
-    });
+    
+    // Load event information.
+    var loadEventUses = JSON.parse(
+      localStorage.getItem("savedEventUses")
+    );
+    var loadEventFlags = JSON.parse(
+      localStorage.getItem("savedEventFlags")
+    );
 
-
+    for (var i = 0; i < loadEventUses.length; i++) {
+      events[i].uses = loadEventUses[i];
+      events[i].flag = loadEventFlags[i];
+    }
+    
+    var consoleHistory = JSON.parse(localStorage.getItem("consoleHistory"));
+    
+    for (i in consoleHistory.length) {
+      displayMessage(consoleHistory[i]);
+    }
     theme = JSON.parse(localStorage.getItem("theme")); // Theme.
 
   } else {
     save();
   }
 }
-
 
 function applyTheme() {
   // Sets light or dark theme.
@@ -305,19 +343,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   // Initial messages.
   if (consoleHistory.length == 0) {
-    displayMessage('Click "Fold Crane" to start making cranes.');
+    displayMessage("Click \"Fold Crane\" to start making cranes.");
   }
 });
 
 // Game loop!
 window.setInterval(function () {
-  var demand = (0.08 / cranePrice) * Math.pow(1.1, marketingLevel - 1);
-
-  // Buy paper!
-  if (paper <= 0 && paperBuyerOn) {
-    buyPaper(1);
-  }
-
+  
+  var demand = (0.08 / cranePrice) * Math.pow(1.3, marketingLevel - 1);
+  
   // Make cranes before selling them.
   makeCrane((highSchoolers * highSchoolerBoost) / 500);
   makeCrane(jos);
@@ -356,12 +390,6 @@ window.setInterval(function () {
   btnBorrowMoneyEl.disabled = debt >= maxDebt;
   btnHireJoEl.disabled = joCost > funds;
 
-  if (!wishUnlocked && cranes > 999) {
-    wishUnlocked = true;
-    column0DivEl.hidden = false;
-    blink(column0DivEl, 1.0);
-  }
-
   if (funds >= 0.1) {
     happinessMeterEl.style.width = Math.log(funds + wishes) + "%";
   } else {
@@ -385,8 +413,10 @@ window.setInterval(function () {
   craneCountCrunchedEl.innerHTML = spellf(Math.round(cranes));
 
   manageProjects();
+  manageEvents();
 
   tick++;
+  
 }, 10);
 
 // A slower one.
@@ -690,13 +720,9 @@ function togglePaperBuyer() {
 }
 
 // Console stuff.
-function displayMessage(msg, dontSave) {
+function displayMessage(msg) {
   console.log(msg);
-  if (!dontSave) {
-    consoleHistory.push(msg);
-  }
-
-
+  consoleHistory.push(msg);
   var newMsgEl = document.createElement("div");
   newMsgEl.setAttribute("class", "consoleMsg");
   newMsgEl.setAttribute("id", "consoleMsg");
@@ -753,6 +779,15 @@ function manageProjects() {
   }
   for (i = 0; i < activeProjects.length; i++) {
     activeProjects[i].element.disabled = !activeProjects[i].cost();
+  }
+}
+
+function manageEvents() {
+  for (var i = 0; i < events.length; i++) {
+    if (events[i].trigger() && events[i].uses > 0) {
+      events[i].effect();
+      events[i].uses--;
+    }
   }
 }
 

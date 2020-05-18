@@ -18,7 +18,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
   
   document.body.style.background = theme == "Light" ? "#ffffff" : "#181818";
   
-  window.setInterval(resizeImage, 10);
+  resizeImage();
+  window.addEventListener("resize", resizeImage());
 });
 
 

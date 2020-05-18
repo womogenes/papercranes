@@ -146,6 +146,7 @@ div.scroll {
 }
 
 div#consoleMsg {
+  font-size: 14px;
 	overflow: hidden;
 	margin-bottom: 5px;
 }
