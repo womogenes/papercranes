@@ -1,10 +1,49 @@
 
-#craneImage {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  position: fixed;
+html, body {
+  margin: 0;
+  background-color: var(--bg-color);
+  height: 100%;
+}
+
+p {
+  font-family: "Inconsolata", "Consolas", monospaced, sans-serif;
+  color: var(--text-color);
+}
+
+a {
+  text-decoration: none;
+}
+
+a.hover {
+  text-decoration: underline;
+}
+
+.container {
+  width: auto;
+  height: 100%;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+
+#centerDiv {
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+#craneImage {
+  display: block;
+  margin: 0 auto;
+}
+
+#titleText {
+  margin: 0;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+#titleText:hover {
+  text-decoration: underline;
 }
