@@ -4,7 +4,7 @@ var events = [];
 
 var event1 = {
   id: "event1",
-  title: "Unhide Prestige Column",
+  title: "Unhide prestige column",
   description: "Prestige column gets unhidden.",
   trigger: function() {
     return cranes >= 1000;
@@ -35,3 +35,19 @@ var event2 = {
 }
 
 events.push(event2);
+
+var event3 = {
+  id: "event3",
+  title: "Cap debt",
+  description: "Automatically cap debt at maxDebt.",
+  trigger: function() {
+    debt >= maxDebt;
+  },
+  uses: -1,
+  flag: 0,
+  effect: function() {
+    debt = maxDebt;
+  }
+}
+
+events.push(event3);
