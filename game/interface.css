@@ -71,7 +71,7 @@ div.scroll {
 }
 
 .projectButton {
-  font-size: 14px;
+	font-size: 14px;
 	border-radius: 10px;
 	border: 1px solid var(--outline-color);
 	outline: none;
@@ -146,7 +146,7 @@ div.scroll {
 }
 
 div#consoleMsg {
-  font-size: 14px;
+	font-size: 14px;
 	overflow: hidden;
 	margin-bottom: 5px;
 }
@@ -156,6 +156,31 @@ div#readoutDiv {
 	padding: 5px;
 	height: 100%;
 	border: 1px solid var(--outline-color);
+}
+
+#eventDiv {
+	background: rgba(100, 100, 100, .5);
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	display: none;
+	z-index: 1;
+}
+
+#eventPanel {
+	background: var(--bg-color);
+	border: 2px solid var(--outline-color);
+	top: 50%;
+	left: 50%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
+	padding: 20px;
+	position: absolute;
+	width: 335px;
+	height: 200px;
+	z-index: 2;
 }
 
 #fundsDiv {
@@ -187,7 +212,7 @@ div#readoutDiv {
 	float: right;
 	width: 275px;
 	margin-right: 15px;
-  margin-bottom: 50px;
+	margin-bottom: 50px;
 }
 
 #menuDiv {
@@ -196,11 +221,11 @@ div#readoutDiv {
 	right: 0;
 	margin-left: 8px;
 	margin-top: 5px;
-  margin-right: 15px;
+	margin-right: 15px;
 }
 
 #happinessDiv {
-  width: 275px;
+	width: 275px;
 }
 
 #happinessProgress {
@@ -232,10 +257,10 @@ div#readoutDiv {
 	#projectsColumn {
 		width: 100%;
 	}
-  
-  #happinessDiv {
-    width: 99%;
-  }
+
+	#happinessDiv {
+		width: 99%;
+	}
 
 	#consoleDiv {
 		width: 100%;

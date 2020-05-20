@@ -1,4 +1,3 @@
-
 // Yoy!
 var cranes = 0;
 var unsoldCranes = 0;
@@ -78,6 +77,10 @@ var craneCountCrunchedEl;
 
 var btnChangeThemeEl;
 
+var eventDiv;
+var eventDescription;
+var eventTitle;
+
 function save() {
   var savedGame = {
     cranes: cranes,
@@ -108,7 +111,7 @@ function save() {
     wishUnlocked: wishUnlocked,
     paperBuyerUnlocked: paperBuyerUnlocked,
   };
-  
+
   localStorage.setItem(
     "savedGame",
     JSON.stringify(savedGame)
@@ -138,7 +141,7 @@ function save() {
     "savedActiveProjects",
     JSON.stringify(savedActiveProjects)
   );
-  
+
   // Deal with events.
   var savedEventUses = [];
   var savedEventFlags = [];
@@ -154,7 +157,7 @@ function save() {
     "savedEventFlags",
     JSON.stringify(savedEventFlags)
   );
-  
+
   localStorage.setItem("consoleHistory", JSON.stringify(consoleHistory));
   localStorage.setItem("theme", JSON.stringify(theme));
 }
@@ -210,7 +213,7 @@ function load() {
         activeProjects.push(projects[i]);
       }
     }
-    
+
     // Load event information.
     var loadEventUses = JSON.parse(
       localStorage.getItem("savedEventUses")
@@ -223,9 +226,9 @@ function load() {
       events[i].uses = loadEventUses[i];
       events[i].flag = loadEventFlags[i];
     }
-    
+
     var consoleHistory = JSON.parse(localStorage.getItem("consoleHistory"));
-    
+
     for (i in consoleHistory.length) {
       displayMessage(consoleHistory[i]);
     }
@@ -316,6 +319,10 @@ function cacheDOMElements() {
 
   btnChangeThemeEl = document.getElementById("btnChangeTheme");
 
+  eventDiv = document.getElementById('eventDiv');
+  eventDescription = document.getElementById('eventDescription');
+  eventTitle = document.getElementById('eventTitle');
+
   load();
 
   applyTheme();
@@ -349,9 +356,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 // Game loop!
 window.setInterval(function () {
-  
+
   var demand = (0.08 / cranePrice) * Math.pow(1.3, marketingLevel - 1);
-  
+
   // Make cranes before selling them.
   makeCrane((highSchoolers * highSchoolerBoost) / 500);
   makeCrane(jos);
@@ -362,7 +369,7 @@ window.setInterval(function () {
     (cranePrice <= 0.01 && Math.random() > 0.7)
   ) {
     var amount = Math.ceil(demand);
-    
+
     if (cranePrice <= 0.01) {
       amount = Math.ceil(unsoldCranes / 10);
     }
@@ -373,7 +380,7 @@ window.setInterval(function () {
       amount = 0;
     }
     unsoldCranes -= amount;
-    
+
     funds += cranePrice * amount;
   }
 
@@ -416,7 +423,7 @@ window.setInterval(function () {
   manageEvents();
 
   tick++;
-  
+
 }, 10);
 
 // A slower one.
@@ -785,10 +792,20 @@ function manageProjects() {
 function manageEvents() {
   for (var i = 0; i < events.length; i++) {
     if (events[i].trigger() && events[i].uses > 0) {
+      eventTitle.innerHTML = events[i].title;
+      eventDescription.innerHTML = events[i].description;
+      eventDiv.style.display = "block";
+
       events[i].effect();
       events[i].uses--;
     }
   }
+}
+
+function closeEvent() {
+  eventDescription.innerHTML = "";
+  eventDiv.style.display = "none";
+
 }
 
 function blink(element, targetOpacity) {

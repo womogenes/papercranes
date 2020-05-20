@@ -12,7 +12,6 @@ var event1 = {
   uses: 1,
   flag: 0,
   effect: function() {
-    console.log("asdf");
     wishUnlocked = true;
     column0DivEl.hidden = false;
     blink(column0DivEl, 1.0);
