@@ -32,7 +32,8 @@ var tick = 0;
 var prevTimer = Date.now();
 
 var consoleHistory = [];
-var pendingEvents = []
+var pendingEvents = [];
+var notificationCount;
 // Style variables.
 var theme = (window.matchMedia &&
     window.matchMedia("(prefers-color-scheme: dark)").matches) ?
@@ -422,7 +423,8 @@ window.setInterval(function () {
 
   manageProjects();
   manageEvents();
-
+  notificationCount = pendingEvents.length + (eventDiv.style.display == "block" ? 1 : 0);
+  document.title = (notificationCount ? "(" + notificationCount + ") " : "") + "Paper Cranes";
   tick++;
 
 }, 10);

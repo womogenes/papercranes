@@ -27,7 +27,7 @@ var event2 = {
   trigger: function() {
     return paper <= 0 && paperBuyerOn;
   },
-  uses: Infinity,
+  uses: -1,
   flag: 0,
   effect: function() {
     buyPaper(1);
