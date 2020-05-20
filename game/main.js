@@ -32,6 +32,7 @@ var tick = 0;
 var prevTimer = Date.now();
 
 var consoleHistory = [];
+var pendingEvents = []
 // Style variables.
 var theme = (window.matchMedia &&
     window.matchMedia("(prefers-color-scheme: dark)").matches) ?
@@ -792,20 +793,30 @@ function manageProjects() {
 function manageEvents() {
   for (var i = 0; i < events.length; i++) {
     if (events[i].trigger() && events[i].uses > 0) {
-      eventTitle.innerHTML = events[i].title;
-      eventDescription.innerHTML = events[i].description;
-      eventDiv.style.display = "block";
-
+      pendingEvents.push(events[i]);
       events[i].effect();
       events[i].uses--;
     }
   }
+  if (pendingEvents.length > 0 && eventDiv.style.display == "") {
+    displayNextEvent();
+  }
+}
+
+function displayNextEvent() {
+  event = pendingEvents.pop();
+  eventTitle.innerHTML = event.title;
+  eventDescription.innerHTML = event.description;
+  eventDiv.style.display = "block";
 }
 
 function closeEvent() {
-  eventDescription.innerHTML = "";
-  eventDiv.style.display = "none";
-
+  if (pendingEvents.length == 0) {
+    eventDescription.innerHTML = "";
+    eventDiv.style.display = "none";
+  } else {
+    displayNextEvent()
+  }
 }
 
 function blink(element, targetOpacity) {
