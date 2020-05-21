@@ -247,11 +247,12 @@ div#readoutDiv {
 	right: 0;
 	margin-left: 8px;
 	margin-top: 5px;
-	margin-right: 13px;
+	margin-right: 11px;
 }
 
 #happinessDiv {
 	width: 275px;
+  margin-right: 13px;
 }
 
 #happinessProgress {
