@@ -737,7 +737,7 @@ function displayMessage(msg) {
   newMsgEl.setAttribute("class", "consoleMsg");
   newMsgEl.setAttribute("id", "consoleMsg");
   newMsgEl.innerHTML = msg;
-  blink(newMsgEl, 1.0);
+  fade(newMsgEl, 1.0);
 
   readoutDivEl.prepend(newMsgEl, readoutDivEl.firstChild);
 }
@@ -773,9 +773,9 @@ function displayProjects(project) {
   project.element.appendChild(description);
 
   if (project.cost()) {
-    blink(project.element, 1.0);
+    fade(project.element, 1.0);
   } else {
-    blink(project.element, 0.6);
+    fade(project.element, 0.6);
   }
 }
 
@@ -821,23 +821,23 @@ function closeEvent() {
   }
 }
 
-function blink(element, targetOpacity) {
-  var blinkCounter = -1;
+function fade(element, targetOpacity) {
+  var fadeCounter = -1;
 
   var handle = window.setInterval(function () {
     toggleVisibility(element);
   }, 30);
 
   function toggleVisibility(element) {
-    if (blinkCounter > targetOpacity * 10) {
+    if (fadeCounter > targetOpacity * 10) {
       element.style.opacity = null;
       clearInterval(handle);
       return;
 
     } else {
-      element.style.opacity = blinkCounter / 10;
+      element.style.opacity = fadeCounter / 10;
     }
 
-    blinkCounter++;
+    fadeCounter++;
   }
 }
