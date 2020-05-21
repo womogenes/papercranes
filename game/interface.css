@@ -24,8 +24,18 @@ body {
 	font-size: 14px;
 }
 
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 div {
 	touch-action: manipulation;
+}
+
+div.scroll {
+	overflow: auto;
+	border: 1px solid #000;
 }
 
 hr {
@@ -35,11 +45,6 @@ hr {
 	background-color: var(--outline-color);
 }
 
-div.scroll {
-	overflow: auto;
-	border: 1px solid #000;
-}
-
 .button {
 	font-size: 13px;
 	border-radius: 5px;
@@ -47,8 +52,8 @@ div.scroll {
 	outline: none;
 	background: var(--btn-bg-on);
 
-	margin: 3px 2px;
-	margin-right: 1em;
+	margin: 3px 0;
+	margin-right: 4px;
 	padding: 2px 4px;
 
 	touch-action: manipulation;
@@ -69,7 +74,6 @@ div.scroll {
 	opacity: 0.6;
 	border: 1px solid #555;
 	cursor: auto;
-	/* touch-action: manipulation; */
 }
 
 .projectButton {
@@ -102,7 +106,6 @@ div.scroll {
 	opacity: 0.6;
 	border: 1px solid #555;
 	cursor: auto;
-	/* touch-action: manipulation; */
 }
 
 .pulsate {
