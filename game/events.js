@@ -7,6 +7,7 @@ var event1 = {
   title: "Unhide prestige column",
   description: "Prestige column gets unhidden.",
   trigger: function() {
+    return true; //for testing
     return cranes >= 1000;
   },
   uses: 1,

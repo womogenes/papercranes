@@ -189,8 +189,6 @@ div#readoutDiv {
 }
 
 #closeButton {
-	width: 20px;
-	height: 20px;
 	right: 0%;
 	top: 0%;
 	position: absolute;
