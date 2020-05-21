@@ -83,6 +83,8 @@ var eventDiv;
 var eventDescription;
 var eventTitle;
 
+var iconEl;
+
 function save() {
   var savedGame = {
     cranes: cranes,
@@ -325,6 +327,8 @@ function cacheDOMElements() {
   eventDescription = document.getElementById('eventDescription');
   eventTitle = document.getElementById('eventTitle');
 
+  iconEl = document.getElementById('icon');
+
   load();
 
   applyTheme();
@@ -426,6 +430,7 @@ window.setInterval(function () {
   manageEvents();
   notificationCount = pendingEvents.length + (eventDiv.style.display == "block" ? 1 : 0);
   document.title = (notificationCount ? "(" + notificationCount + ") " : "") + "Paper Cranes";
+  iconEl.setAttribute("href", notificationCount ? "../notification.svg" : "../crane.svg");
   tick++;
 
 }, 10);

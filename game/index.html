@@ -7,7 +7,7 @@
 
 	<title>Paper Cranes</title>
 
-	<link rel="icon" href="../crane.ico">
+	<link id="icon" rel="icon" href="../crane.svg">
 	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
 	<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" type="text/css" href="./interface.css" media="screen" />
@@ -104,7 +104,9 @@
 			<b>Manufacturing</b>
 			<hr>
 
-			<button class="button" id="btnMakeCrane" onClick="makeCrane(1)"><p>Fold Crane</p></button>
+			<button class="button" id="btnMakeCrane" onClick="makeCrane(1)">
+				<p>Fold Crane</p>
+			</button>
 			<br>
 
 			<p>Cranes per Second: </p><span id="cranemakerRate">0</span>
