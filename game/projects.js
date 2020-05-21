@@ -48,7 +48,9 @@ var project2 = {
 		displayMessage("Bank account opened. You can now borrow money $20 at a time.");
 		funds -= 10;
 		bankUnlocked = true;
+		bankDivEl.style.opacity = 0.0;
 		bankDivEl.hidden = false;
+		fade(bankDivEl, 1.0);
 		project2.element.parentNode.removeChild(project2.element);
 		var index = activeProjects.indexOf(project2);
 		activeProjects.splice(index, 1);
