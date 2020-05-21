@@ -188,6 +188,19 @@ div#readoutDiv {
 	z-index: 2;
 }
 
+#closeButton {
+	width: 20px;
+	height: 20px;
+	right: 0%;
+	top: 0%;
+	position: absolute;
+	font-size: 20px;
+	border: none;
+	outline: none;
+	background: none;
+	touch-action: manipulation;
+}
+
 #fundsDiv {
 	margin-top: 30px;
 }
