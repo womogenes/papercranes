@@ -815,7 +815,9 @@ function displayNextEvent() {
   event = pendingEvents.pop();
   eventTitle.innerHTML = event.title;
   eventDescription.innerHTML = event.description;
+  eventDiv.style.opacity = 0;
   eventDiv.style.display = "block";
+  fade(eventDiv, 1.0);
 }
 
 function closeEvent() {
