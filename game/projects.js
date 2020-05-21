@@ -1,4 +1,3 @@
-
 // Yoy!
 var projects = [];
 var activeProjects = [];
@@ -118,7 +117,7 @@ var project5 = {
 	id: "projectButton5",
 	title: "Professionals ",
 	priceTag: "(10 wishes)",
-	description: "Use 10 wishes to start hiring Jo Nakashimas, the most professional of folders.",
+	description: "Use 10 wishes to start hiring Professionals, the best folders.",
 	trigger: function () {
 		return highSchoolers >= 100;
 	},
@@ -132,8 +131,8 @@ var project5 = {
 		project5.flag = 1;
 		displayMessage("100x more powerful than a high schooler.");
 		wishes -= 10;
-		joUnlocked = true;
-		joDivEl.hidden = false;
+		professionalUnlocked = true;
+		professionalDivEl.hidden = false;
 		project5.element.parentNode.removeChild(project5.element);
 		var index = activeProjects.indexOf(project5);
 		activeProjects.splice(index, 1);

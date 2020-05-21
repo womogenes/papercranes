@@ -15,15 +15,15 @@ var debt = 0;
 var maxDebt = 1e3;
 var interestRate = 0.01;
 
-var jos = 0;
-var joCost = 100;
+var professionals = 0;
+var professionalCost = 100;
 var basePaperPrice = 15;
 var wishes = 0;
 
 var paperBuyerOn = false;
 
 var bankUnlocked = false;
-var joUnlocked = false;
+var professionalUnlocked = false;
 var wishUnlocked = false;
 var paperBuyerUnlocked = false;
 
@@ -67,10 +67,10 @@ var btnPayBackEl;
 var btnBorrowMoneyEl;
 var interestRateEl;
 
-var joDivEl;
-var btnHireJoEl;
-var josEl;
-var joCostEl;
+var professionalDivEl;
+var btnHireProfessionalEl;
+var professionalsEl;
+var professionalCostEl;
 var column0DivEl;
 var wishEl;
 var paperBuyerDivEl;
@@ -101,15 +101,15 @@ function save() {
     maxDebt: maxDebt,
     interestRate: interestRate,
 
-    jos: jos,
-    joCost: joCost,
+    professionals: professionals,
+    professionalCost: professionalCost,
     basePaperPrice: basePaperPrice,
     wishes: wishes,
 
     paperBuyerOn: paperBuyerOn,
 
     bankUnlocked: bankUnlocked,
-    joUnlocked: joUnlocked,
+    professionalUnlocked: professionalUnlocked,
     wishUnlocked: wishUnlocked,
     paperBuyerUnlocked: paperBuyerUnlocked,
   };
@@ -183,8 +183,8 @@ function load() {
     maxDebt = savedGame.maxDebt;
     interestRate = savedGame.interestRate;
 
-    jos = savedGame.jos;
-    joCost = savedGame.joCost;
+    professionals = savedGame.professionals;
+    professionalCost = savedGame.professionalCost;
     basePaperPrice = savedGame.basePaperPrice;
     wishes = savedGame.wishes;
     basePaperPrice = savedGame.basePaperPrice;
@@ -192,7 +192,7 @@ function load() {
     paperBuyerOn = savedGame.paperBuyerOn;
 
     bankUnlocked = savedGame.bankUnlocked;
-    joUnlocked = savedGame.joUnlocked;
+    professionalUnlocked = savedGame.professionalUnlocked;
     wishUnlocked = savedGame.wishUnlocked;
     paperBuyerUnlocked = savedGame.paperBuyerUnlocked;
 
@@ -309,10 +309,10 @@ function cacheDOMElements() {
   btnBorrowMoneyEl = document.getElementById("btnBorrowMoney");
   interestRateEl = document.getElementById("interestRate");
 
-  joDivEl = document.getElementById("joDiv");
-  btnHireJoEl = document.getElementById("btnHireJo");
-  josEl = document.getElementById("jos");
-  joCostEl = document.getElementById("joCost");
+  professionalDivEl = document.getElementById("professionalDiv");
+  btnHireProfessionalEl = document.getElementById("btnHireProfessional");
+  professionalsEl = document.getElementById("professionals");
+  professionalCostEl = document.getElementById("professionalCost");
   column0DivEl = document.getElementById("column0");
   wishEl = document.getElementById("wishes");
   paperBuyerDivEl = document.getElementById("paperBuyerDiv");
@@ -338,7 +338,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   btnMarketingEl.disabled = true;
   btnHireHighSchoolerEl.disabled = true;
   bankDivEl.hidden = !bankUnlocked;
-  joDivEl.hidden = !joUnlocked;
+  professionalDivEl.hidden = !professionalUnlocked;
   column0DivEl.hidden = !wishUnlocked;
   paperBuyerDivEl.hidden = !paperBuyerUnlocked;
 
@@ -363,7 +363,7 @@ window.setInterval(function () {
 
   // Make cranes before selling them.
   makeCrane((highSchoolers * highSchoolerBoost) / 500);
-  makeCrane(jos);
+  makeCrane(professionals);
 
   // Sell cranes.
   if (
@@ -397,7 +397,7 @@ window.setInterval(function () {
   btnHireHighSchoolerEl.disabled = funds < minWage;
   btnPayBackEl.disabled = funds <= 0 || debt <= 0;
   btnBorrowMoneyEl.disabled = debt >= maxDebt;
-  btnHireJoEl.disabled = joCost > funds;
+  btnHireProfessionalEl.disabled = professionalCost > funds;
 
   if (funds >= 0.1) {
     happinessMeterEl.style.width = Math.log(funds + wishes) + "%";
@@ -416,8 +416,8 @@ window.setInterval(function () {
   paperEl.innerHTML = commify(Math.floor(paper));
   interestRateEl.innerHTML = interestRate * 100;
   highSchoolerWageEl.innerHTML = monify(minWage);
-  josEl.innerHTML = commify(jos);
-  joCostEl.innerHTML = monify(joCost);
+  professionalsEl.innerHTML = commify(professionals);
+  professionalCostEl.innerHTML = monify(professionalCost);
   wishEl.innerHTML = commify(Math.floor(wishes));
   craneCountCrunchedEl.innerHTML = spellf(Math.round(cranes));
 
@@ -542,7 +542,7 @@ function spellf(userInput) {
     if (numToWorkOn.indexOf(".") !== -1) {
       numToWorkOn = splittedExponentNum[0].split(".");
       exponent -= numToWorkOn[1].length;
-      numToWorkOn = numToWorkOn.join("");
+      numToWorkOn = numToWorkOn.professionalin("");
     } else {
       numToWorkOn = splittedExponentNum[0];
     }
@@ -679,14 +679,14 @@ function hireHighSchooler() {
   minWage = Math.ceil(minWage * 1.01 * 100) / 100;
 }
 
-function hireJo() {
-  // Hires one Jo Nakashima.
-  if (funds < joCost) {
+function HireProfessional() {
+  // Hires one Professional
+  if (funds < professionalCost) {
     return;
   }
-  jos++;
-  funds -= joCost;
-  joCost = Math.ceil(joCost * 1.1 * 100) / 100;
+  professionals++;
+  funds -= professionalCost;
+  professionalCost = Math.ceil(professionalCost * 1.1 * 100) / 100;
 }
 
 function lowerPrice() {

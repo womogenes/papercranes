@@ -48,6 +48,7 @@ div.scroll {
 	background: var(--btn-bg-on);
 
 	margin: 3px 2px;
+	margin-right: 1em;
 	padding: 2px 4px;
 
 	touch-action: manipulation;
