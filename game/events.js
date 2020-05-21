@@ -14,7 +14,7 @@ var event1 = {
   effect: function() {
     wishUnlocked = true;
     column0DivEl.hidden = false;
-    blink(column0DivEl, 1.0);
+    fade(column0DivEl, 1.0);
   }
 }
 

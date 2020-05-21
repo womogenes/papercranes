@@ -352,7 +352,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   // Initial messages.
   if (consoleHistory.length == 0) {
-    displayMessage("Click \"Fold Crane\" to start making cranes.");
+    displayMessage('Buy some paper using the "Paper" button, then click "Fold Crane" to start making cranes.');
   }
 });
 
@@ -390,6 +390,7 @@ window.setInterval(function () {
     debt = maxDebt;
   }
 
+  // Disable buttons which player cannot use
   btnMakeCraneEl.disabled = paper < 1;
   btnLowerPriceEl.disabled = cranePrice <= 0.01;
   btnBuyPaperEl.disabled = paperPrice > funds;
