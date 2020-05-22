@@ -36,7 +36,7 @@ var pendingEvents = [];
 var notificationCount;
 // Style variables.
 var theme = (
-  window.matchMedia &&window.matchMedia("(prefers-color-scheme: dark)").matches) ?
+    window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ?
   "Dark" : "Light";
 
 var themes = {
@@ -194,84 +194,84 @@ function save() {
 }
 
 function load() {
-  if (localStorage.getItem("savedGame") != null) {
-    var savedGame = JSON.parse(localStorage.getItem("savedGame"));
-    cranes = savedGame.cranes;
-    unsoldCranes = savedGame.unsoldCranes;
-    funds = savedGame.funds;
-    cranePrice = savedGame.cranePrice;
-    marketingPrice = savedGame.marketingPrice;
-    paperPrice = savedGame.paperPrice;
-    paperAmount = savedGame.paperAmount;
-    paper = savedGame.paper;
-    marketingLevel = savedGame.marketingLevel;
-    highSchoolers = savedGame.highSchoolers;
-    minWage = savedGame.minWage;
-    highSchoolerBoost = savedGame.highSchoolerBoost;
-    debt = savedGame.debt;
-    maxDebt = savedGame.maxDebt;
-    interestRate = savedGame.interestRate;
-
-    professionals = savedGame.professionals;
-    professionalCost = savedGame.professionalCost;
-    basePaperPrice = savedGame.basePaperPrice;
-    wishes = savedGame.wishes;
-    basePaperPrice = savedGame.basePaperPrice;
-
-    paperBuyerOn = savedGame.paperBuyerOn;
-
-    bankUnlocked = savedGame.bankUnlocked;
-    professionalUnlocked = savedGame.professionalUnlocked;
-    wishUnlocked = savedGame.wishUnlocked;
-    paperBuyerUnlocked = savedGame.paperBuyerUnlocked;
-
-    // Load project information.
-    var loadProjectUses = JSON.parse(localStorage.getItem("savedProjectUses"));
-    var loadProjectFlags = JSON.parse(
-      localStorage.getItem("savedProjectFlags")
-    );
-    var loadActiveProjects = JSON.parse(
-      localStorage.getItem("savedActiveProjects")
-    );
-
-    for (var i = 0; i < loadProjectUses.length; i++) {
-      projects[i].uses = loadProjectUses[i];
-      projects[i].flag = loadProjectFlags[i];
-    }
-    for (var i = 0; i < projects.length; i++) {
-      if (loadActiveProjects.indexOf(projects[i].id) >= 0) {
-        displayProjects(projects[i]);
-        activeProjects.push(projects[i]);
-      }
-    }
-
-    // Load event information.
-    var loadEventUses = JSON.parse(
-      localStorage.getItem("savedEventUses")
-    );
-    var loadEventFlags = JSON.parse(
-      localStorage.getItem("savedEventFlags")
-    );
-
-    for (var i = 0; i < loadEventUses.length; i++) {
-      events[i].uses = loadEventUses[i];
-      events[i].flag = loadEventFlags[i];
-    }
-
-    var consoleHistory = JSON.parse(localStorage.getItem("consoleHistory"));
-
-    for (i in consoleHistory.length) {
-      displayMessage(consoleHistory[i]);
-    }
-    theme = JSON.parse(localStorage.getItem("theme")); // Theme.
-
-  } else {
+  if (localStorage.getItem("savedGame") == null) {
     save();
+    return;
   }
+  var savedGame = JSON.parse(localStorage.getItem("savedGame"));
+  cranes = savedGame.cranes;
+  unsoldCranes = savedGame.unsoldCranes;
+  funds = savedGame.funds;
+  cranePrice = savedGame.cranePrice;
+  marketingPrice = savedGame.marketingPrice;
+  paperPrice = savedGame.paperPrice;
+  paperAmount = savedGame.paperAmount;
+  paper = savedGame.paper;
+  marketingLevel = savedGame.marketingLevel;
+  highSchoolers = savedGame.highSchoolers;
+  minWage = savedGame.minWage;
+  highSchoolerBoost = savedGame.highSchoolerBoost;
+  debt = savedGame.debt;
+  maxDebt = savedGame.maxDebt;
+  interestRate = savedGame.interestRate;
+
+  professionals = savedGame.professionals;
+  professionalCost = savedGame.professionalCost;
+  basePaperPrice = savedGame.basePaperPrice;
+  wishes = savedGame.wishes;
+  basePaperPrice = savedGame.basePaperPrice;
+
+  paperBuyerOn = savedGame.paperBuyerOn;
+
+  bankUnlocked = savedGame.bankUnlocked;
+  professionalUnlocked = savedGame.professionalUnlocked;
+  wishUnlocked = savedGame.wishUnlocked;
+  paperBuyerUnlocked = savedGame.paperBuyerUnlocked;
+
+  // Load project information.
+  var loadProjectUses = JSON.parse(localStorage.getItem("savedProjectUses"));
+  var loadProjectFlags = JSON.parse(
+    localStorage.getItem("savedProjectFlags")
+  );
+  var loadActiveProjects = JSON.parse(
+    localStorage.getItem("savedActiveProjects")
+  );
+
+  for (var i = 0; i < loadProjectUses.length; i++) {
+    projects[i].uses = loadProjectUses[i];
+    projects[i].flag = loadProjectFlags[i];
+  }
+  for (var i = 0; i < projects.length; i++) {
+    if (loadActiveProjects.indexOf(projects[i].id) >= 0) {
+      displayProjects(projects[i]);
+      activeProjects.push(projects[i]);
+    }
+  }
+
+  // Load event information.
+  var loadEventUses = JSON.parse(
+    localStorage.getItem("savedEventUses")
+  );
+  var loadEventFlags = JSON.parse(
+    localStorage.getItem("savedEventFlags")
+  );
+
+  for (var i = 0; i < loadEventUses.length; i++) {
+    events[i].uses = loadEventUses[i];
+    events[i].flag = loadEventFlags[i];
+  }
+
+  var consoleHistory = JSON.parse(localStorage.getItem("consoleHistory"));
+
+  for (i in consoleHistory.length) {
+    displayMessage(consoleHistory[i]);
+  }
+
+  theme = JSON.parse(localStorage.getItem("theme")); // Theme.
 }
 
 function applyTheme() {
-  // Sets light or dark theme.
+  // Sets theme colors
   for (var i in themes[theme]) {
     document.documentElement.style.setProperty(i, themes[theme][i])
   }
@@ -329,7 +329,6 @@ function cacheDOMElements() {
   iconEl = document.getElementById('icon');
 
   load();
-
   applyTheme();
 }
 
@@ -347,11 +346,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   paperPriceEl.innerHTML = paperPrice;
   marketingLevelEl.innerHTML = commify(marketingLevel);
-  if (paperBuyerOn) {
-    paperBuyerEl.innerHTML = "ON";
-  } else {
-    paperBuyerEl.innerHTML = "OFF";
-  }
+  paperBuyerEl.innerHTML = paperBuyerOn ? "ON" : "OFF";
+
 
   // Initial messages.
   if (consoleHistory.length == 0) {
@@ -369,29 +365,21 @@ window.setInterval(function () {
   makeCrane(professionals);
 
   // Sell cranes.
-  if (
-    Math.random() * 50 < demand ||
-    (cranePrice <= 0.01 && Math.random() > 0.7)
-  ) {
+  if (Math.random() * 50 < demand || (cranePrice <= 0.01 && Math.random() > 0.7)) {
     var amount = Math.ceil(demand);
 
     if (cranePrice <= 0.01) {
       amount = Math.ceil(unsoldCranes / 10);
     }
-    if (amount > unsoldCranes) {
-      amount = unsoldCranes;
-    }
+    amount = Math.min(amount, unsoldCranes);
     if (unsoldCranes < 1) {
       amount = 0;
     }
     unsoldCranes -= amount;
-
     funds += cranePrice * amount;
   }
 
-  if (debt > maxDebt) {
-    debt = maxDebt;
-  }
+  debt = Math.min(maxDebt, debt);
 
   // Disable buttons which player cannot use
   btnMakeCraneEl.disabled = paper < 1;
@@ -403,11 +391,7 @@ window.setInterval(function () {
   btnBorrowMoneyEl.disabled = debt >= maxDebt;
   btnHireProfessionalEl.disabled = professionalCost > funds;
 
-  if (funds >= 0.1) {
-    happinessMeterEl.style.width = Math.log(funds + wishes) + "%";
-  } else {
-    happinessMeterEl.style.width = "0%";
-  }
+  happinessMeterEl.style.width = (funds >= 0.1 ? Math.log(funds + wishes) : 0) + "%"
 
   cranesEl.innerHTML = commify(Math.round(cranes));
   cranePriceEl.innerHTML = monify(cranePrice);
@@ -443,9 +427,7 @@ window.setInterval(function () {
   paperPriceEl.innerHTML = paperPrice;
 
   debt = Math.ceil(debt * (1 + interestRate) * 100) / 100;
-  if (debt > maxDebt) {
-    debt = maxDebt;
-  }
+  debt = Math.min(maxDebt, debt);
 }, 5000);
 
 // Slower one, every second.
@@ -470,54 +452,54 @@ function commify(n) {
 
 {
   var oneToTen = [
-      "zero", "one", "two", "three", "four",
-      "five", "six", "seven", "eight", "nine",
-    ],
-    elevenToNineteen = [
-      "ten", "eleven", "twelve", "thirteen", "fourteen",
-      "fifteen", "sixteen", "seventeen", "eighteen", "nineteen",
-    ],
-    multipleOfTen = [
-      "", "", "twenty", "thirty", "forty",
-      "fifty", "sixty", "seventy", "eighty", "ninety",
-    ],
-    placeValue = [
-      "", " thousand ", " million ", " billion ", " trillion ", " quadrillion ",
-      " quintillion ", " sextillion ", " septillion ", " octillion ",
-      " nonillion ", " decillion ", " undecillion ", " duodecillion ",
-      " tredecillion ", " quattuordecillion ", " quindecillion ",
-      " sexdecillion ", " septendecillion ", " octodecillion ",
-      " novemdecillion  ", " vigintillion ", " unvigintillion ",
-      " duovigintillion ", " trevigintillion ", " quattuorvigintillion ",
-      " quinvigintillion ", " sexvigintillion ", " septenvigintillion ",
-      " octovigintillion ", " novemvigintillion ", " trigintillion ",
-      " untrigintillion ", " duotrigintillion ", " tretrigintillion ",
-      " quattuortrigintillion ", " quintrigintillion ", " sextrigintillion ",
-      " septentrigintillion ", " octotrigintillion ", " novemtrigintillion ",
-      " quadragintillion ", " unquadragintillion ", " duoquadragintillion ",
-      " trequadragintillion ", " quattuorquadragintillion ",
-      " quinquadragintillion ", " sexquadragintillion ",
-      " septenquadragintillion ", " octoquadragintillion ",
-      " novemquadragintillion ", " quinquagintillion ", " unquinquagintillion ",
-      " duoquinquagintillion ", " trequinquagintillion ",
-      " quattuorquinquagintillion ", " quinquinquagintillion ",
-      " sexquinquagintillion ", " septenquinquagintillion ",
-      " octoquinquagintillion ", " novemquinquagintillion ", " sexagintillion ",
-      " unsexagintillion ", " duosexagintillion ", " tresexagintillion ",
-      " quattuorsexagintillion ", " quinsexagintillion ", " sexsexagintillion ",
-      " septsexagintillion ", " octosexagintillion ", " octosexagintillion ",
-      " septuagintillion ", " unseptuagintillion ", " duoseptuagintillion ",
-      " treseptuagintillion ", " quinseptuagintillion", " sexseptuagintillion",
-      " septseptuagintillion", " octoseptuagintillion",
-      " novemseptuagintillion", " octogintillion", " unoctogintillion",
-      " duooctogintillion", " treoctogintillion", " quattuoroctogintillion",
-      " quinoctogintillion", " sexoctogintillion", " septoctogintillion",
-      " octooctogintillion", " novemoctogintillion", " nonagintillion",
-      " unnonagintillion", " duononagintillion", " trenonagintillion ",
-      " quattuornonagintillion ", " quinnonagintillion ", " sexnonagintillion ",
-      " septnonagintillion ", " octononagintillion ", " novemnonagintillion ",
-      " centillion",
-    ];
+    "zero", "one", "two", "three", "four",
+    "five", "six", "seven", "eight", "nine",
+  ],
+  elevenToNineteen = [
+    "ten", "eleven", "twelve", "thirteen", "fourteen",
+    "fifteen", "sixteen", "seventeen", "eighteen", "nineteen",
+  ],
+  multipleOfTen = [
+    "", "", "twenty", "thirty", "forty",
+    "fifty", "sixty", "seventy", "eighty", "ninety",
+  ],
+  placeValue = [
+    "", " thousand ", " million ", " billion ", " trillion ", " quadrillion ",
+    " quintillion ", " sextillion ", " septillion ", " octillion ",
+    " nonillion ", " decillion ", " undecillion ", " duodecillion ",
+    " tredecillion ", " quattuordecillion ", " quindecillion ",
+    " sexdecillion ", " septendecillion ", " octodecillion ",
+    " novemdecillion  ", " vigintillion ", " unvigintillion ",
+    " duovigintillion ", " trevigintillion ", " quattuorvigintillion ",
+    " quinvigintillion ", " sexvigintillion ", " septenvigintillion ",
+    " octovigintillion ", " novemvigintillion ", " trigintillion ",
+    " untrigintillion ", " duotrigintillion ", " tretrigintillion ",
+    " quattuortrigintillion ", " quintrigintillion ", " sextrigintillion ",
+    " septentrigintillion ", " octotrigintillion ", " novemtrigintillion ",
+    " quadragintillion ", " unquadragintillion ", " duoquadragintillion ",
+    " trequadragintillion ", " quattuorquadragintillion ",
+    " quinquadragintillion ", " sexquadragintillion ",
+    " septenquadragintillion ", " octoquadragintillion ",
+    " novemquadragintillion ", " quinquagintillion ", " unquinquagintillion ",
+    " duoquinquagintillion ", " trequinquagintillion ",
+    " quattuorquinquagintillion ", " quinquinquagintillion ",
+    " sexquinquagintillion ", " septenquinquagintillion ",
+    " octoquinquagintillion ", " novemquinquagintillion ", " sexagintillion ",
+    " unsexagintillion ", " duosexagintillion ", " tresexagintillion ",
+    " quattuorsexagintillion ", " quinsexagintillion ", " sexsexagintillion ",
+    " septsexagintillion ", " octosexagintillion ", " octosexagintillion ",
+    " septuagintillion ", " unseptuagintillion ", " duoseptuagintillion ",
+    " treseptuagintillion ", " quinseptuagintillion", " sexseptuagintillion",
+    " septseptuagintillion", " octoseptuagintillion",
+    " novemseptuagintillion", " octogintillion", " unoctogintillion",
+    " duooctogintillion", " treoctogintillion", " quattuoroctogintillion",
+    " quinoctogintillion", " sexoctogintillion", " septoctogintillion",
+    " octooctogintillion", " novemoctogintillion", " nonagintillion",
+    " unnonagintillion", " duononagintillion", " trenonagintillion ",
+    " quattuornonagintillion ", " quinnonagintillion ", " sexnonagintillion ",
+    " septnonagintillion ", " octononagintillion ", " novemnonagintillion ",
+    " centillion",
+  ];
 }
 
 function spellf(userInput) {
@@ -552,13 +534,12 @@ function spellf(userInput) {
       numToWorkOn = splittedExponentNum[0];
     }
     while (exponent--) {
-      str = str + "0";
+      str += "0";
     }
-    numToWorkOn = numToWorkOn + str;
+    numToWorkOn += str;
   } else if (numToWorkOn.indexOf(".") !== -1) {
     var splittedDecimal = numToWorkOn.split(".");
-    var leftNum = splittedDecimal[0];
-    numToWorkOn = leftNum;
+    numToWorkOn = splittedDecimal[0];
   }
 
   // Put limit check on the program, placevalue map should be increased to increase capacity
@@ -624,23 +605,22 @@ function spellf(userInput) {
   // Pronounces any number less than 99
   function numLessThan99(val) {
     val = Number(val);
-    var tenthPlace = parseInt(val / 10),
-      result;
+    var tenthPlace = parseInt(val / 10), result;
     if (tenthPlace !== 1) {
-      val % 10 ?
-        (result = multipleOfTen[tenthPlace] + " " + numLessThan10(val % 10)) :
-        (result = multipleOfTen[tenthPlace]);
+      result = multipleOfTen[tenthPlace]
+      if (val % 10) {
+        result += " " + numLessThan10(val % 10)
+      }
       return result;
     } else {
       result = elevenToNineteen[val % 10];
-      return result;
     }
+    return result
   }
 
   // Pronounces any number less than 10
   function numLessThan10(val) {
-    val = Number(val);
-    return oneToTen[val];
+    return oneToTen[Number(val)];
   }
 }
 
@@ -655,9 +635,7 @@ function restart() {
 
 // Handles.
 function makeCrane(n) {
-  if (n > paper) {
-    n = paper;
-  }
+  n = Math.min(n, paper)
 
   wishes += n / 1000;
 
@@ -831,11 +809,8 @@ function fade(element, targetOpacity) {
       element.style.opacity = null;
       clearInterval(handle);
       return;
-
-    } else {
-      element.style.opacity = fadeCounter / 10;
     }
-
+    element.style.opacity = fadeCounter / 10;
     fadeCounter++;
   }
 }
