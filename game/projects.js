@@ -2,6 +2,13 @@
 var projects = [];
 var activeProjects = [];
 
+function baseEffect(project) {
+	project.flag = 1;
+	project.element.parentNode.removeChild(project.element);
+	var index = activeProjects.indexOf(project);
+	activeProjects.splice(index, 1);
+}
+
 var project1 = {
 	id: "projectButton1",
 	title: "Faster High Schoolers",
@@ -17,13 +24,10 @@ var project1 = {
 	flag: 0,
 	element: null,
 	effect: function () {
-		project1.flag = 1;
 		displayMessage("High schoolers now work 25% as fast.");
 		highSchoolerBoost *= 1.25;
-		project1.element.parentNode.removeChild(project1.element);
 		funds -= 10;
-		var index = activeProjects.indexOf(project1);
-		activeProjects.splice(index, 1);
+		baseEffect(project1);
 	}
 }
 
@@ -44,16 +48,13 @@ var project2 = {
 	flag: 0,
 	element: null,
 	effect: function () {
-		project2.flag = 1;
 		displayMessage("Bank account opened. You can now borrow money $20 at a time.");
 		funds -= 10;
 		bankUnlocked = true;
 		bankDivEl.style.opacity = 0.0;
 		bankDivEl.hidden = false;
 		fade(bankDivEl, 1.0);
-		project2.element.parentNode.removeChild(project2.element);
-		var index = activeProjects.indexOf(project2);
-		activeProjects.splice(index, 1);
+		baseEffect(project2);
 	}
 }
 
@@ -74,14 +75,11 @@ var project3 = {
 	flag: 0,
 	element: null,
 	effect: function () {
-		project3.flag = 1;
 		displayMessage("Speedy high schoolers!");
 		highSchoolerBoost *= 2;
 		interestRate *= 2;
 		funds -= 20;
-		project3.element.parentNode.removeChild(project3.element);
-		var index = activeProjects.indexOf(project3);
-		activeProjects.splice(index, 1);
+		baseEffect(project3);
 	}
 }
 
@@ -102,14 +100,11 @@ var project4 = {
 	flag: 0,
 	element: null,
 	effect: function () {
-		project4.flag = 1;
 		displayMessage("When they work harder, you gotta pay them more.");
 		highSchoolerBoost *= 2;
 		minWage *= 2;
 		funds -= 40;
-		project4.element.parentNode.removeChild(project4.element);
-		var index = activeProjects.indexOf(project4);
-		activeProjects.splice(index, 1);
+		baseEffect(project4);
 	}
 }
 
@@ -130,14 +125,11 @@ var project5 = {
 	flag: 0,
 	element: null,
 	effect: function () {
-		project5.flag = 1;
 		displayMessage("100x more powerful than a high schooler.");
 		wishes -= 10;
 		professionalUnlocked = true;
 		professionalDivEl.hidden = false;
-		project5.element.parentNode.removeChild(project5.element);
-		var index = activeProjects.indexOf(project5);
-		activeProjects.splice(index, 1);
+		baseEffect(project5);
 	}
 }
 
@@ -158,13 +150,10 @@ var project6 = {
 	flag: 0,
 	element: null,
 	effect: function () {
-		project6.flag = 1;
 		funds -= 200;
 		paperAmount = Math.round(paperAmount * 1.5);
 		basePaperPrice = Math.round(basePaperPrice * 1.5);
-		project6.element.parentNode.removeChild(project6.element);
-		var index = activeProjects.indexOf(project6);
-		activeProjects.splice(index, 1);
+		baseEffect(project6);
 	}
 }
 
@@ -185,13 +174,10 @@ var project7 = {
 	flag: 0,
 	element: null,
 	effect: function () {
-		project7.flag = 1
 		highSchoolers -= 100;
 		paperBuyerUnlocked = true;
 		paperBuyerDivEl.hidden = false;
-		project7.element.parentNode.removeChild(project7.element);
-		var index = activeProjects.indexOf(project7);
-		activeProjects.splice(index, 1);
+		baseEffect(project7);
 	}
 }
 
@@ -212,13 +198,10 @@ var project8 = {
 	flag: 0,
 	element: null,
 	effect: function () {
-		project8.flag = 1;
 		funds -= 400;
 		paperAmount = Math.round(paperAmount * 1.75);
 		basePaperPrice = Math.round(basePaperPrice * 1.5);
-		project8.element.parentNode.removeChild(project8.element);
-		var index = activeProjects.indexOf(project8);
-		activeProjects.splice(index, 1);
+		baseEffect(project8);
 	}
 }
 
@@ -239,13 +222,10 @@ var project9 = {
 	flag: 0,
 	element: null,
 	effect: function () {
-		project9.flag = 1;
 		funds -= 800;
 		paperAmount = Math.round(paperAmount * 10);
 		basePaperPrice = Math.round(basePaperPrice * 1.5);
-		project9.element.parentNode.removeChild(project9.element);
-		var index = activeProjects.indexOf(project9);
-		activeProjects.splice(index, 1);
+		baseEffect(project9);
 	}
 }
 
@@ -266,11 +246,8 @@ var project10 = {
 	flag: 0,
 	element: null,
 	effect: function () {
-		project10.flag = 1;
 		minWage = 0;
-		project10.element.parentNode.removeChild(project10.element);
-		var index = activeProjects.indexOf(project10);
-		activeProjects.splice(index, 1);
+		baseEffect(project10);
 	}
 }
 
