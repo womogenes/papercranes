@@ -172,6 +172,7 @@ div#readoutDiv {
 	position: absolute;
 	display: none;
 	z-index: 1;
+	touch-action: none;
 }
 
 #eventPanel {

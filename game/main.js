@@ -720,6 +720,7 @@ function displayMessage(msg) {
   newMsgEl.setAttribute("class", "consoleMsg");
   newMsgEl.setAttribute("id", "consoleMsg");
   newMsgEl.innerHTML = msg;
+  newMsgEl.style.opacity = 0;
   fade(newMsgEl, 1.0);
 
   readoutDivEl.prepend(newMsgEl, readoutDivEl.firstChild);
