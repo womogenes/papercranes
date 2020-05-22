@@ -4,8 +4,8 @@ var activeProjects = [];
 
 var project1 = {
 	id: "projectButton1",
-	title: "Faster High Schoolers ",
-	priceTag: "($10)",
+	title: "Faster High Schoolers",
+	priceTag: "$10",
 	description: "High Schoolers work 25% faster.",
 	trigger: function () {
 		return funds >= 5 && highSchoolers > 0;
@@ -31,8 +31,8 @@ projects.push(project1);
 
 var project2 = {
 	id: "projectButton2",
-	title: "Bank Account ",
-	priceTag: "($10)",
+	title: "Bank Account",
+	priceTag: "$10",
 	description: "Be able to borrow money!",
 	trigger: function () {
 		return funds >= 5;
@@ -61,8 +61,8 @@ projects.push(project2);
 
 var project3 = {
 	id: "projectButton3",
-	title: "Even Faster High Schoolers ",
-	priceTag: "($20)",
+	title: "Even Faster High Schoolers",
+	priceTag: "$20",
 	description: "Double interest rate, and high schoolers are 50% faster.",
 	trigger: function () {
 		return funds >= 10 && project1.flag;
@@ -89,8 +89,8 @@ projects.push(project3);
 
 var project4 = {
 	id: "projectButton4",
-	title: "Highly Skilled Students ",
-	priceTag: "($40)",
+	title: "Highly Skilled Students",
+	priceTag: "$40",
 	description: "Double hire price, high schoolers work twice as fast.",
 	trigger: function () {
 		return funds >= 20 && project3.flag;
@@ -117,8 +117,8 @@ projects.push(project4);
 
 var project5 = {
 	id: "projectButton5",
-	title: "Professionals ",
-	priceTag: "(10 wishes)",
+	title: "Professionals",
+	priceTag: "10 wishes",
 	description: "Use 10 wishes to start hiring Professionals, the best folders.",
 	trigger: function () {
 		return highSchoolers >= 100;
@@ -145,8 +145,8 @@ projects.push(project5);
 
 var project6 = {
 	id: "projectButton6",
-	title: "Paper Efficiency ",
-	priceTag: "($200)",
+	title: "Paper Efficiency",
+	priceTag: "$200",
 	description: "Gain 50% more paper from each purchase.",
 	trigger: function () {
 		return cranes >= 5000;
@@ -172,8 +172,8 @@ projects.push(project6);
 
 var project7 = {
 	id: "projectButton7",
-	title: "Paper Buyer ",
-	priceTag: "(100 high schoolers)",
+	title: "Paper Buyer",
+	priceTag: "100 high schoolers",
 	description: "Auto-purchase paper when it runs out.",
 	trigger: function () {
 		return cranes >= 10000;
@@ -199,8 +199,8 @@ projects.push(project7);
 
 var project8 = {
 	id: "projectButton8",
-	title: "Thinner Sheets ",
-	priceTag: "($400)",
+	title: "Thinner Sheets",
+	priceTag: "$400",
 	description: "Gain 75% more paper from each purchase.",
 	trigger: function () {
 		return project6.flag == 1;
@@ -226,8 +226,8 @@ projects.push(project8);
 
 var project9 = {
 	id: "projectButton9",
-	title: "Big Paper ",
-	priceTag: "($800)",
+	title: "Big Paper",
+	priceTag: "$800",
 	description: "1000% more paper from each purchase.",
 	trigger: function () {
 		return project8.flag == 1;
@@ -253,8 +253,8 @@ projects.push(project9);
 
 var project10 = {
 	id: "projectButton10",
-	title: "Lower Wages ",
-	priceTag: "($10,000,000)",
+	title: "Lower Wages",
+	priceTag: "$10,000,000",
 	description: "Lobby the lawmakers to reduce minimum wage.",
 	trigger: function () {
 		return highSchoolers > 250;

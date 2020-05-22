@@ -766,23 +766,13 @@ function displayProjects(project) {
   span.style.fontWeight = "bold";
   project.element.appendChild(span);
 
-  var title = document.createTextNode(project.title);
-  span.appendChild(title);
+  span.appendChild(document.createTextNode(project.title));
+  project.element.appendChild(document.createTextNode(" (" + project.priceTag + ")"));
+  project.element.appendChild(document.createElement("div"));
+  project.element.appendChild(document.createTextNode(project.description));
 
-  var cost = document.createTextNode(project.priceTag);
-  project.element.appendChild(cost);
+  fade(project.element, project.cost() ? 1.0 : 0.6);
 
-  var div = document.createElement("div");
-  project.element.appendChild(div);
-
-  var description = document.createTextNode(project.description);
-  project.element.appendChild(description);
-
-  if (project.cost()) {
-    fade(project.element, 1.0);
-  } else {
-    fade(project.element, 0.6);
-  }
 }
 
 function manageProjects() {
