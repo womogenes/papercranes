@@ -768,11 +768,11 @@ function displayProjects(project) {
   project.element.appendChild(span);
 
   span.appendChild(document.createTextNode(project.title));
-  project.element.appendChild(document.createTextNode(" (" + project.priceTag + ")"));
+  project.element.appendChild(document.createTextNode(" (" + project.priceTag() + ")"));
   project.element.appendChild(document.createElement("div"));
   project.element.appendChild(document.createTextNode(project.description));
 
-  fade(project.element, project.cost() ? 1.0 : 0.6);
+  fade(project.element, project.canAfford() ? 1.0 : 0.6);
 
 }
 
@@ -785,7 +785,7 @@ function manageProjects() {
     }
   }
   for (i = 0; i < activeProjects.length; i++) {
-    activeProjects[i].element.disabled = !activeProjects[i].cost();
+    activeProjects[i].element.disabled = !activeProjects[i].canAfford();
   }
 }
 
