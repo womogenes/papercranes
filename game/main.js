@@ -755,6 +755,7 @@ function displayProjects(project) {
   project.element.setAttribute("id", project.id);
 
   project.element.onclick = function () {
+    baseEffect(project);
     project.effect();
   };
 
