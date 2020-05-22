@@ -7,11 +7,11 @@ var event1 = {
   title: "Unhide prestige column",
   description: "Prestige column gets unhidden.",
   trigger: function() {
-    //return true; //for testing
     return cranes >= 1000;
   },
   uses: 1,
   flag: 0,
+  notifyPlayer: false,
   effect: function() {
     wishUnlocked = true;
     column0DivEl.hidden = false;
@@ -30,6 +30,7 @@ var event2 = {
   },
   uses: -1,
   flag: 0,
+  notifyPlayer: false,
   effect: function() {
     buyPaper(1);
   }
@@ -46,6 +47,7 @@ var event3 = {
   },
   uses: -1,
   flag: 0,
+  notifyPlayer: false,
   effect: function() {
     debt = maxDebt;
   }

@@ -770,7 +770,10 @@ function manageProjects() {
 function manageEvents() {
   for (var i = 0; i < events.length; i++) {
     if (events[i].trigger() && events[i].uses != 0) {
-      pendingEvents.push(events[i]);
+      if (events[i].notifyPlayer) {
+        pendingEvents.push(events[i]);
+      }
+
       events[i].effect();
       events[i].uses--;
     }
