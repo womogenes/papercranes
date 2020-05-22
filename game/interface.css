@@ -203,6 +203,7 @@ div#readoutDiv {
 #closeButton:hover {
 	text-rendering: var(--btn-outline-hover);
 	text-decoration: underline;
+	cursor: pointer;
 }
 
 
