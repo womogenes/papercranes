@@ -348,7 +348,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
   marketingLevelEl.innerHTML = commify(marketingLevel);
   paperBuyerEl.innerHTML = paperBuyerOn ? "ON" : "OFF";
 
-
   // Initial messages.
   if (consoleHistory.length == 0) {
     displayMessage('Buy some paper using the "Paper" button, then click "Fold Crane" to start making cranes.');

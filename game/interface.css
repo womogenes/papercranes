@@ -185,8 +185,12 @@ div#readoutDiv {
 	padding: 20px;
 	position: absolute;
 	width: 50%;
-	height: 30%;
+	height: 50%;
 	z-index: 2;
+	min-width: 100px;
+	max-width: 300px;
+	min-height: 100px;
+	max-height: 300px;
 }
 
 #closeButton {

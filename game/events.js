@@ -7,11 +7,12 @@ var event1 = {
   title: "Unhide prestige column",
   description: "Prestige column gets unhidden.",
   trigger: function() {
+    return true;
     return cranes >= 1000;
   },
   uses: 1,
   flag: 0,
-  notifyPlayer: false,
+  notifyPlayer: true,
   effect: function() {
     wishUnlocked = true;
     column0DivEl.hidden = false;
