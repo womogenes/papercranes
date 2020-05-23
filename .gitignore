@@ -1,6 +1,0 @@
-**.vscode/
-test.py
-Pipfile
-Pipfile.lock
-serve.py
-__pycache__
