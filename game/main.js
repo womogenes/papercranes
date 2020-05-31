@@ -412,7 +412,7 @@ window.setInterval(function () {
   manageEvents();
   notificationCount = pendingEvents.length + (eventDiv.style.display == "block" ? 1 : 0);
   document.title = (notificationCount ? "(" + notificationCount + ") " : "") + "Paper Cranes";
-  iconEl.setAttribute("href", notificationCount ? "../notification.svg" : "../crane.svg");
+  iconEl.setAttribute("href", notificationCount ? "../favicon_notification.svg" : "../favicon_crane.svg");
   tick++;
 
 }, 10);
