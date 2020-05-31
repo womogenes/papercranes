@@ -26,7 +26,7 @@ body {
 
 p {
 	display: inline;
-	margin: 0 auto;
+	margin: 1px auto;
 }
 
 div {
@@ -150,13 +150,13 @@ hr {
 	margin-top: 40px;
 }
 
-div#consoleMsg {
+#consoleMsg {
 	font-size: 13px;
 	overflow: hidden;
 	margin-bottom: 5px;
 }
 
-div#readoutDiv {
+#readoutDiv {
 	margin-top: 10px;
 	padding: 5px;
 	height: 100%;
@@ -169,7 +169,7 @@ div#readoutDiv {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	position: absolute;
+	position: fixed;
 	display: none;
 	z-index: 1;
 	touch-action: none;
@@ -194,8 +194,8 @@ div#readoutDiv {
 }
 
 #closeButton {
-	right: 1%;
-	top: 2%;
+	right: 10px;
+  top: 15px;
 	position: absolute;
 	font-size: 20px;
 	border: none;
@@ -210,7 +210,6 @@ div#readoutDiv {
 	text-decoration: underline;
 	cursor: pointer;
 }
-
 
 #fundsDiv {
 	margin-top: 30px;
@@ -284,6 +283,19 @@ div#readoutDiv {
 }
 
 @media only screen and (max-width: 550px) {
+  
+  body {
+    font-size: 16px;
+  }
+  .button {
+    font-size: 14px;
+  }
+  .projectButton {
+    font-size: 14px;
+  }
+  #consoleMsg {
+    font-size: 15px;
+  }
 
 	#column0,
 	#column1,
@@ -300,4 +312,8 @@ div#readoutDiv {
 	#consoleDiv {
 		width: 100%;
 	}
+  
+  #closeButton {
+    right: 0px;
+  }
 }
