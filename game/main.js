@@ -231,12 +231,13 @@ function load() {
     projects[i].uses = loadProjectUses[i];
     projects[i].flag = loadProjectFlags[i];
   }
-  for (var i = 0; i < projects.length; i++) {
-    if (loadActiveProjects.indexOf(projects[i].id) >= 0) {
-      displayProjects(projects[i]);
-      activeProjects.push(projects[i]);
+
+  projects.forEach(project => {
+    if (loadActiveProjects.indexOf(project.id) >= 0) {
+      displayProjects(project);
+      activeProjects.push(project);
     }
-  }
+  });
 
   // Load event information.
   var loadEventUses = JSON.parse(
