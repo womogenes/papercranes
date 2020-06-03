@@ -2,5 +2,5 @@
 test.py
 Pipfile
 Pipfile.lock
-serve.py
+./game/serve.py
 __pycache__

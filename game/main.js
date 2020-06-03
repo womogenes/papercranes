@@ -22,9 +22,6 @@ var wishes = 0;
 
 var paperBuyerOn = false;
 
-var bankUnlocked = false;
-var professionalUnlocked = false;
-var wishUnlocked = false;
 var paperBuyerUnlocked = false;
 
 var prevCranes = cranes;
@@ -34,6 +31,7 @@ var prevTimer = Date.now();
 var consoleHistory = [];
 var pendingEvents = [];
 var notificationCount;
+
 // Style variables.
 var theme = (
     window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ?
@@ -137,10 +135,6 @@ function save() {
 
     paperBuyerOn: paperBuyerOn,
 
-    bankUnlocked: bankUnlocked,
-    professionalUnlocked: professionalUnlocked,
-    wishUnlocked: wishUnlocked,
-    paperBuyerUnlocked: paperBuyerUnlocked,
   };
 
   localStorage.setItem(
@@ -222,12 +216,7 @@ function load() {
   basePaperPrice = savedGame.basePaperPrice;
 
   paperBuyerOn = savedGame.paperBuyerOn;
-
-  bankUnlocked = savedGame.bankUnlocked;
-  professionalUnlocked = savedGame.professionalUnlocked;
-  wishUnlocked = savedGame.wishUnlocked;
-  paperBuyerUnlocked = savedGame.paperBuyerUnlocked;
-
+  
   // Load project information.
   var loadProjectUses = JSON.parse(localStorage.getItem("savedProjectUses"));
   var loadProjectFlags = JSON.parse(
@@ -262,18 +251,20 @@ function load() {
   }
 
   var consoleHistory = JSON.parse(localStorage.getItem("consoleHistory"));
-
+  console.log(consoleHistory);
+  
   for (i in consoleHistory.length) {
     displayMessage(consoleHistory[i]);
   }
+  console.log(consoleHistory);
 
   theme = JSON.parse(localStorage.getItem("theme")); // Theme.
 }
 
 function applyTheme() {
-  // Sets theme colors
+  // Sets theme colors.
   for (var i in themes[theme]) {
-    document.documentElement.style.setProperty(i, themes[theme][i])
+    document.documentElement.style.setProperty(i, themes[theme][i]);
   }
 }
 
@@ -322,14 +313,15 @@ function cacheDOMElements() {
 
   btnChangeThemeEl = document.getElementById("btnChangeTheme");
 
-  eventDiv = document.getElementById('eventDiv');
-  eventDescription = document.getElementById('eventDescription');
-  eventTitle = document.getElementById('eventTitle');
+  eventDiv = document.getElementById("eventDiv");
+  eventDescription = document.getElementById("eventDescription");
+  eventTitle = document.getElementById("eventTitle");
 
-  iconEl = document.getElementById('icon');
+  iconEl = document.getElementById("icon");
 
   load();
   applyTheme();
+  console.log(consoleHistory);
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -338,9 +330,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
   btnBuyPaperEl.disabled = true;
   btnMarketingEl.disabled = true;
   btnHireHighSchoolerEl.disabled = true;
-  bankDivEl.hidden = !bankUnlocked;
-  professionalDivEl.hidden = !professionalUnlocked;
-  column0DivEl.hidden = !wishUnlocked;
+  bankDivEl.hidden = !project2.flag;
+  professionalDivEl.hidden = !project5.flag;
+  column0DivEl.hidden = !event1.flag;
   paperBuyerDivEl.hidden = !paperBuyerUnlocked;
 
   paperPriceEl.innerHTML = paperPrice;
@@ -356,6 +348,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
   if (consoleHistory.length == 0) {
     displayMessage('Buy some paper using the "Paper" button, then click "Fold Crane" to start making cranes.');
   }
+  console.log(consoleHistory);
+  
 });
 
 // Game loop!
