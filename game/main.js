@@ -251,13 +251,11 @@ function load() {
     events[i].flag = loadEventFlags[i];
   }
 
-  var consoleHistory = JSON.parse(localStorage.getItem("consoleHistory"));
-  console.log(consoleHistory);
+  consoleHistory = JSON.parse(localStorage.getItem("consoleHistory"));
 
-  for (i in consoleHistory.length) {
-    displayMessage(consoleHistory[i]);
-  }
-  console.log(consoleHistory);
+  consoleHistory.forEach(message => {
+    displayMessage(message)
+  });
 
   theme = JSON.parse(localStorage.getItem("theme")); // Theme.
 }
@@ -323,7 +321,6 @@ function cacheDOMElements() {
 
   load();
   applyTheme();
-  console.log(consoleHistory);
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -350,7 +347,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
   if (consoleHistory.length == 0) {
     displayMessage('Buy some paper using the "Paper" button, then click "Fold Crane" to start making cranes.');
   }
-  console.log(consoleHistory);
 
 });
 
