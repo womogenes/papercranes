@@ -254,7 +254,7 @@ function load() {
   consoleHistory = JSON.parse(localStorage.getItem("consoleHistory"));
 
   consoleHistory.forEach(message => {
-    displayMessage(message)
+    displayMessage(message, true);
   });
 
   theme = JSON.parse(localStorage.getItem("theme")); // Theme.
@@ -699,9 +699,11 @@ function togglePaperBuyer() {
 }
 
 // Console stuff.
-function displayMessage(msg) {
+function displayMessage(msg, dontSave) {
   console.log(msg);
-  consoleHistory.push(msg);
+  if (!dontSave) {
+    consoleHistory.push(msg);
+  }
   var newMsgEl = document.createElement("div");
   newMsgEl.setAttribute("class", "consoleMsg");
   newMsgEl.setAttribute("id", "consoleMsg");
