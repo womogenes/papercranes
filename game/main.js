@@ -735,7 +735,7 @@ function displayProjects(project) {
   project.element.appendChild(span);
 
   span.appendChild(document.createTextNode(project.title));
-  project.element.appendChild(document.createTextNode(" (" + project.priceTag() + ")"));
+  project.element.appendChild(document.createTextNode(" " + priceTag(project)));
   project.element.appendChild(document.createElement("div"));
   project.element.appendChild(document.createTextNode(project.description));
 
