@@ -72,8 +72,8 @@
 			<hr>
 			<p>Unsold Inventory: </p><span id="unsoldCranes">0</span><br>
 
-			<button class="button" id="btnLowerPrice" onclick="lowerPrice()">Lower</button>
-			<button class="button" id="btnRaisePrice" onclick="raisePrice()">Raise</button>
+
+			<input id="priceSlider" type="range" min="0.01" max="10.00" value="0.25" step="0.01">
 			<p>Crane price: $</p><span id="cranePrice">0.25</span>
 			<br>
 
@@ -140,7 +140,7 @@
 			<br>
 
 			<div id="professionalDiv" hidden>
-				<button class="button" id="btnHireProfessional" onclick="HireProfessional()">Hire</button>
+				<button class="button" id="btnHireProfessional" onclick="hireProfessional()">Hire</button>
 				<span id="professionals">0</span> Professionals<br>
 				<p>Cost: $</p><span id="professionalCost">100.00</span>
 			</div>

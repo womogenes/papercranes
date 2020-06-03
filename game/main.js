@@ -2,7 +2,7 @@
 var cranes = 0;
 var unsoldCranes = 0;
 var funds = 20;
-var cranePrice = 0.15;
+var cranePrice = 0.25;
 var marketingPrice = 40.0;
 var paperPrice = 20;
 var paperAmount = 1000;
@@ -71,7 +71,6 @@ var hapinessMeterEl;
 var paperEl;
 var cranesEl;
 var btnMakeCraneEl;
-var btnLowerPriceEl;
 var btnBuyPaperEl;
 var btnMarketingEl;
 var btnHireHighSchoolerEl;
@@ -93,6 +92,7 @@ var debtEl;
 var btnPayBackEl;
 var btnBorrowMoneyEl;
 var interestRateEl;
+var priceSlider;
 
 var professionalDivEl;
 var btnHireProfessionalEl;
@@ -287,7 +287,6 @@ function cacheDOMElements() {
   paperEl = document.getElementById("paper");
   cranesEl = document.getElementById("cranes");
   btnMakeCraneEl = document.getElementById("btnMakeCrane");
-  btnLowerPriceEl = document.getElementById("btnLowerPrice");
   btnBuyPaperEl = document.getElementById("btnBuyPaper");
   btnMarketingEl = document.getElementById("btnMarketing");
   btnHireHighSchoolerEl = document.getElementById("btnHireHighSchooler");
@@ -309,6 +308,7 @@ function cacheDOMElements() {
   btnPayBackEl = document.getElementById("btnPayBack");
   btnBorrowMoneyEl = document.getElementById("btnBorrowMoney");
   interestRateEl = document.getElementById("interestRate");
+  priceSlider = document.getElementById("priceSlider");
 
   professionalDivEl = document.getElementById("professionalDiv");
   btnHireProfessionalEl = document.getElementById("btnHireProfessional");
@@ -335,7 +335,6 @@ function cacheDOMElements() {
 document.addEventListener("DOMContentLoaded", function (event) {
   cacheDOMElements();
   btnMakeCraneEl.disabled = false;
-  btnLowerPriceEl.disabled = false;
   btnBuyPaperEl.disabled = true;
   btnMarketingEl.disabled = true;
   btnHireHighSchoolerEl.disabled = true;
@@ -348,6 +347,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
   marketingLevelEl.innerHTML = commify(marketingLevel);
   paperBuyerEl.innerHTML = paperBuyerOn ? "ON" : "OFF";
 
+  priceSlider.addEventListener('input', (event) => {
+    cranePrice = priceSlider.value;
+    cranePriceEl.innerHTML = monify(cranePrice);
+  });
+
   // Initial messages.
   if (consoleHistory.length == 0) {
     displayMessage('Buy some paper using the "Paper" button, then click "Fold Crane" to start making cranes.');
@@ -356,7 +360,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 // Game loop!
 window.setInterval(function () {
-
   var demand = (0.08 / cranePrice) * Math.pow(1.3, marketingLevel - 1);
 
   // Make cranes before selling them.
@@ -382,7 +385,6 @@ window.setInterval(function () {
 
   // Disable buttons which player cannot use
   btnMakeCraneEl.disabled = paper < 1;
-  btnLowerPriceEl.disabled = cranePrice <= 0.01;
   btnBuyPaperEl.disabled = paperPrice > funds;
   btnMarketingEl.disabled = marketingPrice > funds;
   btnHireHighSchoolerEl.disabled = funds < minWage;
@@ -393,7 +395,6 @@ window.setInterval(function () {
   happinessMeterEl.style.width = (funds >= 0.1 ? Math.log(funds + wishes) : 0) + "%"
 
   cranesEl.innerHTML = commify(Math.round(cranes));
-  cranePriceEl.innerHTML = monify(cranePrice);
   unsoldCranesEl.innerHTML = commify(Math.floor(unsoldCranes));
   fundsEl.innerHTML = monify(funds);
   marketingPriceEl.innerHTML = monify(marketingPrice);
@@ -407,6 +408,7 @@ window.setInterval(function () {
   professionalCostEl.innerHTML = monify(professionalCost);
   wishEl.innerHTML = commify(Math.floor(wishes));
   craneCountCrunchedEl.innerHTML = spellf(Math.round(cranes));
+  cranePriceEl.innerHTML = monify(cranePrice);
 
   manageProjects();
   manageEvents();
@@ -451,54 +453,54 @@ function commify(n) {
 
 {
   var oneToTen = [
-    "zero", "one", "two", "three", "four",
-    "five", "six", "seven", "eight", "nine",
-  ],
-  elevenToNineteen = [
-    "ten", "eleven", "twelve", "thirteen", "fourteen",
-    "fifteen", "sixteen", "seventeen", "eighteen", "nineteen",
-  ],
-  multipleOfTen = [
-    "", "", "twenty", "thirty", "forty",
-    "fifty", "sixty", "seventy", "eighty", "ninety",
-  ],
-  placeValue = [
-    "", " thousand ", " million ", " billion ", " trillion ", " quadrillion ",
-    " quintillion ", " sextillion ", " septillion ", " octillion ",
-    " nonillion ", " decillion ", " undecillion ", " duodecillion ",
-    " tredecillion ", " quattuordecillion ", " quindecillion ",
-    " sexdecillion ", " septendecillion ", " octodecillion ",
-    " novemdecillion  ", " vigintillion ", " unvigintillion ",
-    " duovigintillion ", " trevigintillion ", " quattuorvigintillion ",
-    " quinvigintillion ", " sexvigintillion ", " septenvigintillion ",
-    " octovigintillion ", " novemvigintillion ", " trigintillion ",
-    " untrigintillion ", " duotrigintillion ", " tretrigintillion ",
-    " quattuortrigintillion ", " quintrigintillion ", " sextrigintillion ",
-    " septentrigintillion ", " octotrigintillion ", " novemtrigintillion ",
-    " quadragintillion ", " unquadragintillion ", " duoquadragintillion ",
-    " trequadragintillion ", " quattuorquadragintillion ",
-    " quinquadragintillion ", " sexquadragintillion ",
-    " septenquadragintillion ", " octoquadragintillion ",
-    " novemquadragintillion ", " quinquagintillion ", " unquinquagintillion ",
-    " duoquinquagintillion ", " trequinquagintillion ",
-    " quattuorquinquagintillion ", " quinquinquagintillion ",
-    " sexquinquagintillion ", " septenquinquagintillion ",
-    " octoquinquagintillion ", " novemquinquagintillion ", " sexagintillion ",
-    " unsexagintillion ", " duosexagintillion ", " tresexagintillion ",
-    " quattuorsexagintillion ", " quinsexagintillion ", " sexsexagintillion ",
-    " septsexagintillion ", " octosexagintillion ", " octosexagintillion ",
-    " septuagintillion ", " unseptuagintillion ", " duoseptuagintillion ",
-    " treseptuagintillion ", " quinseptuagintillion", " sexseptuagintillion",
-    " septseptuagintillion", " octoseptuagintillion",
-    " novemseptuagintillion", " octogintillion", " unoctogintillion",
-    " duooctogintillion", " treoctogintillion", " quattuoroctogintillion",
-    " quinoctogintillion", " sexoctogintillion", " septoctogintillion",
-    " octooctogintillion", " novemoctogintillion", " nonagintillion",
-    " unnonagintillion", " duononagintillion", " trenonagintillion ",
-    " quattuornonagintillion ", " quinnonagintillion ", " sexnonagintillion ",
-    " septnonagintillion ", " octononagintillion ", " novemnonagintillion ",
-    " centillion",
-  ];
+      "zero", "one", "two", "three", "four",
+      "five", "six", "seven", "eight", "nine",
+    ],
+    elevenToNineteen = [
+      "ten", "eleven", "twelve", "thirteen", "fourteen",
+      "fifteen", "sixteen", "seventeen", "eighteen", "nineteen",
+    ],
+    multipleOfTen = [
+      "", "", "twenty", "thirty", "forty",
+      "fifty", "sixty", "seventy", "eighty", "ninety",
+    ],
+    placeValue = [
+      "", " thousand ", " million ", " billion ", " trillion ", " quadrillion ",
+      " quintillion ", " sextillion ", " septillion ", " octillion ",
+      " nonillion ", " decillion ", " undecillion ", " duodecillion ",
+      " tredecillion ", " quattuordecillion ", " quindecillion ",
+      " sexdecillion ", " septendecillion ", " octodecillion ",
+      " novemdecillion  ", " vigintillion ", " unvigintillion ",
+      " duovigintillion ", " trevigintillion ", " quattuorvigintillion ",
+      " quinvigintillion ", " sexvigintillion ", " septenvigintillion ",
+      " octovigintillion ", " novemvigintillion ", " trigintillion ",
+      " untrigintillion ", " duotrigintillion ", " tretrigintillion ",
+      " quattuortrigintillion ", " quintrigintillion ", " sextrigintillion ",
+      " septentrigintillion ", " octotrigintillion ", " novemtrigintillion ",
+      " quadragintillion ", " unquadragintillion ", " duoquadragintillion ",
+      " trequadragintillion ", " quattuorquadragintillion ",
+      " quinquadragintillion ", " sexquadragintillion ",
+      " septenquadragintillion ", " octoquadragintillion ",
+      " novemquadragintillion ", " quinquagintillion ", " unquinquagintillion ",
+      " duoquinquagintillion ", " trequinquagintillion ",
+      " quattuorquinquagintillion ", " quinquinquagintillion ",
+      " sexquinquagintillion ", " septenquinquagintillion ",
+      " octoquinquagintillion ", " novemquinquagintillion ", " sexagintillion ",
+      " unsexagintillion ", " duosexagintillion ", " tresexagintillion ",
+      " quattuorsexagintillion ", " quinsexagintillion ", " sexsexagintillion ",
+      " septsexagintillion ", " octosexagintillion ", " octosexagintillion ",
+      " septuagintillion ", " unseptuagintillion ", " duoseptuagintillion ",
+      " treseptuagintillion ", " quinseptuagintillion", " sexseptuagintillion",
+      " septseptuagintillion", " octoseptuagintillion",
+      " novemseptuagintillion", " octogintillion", " unoctogintillion",
+      " duooctogintillion", " treoctogintillion", " quattuoroctogintillion",
+      " quinoctogintillion", " sexoctogintillion", " septoctogintillion",
+      " octooctogintillion", " novemoctogintillion", " nonagintillion",
+      " unnonagintillion", " duononagintillion", " trenonagintillion ",
+      " quattuornonagintillion ", " quinnonagintillion ", " sexnonagintillion ",
+      " septnonagintillion ", " octononagintillion ", " novemnonagintillion ",
+      " centillion",
+    ];
 }
 
 function spellf(userInput) {
@@ -604,7 +606,8 @@ function spellf(userInput) {
   // Pronounces any number less than 99
   function numLessThan99(val) {
     val = Number(val);
-    var tenthPlace = parseInt(val / 10), result;
+    var tenthPlace = parseInt(val / 10),
+      result;
     if (tenthPlace !== 1) {
       result = multipleOfTen[tenthPlace]
       if (val % 10) {
@@ -661,7 +664,7 @@ function hireHighSchooler() {
   minWage = Math.ceil(minWage * 1.01 * 100) / 100;
 }
 
-function HireProfessional() {
+function hireProfessional() {
   // Hires one Professional
   if (funds < professionalCost) {
     return;
@@ -671,17 +674,7 @@ function HireProfessional() {
   professionalCost = Math.ceil(professionalCost * 1.1 * 100) / 100;
 }
 
-function lowerPrice() {
-  if (cranePrice <= 0.01) {
-    cranePrice = 0.01;
-    return;
-  }
-  cranePrice = Math.round(cranePrice * 100 - 1) / 100;
-}
 
-function raisePrice() {
-  cranePrice = Math.round(cranePrice * 100 + 1) / 100;
-}
 
 function increaseMarketing() {
   if (funds < marketingPrice) {
