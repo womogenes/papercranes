@@ -65,7 +65,8 @@ var themes = {
 }
 
 // DOM Elements.
-var hapinessMeterEl;
+var happinessMeterEl;
+var happinessAmountEl;
 var paperEl;
 var cranesEl;
 var btnMakeCraneEl;
@@ -216,7 +217,7 @@ function load() {
   basePaperPrice = savedGame.basePaperPrice;
 
   paperBuyerOn = savedGame.paperBuyerOn;
-  
+
   // Load project information.
   var loadProjectUses = JSON.parse(localStorage.getItem("savedProjectUses"));
   var loadProjectFlags = JSON.parse(
@@ -252,7 +253,7 @@ function load() {
 
   var consoleHistory = JSON.parse(localStorage.getItem("consoleHistory"));
   console.log(consoleHistory);
-  
+
   for (i in consoleHistory.length) {
     displayMessage(consoleHistory[i]);
   }
@@ -275,6 +276,7 @@ function changeTheme() {
 
 function cacheDOMElements() {
   happinessMeterEl = document.getElementById("happinessMeter");
+  happinessAmountEl = document.getElementById("happinessAmount");
   paperEl = document.getElementById("paper");
   cranesEl = document.getElementById("cranes");
   btnMakeCraneEl = document.getElementById("btnMakeCrane");
@@ -349,7 +351,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     displayMessage('Buy some paper using the "Paper" button, then click "Fold Crane" to start making cranes.');
   }
   console.log(consoleHistory);
-  
+
 });
 
 // Game loop!
@@ -386,7 +388,9 @@ window.setInterval(function () {
   btnBorrowMoneyEl.disabled = debt >= maxDebt;
   btnHireProfessionalEl.disabled = professionalCost > funds;
 
-  happinessMeterEl.style.width = (funds >= 0.1 ? Math.log(funds + wishes) : 0) + "%"
+  var happiness = funds >= 0.1 ? Math.log(funds + wishes) : 0
+  happinessMeterEl.style.width = happiness + "%"
+  happinessAmountEl.innerHTML = happiness.toFixed(2);
 
   cranesEl.innerHTML = commify(Math.round(cranes));
   unsoldCranesEl.innerHTML = commify(Math.floor(unsoldCranes));
