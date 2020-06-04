@@ -135,7 +135,6 @@ function save() {
     wishes: wishes,
 
     paperBuyerOn: paperBuyerOn,
-
   };
 
   localStorage.setItem(
@@ -332,7 +331,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   btnHireHighSchoolerEl.disabled = true;
   bankDivEl.hidden = !bankAccountProject.flag;
   professionalDivEl.hidden = !hireProfessionalsProject.flag;
-  column0DivEl.hidden = !event1.flag;
+  column0DivEl.hidden = !prestigeUnlockedEvent.flag;
   paperBuyerDivEl.hidden = !paperBuyerUnlocked;
 
   paperPriceEl.innerHTML = paperPrice;

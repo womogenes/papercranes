@@ -2,8 +2,8 @@
 // Custom event stuff!
 var events = [];
 
-var event1 = {
-  id: "event1",
+var prestigeUnlockedEvent = {
+  id: "prestigeUnlockedEvent",
   title: "Unhide prestige column",
   description: "Prestige column gets unhidden.",
   trigger: function() {
@@ -18,10 +18,10 @@ var event1 = {
   }
 }
 
-events.push(event1);
+events.push(prestigeUnlockedEvent);
 
-var event2 = {
-  id: "event2",
+var autobuyPaperEvent = {
+  id: "autobuyPaperEvent",
   title: "Buy paper",
   description: "Automatically buy paper when it runs out.",
   trigger: function() {
@@ -35,10 +35,10 @@ var event2 = {
   }
 }
 
-events.push(event2);
+events.push(autobuyPaperEvent);
 
-var event3 = {
-  id: "event3",
+var capDebtEvent = {
+  id: "capDebtEvent",
   title: "Cap debt",
   description: "Automatically cap debt at maxDebt.",
   trigger: function() {
@@ -52,4 +52,4 @@ var event3 = {
   }
 }
 
-events.push(event3);
+events.push(capDebtEvent);
