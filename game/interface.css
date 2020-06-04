@@ -45,11 +45,25 @@ hr {
 	background-color: var(--outline-color);
 }
 
+input[type=range] {
+  width: 100%;
+  overflow: hidden;
+  margin: 5px 0;
+  cursor: pointer;
+  padding: 1px;
+  transition: all 0.3s ease;
+}
+
+input[type=range]:focus {
+  outline: none;
+  transform: scale(1.05);
+  box-shadow: 0px 0px 0 0 var(--fill-color);;
+}
+
 .button {
 	font-size: 13px;
 	border-radius: 5px;
 	border: 1px solid var(--outline-color);
-	outline: none;
 	background: var(--btn-bg-on);
 
 	margin: 3px 0;
@@ -80,13 +94,13 @@ hr {
 	font-size: 13px;
 	border-radius: 10px;
 	border: 1px solid var(--outline-color);
-	outline: none;
 	background: var(--btn-bg-on);
 	display: block;
 
 	height: 70px;
 	width: 100%;
 	margin-top: 10px;
+  transition: all 0.3s ease;
 
 	touch-action: manipulation;
 }
@@ -199,7 +213,6 @@ hr {
 	position: absolute;
 	font-size: 20px;
 	border: none;
-	outline: none;
 	background: none;
 	text-rendering: var(--outline-color);
 	touch-action: manipulation;
