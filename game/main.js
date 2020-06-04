@@ -331,7 +331,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   btnMarketingEl.disabled = true;
   btnHireHighSchoolerEl.disabled = true;
   bankDivEl.hidden = !bankAccountProject.flag;
-  professionalDivEl.hidden = !project5.flag;
+  professionalDivEl.hidden = !hireProfessionalsProject.flag;
   column0DivEl.hidden = !event1.flag;
   paperBuyerDivEl.hidden = !paperBuyerUnlocked;
 
@@ -431,21 +431,6 @@ window.setInterval(function () {
   cranemakerRateEl.innerHTML = commify(Math.round(cranes - prevCranes));
   prevCranes = cranes;
 }, 1000);
-
-function monify(n) {
-  return n.toLocaleString("en", {
-    useGrouping: true,
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
-}
-
-function commify(n) {
-  return n.toLocaleString("en", {
-    useGrouping: true
-  });
-}
-
 
 
 function restart() {

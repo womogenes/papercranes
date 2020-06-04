@@ -172,3 +172,17 @@ function spellf(userInput) {
     return oneToTen[Number(val)];
   }
 }
+
+function monify(n) {
+  return n.toLocaleString("en", {
+    useGrouping: true,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}
+
+function commify(n) {
+  return n.toLocaleString("en", {
+    useGrouping: true
+  });
+}
