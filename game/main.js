@@ -283,7 +283,7 @@ window.setInterval(function () {
   }
 
   debt = Math.min(maxDebt, debt);
-  cranePrice = (Math.pow(101, priceSliderEl.value) - 1) / 10 + 0.01;
+  cranePrice = (Math.pow(101, domElements["priceSlider"].value) - 1) / 10 + 0.01;
 
   // Disable buttons which player cannot use
   domElements["btnMakeCrane"].disabled = paper < 1;

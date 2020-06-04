@@ -185,3 +185,9 @@ function monify(n) {
     currency: "USD"
   }).substring(2);
 }
+
+function commify(n) {
+  return n.toLocaleString("en", {
+    useGrouping: true
+  });
+}
