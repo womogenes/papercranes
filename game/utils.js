@@ -174,15 +174,14 @@ function spellf(userInput) {
 }
 
 function monify(n) {
-  return n.toLocaleString("en", {
-    useGrouping: true,
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
-}
-
-function commify(n) {
-  return n.toLocaleString("en", {
-    useGrouping: true
-  });
+  if (n >= 0) {
+    return n.toLocaleString("en", {
+      style: "currency",
+      currency: "USD"
+    }).substring(1);
+  }
+  return "-" + n.toLocaleString("en", {
+    style: "currency",
+    currency: "USD"
+  }).substring(2);
 }
