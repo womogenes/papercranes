@@ -330,7 +330,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   btnBuyPaperEl.disabled = true;
   btnMarketingEl.disabled = true;
   btnHireHighSchoolerEl.disabled = true;
-  bankDivEl.hidden = !project2.flag;
+  bankDivEl.hidden = !bankAccountProject.flag;
   professionalDivEl.hidden = !project5.flag;
   column0DivEl.hidden = !event1.flag;
   paperBuyerDivEl.hidden = !paperBuyerUnlocked;

@@ -23,8 +23,8 @@ function priceTag(project) {
 	return "(" + costs.join(", ") + ")";
 }
 
-var project1 = {
-	id: "projectButton1",
+var fasterHighSchoolersProject = {
+	id: "fasterHighSchoolersProjectButton",
 	title: "Faster High Schoolers",
 	description: "High Schoolers work 25% faster.",
 	dollarCost: 10,
@@ -44,10 +44,10 @@ var project1 = {
 	}
 }
 
-projects.push(project1);
+projects.push(fasterHighSchoolersProject);
 
-var project2 = {
-	id: "projectButton2",
+var bankAccountProject = {
+	id: "bankAccountProjectButton",
 	title: "Bank Account",
 	dollarCost: 10,
 	description: "Be able to borrow money!",
@@ -69,16 +69,16 @@ var project2 = {
 	}
 }
 
-projects.push(project2);
+projects.push(bankAccountProject);
 
-var project3 = {
-	id: "projectButton3",
+var evenFasterHighSchoolersProject = {
+	id: "evenFasterHighSchoolersProjectButton",
 	title: "Even Faster High Schoolers",
 	dollarCost: 20,
 	description: "Double interest rate, and high schoolers are 50% faster.",
 	purchaseMessage: "Speedy high schoolers!",
 	trigger: function () {
-		return funds >= 10 && project1.flag;
+		return funds >= 10 && fasterHighSchoolersProject.flag;
 	},
 	uses: 1,
 	canAfford: function () {
@@ -93,15 +93,15 @@ var project3 = {
 	}
 }
 
-projects.push(project3);
+projects.push(evenFasterHighSchoolersProject);
 
-var project4 = {
-	id: "projectButton4",
+var highlySkilledStudentsProject = {
+	id: "highlySkilledStudentsProjectButton",
 	title: "Highly Skilled Students",
 	dollarCost: 40,
 	description: "Double hire price, high schoolers work twice as fast.",
 	trigger: function () {
-		return funds >= 20 && project3.flag;
+		return funds >= 20 && evenFasterHighSchoolersProject.flag;
 	},
 	uses: 1,
 	canAfford: function () {
@@ -117,10 +117,10 @@ var project4 = {
 	}
 }
 
-projects.push(project4);
+projects.push(highlySkilledStudentsProject);
 
-var project5 = {
-	id: "projectButton5",
+var hireProfessionalsProject = {
+	id: "hireProfessionalsProjectButton",
 	title: "Professionals",
 	wishCost: 10,
 	description: "Use 10 wishes to start hiring Professionals, the best folders.",
@@ -141,10 +141,10 @@ var project5 = {
 	}
 }
 
-projects.push(project5);
+projects.push(hireProfessionalsProject);
 
-var project6 = {
-	id: "projectButton6",
+var paperEffciencyProject = {
+	id: "paperEffciencyProjectButton",
 	title: "Paper Efficiency",
 	dollarCost: 200,
 	description: "Gain 50% more paper from each purchase.",
@@ -164,10 +164,10 @@ var project6 = {
 	}
 }
 
-projects.push(project6);
+projects.push(paperEffciencyProject);
 
-var project7 = {
-	id: "projectButton7",
+var paperBuyerProject = {
+	id: "paperBuyerProjectButton",
 	title: "Paper Buyer",
 	highSchoolerCost: 100,
 	description: "Auto-purchase paper when it runs out.",
@@ -186,15 +186,15 @@ var project7 = {
 	}
 }
 
-projects.push(project7);
+projects.push(paperBuyerProject);
 
-var project8 = {
-	id: "projectButton8",
+var thinnerSheetsProject = {
+	id: "paperBuyerProjectButton",
 	title: "Thinner Sheets",
 	dollarCost: 400,
 	description: "Gain 75% more paper from each purchase.",
 	trigger: function () {
-		return project6.flag == 1;
+		return paperEffciencyProject.flag == 1;
 	},
 	uses: 1,
 	canAfford: function () {
@@ -209,15 +209,15 @@ var project8 = {
 	}
 }
 
-projects.push(project8);
+projects.push(paperBuyerProject);
 
-var project9 = {
-	id: "projectButton9",
+var bigPaperProject = {
+	id: "bigPaperProjectButton",
 	title: "Big Paper",
 	dollarCost: 800,
 	description: "1000% more paper from each purchase.",
 	trigger: function () {
-		return project8.flag == 1;
+		return thinnerSheetsProject.flag == 1;
 	},
 	uses: 1,
 	canAfford: function () {
@@ -232,10 +232,10 @@ var project9 = {
 	}
 }
 
-projects.push(project9);
+projects.push(bigPaperProject);
 
-var project10 = {
-	id: "projectButton10",
+var lowerWagesProject = {
+	id: "lowerWagesProjectButton",
 	title: "Lower Wages",
 	dollarCost: 10000000,
 	description: "Lobby the lawmakers to reduce minimum wage.",
@@ -254,4 +254,4 @@ var project10 = {
 	}
 }
 
-projects.push(project10);
+projects.push(lowerWagesProject);
