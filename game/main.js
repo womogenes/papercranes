@@ -744,29 +744,31 @@ function displayProjects(project) {
 }
 
 function manageProjects() {
-  for (var i = 0; i < projects.length; i++) {
-    if (projects[i].trigger() && projects[i].uses > 0) {
-      displayProjects(projects[i]);
-      projects[i].uses--;
-      activeProjects.push(projects[i]);
+  projects.forEach(project => {
+    if (project.trigger() && project.uses > 0) {
+      displayProjects(project);
+      project.uses--;
+      activeProjects.push(project);
     }
-  }
-  for (i = 0; i < activeProjects.length; i++) {
-    activeProjects[i].element.disabled = !activeProjects[i].canAfford();
-  }
+  });
+
+  activeProjects.forEach(project => {
+    project.element.disabled = !project.canAfford();
+  });
 }
 
 function manageEvents() {
-  for (var i = 0; i < events.length; i++) {
-    if (events[i].trigger() && events[i].uses != 0) {
-      if (events[i].notifyPlayer) {
-        pendingEvents.push(events[i]);
+  events.forEach(event => {
+    if (event.trigger() && event.uses != 0) {
+      if (event.notifyPlayer) {
+        pendingEvents.push(event);
       }
 
-      events[i].effect();
-      events[i].uses--;
+      event.effect();
+      event.uses--;
     }
-  }
+  });
+
   if (pendingEvents.length > 0 && eventDiv.style.display == "") {
     displayNextEvent();
   }
