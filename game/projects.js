@@ -62,9 +62,9 @@ var bankAccountProject = {
 	element: null,
 	effect: function () {
     funds -= this.dollarCost;
-		bankDivEl.style.opacity = 0.0;
-		bankDivEl.hidden = false;
-		fade(bankDivEl, 1.0);
+		domElements["bankDiv"].style.opacity = 0.0;
+		domElements["bankDiv"].hidden = false;
+		fade(domElements["bankDiv"], 1.0);
     displayMessage("Bank account opened. You can now borrow money $20 at a time.");
 	}
 }
@@ -136,7 +136,7 @@ var hireProfessionalsProject = {
 	effect: function () {
 		wishes -= this.wishCost;
 		professionalUnlocked = true;
-		professionalDivEl.hidden = false;
+		domElements["professionalDiv"].hidden = false;
     displayMessage("100x more powerful than a high schooler.");
 	}
 }
@@ -182,7 +182,7 @@ var paperBuyerProject = {
 	element: null,
 	effect: function () {
 		highSchoolers -= this.highSchoolerCost;
-		paperBuyerDivEl.hidden = false;
+		domElements["paperBuyerDiv"].hidden = false;
 	}
 }
 

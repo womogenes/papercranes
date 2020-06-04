@@ -64,52 +64,7 @@ var themes = {
   }
 }
 
-// DOM Elements.
-var happinessMeterEl;
-var happinessAmountEl;
-var paperEl;
-var cranesEl;
-var btnMakeCraneEl;
-var btnBuyPaperEl;
-var btnMarketingEl;
-var btnHireHighSchoolerEl;
-var highSchoolersEl;
-var cranePriceEl;
-var unsoldCranesEl;
-var fundsEl;
-var marketingPriceEl;
-var marketingLevelEl;
-var demandEl;
-var cranemakerRateEl;
-var readoutDivEl;
-var highSchoolerWageEl;
-var paperPriceEl;
-var projectsColumnEl;
-var projectsDivEl;
-var bankDivEl;
-var debtEl;
-var btnPayBackEl;
-var btnBorrowMoneyEl;
-var interestRateEl;
-var priceSlider;
-
-var professionalDivEl;
-var btnHireProfessionalEl;
-var professionalsEl;
-var professionalCostEl;
-var column0DivEl;
-var wishEl;
-var paperBuyerDivEl;
-var paperBuyerEl;
-var craneCountCrunchedEl;
-
-var btnChangeThemeEl;
-
-var eventDiv;
-var eventDescription;
-var eventTitle;
-
-var iconEl;
+var domElements = {};
 
 function save() {
   var savedGame = {
@@ -272,75 +227,34 @@ function changeTheme() {
   applyTheme();
 }
 
-function cacheDOMElements() {
-  happinessMeterEl = document.getElementById("happinessMeter");
-  happinessAmountEl = document.getElementById("happinessAmount");
-  paperEl = document.getElementById("paper");
-  cranesEl = document.getElementById("cranes");
-  btnMakeCraneEl = document.getElementById("btnMakeCrane");
-  btnBuyPaperEl = document.getElementById("btnBuyPaper");
-  btnMarketingEl = document.getElementById("btnMarketing");
-  btnHireHighSchoolerEl = document.getElementById("btnHireHighSchooler");
-  highSchoolersEl = document.getElementById("highSchoolers");
-  cranePriceEl = document.getElementById("cranePrice");
-  unsoldCranesEl = document.getElementById("unsoldCranes");
-  fundsEl = document.getElementById("funds");
-  marketingPriceEl = document.getElementById("marketingPrice");
-  marketingLevelEl = document.getElementById("marketingLevel");
-  demandEl = document.getElementById("demand");
-  cranemakerRateEl = document.getElementById("cranemakerRate");
-  readoutDivEl = document.getElementById("readoutDiv");
-  highSchoolerWageEl = document.getElementById("highSchoolerCost");
-  paperPriceEl = document.getElementById("paperPrice");
-  projectsColumnEl = document.getElementById("projectsColumn");
-  projectsDivEl = document.getElementById("projectsDiv");
-  bankDivEl = document.getElementById("bankDiv");
-  debtEl = document.getElementById("debt");
-  btnPayBackEl = document.getElementById("btnPayBack");
-  btnBorrowMoneyEl = document.getElementById("btnBorrowMoney");
-  interestRateEl = document.getElementById("interestRate");
-  priceSlider = document.getElementById("priceSlider");
+function cacheDomElements() {
+  Array.from(document.getElementsByTagName("*")).forEach(element => {
+    domElements[element.id] = element;
+  });
 
-  professionalDivEl = document.getElementById("professionalDiv");
-  btnHireProfessionalEl = document.getElementById("btnHireProfessional");
-  professionalsEl = document.getElementById("professionals");
-  professionalCostEl = document.getElementById("professionalCost");
-  column0DivEl = document.getElementById("column0");
-  wishEl = document.getElementById("wishes");
-  paperBuyerDivEl = document.getElementById("paperBuyerDiv");
-  paperBuyerEl = document.getElementById("paperBuyer");
-  craneCountCrunchedEl = document.getElementById("craneCountCrunched");
-
-  btnChangeThemeEl = document.getElementById("btnChangeTheme");
-
-  eventDiv = document.getElementById("eventDiv");
-  eventDescription = document.getElementById("eventDescription");
-  eventTitle = document.getElementById("eventTitle");
-
-  iconEl = document.getElementById("icon");
 
   load();
   applyTheme();
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
-  cacheDOMElements();
-  btnMakeCraneEl.disabled = false;
-  btnBuyPaperEl.disabled = true;
-  btnMarketingEl.disabled = true;
-  btnHireHighSchoolerEl.disabled = true;
-  bankDivEl.hidden = !bankAccountProject.flag;
-  professionalDivEl.hidden = !hireProfessionalsProject.flag;
-  column0DivEl.hidden = !prestigeUnlockedEvent.flag;
-  paperBuyerDivEl.hidden = !paperBuyerUnlocked;
+  cacheDomElements();
+  domElements["btnMakeCrane"].disabled = false;
+  domElements["btnBuyPaper"].disabled = true;
+  domElements["btnHireHighSchooler"].disabled = true;
+  domElements["btnMarketing"].disabled = true;
+  domElements["bankDiv"].hidden = !bankAccountProject.flag;
+  domElements["professionalDiv"].hidden = !hireProfessionalsProject.flag;
+  domElements["column0"].hidden = !prestigeUnlockedEvent.flag;
+  domElements["paperBuyerDiv"].hidden = !paperBuyerUnlocked;
 
-  paperPriceEl.innerHTML = paperPrice;
-  marketingLevelEl.innerHTML = commify(marketingLevel);
-  paperBuyerEl.innerHTML = paperBuyerOn ? "ON" : "OFF";
+  domElements["paperPrice"].innerHTML = paperPrice;
+  domElements["marketingLevel"].innerHTML = commify(marketingLevel);
+  domElements["paperBuyer"].innerHTML = paperBuyerOn ? "ON" : "OFF";
 
-  priceSlider.addEventListener('input', (event) => {
-    cranePrice = priceSlider.value;
-    cranePriceEl.innerHTML = monify(cranePrice);
+  domElements["priceSlider"].addEventListener('input', (event) => {
+    cranePrice = domElements["priceSlider"].value;
+    domElements["cranePrice"].innerHTML = monify(cranePrice);
   });
 
   // Initial messages.
@@ -376,39 +290,39 @@ window.setInterval(function () {
   debt = Math.min(maxDebt, debt);
 
   // Disable buttons which player cannot use
-  btnMakeCraneEl.disabled = paper < 1;
-  btnBuyPaperEl.disabled = paperPrice > funds;
-  btnMarketingEl.disabled = marketingPrice > funds;
-  btnHireHighSchoolerEl.disabled = funds < minWage;
-  btnPayBackEl.disabled = funds <= 0 || debt <= 0;
-  btnBorrowMoneyEl.disabled = debt >= maxDebt;
-  btnHireProfessionalEl.disabled = professionalCost > funds;
+  domElements["btnMakeCrane"].disabled = paper < 1;
+  domElements["btnBuyPaper"].disabled = paperPrice > funds;
+  domElements["btnMarketing"].disabled = marketingPrice > funds;
+  domElements["btnHireHighSchooler"].disabled = funds < minWage;
+  domElements["btnPayBack"].disabled = funds <= 0 || debt <= 0;
+  domElements["btnBorrowMoney"].disabled = debt >= maxDebt;
+  domElements["btnHireProfessional"].disabled = professionalCost > funds;
 
   var happiness = funds >= 0.1 ? Math.log(funds + wishes) : 0
-  happinessMeterEl.style.width = happiness + "%"
-  happinessAmountEl.innerHTML = happiness.toFixed(2);
+  domElements["happinessMeter"].style.width = happiness + "%"
+  domElements["happinessAmount"].innerHTML = happiness.toFixed(2);
 
-  cranesEl.innerHTML = commify(Math.round(cranes));
-  unsoldCranesEl.innerHTML = commify(Math.floor(unsoldCranes));
-  fundsEl.innerHTML = monify(funds);
-  marketingPriceEl.innerHTML = monify(marketingPrice);
-  demandEl.innerHTML = commify(Math.floor(demand * 100));
-  highSchoolersEl.innerHTML = commify(highSchoolers);
-  debtEl.innerHTML = monify(debt);
-  paperEl.innerHTML = commify(Math.floor(paper));
-  interestRateEl.innerHTML = interestRate * 100;
-  highSchoolerWageEl.innerHTML = monify(minWage);
-  professionalsEl.innerHTML = commify(professionals);
-  professionalCostEl.innerHTML = monify(professionalCost);
-  wishEl.innerHTML = commify(Math.floor(wishes));
-  craneCountCrunchedEl.innerHTML = spellf(Math.round(cranes));
-  cranePriceEl.innerHTML = monify(cranePrice);
+  domElements["cranes"].innerHTML = commify(Math.round(cranes));
+  domElements["unsoldCranes"].innerHTML = commify(Math.floor(unsoldCranes));
+  domElements["funds"].innerHTML = monify(funds);
+  domElements["marketingPrice"].innerHTML = monify(marketingPrice);
+  domElements["demand"].innerHTML = commify(Math.floor(demand * 100));
+  domElements["highSchoolers"].innerHTML = commify(highSchoolers);
+  domElements["debt"].innerHTML = monify(debt);
+  domElements["paper"].innerHTML = commify(Math.floor(paper));
+  domElements["interestRate"].innerHTML = interestRate * 100;
+  domElements["highSchoolerCost"].innerHTML = monify(minWage);
+  domElements["professionals"].innerHTML = commify(professionals);
+  domElements["professionalCost"].innerHTML = monify(professionalCost);
+  domElements["wishes"].innerHTML = commify(Math.floor(wishes));
+  domElements["craneCountCrunched"].innerHTML = spellf(Math.round(cranes));
+  domElements["cranePrice"].innerHTML = monify(cranePrice);
 
   manageProjects();
   manageEvents();
   notificationCount = pendingEvents.length + (eventDiv.style.display == "block" ? 1 : 0);
   document.title = (notificationCount ? "(" + notificationCount + ") " : "") + "Paper Cranes";
-  iconEl.setAttribute("href", notificationCount ? "../favicon_notification.svg" : "../favicon_crane.svg");
+  domElements["icon"].setAttribute("href", notificationCount ? "../favicon_notification.svg" : "../favicon_crane.svg");
   tick++;
 
 }, 10);
@@ -419,7 +333,7 @@ window.setInterval(function () {
 
   // Fluctuate price.
   paperPrice = Math.floor(Math.sin(tick / 10) * 4) + basePaperPrice;
-  paperPriceEl.innerHTML = paperPrice;
+  domElements["paperPrice"].innerHTML = paperPrice;
 
   debt = Math.ceil(debt * (1 + interestRate) * 100) / 100;
   debt = Math.min(maxDebt, debt);
@@ -427,7 +341,7 @@ window.setInterval(function () {
 
 // Slower one, every second.
 window.setInterval(function () {
-  cranemakerRateEl.innerHTML = commify(Math.round(cranes - prevCranes));
+  domElements["cranemakerRate"].innerHTML = commify(Math.round(cranes - prevCranes));
   prevCranes = cranes;
 }, 1000);
 
@@ -451,7 +365,7 @@ function makeCrane(n) {
   unsoldCranes += n;
   paper -= n;
 
-  cranesEl.innerHTML = commify(Math.floor(cranes));
+  domElements["cranes"].innerHTML = commify(Math.floor(cranes));
 }
 
 function buyPaper(n) {
@@ -490,7 +404,7 @@ function increaseMarketing() {
   funds -= marketingPrice;
 
   marketingPrice = Math.round(marketingPrice * 2);
-  marketingLevelEl.innerHTML = commify(marketingLevel);
+  domElements["marketingLevel"].innerHTML = commify(marketingLevel);
 }
 
 function borrowMoney(x) {
@@ -507,7 +421,7 @@ function payBack(x) {
 
 function togglePaperBuyer() {
   paperBuyerOn = !paperBuyerOn
-  paperBuyerEl.innerHTML = paperBuyerOn ? "ON" : "OFF";
+  domElements["paperBuyer"].innerHTML = paperBuyerOn ? "ON" : "OFF";
 }
 
 // Console stuff.
@@ -523,7 +437,7 @@ function displayMessage(msg, dontSave) {
   newMsgEl.style.opacity = 0;
   fade(newMsgEl, 1.0);
 
-  readoutDivEl.prepend(newMsgEl, readoutDivEl.firstChild);
+  domElements["readoutDiv"].prepend(newMsgEl, domElements["readoutDiv"].firstChild);
 }
 
 // Project management functions.
@@ -539,7 +453,7 @@ function displayProjects(project) {
 
   project.element.setAttribute("class", "projectButton");
 
-  projectsDivEl.appendChild(project.element, projectsDivEl.firstChild);
+  domElements["projectsDiv"].appendChild(project.element, domElements["projectsDiv"].firstChild);
 
   var span = document.createElement("span");
   span.style.fontWeight = "bold";
@@ -580,24 +494,24 @@ function manageEvents() {
     }
   });
 
-  if (pendingEvents.length > 0 && eventDiv.style.display == "") {
+  if (pendingEvents.length > 0 && domElements["eventDiv"].style.display == "") {
     displayNextEvent();
   }
 }
 
 function displayNextEvent() {
   event = pendingEvents.pop();
-  eventTitle.innerHTML = event.title;
-  eventDescription.innerHTML = event.description;
-  eventDiv.style.opacity = 0;
-  eventDiv.style.display = "block";
-  fade(eventDiv, 1.0);
+  domElements["eventTitle"].innerHTML = event.title;
+  domElements["eventDescription"].innerHTML = event.description;
+  domElements["eventDiv"].style.opacity = 0;
+  domElements["eventDiv"].style.display = "block";
+  fade(domElements["eventDiv"], 1.0);
 }
 
 function closeEvent() {
   if (pendingEvents.length == 0) {
-    eventDescription.innerHTML = "";
-    eventDiv.style.display = "none";
+    domElements["eventDescription"].innerHTML = "";
+    domElements["eventDiv"].style.display = "none";
   } else {
     displayNextEvent()
   }
