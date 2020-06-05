@@ -237,6 +237,25 @@ function cacheDomElements() {
   applyTheme();
 }
 
+function createRipple(e) {
+  var circle = document.createElement("div");
+  this.appendChild(circle);
+
+  var d = Math.max(this.clientWidth, this.clientHeight);
+
+  circle.style.width = circle.style.height = d + "px";
+
+  var rect = this.getBoundingClientRect();
+  circle.style.left = e.clientX - rect.left - d / 2 + "px";
+  circle.style.top = e.clientY - rect.top - d / 2 + "px";
+
+  circle.classList.add("ripple");
+  circle.addEventListener("animationend", function (e) {
+    this.parentNode.removeChild(this);
+  });
+}
+
+
 document.addEventListener("DOMContentLoaded", function (event) {
   cacheDomElements();
   domElements["btnMakeCrane"].disabled = false;
@@ -257,7 +276,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
     displayMessage('Buy some paper using the "Paper" button, then click "Fold Crane" to start making cranes.');
   }
 
+  Array.from(document.getElementsByTagName("button")).forEach(button => {
+    button.addEventListener("click", createRipple);
+  });
 });
+
 
 // Game loop!
 window.setInterval(function () {
