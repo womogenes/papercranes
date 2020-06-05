@@ -43,6 +43,8 @@ var themes = {
     "--outline-color": "#000000",
     "--text-color": "#000000",
     "--fill-color": "#cccccc",
+    "--slider-focus-bg-color": "#e0e0e0",
+    "--slider-thumb-color": "#909090",
 
     "--btn-bg-on": "#eeeeee",
     "--btn-bg-hover": "#f9f9f9",
@@ -55,6 +57,8 @@ var themes = {
     "--outline-color": "#dddddd",
     "--text-color": "#eeeeee",
     "--fill-color": "#555555",
+    "--slider-focus-bg-color": "#707070",
+    "--slider-thumb-color": "#909090",
 
     "--btn-bg-on": "#111111",
     "--btn-bg-hover": "#222222",
@@ -231,7 +235,6 @@ function cacheDomElements() {
   Array.from(document.getElementsByTagName("*")).forEach(element => {
     domElements[element.id] = element;
   });
-
 
   load();
   applyTheme();
