@@ -34,7 +34,39 @@ function canAffordProject(project) {
 	)
 }
 var projects = {
-	fasterHighSchoolers: {
+	learnToFoldCranesProject: {
+		title: "Learn to Fold Cranes",
+		dollarCost: 1,
+		description: "Learn how to fold origami cranes",
+		trigger: function () {
+			return true;
+		},
+		uses: 1,
+		flag: false,
+		element: null,
+		effect: function () {
+			displayMessage('Buy some paper using the "Paper" button, then click "Fold Crane" to start making cranes.');
+			unhide("buisnessColumn");
+			unhide("foldingColumn");
+		}
+	},
+	bankAccountProject: {
+		title: "Bank Account",
+		dollarCost: 10,
+		description: "Be able to borrow money!",
+		trigger: function () {
+			return funds >= 5 && projects.learnToFoldCranesProject.flag;
+		},
+		uses: 1,
+		flag: false,
+		element: null,
+		effect: function () {
+			unhide("bankDiv");
+			displayMessage("Bank account opened. You can now borrow money $20 at a time.");
+		}
+	},
+	// Manufacturing Projects
+	fasterHighSchoolersProject: {
 		title: "Faster High Schoolers",
 		description: "High Schoolers work 25% faster.",
 		dollarCost: 10,
@@ -49,28 +81,13 @@ var projects = {
 			displayMessage("High schoolers now work 25% as fast.");
 		}
 	},
-	bankAccount: {
-		title: "Bank Account",
-		dollarCost: 10,
-		description: "Be able to borrow money!",
-		trigger: function () {
-			return funds >= 5 && projects.learnToFoldCranes.flag;
-		},
-		uses: 1,
-		flag: false,
-		element: null,
-		effect: function () {
-			unhide("bankDiv");
-			displayMessage("Bank account opened. You can now borrow money $20 at a time.");
-		}
-	},
-	evenFasterHighSchoolers: {
+	evenFasterHighSchoolersProject: {
 		title: "Even Faster High Schoolers",
 		dollarCost: 20,
 		description: "Double interest rate, and high schoolers are 50% faster.",
 		purchaseMessage: "Speedy high schoolers!",
 		trigger: function () {
-			return funds >= 10 && projects.fasterHighSchoolers.flag;
+			return funds >= 10 && projects.fasterHighSchoolersProject.flag;
 		},
 		uses: 1,
 		flag: false,
@@ -80,12 +97,12 @@ var projects = {
 			interestRate *= 2;
 		}
 	},
-	highlySkilledStudents: {
+	highlySkilledStudentsProject: {
 		title: "Highly Skilled Students",
 		dollarCost: 40,
 		description: "Double hire price, high schoolers work twice as fast.",
 		trigger: function () {
-			return funds >= 20 && projects.evenFasterHighSchoolers.flag;
+			return funds >= 20 && projects.evenFasterHighSchoolersProject.flag;
 		},
 		uses: 1,
 		flag: false,
@@ -96,7 +113,7 @@ var projects = {
 			displayMessage("When they work harder, you gotta pay them more.");
 		}
 	},
-	professionals: {
+	professionalsProject: {
 		title: "Professionals",
 		wishCost: 10,
 		description: "Use 10 wishes to start hiring Professionals, the best folders.",
@@ -112,7 +129,36 @@ var projects = {
 			displayMessage("100x more powerful than a high schooler.");
 		}
 	},
-	paperEffciency: {
+	lowerWagesProject: {
+		title: "Lower Wages",
+		dollarCost: 10000000,
+		description: "Lobby the lawmakers to reduce minimum wage.",
+		trigger: function () {
+			return highSchoolers > 250;
+		},
+		uses: 1,
+		flag: false,
+		element: null,
+		effect: function () {
+			minWage = 0;
+		}
+	},
+	// Paper projects
+	paperBuyerProject: {
+		title: "Paper Buyer",
+		highSchoolerCost: 100,
+		description: "Auto-purchase paper when it runs out.",
+		trigger: function () {
+			return cranes >= 10000;
+		},
+		uses: 1,
+		flag: false,
+		element: null,
+		effect: function () {
+			domElements["paperBuyerDiv"].hidden = false;
+		}
+	},
+	paperEfficiencyProject: {
 		title: "Paper Efficiency",
 		dollarCost: 200,
 		description: "Gain 50% more paper from each purchase.",
@@ -127,26 +173,12 @@ var projects = {
 			basePaperPrice = Math.round(basePaperPrice * 1.5);
 		}
 	},
-	paperBuyer: {
-		title: "Paper Buyer",
-		highSchoolerCost: 100,
-		description: "Auto-purchase paper when it runs out.",
-		trigger: function () {
-			return cranes >= 10000;
-		},
-		uses: 1,
-		flag: false,
-		element: null,
-		effect: function () {
-			domElements["paperBuyerDiv"].hidden = false;
-		}
-	},
-	thinnerSheets: {
+	thinnerSheetsProject: {
 		title: "Thinner Sheets",
 		dollarCost: 400,
 		description: "Gain 75% more paper from each purchase.",
 		trigger: function () {
-			return projects.paperEffciency.flag;
+			return projects.paperEfficiencyProject.flag;
 		},
 		uses: 1,
 		flag: false,
@@ -156,12 +188,12 @@ var projects = {
 			basePaperPrice = Math.round(basePaperPrice * 1.5);
 		}
 	},
-	bigPaper: {
+	bigPaperProject: {
 		title: "Big Paper",
 		dollarCost: 800,
 		description: "1000% more paper from each purchase.",
 		trigger: function () {
-			return projects.thinnerSheets.flag;
+			return projects.thinnerSheetsProject.flag;
 		},
 		uses: 1,
 		flag: false,
@@ -171,40 +203,9 @@ var projects = {
 			basePaperPrice = Math.round(basePaperPrice * 1.5);
 		}
 	},
-	lowerWages: {
-		title: "Lower Wages",
-		dollarCost: 10000000,
-		description: "Lobby the lawmakers to reduce minimum wage.",
-		trigger: function () {
-			return highSchoolers > 250;
-		},
-		uses: 1,
-		flag: false,
-		element: null,
-		effect: function () {
-			minWage = 0;
-		}
-	},
-	learnToFoldCranes: {
-		title: "Learn to Fold Cranes",
-		dollarCost: 1,
-		description: "Learn how to fold origami cranes",
-		trigger: function () {
-			return true;
-		},
-		uses: 1,
-		flag: false,
-		element: null,
-		effect: function () {
-			displayMessage('Buy some paper using the "Paper" button, then click "Fold Crane" to start making cranes.');
-			unhide("buisnessColumn");
-			unhide("foldingColumn");
-		}
-	}
 }
 
-for (var projectName in projects) {
-	var project = projects[projectName];
+for (var projectId in projects) {
+	var project = projects[projectId];
 	project.id = camelCase(project.title + " project");
-	projects[project.id] = project;
 }

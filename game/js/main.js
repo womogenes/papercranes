@@ -1,28 +1,29 @@
 // Yoy!
 var cranes = 0;
+var wishes = 0;
 var unsoldCranes = 0;
-var funds = 20;
 var cranePrice = 0.25;
-var marketingPrice = 40.0;
-var paperPrice = 20;
-var paperAmount = 1000;
-var paper = 0;
-var marketingLevel = 1;
-var highSchoolers = 0;
-var minWage = 5;
-var highSchoolerBoost = 1;
+
+var funds = 20;
 var debt = 0;
 var maxDebt = 1e3;
 var interestRate = 0.01;
 
+var marketingPrice = 40.0;
+var marketingLevel = 1;
+
+var basePaperPrice = 15;
+var paperPrice = 20;
+var paperAmount = 1000;
+var paper = 0;
+var paperBuyerOn = false;
+var paperBuyerUnlocked = false;
+
+var minWage = 5;
+var highSchoolers = 0;
+var highSchoolerBoost = 1;
 var professionals = 0;
 var professionalCost = 100;
-var basePaperPrice = 15;
-var wishes = 0;
-
-var paperBuyerOn = false;
-
-var paperBuyerUnlocked = false;
 
 var prevCranes = cranes;
 var tick = 0;
@@ -72,8 +73,8 @@ function save() {
   var savedActiveProjects = [];
   var savedProjectData = {};
 
-  for (var projectName in projects) {
-    var project = projects[projectName];
+  for (var projectId in projects) {
+    var project = projects[projectId];
     savedProjectData[project.id] = {
       flag: project.flag,
       uses: project.uses
@@ -83,30 +84,19 @@ function save() {
   for (var i = 0; i < activeProjects.length; i++) {
     savedActiveProjects[i] = activeProjects[i].id;
   }
-  localStorage.setItem(
-    "savedProjectData",
-    JSON.stringify(savedProjectData)
-  );
-  localStorage.setItem(
-    "savedActiveProjects",
-    JSON.stringify(savedActiveProjects)
-  );
+  localStorage.setItem("savedProjectData", JSON.stringify(savedProjectData));
+  localStorage.setItem("savedActiveProjects", JSON.stringify(savedActiveProjects));
 
   // Deal with events.
-  var savedEventUses = [];
-  var savedEventFlags = [];
-  for (var i = 0; i < events.length; i++) {
-    savedEventUses[i] = events[i].uses;
-    savedEventFlags[i] = events[i].flag;
+  var savedEventData = {};
+  for (var eventId in events) {
+    var event = events[eventId];
+    savedEventData[event.id] = {
+      flag: event.flag,
+      uses: event.uses
+    }
   }
-  localStorage.setItem(
-    "savedEventUses",
-    JSON.stringify(savedEventUses)
-  );
-  localStorage.setItem(
-    "savedEventFlags",
-    JSON.stringify(savedEventFlags)
-  );
+  localStorage.setItem("savedEventData", JSON.stringify(savedEventData));
 
   localStorage.setItem("consoleHistory", JSON.stringify(consoleHistory));
   localStorage.setItem("theme", JSON.stringify(theme));
@@ -143,36 +133,34 @@ function load() {
   paperBuyerOn = savedGame.paperBuyerOn;
 
   // Load project information.
-  var loadProjectData = JSON.parse(localStorage.getItem("savedProjectData"));
-  var loadActiveProjects = JSON.parse(localStorage.getItem("savedActiveProjects"));
+  var savedProjectData = JSON.parse(localStorage.getItem("savedProjectData"));
+  var savedActiveProjects = JSON.parse(localStorage.getItem("savedActiveProjects"));
 
-  for (var projectId in loadProjectData) {
-    var savedProject = loadProjectData[projectId];
+  for (var projectId in savedProjectData) {
+    var savedProject = savedProjectData[projectId];
     var project = projects[projectId];
     project.uses = savedProject.uses;
     project.flag = savedProject.flag;
   }
 
-  for (var projectName in projects) {
-    var project = projects[projectName];
-    if (loadActiveProjects.indexOf(project.id) >= 0) {
+  for (var projectId in projects) {
+    var project = projects[projectId];
+    if (savedActiveProjects.indexOf(project.id) >= 0) {
       displayProjects(project);
       activeProjects.push(project);
     }
   }
 
   // Load event information.
-  var loadEventUses = JSON.parse(
-    localStorage.getItem("savedEventUses")
-  );
-  var loadEventFlags = JSON.parse(
-    localStorage.getItem("savedEventFlags")
-  );
+  var savedEventData = JSON.parse(localStorage.getItem("savedEventData"));
 
-  for (var i = 0; i < loadEventUses.length; i++) {
-    events[i].uses = loadEventUses[i];
-    events[i].flag = loadEventFlags[i];
+  for (var eventId in savedEventData) {
+    var savedEvent = savedEventData[eventId];
+    var event = events[eventId];
+    event.uses = savedEvent.uses;
+    event.flag = savedEvent.flag;
   }
+
 
   consoleHistory = JSON.parse(localStorage.getItem("consoleHistory"));
 
@@ -192,11 +180,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   // Unhide unlocked divs
   [
-    ["bankDiv", projects.bankAccount],
-    ["professionalDiv", projects.professionals],
-    ["prestigeColumn", prestigeUnlockedEvent],
-    ["foldingColumn", projects.learnToFoldCranes],
-    ["buisnessColumn", projects.learnToFoldCranes]
+    ["bankDiv", projects.bankAccountProject],
+    ["professionalDiv", projects.professionalsProject],
+    ["prestigeColumn", events.prestigeUnlockedEvent],
+    ["foldingColumn", projects.learnToFoldCranesProject],
+    ["buisnessColumn", projects.learnToFoldCranesProject]
   ].forEach(i => {
     domElements[i[0]].hidden = !i[1].flag;
   });
@@ -286,7 +274,7 @@ function updateDom() {
   domElements["happinessAmount"].innerHTML = happiness.toFixed(2);
 
   // Disable buttons which player cannot use
-  domElements["btnMakeCrane"].disabled = paper < 1 || !projects.learnToFoldCranes.flag;
+  domElements["btnMakeCrane"].disabled = paper < 1 || !projects.learnToFoldCranesProject.flag;
   domElements["btnBuyPaper"].disabled = paperPrice > funds;
   domElements["btnMarketing"].disabled = marketingPrice > funds;
   domElements["btnHireHighSchooler"].disabled = funds < minWage;
@@ -319,7 +307,7 @@ function displayProjects(project) {
   span.style.fontWeight = "bold";
   project.element.appendChild(span);
 
-  span.appendChild(document.createTextNode(project.title));
+  span.appendChild(document.createTextNode(project.title.toTitleCase()));
   project.element.appendChild(document.createTextNode(" " + projectPriceTag(project)));
   project.element.appendChild(document.createElement("div"));
   project.element.appendChild(document.createTextNode(project.description));
@@ -328,8 +316,8 @@ function displayProjects(project) {
 }
 
 function manageProjects() {
-  for (var projectName in projects) {
-    var project = projects[projectName];
+  for (var projectId in projects) {
+    var project = projects[projectId];
     if (project.trigger() && project.uses > 0) {
       displayProjects(project);
       project.uses--;
@@ -343,7 +331,8 @@ function manageProjects() {
 }
 
 function manageEvents() {
-  events.forEach(event => {
+  for (var eventId in events) {
+    var event = events[eventId];
     if (event.trigger() && event.uses != 0) {
       if (event.notifyPlayer) {
         pendingEvents.push(event);
@@ -351,7 +340,7 @@ function manageEvents() {
       event.effect();
       event.uses--;
     }
-  });
+  }
 
   if (pendingEvents.length > 0 && domElements["eventDiv"].hidden) {
     displayNextEvent();
@@ -360,7 +349,7 @@ function manageEvents() {
 
 function displayNextEvent() {
   event = pendingEvents.pop();
-  domElements["eventTitle"].innerHTML = event.title;
+  domElements["eventTitle"].innerHTML = event.title.toTitleCase();
   domElements["eventDescription"].innerHTML = event.description;
   unhide("eventDiv");
 }
