@@ -42,7 +42,7 @@ var capDebtEvent = {
   title: "Cap debt",
   description: "Automatically cap debt at maxDebt.",
   trigger: function() {
-    return debt >= maxDebt;
+    return debt > maxDebt;
   },
   uses: -1,
   flag: 0,
