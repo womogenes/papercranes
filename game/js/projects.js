@@ -1,5 +1,4 @@
 // Yoy!
-var projects = [];
 var activeProjects = [];
 
 function projectBaseEffect(project) {
@@ -19,10 +18,10 @@ function projectPriceTag(project) {
 		costs.push("$" + project.dollarCost.toLocaleString());
 	}
 	if (project.wishCost) {
-		costs.push(project.wishCost + " wishes");
+		costs.push(project.wishCost + " wish" + (project.wishCost > 1 ? "es" : ""));
 	}
 	if (project.highSchoolerCost) {
-		costs.push(project.highSchoolerCost + " high schoolers");
+		costs.push(project.highSchoolerCost + " high schooler" + (project.highSchoolerCost > 1 ? "s" : ""));
 	}
 	return "(" + costs.join(", ") + ")";
 }
@@ -35,8 +34,11 @@ function canAffordProject(project) {
 	)
 }
 
+function projectId(project) {
+	return camelCase(project.title + " project")
+}
+
 var fasterHighSchoolersProject = {
-	id: "fasterHighSchoolersProjectButton",
 	title: "Faster High Schoolers",
 	description: "High Schoolers work 25% faster.",
 	dollarCost: 10,
@@ -52,10 +54,7 @@ var fasterHighSchoolersProject = {
 	}
 }
 
-projects.push(fasterHighSchoolersProject);
-
 var bankAccountProject = {
-	id: "bankAccountProjectButton",
 	title: "Bank Account",
 	dollarCost: 10,
 	description: "Be able to borrow money!",
@@ -71,10 +70,7 @@ var bankAccountProject = {
 	}
 }
 
-projects.push(bankAccountProject);
-
 var evenFasterHighSchoolersProject = {
-	id: "evenFasterHighSchoolersProjectButton",
 	title: "Even Faster High Schoolers",
 	dollarCost: 20,
 	description: "Double interest rate, and high schoolers are 50% faster.",
@@ -91,10 +87,7 @@ var evenFasterHighSchoolersProject = {
 	}
 }
 
-projects.push(evenFasterHighSchoolersProject);
-
 var highlySkilledStudentsProject = {
-	id: "highlySkilledStudentsProjectButton",
 	title: "Highly Skilled Students",
 	dollarCost: 40,
 	description: "Double hire price, high schoolers work twice as fast.",
@@ -111,10 +104,7 @@ var highlySkilledStudentsProject = {
 	}
 }
 
-projects.push(highlySkilledStudentsProject);
-
 var hireProfessionalsProject = {
-	id: "hireProfessionalsProjectButton",
 	title: "Professionals",
 	wishCost: 10,
 	description: "Use 10 wishes to start hiring Professionals, the best folders.",
@@ -131,10 +121,7 @@ var hireProfessionalsProject = {
 	}
 }
 
-projects.push(hireProfessionalsProject);
-
 var paperEffciencyProject = {
-	id: "paperEffciencyProjectButton",
 	title: "Paper Efficiency",
 	dollarCost: 200,
 	description: "Gain 50% more paper from each purchase.",
@@ -150,10 +137,7 @@ var paperEffciencyProject = {
 	}
 }
 
-projects.push(paperEffciencyProject);
-
 var paperBuyerProject = {
-	id: "paperBuyerProjectButton",
 	title: "Paper Buyer",
 	highSchoolerCost: 100,
 	description: "Auto-purchase paper when it runs out.",
@@ -168,10 +152,7 @@ var paperBuyerProject = {
 	}
 }
 
-projects.push(paperBuyerProject);
-
 var thinnerSheetsProject = {
-	id: "paperBuyerProjectButton",
 	title: "Thinner Sheets",
 	dollarCost: 400,
 	description: "Gain 75% more paper from each purchase.",
@@ -187,10 +168,7 @@ var thinnerSheetsProject = {
 	}
 }
 
-projects.push(paperBuyerProject);
-
 var bigPaperProject = {
-	id: "bigPaperProjectButton",
 	title: "Big Paper",
 	dollarCost: 800,
 	description: "1000% more paper from each purchase.",
@@ -206,10 +184,7 @@ var bigPaperProject = {
 	}
 }
 
-projects.push(bigPaperProject);
-
 var lowerWagesProject = {
-	id: "lowerWagesProjectButton",
 	title: "Lower Wages",
 	dollarCost: 10000000,
 	description: "Lobby the lawmakers to reduce minimum wage.",
@@ -224,10 +199,7 @@ var lowerWagesProject = {
 	}
 }
 
-projects.push(lowerWagesProject);
-
 var learnToFoldCranesProject = {
-	id: "learnToFoldCranesProjectButton",
 	title: "Learn to Fold Cranes",
 	dollarCost: 1,
 	description: "Learn how to fold origami cranes",
@@ -243,4 +215,14 @@ var learnToFoldCranesProject = {
 		unhide("foldingColumn");
 	}
 }
-projects.push(learnToFoldCranesProject);
+
+var projects = [
+	fasterHighSchoolersProject, bankAccountProject, evenFasterHighSchoolersProject,
+	highlySkilledStudentsProject, hireProfessionalsProject, paperEffciencyProject,
+	paperBuyerProject, thinnerSheetsProject, bigPaperProject, lowerWagesProject,
+	learnToFoldCranesProject
+];
+
+projects.forEach(project => {
+	project.id = projectId(project);
+});
