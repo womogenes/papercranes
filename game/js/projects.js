@@ -3,7 +3,7 @@ var projects = [];
 var activeProjects = [];
 
 function baseEffect(project) {
-	project.flag = 1;
+	project.flag = true;
 	project.element.parentNode.removeChild(project.element);
 	var index = activeProjects.indexOf(project);
 	activeProjects.splice(index, 1);
@@ -35,7 +35,7 @@ var fasterHighSchoolersProject = {
 	canAfford: function () {
 		return funds >= this.dollarCost;
 	},
-	flag: 0,
+	flag: false,
 	element: null,
 	effect: function () {
 		funds -= this.dollarCost;
@@ -58,7 +58,7 @@ var bankAccountProject = {
 	canAfford: function () {
 		return funds >= this.dollarCost;
 	},
-	flag: 0,
+	flag: false,
 	element: null,
 	effect: function () {
 		funds -= this.dollarCost;
@@ -82,7 +82,7 @@ var evenFasterHighSchoolersProject = {
 	canAfford: function () {
 		return funds >= this.dollarCost;
 	},
-	flag: 0,
+	flag: false,
 	element: null,
 	effect: function () {
 		funds -= this.dollarCost;
@@ -105,7 +105,7 @@ var highlySkilledStudentsProject = {
 	canAfford: function () {
 		return funds >= this.dollarCost;
 	},
-	flag: 0,
+	flag: false,
 	element: null,
 	effect: function () {
 		funds -= this.dollarCost;
@@ -129,7 +129,7 @@ var hireProfessionalsProject = {
 	canAfford: function () {
 		return wishes >= this.wishCost;
 	},
-	flag: 0,
+	flag: false,
 	element: null,
 	effect: function () {
 		wishes -= this.wishCost;
@@ -153,7 +153,7 @@ var paperEffciencyProject = {
 	canAfford: function () {
 		return funds >= this.dollarCost;
 	},
-	flag: 0,
+	flag: false,
 	element: null,
 	effect: function () {
 		funds -= this.dollarCost;
@@ -176,7 +176,7 @@ var paperBuyerProject = {
 	canAfford: function () {
 		return highSchoolers >= this.highSchoolerCost;
 	},
-	flag: 0,
+	flag: false,
 	element: null,
 	effect: function () {
 		highSchoolers -= this.highSchoolerCost;
@@ -192,13 +192,13 @@ var thinnerSheetsProject = {
 	dollarCost: 400,
 	description: "Gain 75% more paper from each purchase.",
 	trigger: function () {
-		return paperEffciencyProject.flag == 1;
+		return paperEffciencyProject.flag;
 	},
 	uses: 1,
 	canAfford: function () {
 		return funds >= this.dollarCost;
 	},
-	flag: 0,
+	flag: false,
 	element: null,
 	effect: function () {
 		funds -= this.dollarCost;
@@ -215,13 +215,13 @@ var bigPaperProject = {
 	dollarCost: 800,
 	description: "1000% more paper from each purchase.",
 	trigger: function () {
-		return thinnerSheetsProject.flag == 1;
+		return thinnerSheetsProject.flag;
 	},
 	uses: 1,
 	canAfford: function () {
 		return funds >= this.dollarCost;
 	},
-	flag: 0,
+	flag: false,
 	element: null,
 	effect: function () {
 		funds -= this.dollarCost;
@@ -244,7 +244,7 @@ var lowerWagesProject = {
 	canAfford: function () {
 		return funds >= this.dollarCost;
 	},
-	flag: 0,
+	flag: false,
 	element: null,
 	effect: function () {
 		funds -= this.dollarCost;
@@ -266,7 +266,7 @@ var learnToFoldCranesProject = {
 	canAfford: function () {
 		return funds >= this.dollarCost;
 	},
-	flag: 0,
+	flag: false,
 	element: null,
 	effect: function () {
 		funds -= this.dollarCost;

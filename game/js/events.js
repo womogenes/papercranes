@@ -9,7 +9,7 @@ var prestigeUnlockedEvent = {
     return cranes >= 1000;
   },
   uses: 1,
-  flag: 0,
+  flag: false,
   notifyPlayer: false,
   effect: function () {
     unhide("prestigeColumn");
@@ -26,7 +26,7 @@ var autobuyPaperEvent = {
     return paper <= 0 && paperBuyerOn;
   },
   uses: -1,
-  flag: 0,
+  flag: false,
   notifyPlayer: false,
   effect: function () {
     buyPaper(1);
@@ -43,7 +43,7 @@ var capDebtEvent = {
     return debt > maxDebt;
   },
   uses: -1,
-  flag: 0,
+  flag: false,
   notifyPlayer: false,
   effect: function () {
     debt = maxDebt;

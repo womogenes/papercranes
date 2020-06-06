@@ -284,7 +284,7 @@ function updateDom() {
   domElements["happinessAmount"].innerHTML = happiness.toFixed(2);
 
   // Disable buttons which player cannot use
-  domElements["btnMakeCrane"].disabled = paper < 1 || learnToFoldCranesProject.flag == 0;
+  domElements["btnMakeCrane"].disabled = paper < 1 || !learnToFoldCranesProject.flag;
   domElements["btnBuyPaper"].disabled = paperPrice > funds;
   domElements["btnMarketing"].disabled = marketingPrice > funds;
   domElements["btnHireHighSchooler"].disabled = funds < minWage;
