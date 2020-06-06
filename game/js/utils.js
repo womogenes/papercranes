@@ -1,3 +1,4 @@
+//String stuff
 {
   var oneToTen = [
       "zero", "one", "two", "three", "four",
@@ -190,4 +191,103 @@ function commify(n) {
   return n.toLocaleString("en", {
     useGrouping: true
   });
+}
+
+// Display stuff
+function cacheDomElements() {
+  Array.from(document.getElementsByTagName("*")).forEach(element => {
+    domElements[element.id] = element;
+  });
+
+  load();
+  applyTheme();
+}
+
+function fade(element, targetOpacity) {
+  var fadeCounter = -1;
+
+  var handle = window.setInterval(function () {
+    toggleVisibility(element);
+  }, 30);
+
+  function toggleVisibility(element) {
+    if (fadeCounter > targetOpacity * 10) {
+      element.style.opacity = null;
+      clearInterval(handle);
+      return;
+    }
+    element.style.opacity = fadeCounter / 10;
+    fadeCounter++;
+  }
+}
+
+function createRipple(e) {
+  var circle = document.createElement("div");
+  this.appendChild(circle);
+
+  var d = Math.max(this.clientWidth, this.clientHeight);
+
+  circle.style.width = circle.style.height = d + "px";
+
+  var rect = this.getBoundingClientRect();
+  circle.style.left = e.clientX - rect.left - d / 2 + "px";
+  circle.style.top = e.clientY - rect.top - d / 2 + "px";
+
+  circle.classList.add("ripple");
+  circle.addEventListener("animationend", function (e) {
+    this.parentNode.removeChild(this);
+  });
+}
+
+function displayMessage(msg, dontSave) {
+  console.log(msg);
+  if (!dontSave) {
+    consoleHistory.push(msg);
+  }
+  var newMsgEl = document.createElement("div");
+  newMsgEl.setAttribute("class", "consoleMsg");
+  newMsgEl.setAttribute("id", "consoleMsg");
+  newMsgEl.innerHTML = msg;
+  newMsgEl.style.opacity = 0;
+  fade(newMsgEl, 1.0);
+
+  domElements["readoutDiv"].prepend(newMsgEl, domElements["readoutDiv"].firstChild);
+}
+
+var themes = {
+  "Light": {
+    "--bg-color": "#ffffff",
+    "--outline-color": "#000000",
+    "--text-color": "#000000",
+    "--fill-color": "#cccccc",
+    "--slider-focus-bg-color": "#e0e0e0",
+    "--slider-thumb-color": "#909090",
+
+    "--btn-bg-on": "#eeeeee",
+    "--btn-bg-hover": "#f9f9f9",
+    "--btn-bg-active": "#cccccc",
+    "--btn-outline-hover": "#222222",
+    "--btn-outline-active": "#222222",
+  },
+  "Dark": {
+    "--bg-color": "#181818",
+    "--outline-color": "#dddddd",
+    "--text-color": "#eeeeee",
+    "--fill-color": "#555555",
+    "--slider-focus-bg-color": "#707070",
+    "--slider-thumb-color": "#909090",
+
+    "--btn-bg-on": "#111111",
+    "--btn-bg-hover": "#222222",
+    "--btn-bg-active": "#1e1e1e",
+    "--btn-outline-hover": "#cccccc",
+    "--btn-outline-active": "#aaaaaa",
+  }
+}
+
+function applyTheme() {
+  // Sets theme colors.
+  for (var i in themes[theme]) {
+    document.documentElement.style.setProperty(i, themes[theme][i]);
+  }
 }

@@ -11,7 +11,7 @@ var prestigeUnlockedEvent = {
   },
   uses: 1,
   flag: 0,
-  notifyPlayer: true,
+  notifyPlayer: false,
   effect: function() {
     domElements["column0"].hidden = false;
     fade(domElements["column0"], 1.0);
