@@ -2,15 +2,19 @@
 var projects = [];
 var activeProjects = [];
 
-function baseEffect(project) {
+function projectBaseEffect(project) {
 	project.flag = true;
 	project.element.parentNode.removeChild(project.element);
 	var index = activeProjects.indexOf(project);
 	activeProjects.splice(index, 1);
+
+	funds -= project.dollarCost ? project.dollarCost : 0;
+	wishes -= project.wishCost ? project.wishCost : 0;
+	highSchoolers -= project.highSchoolerCost ? project.highSchoolerCost : 0;
 }
 
-function priceTag(project) {
-	var costs = []
+function projectPriceTag(project) {
+	var costs = [];
 	if (project.dollarCost) {
 		costs.push("$" + project.dollarCost.toLocaleString());
 	}
@@ -23,6 +27,14 @@ function priceTag(project) {
 	return "(" + costs.join(", ") + ")";
 }
 
+function canAffordProject(project) {
+	return (
+		(project.dollarCost ? funds >= project.dollarCost : true) &&
+		(project.wishCost ? wishes >= project.wishCost : true) &&
+		(project.highSchoolerCost ? highSchoolers >= project.highSchoolerCost : true)
+	)
+}
+
 var fasterHighSchoolersProject = {
 	id: "fasterHighSchoolersProjectButton",
 	title: "Faster High Schoolers",
@@ -32,13 +44,9 @@ var fasterHighSchoolersProject = {
 		return funds >= 5 && highSchoolers > 0;
 	},
 	uses: 1,
-	canAfford: function () {
-		return funds >= this.dollarCost;
-	},
 	flag: false,
 	element: null,
 	effect: function () {
-		funds -= this.dollarCost;
 		highSchoolerBoost *= 1.25;
 		displayMessage("High schoolers now work 25% as fast.");
 	}
@@ -55,13 +63,9 @@ var bankAccountProject = {
 		return funds >= 5 && learnToFoldCranesProject.flag;
 	},
 	uses: 1,
-	canAfford: function () {
-		return funds >= this.dollarCost;
-	},
 	flag: false,
 	element: null,
 	effect: function () {
-		funds -= this.dollarCost;
 		unhide("bankDiv");
 		displayMessage("Bank account opened. You can now borrow money $20 at a time.");
 	}
@@ -79,13 +83,9 @@ var evenFasterHighSchoolersProject = {
 		return funds >= 10 && fasterHighSchoolersProject.flag;
 	},
 	uses: 1,
-	canAfford: function () {
-		return funds >= this.dollarCost;
-	},
 	flag: false,
 	element: null,
 	effect: function () {
-		funds -= this.dollarCost;
 		highSchoolerBoost *= 2;
 		interestRate *= 2;
 	}
@@ -102,13 +102,9 @@ var highlySkilledStudentsProject = {
 		return funds >= 20 && evenFasterHighSchoolersProject.flag;
 	},
 	uses: 1,
-	canAfford: function () {
-		return funds >= this.dollarCost;
-	},
 	flag: false,
 	element: null,
 	effect: function () {
-		funds -= this.dollarCost;
 		highSchoolerBoost *= 2;
 		minWage *= 2;
 		displayMessage("When they work harder, you gotta pay them more.");
@@ -126,13 +122,9 @@ var hireProfessionalsProject = {
 		return highSchoolers >= 100;
 	},
 	uses: 1,
-	canAfford: function () {
-		return wishes >= this.wishCost;
-	},
 	flag: false,
 	element: null,
 	effect: function () {
-		wishes -= this.wishCost;
 		professionalUnlocked = true;
 		domElements["professionalDiv"].hidden = false;
 		displayMessage("100x more powerful than a high schooler.");
@@ -150,13 +142,9 @@ var paperEffciencyProject = {
 		return cranes >= 5000;
 	},
 	uses: 1,
-	canAfford: function () {
-		return funds >= this.dollarCost;
-	},
 	flag: false,
 	element: null,
 	effect: function () {
-		funds -= this.dollarCost;
 		paperAmount = Math.round(paperAmount * 1.5);
 		basePaperPrice = Math.round(basePaperPrice * 1.5);
 	}
@@ -173,13 +161,9 @@ var paperBuyerProject = {
 		return cranes >= 10000;
 	},
 	uses: 1,
-	canAfford: function () {
-		return highSchoolers >= this.highSchoolerCost;
-	},
 	flag: false,
 	element: null,
 	effect: function () {
-		highSchoolers -= this.highSchoolerCost;
 		domElements["paperBuyerDiv"].hidden = false;
 	}
 }
@@ -195,13 +179,9 @@ var thinnerSheetsProject = {
 		return paperEffciencyProject.flag;
 	},
 	uses: 1,
-	canAfford: function () {
-		return funds >= this.dollarCost;
-	},
 	flag: false,
 	element: null,
 	effect: function () {
-		funds -= this.dollarCost;
 		paperAmount = Math.round(paperAmount * 1.75);
 		basePaperPrice = Math.round(basePaperPrice * 1.5);
 	}
@@ -218,13 +198,9 @@ var bigPaperProject = {
 		return thinnerSheetsProject.flag;
 	},
 	uses: 1,
-	canAfford: function () {
-		return funds >= this.dollarCost;
-	},
 	flag: false,
 	element: null,
 	effect: function () {
-		funds -= this.dollarCost;
 		paperAmount = Math.round(paperAmount * 10);
 		basePaperPrice = Math.round(basePaperPrice * 1.5);
 	}
@@ -241,13 +217,9 @@ var lowerWagesProject = {
 		return highSchoolers > 250;
 	},
 	uses: 1,
-	canAfford: function () {
-		return funds >= this.dollarCost;
-	},
 	flag: false,
 	element: null,
 	effect: function () {
-		funds -= this.dollarCost;
 		minWage = 0;
 	}
 }
@@ -263,16 +235,12 @@ var learnToFoldCranesProject = {
 		return true;
 	},
 	uses: 1,
-	canAfford: function () {
-		return funds >= this.dollarCost;
-	},
 	flag: false,
 	element: null,
 	effect: function () {
-		funds -= this.dollarCost;
 		displayMessage('Buy some paper using the "Paper" button, then click "Fold Crane" to start making cranes.');
 		unhide("buisnessColumn");
-		unhide("foldingColumn")
+		unhide("foldingColumn");
 	}
 }
 projects.push(learnToFoldCranesProject);

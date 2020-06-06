@@ -193,11 +193,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
   domElements["btnHireHighSchooler"].disabled = true;
   domElements["btnMarketing"].disabled = true;
 
-  domElements["bankDiv"].hidden = !bankAccountProject.flag;
-  domElements["professionalDiv"].hidden = !hireProfessionalsProject.flag;
-  domElements["prestigeColumn"].hidden = !prestigeUnlockedEvent.flag;
-  domElements["foldingColumn"].hidden = !learnToFoldCranesProject.flag;
-  domElements["buisnessColumn"].hidden = !learnToFoldCranesProject.flag;
+  // Unhide unlocked divs
+  [
+    ["bankDiv", bankAccountProject],
+    ["professionalDiv", hireProfessionalsProject],
+    ["prestigeColumn", prestigeUnlockedEvent],
+    ["foldingColumn", learnToFoldCranesProject],
+    ["buisnessColumn", learnToFoldCranesProject]
+  ].forEach(i => {
+    domElements[i[0]].hidden = !i[1].flag;
+  });
   domElements["paperBuyerDiv"].hidden = !paperBuyerUnlocked;
 
   domElements["paperPrice"].innerHTML = monify(paperPrice);
@@ -305,7 +310,7 @@ function displayProjects(project) {
   project.element.setAttribute("id", project.id);
 
   project.element.onclick = function () {
-    baseEffect(project);
+    projectBaseEffect(project);
     project.effect();
   };
 
@@ -318,11 +323,11 @@ function displayProjects(project) {
   project.element.appendChild(span);
 
   span.appendChild(document.createTextNode(project.title));
-  project.element.appendChild(document.createTextNode(" " + priceTag(project)));
+  project.element.appendChild(document.createTextNode(" " + projectPriceTag(project)));
   project.element.appendChild(document.createElement("div"));
   project.element.appendChild(document.createTextNode(project.description));
 
-  fade(project.element, project.canAfford() ? 1.0 : 0.6);
+  fade(project.element, canAffordProject(project) ? 1.0 : 0.6);
 }
 
 function manageProjects() {
@@ -335,7 +340,7 @@ function manageProjects() {
   });
 
   activeProjects.forEach(project => {
-    project.element.disabled = !project.canAfford();
+    project.element.disabled = !canAffordProject(project);
   });
 }
 
