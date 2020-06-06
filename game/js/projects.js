@@ -34,9 +34,7 @@ function canAffordProject(project) {
 	)
 }
 
-function projectId(project) {
-	return camelCase(project.title + " project")
-}
+
 
 var fasterHighSchoolersProject = {
 	title: "Faster High Schoolers",
@@ -224,5 +222,5 @@ var projects = [
 ];
 
 projects.forEach(project => {
-	project.id = projectId(project);
+	project.id = camelCase(project.title + " project");
 });
