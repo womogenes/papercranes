@@ -30,7 +30,6 @@ var prevTimer = Date.now();
 
 var consoleHistory = [];
 var pendingEvents = [];
-var notificationCount;
 
 var theme = (
     window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ?
@@ -248,6 +247,7 @@ window.setInterval(function () {
 function sellCranes() {
   var demand = (0.08 / cranePrice) * Math.pow(1.3, marketingLevel - 1);
   domElements["demand"].innerHTML = commify(Math.floor(demand * 100));
+
   if (Math.random() * 50 < demand || (cranePrice <= 0.01 && Math.random() > 0.7)) {
     var amount = Math.ceil(demand);
     if (cranePrice <= 0.01) {
@@ -284,7 +284,7 @@ function updateDom() {
   domElements["happinessAmount"].innerHTML = happiness.toFixed(2);
 
   // Disable buttons which player cannot use
-  domElements["btnMakeCrane"].disabled = paper < 1;
+  domElements["btnMakeCrane"].disabled = paper < 1 || learnToFoldCranesProject.flag == 0;
   domElements["btnBuyPaper"].disabled = paperPrice > funds;
   domElements["btnMarketing"].disabled = marketingPrice > funds;
   domElements["btnHireHighSchooler"].disabled = funds < minWage;
@@ -293,7 +293,7 @@ function updateDom() {
   domElements["btnHireProfessional"].disabled = professionalCost > funds;
 
   // Change favicon and title to show notifications
-  notificationCount = pendingEvents.length + (eventDiv.style.display == "block" ? 1 : 0);
+  var notificationCount = pendingEvents.length + (eventDiv.style.display == "block" ? 1 : 0);
   document.title = (notificationCount ? "(" + notificationCount + ") " : "") + "Paper Cranes";
   domElements["icon"].setAttribute("href", notificationCount ? "../favicon_notification.svg" : "../favicon_crane.svg");
 }

@@ -255,3 +255,23 @@ var lowerWagesProject = {
 }
 
 projects.push(lowerWagesProject);
+
+var learnToFoldCranesProject = {
+	id: "learnToFoldCranesProjectButton",
+	title: "Learn to Fold Cranes",
+	dollarCost: 1,
+	description: "Learn how to fold origami cranes",
+	trigger: function () {
+		return true;
+	},
+	uses: 1,
+	canAfford: function () {
+		return funds >= this.dollarCost;
+	},
+	flag: 0,
+	element: null,
+	effect: function () {
+    funds -= this.dollarCost;
+	}
+}
+projects.push(learnToFoldCranesProject);
