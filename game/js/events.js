@@ -1,4 +1,3 @@
-
 // Custom event stuff!
 var events = [];
 
@@ -6,15 +5,14 @@ var prestigeUnlockedEvent = {
   id: "prestigeUnlockedEvent",
   title: "Unhide prestige column",
   description: "Prestige column gets unhidden.",
-  trigger: function() {
+  trigger: function () {
     return cranes >= 1000;
   },
   uses: 1,
   flag: 0,
   notifyPlayer: false,
-  effect: function() {
-    domElements["column0"].hidden = false;
-    fade(domElements["column0"], 1.0);
+  effect: function () {
+    unhide("prestigeColumn");
   }
 }
 
@@ -24,13 +22,13 @@ var autobuyPaperEvent = {
   id: "autobuyPaperEvent",
   title: "Buy paper",
   description: "Automatically buy paper when it runs out.",
-  trigger: function() {
+  trigger: function () {
     return paper <= 0 && paperBuyerOn;
   },
   uses: -1,
   flag: 0,
   notifyPlayer: false,
-  effect: function() {
+  effect: function () {
     buyPaper(1);
   }
 }
@@ -41,13 +39,13 @@ var capDebtEvent = {
   id: "capDebtEvent",
   title: "Cap debt",
   description: "Automatically cap debt at maxDebt.",
-  trigger: function() {
+  trigger: function () {
     return debt > maxDebt;
   },
   uses: -1,
   flag: 0,
   notifyPlayer: false,
-  effect: function() {
+  effect: function () {
     debt = maxDebt;
   }
 }

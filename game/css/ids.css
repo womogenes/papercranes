@@ -24,7 +24,6 @@
 	width: 100%;
 	height: 100%;
 	position: fixed;
-	display: none;
 	z-index: 1;
 	touch-action: none;
 }
@@ -68,7 +67,7 @@
 	margin-top: 30px;
 }
 
-#column0 {
+#prestigeColumn {
 	float: left;
 	width: 275px;
 	margin-right: 15px;
@@ -76,7 +75,7 @@
 	overflow-wrap: break-word;
 }
 
-#column1 {
+#buisnessColumn {
 	float: left;
 	width: 275px;
 	margin-right: 15px;
@@ -84,7 +83,7 @@
 	overflow-wrap: break-word;
 }
 
-#column2 {
+#foldingColumn {
 	float: left;
 	width: 275px;
 	margin-right: 15px;
@@ -141,10 +140,9 @@
 		font-size: 15px;
 	}
 
-	#column0,
-	#column1,
-	#column2,
-	#column3,
+	#prestigeColumn,
+	#buisnessColumn,
+	#foldingColumn,
 	#projectsColumn {
 		width: 100%;
 	}

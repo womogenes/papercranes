@@ -221,6 +221,13 @@ function fade(element, targetOpacity) {
   }
 }
 
+function unhide(id) {
+  var el = domElements[id];
+  el.style.opacity = 0;
+  el.hidden = false;
+  fade(el, 1.0);
+}
+
 function createRipple(e) {
   var circle = document.createElement("div");
   this.appendChild(circle);

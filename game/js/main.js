@@ -192,22 +192,22 @@ document.addEventListener("DOMContentLoaded", function (event) {
   domElements["btnBuyPaper"].disabled = true;
   domElements["btnHireHighSchooler"].disabled = true;
   domElements["btnMarketing"].disabled = true;
+
   domElements["bankDiv"].hidden = !bankAccountProject.flag;
   domElements["professionalDiv"].hidden = !hireProfessionalsProject.flag;
-  domElements["column0"].hidden = !prestigeUnlockedEvent.flag;
+  domElements["prestigeColumn"].hidden = !prestigeUnlockedEvent.flag;
+  domElements["foldingColumn"].hidden = !learnToFoldCranesProject.flag;
+  domElements["buisnessColumn"].hidden = !learnToFoldCranesProject.flag;
   domElements["paperBuyerDiv"].hidden = !paperBuyerUnlocked;
 
   domElements["paperPrice"].innerHTML = monify(paperPrice);
   domElements["marketingLevel"].innerHTML = commify(marketingLevel);
   domElements["paperBuyer"].innerHTML = paperBuyerOn ? "ON" : "OFF";
 
-  // Initial messages.
-  if (consoleHistory.length == 0) {
-    displayMessage('Buy some paper using the "Paper" button, then click "Fold Crane" to start making cranes.');
-  }
-
   Array.from(document.getElementsByTagName("button")).forEach(button => {
-    button.addEventListener("click", createRipple);
+    if (button.id != "closeButton") {
+      button.addEventListener("click", createRipple);
+    }
   });
 });
 
@@ -293,7 +293,7 @@ function updateDom() {
   domElements["btnHireProfessional"].disabled = professionalCost > funds;
 
   // Change favicon and title to show notifications
-  var notificationCount = pendingEvents.length + (eventDiv.style.display == "block" ? 1 : 0);
+  var notificationCount = pendingEvents.length + (domElements["eventDiv"].hidden ? 0 : 1);
   document.title = (notificationCount ? "(" + notificationCount + ") " : "") + "Paper Cranes";
   domElements["icon"].setAttribute("href", notificationCount ? "../favicon_notification.svg" : "../favicon_crane.svg");
 }
@@ -323,7 +323,6 @@ function displayProjects(project) {
   project.element.appendChild(document.createTextNode(project.description));
 
   fade(project.element, project.canAfford() ? 1.0 : 0.6);
-
 }
 
 function manageProjects() {
@@ -351,7 +350,7 @@ function manageEvents() {
     }
   });
 
-  if (pendingEvents.length > 0 && domElements["eventDiv"].style.display == "") {
+  if (pendingEvents.length > 0 && domElements["eventDiv"].hidden) {
     displayNextEvent();
   }
 }
@@ -360,7 +359,5 @@ function displayNextEvent() {
   event = pendingEvents.pop();
   domElements["eventTitle"].innerHTML = event.title;
   domElements["eventDescription"].innerHTML = event.description;
-  domElements["eventDiv"].style.opacity = 0;
-  domElements["eventDiv"].style.display = "block";
-  fade(domElements["eventDiv"], 1.0);
+  unhide("eventDiv");
 }

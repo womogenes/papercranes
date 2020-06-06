@@ -66,11 +66,11 @@ function buyPaper(n) {
 }
 
 function closeEvent() {
-  if (pendingEvents.length == 0) {
-    domElements["eventDescription"].innerHTML = "";
-    domElements["eventDiv"].style.display = "none";
-  } else {
+  if (pendingEvents.length) {
     displayNextEvent()
+  } else {
+    domElements["eventDescription"].innerHTML = "";
+    domElements["eventDiv"].hidden = true;
   }
 }
 
