@@ -198,7 +198,7 @@ function camelCase(str) {
   { 
       return index == 0 ? word.toLowerCase() : word.toUpperCase(); 
   }).replace(/\s+/g, ''); 
-} 
+}
 
 // Display stuff
 function cacheDomElements() {

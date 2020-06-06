@@ -69,24 +69,23 @@ function save() {
   );
 
   // Deal with project stuff.
-  var savedProjectUses = [];
-  var savedProjectFlags = [];
   var savedActiveProjects = [];
+  var savedProjectData = {};
 
-  for (var i = 0; i < projects.length; i++) {
-    savedProjectUses[i] = projects[i].uses;
-    savedProjectFlags[i] = projects[i].flag;
+  for (var projectName in projects) {
+    var project = projects[projectName];
+    savedProjectData[project.id] = {
+      flag: project.flag,
+      uses: project.uses
+    }
   }
+
   for (var i = 0; i < activeProjects.length; i++) {
     savedActiveProjects[i] = activeProjects[i].id;
   }
   localStorage.setItem(
-    "savedProjectUses",
-    JSON.stringify(savedProjectUses)
-  );
-  localStorage.setItem(
-    "savedProjectFlags",
-    JSON.stringify(savedProjectFlags)
+    "savedProjectData",
+    JSON.stringify(savedProjectData)
   );
   localStorage.setItem(
     "savedActiveProjects",
@@ -144,25 +143,23 @@ function load() {
   paperBuyerOn = savedGame.paperBuyerOn;
 
   // Load project information.
-  var loadProjectUses = JSON.parse(localStorage.getItem("savedProjectUses"));
-  var loadProjectFlags = JSON.parse(
-    localStorage.getItem("savedProjectFlags")
-  );
-  var loadActiveProjects = JSON.parse(
-    localStorage.getItem("savedActiveProjects")
-  );
+  var loadProjectData = JSON.parse(localStorage.getItem("savedProjectData"));
+  var loadActiveProjects = JSON.parse(localStorage.getItem("savedActiveProjects"));
 
-  for (var i = 0; i < loadProjectUses.length; i++) {
-    projects[i].uses = loadProjectUses[i];
-    projects[i].flag = loadProjectFlags[i];
+  for (var projectId in loadProjectData) {
+    var savedProject = loadProjectData[projectId];
+    var project = projects[projectId];
+    project.uses = savedProject.uses;
+    project.flag = savedProject.flag;
   }
 
-  projects.forEach(project => {
+  for (var projectName in projects) {
+    var project = projects[projectName];
     if (loadActiveProjects.indexOf(project.id) >= 0) {
       displayProjects(project);
       activeProjects.push(project);
     }
-  });
+  }
 
   // Load event information.
   var loadEventUses = JSON.parse(
@@ -195,11 +192,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   // Unhide unlocked divs
   [
-    ["bankDiv", bankAccountProject],
-    ["professionalDiv", hireProfessionalsProject],
+    ["bankDiv", projects.bankAccount],
+    ["professionalDiv", projects.professionals],
     ["prestigeColumn", prestigeUnlockedEvent],
-    ["foldingColumn", learnToFoldCranesProject],
-    ["buisnessColumn", learnToFoldCranesProject]
+    ["foldingColumn", projects.learnToFoldCranes],
+    ["buisnessColumn", projects.learnToFoldCranes]
   ].forEach(i => {
     domElements[i[0]].hidden = !i[1].flag;
   });
@@ -289,7 +286,7 @@ function updateDom() {
   domElements["happinessAmount"].innerHTML = happiness.toFixed(2);
 
   // Disable buttons which player cannot use
-  domElements["btnMakeCrane"].disabled = paper < 1 || !learnToFoldCranesProject.flag;
+  domElements["btnMakeCrane"].disabled = paper < 1 || !projects.learnToFoldCranes.flag;
   domElements["btnBuyPaper"].disabled = paperPrice > funds;
   domElements["btnMarketing"].disabled = marketingPrice > funds;
   domElements["btnHireHighSchooler"].disabled = funds < minWage;
@@ -331,13 +328,14 @@ function displayProjects(project) {
 }
 
 function manageProjects() {
-  projects.forEach(project => {
+  for (var projectName in projects) {
+    var project = projects[projectName];
     if (project.trigger() && project.uses > 0) {
       displayProjects(project);
       project.uses--;
       activeProjects.push(project);
     }
-  });
+  }
 
   activeProjects.forEach(project => {
     project.element.disabled = !canAffordProject(project);
