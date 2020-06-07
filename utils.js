@@ -175,7 +175,9 @@ function spellf(userInput) {
 }
 
 String.prototype.toTitleCase = function () {
-  return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  return this.replace(/\w\S*/g, function (txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
 };
 
 function monify(n) {
@@ -197,11 +199,10 @@ function commify(n) {
   });
 }
 
-function camelCase(str) { 
-  return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) 
-  { 
-      return index == 0 ? word.toLowerCase() : word.toUpperCase(); 
-  }).replace(/\s+/g, ''); 
+function camelCase(str) {
+  return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+    return index == 0 ? word.toLowerCase() : word.toUpperCase();
+  }).replace(/\s+/g, '');
 }
 
 // Display stuff
@@ -296,6 +297,17 @@ var themes = {
     "--btn-outline-hover": "#cccccc",
     "--btn-outline-active": "#aaaaaa",
   }
+}
+
+function loadTheme() {
+  theme = JSON.parse(localStorage.getItem("theme"));
+  if (theme == null) {
+    theme = (
+      window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) ? "Dark" : "Light";
+    localStorage.setItem("theme", JSON.stringify(theme));
+  }
+  applyTheme();
 }
 
 function applyTheme() {

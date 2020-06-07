@@ -32,9 +32,7 @@ var prevTimer = Date.now();
 var consoleHistory = [];
 var pendingEvents = [];
 
-var theme = (
-    window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ?
-  "Dark" : "Light";
+var theme;
 
 function save() {
   var savedGame = {
@@ -166,12 +164,11 @@ function load() {
     displayMessage(message, true);
   });
 
-  theme = JSON.parse(localStorage.getItem("theme"));
+  loadTheme();
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
   load();
-  applyTheme();
   getEl("btnMakeCrane").disabled = false;
   getEl("btnBuyPaper").disabled = true;
   getEl("btnHireHighSchooler").disabled = true;
