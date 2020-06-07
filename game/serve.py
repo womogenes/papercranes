@@ -8,6 +8,7 @@ host_name = socket.gethostbyname(socket.gethostname())
 
 # creates a Flask application, named app
 app = Flask(__name__, static_folder="", template_folder="")
+app.config["CACHE_TYPE"] = "null"
 
 # a route where we will display a welcome message via an HTML template
 @app.route("/")
