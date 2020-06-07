@@ -6,7 +6,7 @@ function increaseMarketing() {
   funds -= marketingPrice;
 
   marketingPrice = Math.round(marketingPrice * 2);
-  domElements["marketingLevel"].innerHTML = commify(marketingLevel);
+  getEle("marketingLevel").innerHTML = commify(marketingLevel);
 }
 
 
@@ -24,7 +24,7 @@ function payBack(x) {
 
 function togglePaperBuyer() {
   paperBuyerOn = !paperBuyerOn
-  domElements["paperBuyer"].innerHTML = paperBuyerOn ? "ON" : "OFF";
+  getEl("paperBuyer").innerHTML = paperBuyerOn ? "ON" : "OFF";
 }
 
 function hireHighSchooler() {
@@ -53,7 +53,7 @@ function makeCrane(n) {
   unsoldCranes += n;
   paper -= n;
 
-  domElements["cranes"].innerHTML = commify(Math.floor(cranes));
+  getEl("cranes").innerHTML = commify(Math.floor(cranes));
 }
 
 function buyPaper(n) {
@@ -69,8 +69,8 @@ function closeEvent() {
   if (pendingEvents.length) {
     displayNextEvent()
   } else {
-    domElements["eventDescription"].innerHTML = "";
-    domElements["eventDiv"].hidden = true;
+    getEl("eventDescription").innerHTML = "";
+    getEl("eventDiv").hidden = true;
   }
 }
 

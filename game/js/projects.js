@@ -65,7 +65,8 @@ var projects = {
 			displayMessage("Bank account opened. You can now borrow money $20 at a time.");
 		}
 	},
-	// Manufacturing Projects
+
+	// Manufacturing projects
 	fasterHighSchoolersProject: {
 		title: "Faster High Schoolers",
 		description: "High Schoolers work 25% faster.",
@@ -125,7 +126,7 @@ var projects = {
 		element: null,
 		effect: function () {
 			professionalUnlocked = true;
-			domElements["professionalDiv"].hidden = false;
+			getEl("professionalDiv").hidden = false;
 			displayMessage("100x more powerful than a high schooler.");
 		}
 	},
@@ -143,6 +144,7 @@ var projects = {
 			minWage = 0;
 		}
 	},
+
 	// Paper projects
 	paperBuyerProject: {
 		title: "Paper Buyer",
@@ -155,7 +157,7 @@ var projects = {
 		flag: false,
 		element: null,
 		effect: function () {
-			domElements["paperBuyerDiv"].hidden = false;
+			getEl("paperBuyerDiv").hidden = false;
 		}
 	},
 	paperEfficiencyProject: {

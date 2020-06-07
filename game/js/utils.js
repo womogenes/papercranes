@@ -205,13 +205,8 @@ function camelCase(str) {
 }
 
 // Display stuff
-function cacheDomElements() {
-  Array.from(document.getElementsByTagName("*")).forEach(element => {
-    domElements[element.id] = element;
-  });
-
-  load();
-  applyTheme();
+function getEl(id) {
+  return document.getElementById(id);
 }
 
 function fade(element, targetOpacity) {
@@ -233,7 +228,7 @@ function fade(element, targetOpacity) {
 }
 
 function unhide(id) {
-  var el = domElements[id];
+  var el = getEl(id);
   el.style.opacity = 0;
   el.hidden = false;
   fade(el, 1.0);
@@ -269,7 +264,7 @@ function displayMessage(msg, dontSave) {
   newMsgEl.style.opacity = 0;
   fade(newMsgEl, 1.0);
 
-  domElements["readoutDiv"].prepend(newMsgEl, domElements["readoutDiv"].firstChild);
+  getEl("readoutDiv").prepend(newMsgEl, getEl("readoutDiv").firstChild);
 }
 
 var themes = {

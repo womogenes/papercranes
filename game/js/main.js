@@ -36,8 +36,6 @@ var theme = (
     window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ?
   "Dark" : "Light";
 
-var domElements = {};
-
 function save() {
   var savedGame = {
     cranes: cranes,
@@ -172,11 +170,12 @@ function load() {
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
-  cacheDomElements();
-  domElements["btnMakeCrane"].disabled = false;
-  domElements["btnBuyPaper"].disabled = true;
-  domElements["btnHireHighSchooler"].disabled = true;
-  domElements["btnMarketing"].disabled = true;
+  load();
+  applyTheme();
+  getEl("btnMakeCrane").disabled = false;
+  getEl("btnBuyPaper").disabled = true;
+  getEl("btnHireHighSchooler").disabled = true;
+  getEl("btnMarketing").disabled = true;
 
   // Unhide unlocked divs
   [
@@ -186,13 +185,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
     ["foldingColumn", projects.learnToFoldCranesProject],
     ["buisnessColumn", projects.learnToFoldCranesProject]
   ].forEach(i => {
-    domElements[i[0]].hidden = !i[1].flag;
+    getEl(i[0]].hidden = !i[1].flag;
   });
-  domElements["paperBuyerDiv"].hidden = !paperBuyerUnlocked;
+  getEl("paperBuyerDiv").hidden = !paperBuyerUnlocked;
 
-  domElements["paperPrice"].innerHTML = monify(paperPrice);
-  domElements["marketingLevel"].innerHTML = commify(marketingLevel);
-  domElements["paperBuyer"].innerHTML = paperBuyerOn ? "ON" : "OFF";
+  getEl("paperPrice").innerHTML = monify(paperPrice);
+  getEl("marketingLevel").innerHTML = commify(marketingLevel);
+  getEl("paperBuyer").innerHTML = paperBuyerOn ? "ON" : "OFF";
 
   Array.from(document.getElementsByTagName("button")).forEach(button => {
     if (button.id != "closeButton") {
@@ -208,7 +207,7 @@ window.setInterval(function () {
   makeCrane(professionals);
   sellCranes();
 
-  cranePrice = (Math.pow(101, domElements["priceSlider"].value) - 1) / 10 + 0.01;
+  cranePrice = (Math.pow(101, getEl("priceSlider").value) - 1) / 10 + 0.01;
 
   manageProjects();
   manageEvents();
@@ -219,7 +218,7 @@ window.setInterval(function () {
 
 // Slower one, every second.
 window.setInterval(function () {
-  domElements["cranemakerRate"].innerHTML = commify(Math.round(cranes - prevCranes));
+  getEl("cranemakerRate").innerHTML = commify(Math.round(cranes - prevCranes));
   prevCranes = cranes;
 }, 1000);
 
@@ -229,14 +228,14 @@ window.setInterval(function () {
 
   // Fluctuate price.
   paperPrice = Math.floor(Math.sin(tick / 10) * 4) + basePaperPrice;
-  domElements["paperPrice"].innerHTML = monify(paperPrice);
+  getEl("paperPrice").innerHTML = monify(paperPrice);
 
   debt = Math.ceil(debt * (1 + interestRate) * 100) / 100;
 }, 5000);
 
 function sellCranes() {
   var demand = (0.08 / cranePrice) * Math.pow(1.3, marketingLevel - 1);
-  domElements["demand"].innerHTML = commify(Math.floor(demand * 100));
+  getEl("demand").innerHTML = commify(Math.floor(demand * 100));
 
   if (Math.random() * 50 < demand || (cranePrice <= 0.01 && Math.random() > 0.7)) {
     var amount = Math.ceil(demand);
@@ -254,38 +253,38 @@ function sellCranes() {
 
 function updateDom() {
   // Update elements to have correct values
-  domElements["cranes"].innerHTML = commify(Math.round(cranes));
-  domElements["unsoldCranes"].innerHTML = commify(Math.floor(unsoldCranes));
-  domElements["funds"].innerHTML = monify(funds);
-  domElements["marketingPrice"].innerHTML = monify(marketingPrice);
-  domElements["highSchoolers"].innerHTML = commify(highSchoolers);
-  domElements["debt"].innerHTML = monify(debt);
-  domElements["paper"].innerHTML = commify(Math.floor(paper));
-  domElements["interestRate"].innerHTML = interestRate * 100;
-  domElements["highSchoolerCost"].innerHTML = monify(minWage);
-  domElements["professionals"].innerHTML = commify(professionals);
-  domElements["professionalCost"].innerHTML = monify(professionalCost);
-  domElements["wishes"].innerHTML = commify(Math.floor(wishes));
-  domElements["craneCountCrunched"].innerHTML = spellf(Math.round(cranes));
-  domElements["cranePrice"].innerHTML = monify(parseFloat(cranePrice));
+  getEl("cranes").innerHTML = commify(Math.round(cranes));
+  getEl("unsoldCranes").innerHTML = commify(Math.floor(unsoldCranes));
+  getEl("funds").innerHTML = monify(funds);
+  getEl("marketingPrice").innerHTML = monify(marketingPrice);
+  getEl("highSchoolers").innerHTML = commify(highSchoolers);
+  getEl("debt").innerHTML = monify(debt);
+  getEl("paper").innerHTML = commify(Math.floor(paper));
+  getEl("interestRate").innerHTML = interestRate * 100;
+  getEl("highSchoolerCost").innerHTML = monify(minWage);
+  getEl("professionals").innerHTML = commify(professionals);
+  getEl("professionalCost").innerHTML = monify(professionalCost);
+  getEl("wishes").innerHTML = commify(Math.floor(wishes));
+  getEl("craneCountCrunched").innerHTML = spellf(Math.round(cranes));
+  getEl("cranePrice").innerHTML = monify(parseFloat(cranePrice));
 
   var happiness = funds >= 0.1 ? Math.log(funds + wishes) : 0
-  domElements["happinessMeter"].style.width = happiness + "%"
-  domElements["happinessAmount"].innerHTML = happiness.toFixed(2);
+  getEl("happinessMeter").style.width = happiness + "%"
+  getEl("happinessAmount").innerHTML = happiness.toFixed(2);
 
   // Disable buttons which player cannot use
-  domElements["btnMakeCrane"].disabled = paper < 1 || !projects.learnToFoldCranesProject.flag;
-  domElements["btnBuyPaper"].disabled = paperPrice > funds;
-  domElements["btnMarketing"].disabled = marketingPrice > funds;
-  domElements["btnHireHighSchooler"].disabled = funds < minWage;
-  domElements["btnPayBack"].disabled = funds <= 0 || debt <= 0;
-  domElements["btnBorrowMoney"].disabled = debt >= maxDebt;
-  domElements["btnHireProfessional"].disabled = professionalCost > funds;
+  getEl("btnMakeCrane").disabled = paper < 1 || !projects.learnToFoldCranesProject.flag;
+  getEl("btnBuyPaper").disabled = paperPrice > funds;
+  getEl("btnMarketing").disabled = marketingPrice > funds;
+  getEl("btnHireHighSchooler").disabled = funds < minWage;
+  getEl("btnPayBack").disabled = funds <= 0 || debt <= 0;
+  getEl("btnBorrowMoney").disabled = debt >= maxDebt;
+  getEl("btnHireProfessional").disabled = professionalCost > funds;
 
   // Change favicon and title to show notifications
-  var notificationCount = pendingEvents.length + (domElements["eventDiv"].hidden ? 0 : 1);
+  var notificationCount = pendingEvents.length + (getEl("eventDiv").hidden ? 0 : 1);
   document.title = (notificationCount ? "(" + notificationCount + ") " : "") + "Paper Cranes";
-  domElements["icon"].setAttribute("href", notificationCount ? "../favicon_notification.svg" : "../favicon_crane.svg");
+  getEl("icon").setAttribute("href", notificationCount ? "../favicon_notification.svg" : "../favicon_crane.svg");
 }
 
 // Project management functions.
@@ -301,7 +300,7 @@ function displayProjects(project) {
 
   project.element.setAttribute("class", "projectButton");
 
-  domElements["projectsDiv"].appendChild(project.element, domElements["projectsDiv"].firstChild);
+  getEl("projectsDiv").appendChild(project.element, getEl("projectsDiv").firstChild);
 
   var span = document.createElement("span");
   span.style.fontWeight = "bold";
@@ -342,14 +341,14 @@ function manageEvents() {
     }
   }
 
-  if (pendingEvents.length > 0 && domElements["eventDiv"].hidden) {
+  if (pendingEvents.length > 0 && getEl("eventDiv").hidden) {
     displayNextEvent();
   }
 }
 
 function displayNextEvent() {
   event = pendingEvents.pop();
-  domElements["eventTitle"].innerHTML = event.title.toTitleCase();
-  domElements["eventDescription"].innerHTML = event.description;
+  getEl("eventTitle").innerHTML = event.title.toTitleCase();
+  getEl("eventDescription").innerHTML = event.description;
   unhide("eventDiv");
 }
