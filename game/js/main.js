@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     ["foldingColumn", projects.learnToFoldCranesProject],
     ["buisnessColumn", projects.learnToFoldCranesProject]
   ].forEach(i => {
-    getEl(i[0]].hidden = !i[1].flag;
+    getEl(i[0]).hidden = !i[1].flag;
   });
   getEl("paperBuyerDiv").hidden = !paperBuyerUnlocked;
 
