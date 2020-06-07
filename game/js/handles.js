@@ -6,7 +6,7 @@ function increaseMarketing() {
   funds -= marketingPrice;
 
   marketingPrice = Math.round(marketingPrice * 2);
-  getEle("marketingLevel").innerHTML = commify(marketingLevel);
+  getEl("marketingLevel").innerHTML = commify(marketingLevel);
 }
 
 

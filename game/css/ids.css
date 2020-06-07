@@ -52,6 +52,7 @@
 	position: absolute;
 	font-size: 20px;
 	border: none;
+	outline: none;
 	background: none;
 	text-rendering: var(--outline-color);
 	touch-action: manipulation;
