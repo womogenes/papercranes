@@ -15,15 +15,15 @@ function projectBaseEffect(project) {
 function projectPriceTag(project) {
 	var costs = [];
 	if (project.dollarCost) {
-		costs.push("$" + project.dollarCost.toLocaleString());
+		costs.push(`\$${project.dollarCost.toLocaleString()}`);
 	}
 	if (project.wishCost) {
-		costs.push(project.wishCost + " wish" + (project.wishCost > 1 ? "es" : ""));
+		costs.push(`${project.wishCost} wish${project.wishCost != 0 ? "es" : ""}`);
 	}
 	if (project.highSchoolerCost) {
-		costs.push(project.highSchoolerCost + " high schooler" + (project.highSchoolerCost > 1 ? "s" : ""));
+		costs.push(`${project.highSchoolerCost} high schooler${project.highSchoolerCost != 0 ? "s" : ""}`);
 	}
-	return "(" + costs.join(", ") + ")";
+	return `(${costs.join(", ")})`;
 }
 
 function canAffordProject(project) {
@@ -209,5 +209,5 @@ var projects = {
 
 for (var projectId in projects) {
 	var project = projects[projectId];
-	project.id = camelCase(project.title + " project");
+	project.id = camelCase(`${project.title} project`);
 }

@@ -4,6 +4,7 @@ var events = {
     title: "Prestige unlocked",
     description: "Prestige column gets unhidden.",
     trigger: function () {
+      // return true;
       return cranes >= 1000;
     },
     uses: 1,
@@ -43,5 +44,5 @@ var events = {
 
 for (var eventName in events) {
 	var event = events[eventName];
-	event.id = camelCase(event.title + " event");
+	event.id = camelCase(`${event.title} event`);
 }

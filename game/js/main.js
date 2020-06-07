@@ -193,6 +193,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
   getEl("marketingLevel").innerHTML = commify(marketingLevel);
   getEl("paperBuyer").innerHTML = paperBuyerOn ? "ON" : "OFF";
 
+  // Initial messages.
+  if (consoleHistory.length == 0) {
+    displayMessage("Hi");
+  }
+
   Array.from(document.getElementsByTagName("button")).forEach(button => {
     if (button.id != "closeButton") {
       button.addEventListener("click", createRipple);
@@ -283,7 +288,7 @@ function updateDom() {
 
   // Change favicon and title to show notifications
   var notificationCount = pendingEvents.length + (getEl("eventDiv").hidden ? 0 : 1);
-  document.title = (notificationCount ? "(" + notificationCount + ") " : "") + "Paper Cranes";
+  document.title = `${notificationCount ? `(${notificationCount}) ` : ""}Paper Cranes`;
   getEl("icon").setAttribute("href", notificationCount ? "../favicon_notification.svg" : "../favicon_crane.svg");
 }
 
