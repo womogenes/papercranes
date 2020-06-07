@@ -2,7 +2,7 @@
 var cranes = 0;
 var wishes = 0;
 var unsoldCranes = 0;
-var cranePrice = 0.25;
+var cranePriceSliderLoc = 0.1;
 
 var funds = 20;
 var debt = 0;
@@ -41,6 +41,8 @@ function save() {
     funds: funds,
     cranePrice: cranePrice,
     advertisingPrice: advertisingPrice,
+    cranePriceSliderLoc: getEl("priceSlider").value,
+    marketingPrice: marketingPrice,
     paperPrice: paperPrice,
     paperAmount: paperAmount,
     paper: paper,
@@ -105,7 +107,7 @@ function load() {
   cranes = savedGame.cranes;
   wishes = savedGame.wishes;
   unsoldCranes = savedGame.unsoldCranes;
-  cranePrice = savedGame.cranePrice;
+  cranePriceSliderLoc = savedGame.cranePriceSliderLoc;
 
   funds = savedGame.funds;
   debt = savedGame.debt;
@@ -180,13 +182,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
   getEl("paperPrice").innerHTML = monify(paperPrice);
   getEl("advertisingLevel").innerHTML = commify(advertisingLevel);
   getEl("paperBuyer").innerHTML = paperBuyerOn ? "ON" : "OFF";
+  getEl("priceSlider").value = cranePriceSliderLoc;
 
-  // Initial message
+  // Initial message.
   if (consoleHistory.length == 0) {
     displayMessage("Hi");
   }
 
-  // Only have button ripple on mobile
+  // Only have button ripple on mobile.
   if (window.mobileAndTabletCheck()) {
     Array.from(document.getElementsByTagName("button")).forEach(button => {
       if (button.id != "closeButton") {
@@ -194,7 +197,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
       }
     });
   }
-
 });
 
 // Game loop!
