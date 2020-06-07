@@ -3,6 +3,6 @@ test.py
 Pipfile
 Pipfile.lock
 __pycache
-./game/serve.py
+/game/serve.py
 /game/js/inline-console-min.js
 __pycache__
