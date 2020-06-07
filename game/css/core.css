@@ -37,7 +37,6 @@ hr {
 	border-radius: 5px;
 	border: 1px solid var(--outline-color);
 	background: var(--btn-bg-on);
-	outline: none;
 
 	margin: 3px 0;
 	margin-right: 4px;
@@ -69,7 +68,6 @@ button .ripple {
 	background: var(--btn-bg-hover);
 	border: 1px solid var(--btn-outline-hover);
 	cursor: pointer;
-	outline: none;
 }
 
 .button:active {
@@ -82,7 +80,6 @@ button .ripple {
 	opacity: 0.6;
 	border: 1px solid #555;
 	cursor: auto;
-	outline: none;
 }
 
 .projectButton {
@@ -91,7 +88,6 @@ button .ripple {
 	border: 1px solid var(--outline-color);
 	background: var(--btn-bg-on);
 	display: block;
-	outline: none;
 
 	height: 70px;
 	width: 100%;
