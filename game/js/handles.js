@@ -1,12 +1,12 @@
-function increaseMarketing() {
-  if (funds < marketingPrice) {
+function increaseAdvertising() {
+  if (funds < advertisingPrice) {
     return;
   }
-  marketingLevel += 1;
-  funds -= marketingPrice;
+  advertisingLevel += 1;
+  funds -= advertisingPrice;
 
-  marketingPrice = Math.round(marketingPrice * 2);
-  getEl("marketingLevel").innerHTML = commify(marketingLevel);
+  advertisingPrice = Math.round(advertisingPrice * 2);
+  getEl("advertisingLevel").innerHTML = commify(advertisingLevel);
 }
 
 

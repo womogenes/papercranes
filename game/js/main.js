@@ -9,8 +9,8 @@ var debt = 0;
 var maxDebt = 1e3;
 var interestRate = 0.01;
 
-var marketingPrice = 40.0;
-var marketingLevel = 1;
+var advertisingPrice = 40.0;
+var advertisingLevel = 1;
 
 var basePaperPrice = 15;
 var paperPrice = 20;
@@ -40,11 +40,11 @@ function save() {
     unsoldCranes: unsoldCranes,
     funds: funds,
     cranePrice: cranePrice,
-    marketingPrice: marketingPrice,
+    advertisingPrice: advertisingPrice,
     paperPrice: paperPrice,
     paperAmount: paperAmount,
     paper: paper,
-    marketingLevel: marketingLevel,
+    advertisingLevel: advertisingLevel,
     highSchoolers: highSchoolers,
     highSchoolerWage: highSchoolerWage,
     highSchoolerBoost: highSchoolerBoost,
@@ -112,8 +112,8 @@ function load() {
   maxDebt = savedGame.maxDebt;
   interestRate = savedGame.interestRate;
 
-  marketingPrice = savedGame.marketingPrice;
-  marketingLevel = savedGame.marketingLevel;
+  advertisingPrice = savedGame.advertisingPrice;
+  advertisingLevel = savedGame.advertisingLevel;
 
   paperPrice = savedGame.paperPrice;
   paperAmount = savedGame.paperAmount;
@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   getEl("paperBuyerDiv").hidden = !paperBuyerUnlocked;
 
   getEl("paperPrice").innerHTML = monify(paperPrice);
-  getEl("marketingLevel").innerHTML = commify(marketingLevel);
+  getEl("advertisingLevel").innerHTML = commify(advertisingLevel);
   getEl("paperBuyer").innerHTML = paperBuyerOn ? "ON" : "OFF";
 
   // Initial message
@@ -231,7 +231,7 @@ window.setInterval(function () {
 }, 5000);
 
 function sellCranes() {
-  var demand = (0.08 / cranePrice) * Math.pow(1.3, marketingLevel - 1);
+  var demand = (0.08 / cranePrice) * Math.pow(1.3, advertisingLevel - 1);
   getEl("demand").innerHTML = commify(Math.floor(demand * 100));
 
   if (Math.random() * 50 < demand || (cranePrice <= 0.01 && Math.random() > 0.7)) {
@@ -258,7 +258,7 @@ function updateDom() {
   getEl("cranePrice").innerHTML = monify(parseFloat(cranePrice));
 
   getEl("funds").innerHTML = monify(funds);
-  getEl("marketingPrice").innerHTML = monify(marketingPrice);
+  getEl("advertisingPrice").innerHTML = monify(advertisingPrice);
   getEl("debt").innerHTML = monify(debt);
   getEl("interestRate").innerHTML = interestRate * 100;
   getEl("paper").innerHTML = commify(Math.floor(paper));
@@ -275,7 +275,7 @@ function updateDom() {
   // Disable buttons which player cannot use
   getEl("btnMakeCrane").disabled = paper < 1 || !projects.learnToFoldCranesProject.flag;
   getEl("btnBuyPaper").disabled = paperPrice > funds;
-  getEl("btnMarketing").disabled = marketingPrice > funds;
+  getEl("btnAdvertising").disabled = advertisingPrice > funds;
   getEl("btnHireHighSchooler").disabled = funds < highSchoolerWage;
   getEl("btnPayBack").disabled = funds <= 0 || debt <= 0;
   getEl("btnBorrowMoney").disabled = debt >= maxDebt;
