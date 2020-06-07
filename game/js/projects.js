@@ -9,7 +9,7 @@ function projectBaseEffect(project) {
 
 	funds -= project.dollarCost ? project.dollarCost : 0;
 	wishes -= project.wishCost ? project.wishCost : 0;
-	highSchoolers -= project.highSchoolerCost ? project.highSchoolerCost : 0;
+	highSchoolers -= project.highSchoolerWage ? project.highSchoolerWage : 0;
 }
 
 function projectPriceTag(project) {
@@ -20,8 +20,8 @@ function projectPriceTag(project) {
 	if (project.wishCost) {
 		costs.push(`${project.wishCost} wish${project.wishCost != 0 ? "es" : ""}`);
 	}
-	if (project.highSchoolerCost) {
-		costs.push(`${project.highSchoolerCost} high schooler${project.highSchoolerCost != 0 ? "s" : ""}`);
+	if (project.highSchoolerWage) {
+		costs.push(`${project.highSchoolerWage} high schooler${project.highSchoolerWage != 0 ? "s" : ""}`);
 	}
 	return `(${costs.join(", ")})`;
 }
@@ -30,7 +30,7 @@ function canAffordProject(project) {
 	return (
 		(project.dollarCost ? funds >= project.dollarCost : true) &&
 		(project.wishCost ? wishes >= project.wishCost : true) &&
-		(project.highSchoolerCost ? highSchoolers >= project.highSchoolerCost : true)
+		(project.highSchoolerWage ? highSchoolers >= project.highSchoolerWage : true)
 	)
 }
 var projects = {
@@ -110,7 +110,7 @@ var projects = {
 		element: null,
 		effect: function () {
 			highSchoolerBoost *= 2;
-			minWage *= 2;
+			highSchoolerWage *= 2;
 			displayMessage("When they work harder, you gotta pay them more.");
 		}
 	},
@@ -141,14 +141,14 @@ var projects = {
 		flag: false,
 		element: null,
 		effect: function () {
-			minWage = 0;
+			highSchoolerWage = 0;
 		}
 	},
 
 	// Paper projects
 	paperBuyerProject: {
 		title: "Paper Buyer",
-		highSchoolerCost: 100,
+		highSchoolerWage: 100,
 		description: "Auto-purchase paper when it runs out.",
 		trigger: function () {
 			return cranes >= 10000;

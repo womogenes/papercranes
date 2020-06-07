@@ -19,11 +19,11 @@ var paper = 0;
 var paperBuyerOn = false;
 var paperBuyerUnlocked = false;
 
-var minWage = 5;
+var highSchoolerWage = 5;
 var highSchoolers = 0;
 var highSchoolerBoost = 1;
 var professionals = 0;
-var professionalCost = 100;
+var professionalWage = 100;
 
 var prevCranes = cranes;
 var tick = 0;
@@ -46,24 +46,21 @@ function save() {
     paper: paper,
     marketingLevel: marketingLevel,
     highSchoolers: highSchoolers,
-    minWage: minWage,
+    highSchoolerWage: highSchoolerWage,
     highSchoolerBoost: highSchoolerBoost,
     debt: debt,
     maxDebt: maxDebt,
     interestRate: interestRate,
 
     professionals: professionals,
-    professionalCost: professionalCost,
+    professionalWage: professionalWage,
     basePaperPrice: basePaperPrice,
     wishes: wishes,
 
     paperBuyerOn: paperBuyerOn,
   };
 
-  localStorage.setItem(
-    "savedGame",
-    JSON.stringify(savedGame)
-  );
+  localStorage.setItem("savedGame", JSON.stringify(savedGame));
 
   // Deal with project stuff.
   var savedActiveProjects = [];
@@ -106,28 +103,29 @@ function load() {
   }
   var savedGame = JSON.parse(localStorage.getItem("savedGame"));
   cranes = savedGame.cranes;
+  wishes = savedGame.wishes;
   unsoldCranes = savedGame.unsoldCranes;
-  funds = savedGame.funds;
   cranePrice = savedGame.cranePrice;
-  marketingPrice = savedGame.marketingPrice;
-  paperPrice = savedGame.paperPrice;
-  paperAmount = savedGame.paperAmount;
-  paper = savedGame.paper;
-  marketingLevel = savedGame.marketingLevel;
-  highSchoolers = savedGame.highSchoolers;
-  minWage = savedGame.minWage;
-  highSchoolerBoost = savedGame.highSchoolerBoost;
+
+  funds = savedGame.funds;
   debt = savedGame.debt;
   maxDebt = savedGame.maxDebt;
   interestRate = savedGame.interestRate;
 
-  professionals = savedGame.professionals;
-  professionalCost = savedGame.professionalCost;
-  basePaperPrice = savedGame.basePaperPrice;
-  wishes = savedGame.wishes;
-  basePaperPrice = savedGame.basePaperPrice;
+  marketingPrice = savedGame.marketingPrice;
+  marketingLevel = savedGame.marketingLevel;
 
+  paperPrice = savedGame.paperPrice;
+  paperAmount = savedGame.paperAmount;
+  paper = savedGame.paper;
+  basePaperPrice = savedGame.basePaperPrice;
   paperBuyerOn = savedGame.paperBuyerOn;
+
+  highSchoolers = savedGame.highSchoolers;
+  highSchoolerWage = savedGame.highSchoolerWage;
+  highSchoolerBoost = savedGame.highSchoolerBoost;
+  professionals = savedGame.professionals;
+  professionalWage = savedGame.professionalWage;
 
   // Load project information.
   var savedProjectData = JSON.parse(localStorage.getItem("savedProjectData"));
@@ -167,11 +165,6 @@ function load() {
 
 document.addEventListener("DOMContentLoaded", function (event) {
   load();
-  getEl("btnMakeCrane").disabled = false;
-  getEl("btnBuyPaper").disabled = true;
-  getEl("btnHireHighSchooler").disabled = true;
-  getEl("btnMarketing").disabled = true;
-
   // Unhide unlocked divs
   [
     ["bankDiv", projects.bankAccountProject],
@@ -188,16 +181,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
   getEl("marketingLevel").innerHTML = commify(marketingLevel);
   getEl("paperBuyer").innerHTML = paperBuyerOn ? "ON" : "OFF";
 
-  // Initial messages.
+  // Initial message
   if (consoleHistory.length == 0) {
     displayMessage("Hi");
   }
 
-  Array.from(document.getElementsByTagName("button")).forEach(button => {
-    if (button.id != "closeButton") {
-      button.addEventListener("click", createRipple);
-    }
-  });
+  // Only have button ripple on mobile
+  if (window.mobileAndTabletCheck()) {
+    Array.from(document.getElementsByTagName("button")).forEach(button => {
+      if (button.id != "closeButton") {
+        button.addEventListener("click", createRipple);
+      }
+    });
+  }
+
 });
 
 // Game loop!
@@ -254,19 +251,22 @@ function sellCranes() {
 function updateDom() {
   // Update elements to have correct values
   getEl("cranes").innerHTML = commify(Math.round(cranes));
-  getEl("unsoldCranes").innerHTML = commify(Math.floor(unsoldCranes));
-  getEl("funds").innerHTML = monify(funds);
-  getEl("marketingPrice").innerHTML = monify(marketingPrice);
-  getEl("highSchoolers").innerHTML = commify(highSchoolers);
-  getEl("debt").innerHTML = monify(debt);
-  getEl("paper").innerHTML = commify(Math.floor(paper));
-  getEl("interestRate").innerHTML = interestRate * 100;
-  getEl("highSchoolerCost").innerHTML = monify(minWage);
-  getEl("professionals").innerHTML = commify(professionals);
-  getEl("professionalCost").innerHTML = monify(professionalCost);
   getEl("wishes").innerHTML = commify(Math.floor(wishes));
+
+  getEl("unsoldCranes").innerHTML = commify(Math.floor(unsoldCranes));
   getEl("craneCountCrunched").innerHTML = spellf(Math.round(cranes));
   getEl("cranePrice").innerHTML = monify(parseFloat(cranePrice));
+
+  getEl("funds").innerHTML = monify(funds);
+  getEl("marketingPrice").innerHTML = monify(marketingPrice);
+  getEl("debt").innerHTML = monify(debt);
+  getEl("interestRate").innerHTML = interestRate * 100;
+  getEl("paper").innerHTML = commify(Math.floor(paper));
+
+  getEl("highSchoolers").innerHTML = commify(highSchoolers);
+  getEl("highSchoolerWage").innerHTML = monify(highSchoolerWage);
+  getEl("professionals").innerHTML = commify(professionals);
+  getEl("professionalWage").innerHTML = monify(professionalWage);
 
   var happiness = funds >= 0.1 ? Math.log(funds + wishes) : 0
   getEl("happinessMeter").style.width = happiness + "%"
@@ -276,10 +276,10 @@ function updateDom() {
   getEl("btnMakeCrane").disabled = paper < 1 || !projects.learnToFoldCranesProject.flag;
   getEl("btnBuyPaper").disabled = paperPrice > funds;
   getEl("btnMarketing").disabled = marketingPrice > funds;
-  getEl("btnHireHighSchooler").disabled = funds < minWage;
+  getEl("btnHireHighSchooler").disabled = funds < highSchoolerWage;
   getEl("btnPayBack").disabled = funds <= 0 || debt <= 0;
   getEl("btnBorrowMoney").disabled = debt >= maxDebt;
-  getEl("btnHireProfessional").disabled = professionalCost > funds;
+  getEl("btnHireProfessional").disabled = professionalWage > funds;
 
   // Change favicon and title to show notifications
   var notificationCount = pendingEvents.length + (getEl("eventDiv").hidden ? 0 : 1);

@@ -30,18 +30,18 @@ function togglePaperBuyer() {
 function hireHighSchooler() {
   // Hires a highSchooler!
   highSchoolers++;
-  funds -= minWage;
-  minWage = Math.ceil(minWage * 1.01 * 100) / 100;
+  funds -= highSchoolerWage;
+  highSchoolerWage = Math.ceil(highSchoolerWage * 1.01 * 100) / 100;
 }
 
 function hireProfessional() {
   // Hires one Professional
-  if (funds < professionalCost) {
+  if (funds < professionalWage) {
     return;
   }
   professionals++;
-  funds -= professionalCost;
-  professionalCost = Math.ceil(professionalCost * 1.1 * 100) / 100;
+  funds -= professionalWage;
+  professionalWage = Math.ceil(professionalWage * 1.1 * 100) / 100;
 }
 
 function makeCrane(n) {
