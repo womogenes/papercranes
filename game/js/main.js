@@ -99,6 +99,7 @@ function save() {
 }
 
 function load() {
+  loadTheme();
   if (localStorage.getItem("savedGame") == null) {
     save();
     return;
@@ -159,12 +160,9 @@ function load() {
 
 
   consoleHistory = JSON.parse(localStorage.getItem("consoleHistory"));
-
   consoleHistory.forEach(message => {
     displayMessage(message, true);
   });
-
-  loadTheme();
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {

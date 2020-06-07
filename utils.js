@@ -238,9 +238,7 @@ function unhide(id) {
 function createRipple(e) {
   var circle = document.createElement("div");
   this.appendChild(circle);
-
   var d = Math.max(this.clientWidth, this.clientHeight);
-
   circle.style.width = circle.style.height = d + "px";
 
   var rect = this.getBoundingClientRect();
@@ -301,10 +299,8 @@ var themes = {
 
 function loadTheme() {
   theme = JSON.parse(localStorage.getItem("theme"));
-  if (theme == null) {
-    theme = (
-      window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
-    ) ? "Dark" : "Light";
+  if (!theme) {
+    theme = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "Dark" : "Light";
     localStorage.setItem("theme", JSON.stringify(theme));
   }
   applyTheme();
