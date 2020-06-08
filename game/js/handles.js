@@ -69,7 +69,7 @@ function closeEvent() {
   if (pendingEvents.length) {
     displayNextEvent()
   } else {
-    getEl("eventDescription").innerHTML = "";
+    resetEventDiv();
     getEl("eventDiv").hidden = true;
   }
 }

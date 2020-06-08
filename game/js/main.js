@@ -341,8 +341,21 @@ function manageEvents() {
 }
 
 function displayNextEvent() {
+  resetEventDiv();
   event = pendingEvents.pop();
   getEl("eventTitle").innerHTML = event.title.toTitleCase();
   getEl("eventDescription").innerHTML = event.description;
+  if (event.noCloseButton) {
+    getEl("closeButton").hidden = true;
+  }
+  if (event.buttons) {
+    for (let buttonText in event.buttons) {
+      let newButton = document.createElement("button");
+      newButton.className = "button";
+      newButton.innerHTML = buttonText.toTitleCase();
+      newButton.onclick = event.buttons[buttonText];
+      getEl("eventButtons").appendChild(newButton);
+    }
+  }
   unhide("eventDiv");
 }

@@ -346,6 +346,13 @@ function generateIds(type, object) {
   }
 }
 
+function resetEventDiv() {
+  getEl("eventTitle").innerHTML = "";
+  getEl("eventDescription").innerHTML = "";
+  getEl("eventButtons").innerHTML = "";
+  getEl("closeButton").hidden = false;
+}
+
 function trigger(thing) {
   if (typeof thing.trigger == "function") {
       return thing.trigger();

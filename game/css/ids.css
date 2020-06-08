@@ -46,6 +46,11 @@
 	max-height: 300px;
 }
 
+#eventButtons {
+	bottom: 20px;
+	position: absolute;
+}
+
 #closeButton {
 	right: 10px;
 	top: 15px;

@@ -61,9 +61,17 @@ var events = {
     notifyPlayer: true,
     effect: function () {
       this.trigger = false;
-      // localStorage.clear();
-      // location.reload();
-    }
+    },
+    buttons: {
+      "restart": function () {
+        localStorage.clear();
+        location.reload();
+      },
+      "cancel": function () {
+        closeEvent();
+      }
+    },
+    noCloseButton: true
   }
 }
 
