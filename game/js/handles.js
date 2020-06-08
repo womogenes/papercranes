@@ -1,9 +1,9 @@
 function increaseAdvertising() {
-  if (funds < advertisingPrice) {
+  if (money < advertisingPrice) {
     return;
   }
   advertisingLevel += 1;
-  funds -= advertisingPrice;
+  money -= advertisingPrice;
 
   advertisingPrice = Math.round(advertisingPrice * 2);
   getEl("advertisingLevel").innerHTML = commify(advertisingLevel);
@@ -12,14 +12,14 @@ function increaseAdvertising() {
 
 function borrowMoney(x) {
   x = Math.min(x, maxDebt - debt);
-  funds += x;
+  money += x;
   debt += x;
 }
 
 function payBack(x) {
-  var max = Math.min(debt, funds);
+  var max = Math.min(debt, money);
   debt -= max;
-  funds -= max;
+  money -= max;
 }
 
 function togglePaperBuyer() {
@@ -30,17 +30,17 @@ function togglePaperBuyer() {
 function hireHighSchooler() {
   // Hires a highSchooler!
   highSchoolers++;
-  funds -= highSchoolerWage;
+  money -= highSchoolerWage;
   highSchoolerWage = Math.ceil(highSchoolerWage * 1.01 * 100) / 100;
 }
 
 function hireProfessional() {
   // Hires one Professional
-  if (funds < professionalWage) {
+  if (money < professionalWage) {
     return;
   }
   professionals++;
-  funds -= professionalWage;
+  money -= professionalWage;
   professionalWage = Math.ceil(professionalWage * 1.1 * 100) / 100;
 }
 
@@ -57,12 +57,12 @@ function makeCrane(n) {
 }
 
 function buyPaper(n) {
-  if (funds < paperPrice * n) {
+  if (money < paperPrice * n) {
     return;
   }
   // Buys paper! May be upgraded.
   paper += Math.round(paperAmount * n);
-  funds -= Math.round(paperPrice * n);
+  money -= Math.round(paperPrice * n);
 }
 
 function closeEvent() {

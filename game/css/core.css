@@ -115,8 +115,10 @@ button .ripple {
 }
 
 .pulsate {
+	animation: pulsate 0.7s ease-out;
 	-webkit-animation: pulsate 0.7s ease-out;
 	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
 	opacity: 0.0;
 }
 

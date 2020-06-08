@@ -7,42 +7,44 @@ function projectBaseEffect(project) {
 	var index = activeProjects.indexOf(project);
 	activeProjects.splice(index, 1);
 
-	if (project.dollarCost) {
-		funds -= project.dollarCost;
+	if (project.costs.money) {
+		money -= project.costs.money;
 	}
-	if (project.wishCost) {
-		wishes -= project.wishCost;
+	if (project.costs.wishes) {
+		wishes -= project.costs.wishes;
 	}
-	if (project.highSchoolerCost) {
-		highSchoolers -= project.highSchoolerCost;
+	if (project.costs.highSchoolers) {
+		highSchoolers -= project.costs.highSchoolers;
 	}
 }
 
 function projectPriceTag(project) {
 	var costs = [];
-	if (project.dollarCost) {
-		costs.push(`\$${project.dollarCost.toLocaleString()}`);
+	if (project.costs.money) {
+		costs.push(`\$${project.costs.money.toLocaleString()}`);
 	}
-	if (project.wishCost) {
-		costs.push(`${project.wishCost} wish${project.wishCost != 0 ? "es" : ""}`);
+	if (project.costs.wishes) {
+		costs.push(`${project.costs.wishes} wish${project.costs.wishes != 0 ? "es" : ""}`);
 	}
 	if (project.highSchoolerCost) {
-		costs.push(`${project.highSchoolerCost} high schooler${project.highSchoolerCost != 0 ? "s" : ""}`);
+		costs.push(`${project.costs.highSchoolers} high schooler${project.costs.highSchoolers != 0 ? "s" : ""}`);
 	}
 	return `(${costs.join(", ")})`;
 }
 
 function canAffordProject(project) {
 	return (
-		(project.dollarCost ? funds >= project.dollarCost : true) &&
-		(project.wishCost ? wishes >= project.wishCost : true) &&
-		(project.highSchoolerCost ? highSchoolers >= project.highSchoolerCost : true)
+		(project.costs.money ? money >= project.costs.money : true) &&
+		(project.costs.wishes ? wishes >= project.costs.wishes : true) &&
+		(project.costs.highSchoolers ? highSchoolers >= project.costs.highSchoolers : true)
 	)
 }
 var projects = {
 	learnToFoldCranesProject: {
 		title: "Learn to Fold Cranes",
-		dollarCost: 1,
+		costs: {
+			money: 1
+		},
 		description: "Learn how to fold origami cranes",
 		trigger: function () {
 			return true;
@@ -61,10 +63,12 @@ var projects = {
 	},
 	bankAccountProject: {
 		title: "Bank Account",
-		dollarCost: 10,
+		costs: {
+			money: 10
+		},
 		description: "Be able to borrow money!",
 		trigger: function () {
-			return funds >= 5 && projects.learnToFoldCranesProject.flag;
+			return money >= 5 && projects.learnToFoldCranesProject.flag;
 		},
 		uses: 1,
 		flag: false,
@@ -82,9 +86,11 @@ var projects = {
 	fasterHighSchoolersProject: {
 		title: "Faster High Schoolers",
 		description: "High Schoolers work 25% faster.",
-		dollarCost: 10,
+		costs: {
+			money: 10
+		},
 		trigger: function () {
-			return funds >= 5 && highSchoolers > 0;
+			return money >= 5 && highSchoolers > 0;
 		},
 		uses: 1,
 		flag: false,
@@ -96,11 +102,13 @@ var projects = {
 	},
 	evenFasterHighSchoolersProject: {
 		title: "Even Faster High Schoolers",
-		dollarCost: 20,
+		costs: {
+			money: 20
+		},
 		description: "Double interest rate, and high schoolers are 50% faster.",
 		purchaseMessage: "Speedy high schoolers!",
 		trigger: function () {
-			return funds >= 10 && projects.fasterHighSchoolersProject.flag;
+			return money >= 10 && projects.fasterHighSchoolersProject.flag;
 		},
 		uses: 1,
 		flag: false,
@@ -112,10 +120,12 @@ var projects = {
 	},
 	highlySkilledStudentsProject: {
 		title: "Highly Skilled Students",
-		dollarCost: 40,
+		costs: {
+			money: 40
+		},
 		description: "Double hire price, high schoolers work twice as fast.",
 		trigger: function () {
-			return funds >= 20 && projects.evenFasterHighSchoolersProject.flag;
+			return money >= 20 && projects.evenFasterHighSchoolersProject.flag;
 		},
 		uses: 1,
 		flag: false,
@@ -128,7 +138,9 @@ var projects = {
 	},
 	professionalsProject: {
 		title: "Professionals",
-		wishCost: 10,
+		costs: {
+			wishes: 10
+		},
 		description: "Use 10 wishes to start hiring Professionals, the best folders.",
 		trigger: function () {
 			return highSchoolers >= 100;
@@ -146,7 +158,9 @@ var projects = {
 	},
 	lowerWagesProject: {
 		title: "Lower Wages",
-		dollarCost: 10000000,
+		costs: {
+			money: 10000000
+		},
 		description: "Lobby the lawmakers to reduce minimum wage.",
 		trigger: function () {
 			return highSchoolers > 250;
@@ -162,7 +176,9 @@ var projects = {
 	// Paper projects
 	paperBuyerProject: {
 		title: "Paper Buyer",
-		highSchoolerCost: 100,
+		costs: {
+			highSchoolers: 100
+		},
 		description: "Auto-purchase paper when it runs out.",
 		trigger: function () {
 			return cranes >= 10000;
@@ -179,7 +195,9 @@ var projects = {
 	},
 	paperEfficiencyProject: {
 		title: "Paper Efficiency",
-		dollarCost: 200,
+		costs: {
+			money: 200
+		},
 		description: "Gain 50% more paper from each purchase.",
 		trigger: function () {
 			return cranes >= 5000;
@@ -194,7 +212,9 @@ var projects = {
 	},
 	thinnerSheetsProject: {
 		title: "Thinner Sheets",
-		dollarCost: 400,
+		costs: {
+			money: 400
+		},
 		description: "Gain 75% more paper from each purchase.",
 		trigger: function () {
 			return projects.paperEfficiencyProject.flag;
@@ -209,7 +229,9 @@ var projects = {
 	},
 	bigPaperProject: {
 		title: "Big Paper",
-		dollarCost: 800,
+		costs: {
+			money: 800
+		},
 		description: "1000% more paper from each purchase.",
 		trigger: function () {
 			return projects.thinnerSheetsProject.flag;

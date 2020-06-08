@@ -4,7 +4,7 @@ var wishes = 0;
 var unsoldCranes = 0;
 var cranePriceSliderLoc = 0.1;
 
-var funds = 20;
+var money = 20;
 var debt = 0;
 var maxDebt = 1e3;
 var interestRate = 0.01;
@@ -13,7 +13,7 @@ var advertisingPrice = 40.0;
 var advertisingLevel = 1;
 
 var basePaperPrice = 15;
-var paperPrice = 20;
+var paperPrice = 15;
 var paperAmount = 1000;
 var paper = 0;
 var paperBuyerOn = false;
@@ -37,7 +37,7 @@ function save() {
   var savedGame = {
     cranes: cranes,
     unsoldCranes: unsoldCranes,
-    funds: funds,
+    money: money,
     cranePrice: cranePrice,
     advertisingPrice: advertisingPrice,
     cranePriceSliderLoc: getEl("priceSlider").value,
@@ -107,7 +107,7 @@ function load() {
   unsoldCranes = savedGame.unsoldCranes;
   cranePriceSliderLoc = savedGame.cranePriceSliderLoc;
 
-  funds = savedGame.funds;
+  money = savedGame.money;
   debt = savedGame.debt;
   maxDebt = savedGame.maxDebt;
   interestRate = savedGame.interestRate;
@@ -238,7 +238,7 @@ function sellCranes() {
       amount = 0;
     }
     unsoldCranes -= amount;
-    funds += cranePrice * amount;
+    money += cranePrice * amount;
   }
 }
 
@@ -251,7 +251,7 @@ function updateDom() {
   getEl("craneCountCrunched").innerHTML = spellf(Math.round(cranes));
   getEl("cranePrice").innerHTML = monify(parseFloat(cranePrice));
 
-  getEl("funds").innerHTML = monify(funds);
+  getEl("money").innerHTML = monify(money);
   getEl("advertisingPrice").innerHTML = monify(advertisingPrice);
   getEl("debt").innerHTML = monify(debt);
   getEl("interestRate").innerHTML = interestRate * 100;
@@ -262,18 +262,18 @@ function updateDom() {
   getEl("professionals").innerHTML = commify(professionals);
   getEl("professionalWage").innerHTML = monify(professionalWage);
 
-  var happiness = funds >= 0.1 ? Math.log(funds + wishes) : 0
+  var happiness = money >= 0.1 ? Math.log(money + wishes) : 0
   getEl("happinessMeter").style.width = happiness + "%"
   getEl("happinessAmount").innerHTML = happiness.toFixed(2);
 
   // Disable buttons which player cannot use
   getEl("btnMakeCrane").disabled = paper < 1 || !projects.learnToFoldCranesProject.flag;
-  getEl("btnBuyPaper").disabled = paperPrice > funds;
-  getEl("btnAdvertising").disabled = advertisingPrice > funds;
-  getEl("btnHireHighSchooler").disabled = funds < highSchoolerWage;
-  getEl("btnPayBack").disabled = funds <= 0 || debt <= 0;
+  getEl("btnBuyPaper").disabled = paperPrice > money;
+  getEl("btnAdvertising").disabled = advertisingPrice > money;
+  getEl("btnHireHighSchooler").disabled = money < highSchoolerWage;
+  getEl("btnPayBack").disabled = money <= 0 || debt <= 0;
   getEl("btnBorrowMoney").disabled = debt >= maxDebt;
-  getEl("btnHireProfessional").disabled = professionalWage > funds;
+  getEl("btnHireProfessional").disabled = professionalWage > money;
 
   // Change favicon and title to show notifications
   var notificationCount = pendingEvents.length + (getEl("eventDiv").hidden ? 0 : 1);
