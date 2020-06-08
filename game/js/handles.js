@@ -76,7 +76,7 @@ function closeEvent() {
 
 function changeTheme() {
   theme = theme == "Light" ? "Dark" : "Light"
-  applyTheme();
+  applyTheme(theme);
 }
 
 function restart() {

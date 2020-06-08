@@ -46,6 +46,9 @@ var projects = {
 		element: null,
 		effect: function () {
 			displayMessage('Buy some paper using the "Paper" button, then click "Fold Crane" to start making cranes.');
+			this.loadEffect();
+		},
+		loadEffect: function () {
 			unhide("buisnessColumn");
 			unhide("foldingColumn");
 		}
@@ -61,8 +64,11 @@ var projects = {
 		flag: false,
 		element: null,
 		effect: function () {
-			unhide("bankDiv");
 			displayMessage("Bank account opened. You can now borrow money $20 at a time.");
+			this.loadEffect();
+		},
+		loadEffect: function () {
+			unhide("bankDiv");
 		}
 	},
 
@@ -125,9 +131,11 @@ var projects = {
 		flag: false,
 		element: null,
 		effect: function () {
-			professionalUnlocked = true;
-			getEl("professionalDiv").hidden = false;
 			displayMessage("100x more powerful than a high schooler.");
+			this.loadEffect();
+		},
+		loadEffect: function () {
+			unhide("professionalDiv");
 		}
 	},
 	lowerWagesProject: {
@@ -157,7 +165,10 @@ var projects = {
 		flag: false,
 		element: null,
 		effect: function () {
-			getEl("paperBuyerDiv").hidden = false;
+			this.loadEffect();
+		},
+		loadEffect: function () {
+			unhide("paperBuyerDiv");
 		}
 	},
 	paperEfficiencyProject: {
@@ -207,7 +218,4 @@ var projects = {
 	},
 }
 
-for (var projectId in projects) {
-	var project = projects[projectId];
-	project.id = camelCase(`${project.title} project`);
-}
+generateIds("project", projects);

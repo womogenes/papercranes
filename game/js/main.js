@@ -17,7 +17,6 @@ var paperPrice = 20;
 var paperAmount = 1000;
 var paper = 0;
 var paperBuyerOn = false;
-var paperBuyerUnlocked = false;
 
 var highSchoolerWage = 5;
 var highSchoolers = 0;
@@ -42,7 +41,7 @@ function save() {
     cranePrice: cranePrice,
     advertisingPrice: advertisingPrice,
     cranePriceSliderLoc: getEl("priceSlider").value,
-    marketingPrice: marketingPrice,
+    advertisingPrice: advertisingPrice,
     paperPrice: paperPrice,
     paperAmount: paperAmount,
     paper: paper,
@@ -129,17 +128,15 @@ function load() {
   professionals = savedGame.professionals;
   professionalWage = savedGame.professionalWage;
 
-  // Load project information.
+  // Load projects and events
   var savedProjectData = JSON.parse(localStorage.getItem("savedProjectData"));
   var savedActiveProjects = JSON.parse(localStorage.getItem("savedActiveProjects"));
-
   for (var projectId in savedProjectData) {
     var savedProject = savedProjectData[projectId];
     var project = projects[projectId];
     project.uses = savedProject.uses;
     project.flag = savedProject.flag;
   }
-
   for (var projectId in projects) {
     var project = projects[projectId];
     if (savedActiveProjects.indexOf(project.id) >= 0) {
@@ -148,15 +145,22 @@ function load() {
     }
   }
 
-  // Load event information.
   var savedEventData = JSON.parse(localStorage.getItem("savedEventData"));
-
   for (var eventId in savedEventData) {
     var savedEvent = savedEventData[eventId];
     var event = events[eventId];
     event.uses = savedEvent.uses;
     event.flag = savedEvent.flag;
   }
+
+  [projects, events].forEach(object => {
+    for (var id in object) {
+      var thing = object[id];
+      if (thing.flag && thing.hasOwnProperty("loadEffect")) {
+        thing.loadEffect();
+      }
+    }
+  });
 
 
   consoleHistory = JSON.parse(localStorage.getItem("consoleHistory"));
@@ -167,17 +171,6 @@ function load() {
 
 document.addEventListener("DOMContentLoaded", function (event) {
   load();
-  // Unhide unlocked divs
-  [
-    ["bankDiv", projects.bankAccountProject],
-    ["professionalDiv", projects.professionalsProject],
-    ["prestigeColumn", events.prestigeUnlockedEvent],
-    ["foldingColumn", projects.learnToFoldCranesProject],
-    ["buisnessColumn", projects.learnToFoldCranesProject]
-  ].forEach(i => {
-    getEl(i[0]).hidden = !i[1].flag;
-  });
-  getEl("paperBuyerDiv").hidden = !paperBuyerUnlocked;
 
   getEl("paperPrice").innerHTML = monify(paperPrice);
   getEl("advertisingLevel").innerHTML = commify(advertisingLevel);
@@ -338,8 +331,8 @@ function manageEvents() {
       if (event.notifyPlayer) {
         pendingEvents.push(event);
       }
+      eventBaseEffect(event)
       event.effect();
-      event.uses--;
     }
   }
 

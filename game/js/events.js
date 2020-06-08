@@ -1,4 +1,10 @@
 // Custom event stuff!
+
+function eventBaseEffect(event) {
+  event.flag = true;
+  event.uses -= 1;
+}
+
 var events = {
   prestigeUnlockedEvent: {
     title: "Prestige unlocked",
@@ -11,6 +17,10 @@ var events = {
     flag: false,
     notifyPlayer: false,
     effect: function () {
+      this.loadEffect();
+    },
+    loadEffect: function () {
+      console.log("loading things");
       unhide("prestigeColumn");
     }
   },
@@ -42,7 +52,4 @@ var events = {
   }
 }
 
-for (var eventName in events) {
-	var event = events[eventName];
-	event.id = camelCase(`${event.title} event`);
-}
+generateIds("event", events);

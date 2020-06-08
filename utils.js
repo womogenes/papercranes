@@ -206,8 +206,13 @@ function camelCase(str) {
 }
 
 // Display stuff
+var domElements = {}
+
 function getEl(id) {
-  return document.getElementById(id);
+  if (!domElements[id]) {
+    domElements[id] = document.getElementById(id);
+  }
+  return domElements[id];
 }
 
 function fade(element, targetOpacity) {
@@ -303,10 +308,10 @@ function loadTheme() {
     theme = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "Dark" : "Light";
     localStorage.setItem("theme", JSON.stringify(theme));
   }
-  applyTheme();
+  applyTheme(theme);
 }
 
-function applyTheme() {
+function applyTheme(theme) {
   // Sets theme colors.
   for (var i in themes[theme]) {
     document.documentElement.style.setProperty(i, themes[theme][i]);
@@ -320,3 +325,16 @@ window.mobileAndTabletCheck = function () {
   })(navigator.userAgent || navigator.vendor || window.opera);
   return check;
 };
+
+
+function generateIds(type, object) {
+  for (var i in object) {
+    i = object[i];
+    i.id = camelCase(`${i.title} ${type}`);
+    if (object[i.id] != i) {
+      console.log(`${type} ${i.id} with title ${i.title} is not in ${type}s. ${type} titles must match the ${type}'s name in ${type}s`);
+      // to prevent errors
+      object[i.id] = i;
+    }
+  }
+}
