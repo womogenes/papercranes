@@ -41,7 +41,6 @@ function save() {
     cranePrice: cranePrice,
     advertisingPrice: advertisingPrice,
     cranePriceSliderLoc: getEl("priceSlider").value,
-    advertisingPrice: advertisingPrice,
     paperPrice: paperPrice,
     paperAmount: paperAmount,
     paper: paper,
@@ -130,14 +129,14 @@ function load() {
 
   // Load projects and events
   var savedProjectData = JSON.parse(localStorage.getItem("savedProjectData"));
-  var savedActiveProjects = JSON.parse(localStorage.getItem("savedActiveProjects"));
-  for (var projectId in savedProjectData) {
-    var savedProject = savedProjectData[projectId];
-    var project = projects[projectId];
+  for (var savedProjectId in savedProjectData) {
+    var savedProject = savedProjectData[savedProjectId];
+    var project = projects[savedProjectId];
     project.uses = savedProject.uses;
     project.flag = savedProject.flag;
   }
   for (var projectId in projects) {
+    var savedActiveProjects = JSON.parse(localStorage.getItem("savedActiveProjects"));
     var project = projects[projectId];
     if (savedActiveProjects.indexOf(project.id) >= 0) {
       displayProjects(project);

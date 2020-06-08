@@ -7,9 +7,15 @@ function projectBaseEffect(project) {
 	var index = activeProjects.indexOf(project);
 	activeProjects.splice(index, 1);
 
-	funds -= project.dollarCost ? project.dollarCost : 0;
-	wishes -= project.wishCost ? project.wishCost : 0;
-	highSchoolers -= project.highSchoolerWage ? project.highSchoolerWage : 0;
+	if (project.dollarCost) {
+		funds -= project.dollarCost;
+	}
+	if (project.wishCost) {
+		wishes -= project.wishCost;
+	}
+	if (project.highSchoolerCost) {
+		highSchoolers -= project.highSchoolerCost;
+	}
 }
 
 function projectPriceTag(project) {
@@ -20,8 +26,8 @@ function projectPriceTag(project) {
 	if (project.wishCost) {
 		costs.push(`${project.wishCost} wish${project.wishCost != 0 ? "es" : ""}`);
 	}
-	if (project.highSchoolerWage) {
-		costs.push(`${project.highSchoolerWage} high schooler${project.highSchoolerWage != 0 ? "s" : ""}`);
+	if (project.highSchoolerCost) {
+		costs.push(`${project.highSchoolerCost} high schooler${project.highSchoolerCost != 0 ? "s" : ""}`);
 	}
 	return `(${costs.join(", ")})`;
 }
@@ -30,7 +36,7 @@ function canAffordProject(project) {
 	return (
 		(project.dollarCost ? funds >= project.dollarCost : true) &&
 		(project.wishCost ? wishes >= project.wishCost : true) &&
-		(project.highSchoolerWage ? highSchoolers >= project.highSchoolerWage : true)
+		(project.highSchoolerCost ? highSchoolers >= project.highSchoolerCost : true)
 	)
 }
 var projects = {
@@ -156,7 +162,7 @@ var projects = {
 	// Paper projects
 	paperBuyerProject: {
 		title: "Paper Buyer",
-		highSchoolerWage: 100,
+		highSchoolerCost: 100,
 		description: "Auto-purchase paper when it runs out.",
 		trigger: function () {
 			return cranes >= 10000;
