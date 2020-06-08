@@ -7,7 +7,7 @@ function eventBaseEffect(event) {
 
 var events = {
   prestigeUnlockedEvent: {
-    title: "Prestige unlocked",
+    title: "prestige unlocked",
     description: "Prestige column gets unhidden.",
     trigger: function () {
       // return true;
@@ -25,7 +25,7 @@ var events = {
     }
   },
   autoBuyPaperEvent: {
-    title: "Auto buy paper",
+    title: "auto buy paper",
     description: "Automatically buy paper when it runs out.",
     trigger: function () {
       return paper <= 0 && paperBuyerOn;
@@ -38,7 +38,7 @@ var events = {
     }
   },
   capDebtEvent: {
-    title: "Cap debt",
+    title: "cap debt",
     description: "Automatically cap debt at maxDebt.",
     trigger: function () {
       return debt > maxDebt;

@@ -41,7 +41,7 @@ function canAffordProject(project) {
 }
 var projects = {
 	learnToFoldCranesProject: {
-		title: "Learn to Fold Cranes",
+		title: "learn to fold cranes",
 		costs: {
 			money: 1
 		},
@@ -62,7 +62,7 @@ var projects = {
 		}
 	},
 	bankAccountProject: {
-		title: "Bank Account",
+		title: "bank account",
 		costs: {
 			money: 10
 		},
@@ -85,7 +85,7 @@ var projects = {
 	// Manufacturing projects
 	fasterHighSchoolersProject: {
 		fasterPercent: 25,
-		title: "Faster High Schoolers",
+		title: "faster high schoolers",
 		description: function () {
 			return `High Schoolers work ${this.fasterPercent}% faster.`;
 		},
@@ -105,7 +105,7 @@ var projects = {
 	},
 	evenFasterHighSchoolersProject: {
 		fasterPercent: 50,
-		title: "Even Faster High Schoolers",
+		title: "even faster high schoolers",
 		costs: {
 			money: 20
 		},
@@ -126,7 +126,7 @@ var projects = {
 	},
 	highlySkilledStudentsProject: {
 		fasterAmount: 2,
-		title: "Highly Skilled Students",
+		title: "highly skilled students",
 		costs: {
 			money: 40
 		},
@@ -146,7 +146,7 @@ var projects = {
 		}
 	},
 	professionalsProject: {
-		title: "Professionals",
+		title: "professionals",
 		costs: {
 			wishes: 10
 		},
@@ -168,7 +168,7 @@ var projects = {
 		}
 	},
 	lowerWagesProject: {
-		title: "Lower Wages",
+		title: "lower wages",
 		costs: {
 			money: 10000000
 		},
@@ -186,7 +186,7 @@ var projects = {
 
 	// Paper projects
 	paperBuyerProject: {
-		title: "Paper Buyer",
+		title: "paper buyer",
 		costs: {
 			highSchoolers: 100
 		},
@@ -206,7 +206,7 @@ var projects = {
 	},
 	paperEfficiencyProject: {
 		increasePercent: 50,
-		title: "Paper Efficiency",
+		title: "paper efficiency",
 		costs: {
 			money: 200
 		},
@@ -226,7 +226,7 @@ var projects = {
 	},
 	thinnerSheetsProject: {
 		increasePercent: 75,
-		title: "Thinner Sheets",
+		title: "thinner sheets",
 		costs: {
 			money: 400
 		},
@@ -246,7 +246,7 @@ var projects = {
 	},
 	bigPaperProject: {
 		increasePercent: 1000,
-		title: "Big Paper",
+		title: "big paper",
 		costs: {
 			money: 800
 		},
