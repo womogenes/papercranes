@@ -84,8 +84,11 @@ var projects = {
 
 	// Manufacturing projects
 	fasterHighSchoolersProject: {
+		fasterPercent: 25,
 		title: "Faster High Schoolers",
-		description: "High Schoolers work 25% faster.",
+		description: function () {
+			return `High Schoolers work ${this.fasterPercent}% faster.`;
+		},
 		costs: {
 			money: 10
 		},
@@ -96,16 +99,19 @@ var projects = {
 		flag: false,
 		element: null,
 		effect: function () {
-			highSchoolerBoost *= 1.25;
-			displayMessage("High schoolers now work 25% as fast.");
+			highSchoolerBoost *= percentToMultiplier(this.fasterPercent);
+			displayMessage(`High schoolers now work ${this.fasterPercent}% as fast.`);
 		}
 	},
 	evenFasterHighSchoolersProject: {
+		fasterPercent: 50,
 		title: "Even Faster High Schoolers",
 		costs: {
 			money: 20
 		},
-		description: "Double interest rate, and high schoolers are 50% faster.",
+		description: function () {
+			return `Double interest rate, and high schoolers are ${this.fasterPercent}% faster.`;
+		},
 		purchaseMessage: "Speedy high schoolers!",
 		trigger: function () {
 			return money >= 10 && projects.fasterHighSchoolersProject.flag;
@@ -114,16 +120,19 @@ var projects = {
 		flag: false,
 		element: null,
 		effect: function () {
-			highSchoolerBoost *= 2;
+			highSchoolerBoost *= percentToMultiplier(this.fasterPercent);
 			interestRate *= 2;
 		}
 	},
 	highlySkilledStudentsProject: {
+		fasterAmount: 2,
 		title: "Highly Skilled Students",
 		costs: {
 			money: 40
 		},
-		description: "Double hire price, high schoolers work twice as fast.",
+		description: function () {
+			return `Double hire price, high schoolers work ${this.fasterAmount} times as fast.`;
+		},
 		trigger: function () {
 			return money >= 20 && projects.evenFasterHighSchoolersProject.flag;
 		},
@@ -131,7 +140,7 @@ var projects = {
 		flag: false,
 		element: null,
 		effect: function () {
-			highSchoolerBoost *= 2;
+			highSchoolerBoost *= fasterAmount;
 			highSchoolerWage *= 2;
 			displayMessage("When they work harder, you gotta pay them more.");
 		}
@@ -141,7 +150,9 @@ var projects = {
 		costs: {
 			wishes: 10
 		},
-		description: "Use 10 wishes to start hiring Professionals, the best folders.",
+		description: function () {
+			return `Use ${this.costs.wishes} wishes to start hiring Professionals, the best folders.`;
+		},
 		trigger: function () {
 			return highSchoolers >= 100;
 		},
@@ -194,11 +205,14 @@ var projects = {
 		}
 	},
 	paperEfficiencyProject: {
+		increasePercent: 50,
 		title: "Paper Efficiency",
 		costs: {
 			money: 200
 		},
-		description: "Gain 50% more paper from each purchase.",
+		description: function () {
+			return `Gain ${this.increasePercent}% more paper from each purchase.`;
+		},
 		trigger: function () {
 			return cranes >= 5000;
 		},
@@ -206,16 +220,19 @@ var projects = {
 		flag: false,
 		element: null,
 		effect: function () {
-			paperAmount = Math.round(paperAmount * 1.5);
-			basePaperPrice = Math.round(basePaperPrice * 1.5);
+			paperAmount = Math.round(paperAmount * percentToMultiplier(this.increasePercent));
+			basePaperPrice = Math.round(basePaperPrice * percentToMultiplier(this.increasePercent));
 		}
 	},
 	thinnerSheetsProject: {
+		increasePercent: 75,
 		title: "Thinner Sheets",
 		costs: {
 			money: 400
 		},
-		description: "Gain 75% more paper from each purchase.",
+		description: function () {
+			return `Gain ${this.increasePercent}% more paper from each purchase.`;
+		},
 		trigger: function () {
 			return projects.paperEfficiencyProject.flag;
 		},
@@ -223,16 +240,19 @@ var projects = {
 		flag: false,
 		element: null,
 		effect: function () {
-			paperAmount = Math.round(paperAmount * 1.75);
+			paperAmount = Math.round(paperAmount * percentToMultiplier(this.increasePercent));
 			basePaperPrice = Math.round(basePaperPrice * 1.5);
 		}
 	},
 	bigPaperProject: {
+		increasePercent: 1000,
 		title: "Big Paper",
 		costs: {
 			money: 800
 		},
-		description: "1000% more paper from each purchase.",
+		description: function () {
+			return `${this.increasePercent}% more paper from each purchase.`;
+		},
 		trigger: function () {
 			return projects.thinnerSheetsProject.flag;
 		},
@@ -240,7 +260,7 @@ var projects = {
 		flag: false,
 		element: null,
 		effect: function () {
-			paperAmount = Math.round(paperAmount * 10);
+			paperAmount = Math.round(paperAmount * percentToMultiplier(this.increasePercent));
 			basePaperPrice = Math.round(basePaperPrice * 1.5);
 		}
 	},

@@ -66,15 +66,15 @@ function save() {
   var savedActiveProjects = [];
   var savedProjectData = {};
 
-  for (var projectId in projects) {
-    var project = projects[projectId];
+  for (let projectId in projects) {
+    let project = projects[projectId];
     savedProjectData[project.id] = {
       flag: project.flag,
       uses: project.uses
     }
   }
 
-  for (var i = 0; i < activeProjects.length; i++) {
+  for (let i = 0; i < activeProjects.length; i++) {
     savedActiveProjects[i] = activeProjects[i].id;
   }
   localStorage.setItem("savedProjectData", JSON.stringify(savedProjectData));
@@ -82,8 +82,8 @@ function save() {
 
   // Deal with events.
   var savedEventData = {};
-  for (var eventId in events) {
-    var event = events[eventId];
+  for (let eventId in events) {
+    let event = events[eventId];
     savedEventData[event.id] = {
       flag: event.flag,
       uses: event.uses
@@ -129,15 +129,15 @@ function load() {
 
   // Load projects and events
   var savedProjectData = JSON.parse(localStorage.getItem("savedProjectData"));
-  for (var savedProjectId in savedProjectData) {
-    var savedProject = savedProjectData[savedProjectId];
-    var project = projects[savedProjectId];
+  for (let savedProjectId in savedProjectData) {
+    let savedProject = savedProjectData[savedProjectId];
+    let project = projects[savedProjectId];
     project.uses = savedProject.uses;
     project.flag = savedProject.flag;
   }
-  for (var projectId in projects) {
-    var savedActiveProjects = JSON.parse(localStorage.getItem("savedActiveProjects"));
-    var project = projects[projectId];
+  for (let projectId in projects) {
+    let savedActiveProjects = JSON.parse(localStorage.getItem("savedActiveProjects"));
+    let project = projects[projectId];
     if (savedActiveProjects.indexOf(project.id) >= 0) {
       displayProjects(project);
       activeProjects.push(project);
@@ -145,16 +145,16 @@ function load() {
   }
 
   var savedEventData = JSON.parse(localStorage.getItem("savedEventData"));
-  for (var eventId in savedEventData) {
-    var savedEvent = savedEventData[eventId];
-    var event = events[eventId];
+  for (let eventId in savedEventData) {
+    let savedEvent = savedEventData[eventId];
+    let event = events[eventId];
     event.uses = savedEvent.uses;
     event.flag = savedEvent.flag;
   }
 
   [projects, events].forEach(object => {
-    for (var id in object) {
-      var thing = object[id];
+    for (let id in object) {
+      let thing = object[id];
       if (thing.flag && thing.hasOwnProperty("loadEffect")) {
         thing.loadEffect();
       }
@@ -301,7 +301,7 @@ function displayProjects(project) {
   project.element.appendChild(span);
 
   span.appendChild(document.createTextNode(project.title.toTitleCase()));
-  project.element.appendChild(document.createTextNode(" " + projectPriceTag(project)));
+  project.element.appendChild(document.createTextNode(` ${projectPriceTag(project)}`));
   project.element.appendChild(document.createElement("div"));
   project.element.appendChild(document.createTextNode(project.description));
 
@@ -309,8 +309,8 @@ function displayProjects(project) {
 }
 
 function manageProjects() {
-  for (var projectId in projects) {
-    var project = projects[projectId];
+  for (let projectId in projects) {
+    let project = projects[projectId];
     if (project.trigger() && project.uses > 0) {
       displayProjects(project);
       project.uses--;
@@ -324,8 +324,8 @@ function manageProjects() {
 }
 
 function manageEvents() {
-  for (var eventId in events) {
-    var event = events[eventId];
+  for (let eventId in events) {
+    let event = events[eventId];
     if (event.trigger() && event.uses != 0) {
       if (event.notifyPlayer) {
         pendingEvents.push(event);

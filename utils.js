@@ -107,7 +107,7 @@ function spellf(userInput) {
     var result = "",
       unitLookup = 0,
       strLength = stringEquivalent.length;
-    for (var k = strLength; k > 0; k = k - 3) {
+    for (let k = strLength; k > 0; k = k - 3) {
       if (k - 3 <= 0) {
         var subStr = stringEquivalent.substring(k, k - 3);
         var pronounce = pronounceNum(subStr);
@@ -313,7 +313,7 @@ function loadTheme() {
 
 function applyTheme(theme) {
   // Sets theme colors.
-  for (var i in themes[theme]) {
+  for (let i in themes[theme]) {
     document.documentElement.style.setProperty(i, themes[theme][i]);
   }
 }
@@ -328,13 +328,24 @@ window.mobileAndTabletCheck = function () {
 
 
 function generateIds(type, object) {
-  for (var i in object) {
+  for (let i in object) {
     i = object[i];
+
+    // Create and check ids
     i.id = camelCase(`${i.title} ${type}`);
     if (object[i.id] != i) {
       console.log(`${type} ${i.id} with title ${i.title} is not in ${type}s. ${type} titles must match the ${type}'s name in ${type}s`);
       // to prevent errors
       object[i.id] = i;
     }
+
+    // Create descriptions
+    if(typeof i.description == "function") {
+      i.description = i.description();
+    }
   }
+}
+
+function percentToMultiplier(percent) {
+  return 1 + (percent / 100)
 }
