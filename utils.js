@@ -326,7 +326,7 @@ window.mobileAndTabletCheck = function () {
   return check;
 };
 
-
+// project and event stuff
 function generateIds(type, object) {
   for (let i in object) {
     i = object[i];
@@ -344,6 +344,13 @@ function generateIds(type, object) {
       i.description = i.description();
     }
   }
+}
+
+function trigger(thing) {
+  if (typeof thing.trigger == "function") {
+      return thing.trigger();
+  }
+  return thing.trigger;
 }
 
 function percentToMultiplier(percent) {

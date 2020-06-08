@@ -311,7 +311,7 @@ function displayProjects(project) {
 function manageProjects() {
   for (let projectId in projects) {
     let project = projects[projectId];
-    if (project.trigger() && project.uses > 0) {
+    if (trigger(project) && project.uses > 0) {
       displayProjects(project);
       project.uses--;
       activeProjects.push(project);
@@ -326,7 +326,7 @@ function manageProjects() {
 function manageEvents() {
   for (let eventId in events) {
     let event = events[eventId];
-    if (event.trigger() && event.uses != 0) {
+    if (trigger(event) && event.uses != 0) {
       if (event.notifyPlayer) {
         pendingEvents.push(event);
       }

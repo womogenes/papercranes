@@ -80,10 +80,5 @@ function changeTheme() {
 }
 
 function restart() {
-  if (confirm(
-      "Are you sure you want to restart? \nThis will clear all your progress. "
-    )) {
-    localStorage.clear();
-    location.reload();
-  }
+  events.restartEvent.trigger = true;
 }

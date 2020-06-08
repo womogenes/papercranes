@@ -49,6 +49,21 @@ var events = {
     effect: function () {
       debt = maxDebt;
     }
+  },
+  restartEvent: {
+    title: "restart",
+    description: "Are you sure you want to restart? \nThis will clear all your progress.",
+    trigger: function () {
+      return false;
+    },
+    uses: -1,
+    flag: false,
+    notifyPlayer: true,
+    effect: function () {
+      this.trigger = false;
+      // localStorage.clear();
+      // location.reload();
+    }
   }
 }
 
