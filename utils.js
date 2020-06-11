@@ -257,7 +257,6 @@ function createRipple(e) {
 }
 
 function displayMessage(msg, dontSave) {
-  console.log(msg);
   if (!dontSave) {
     consoleHistory.push(msg);
   }
@@ -285,6 +284,7 @@ var themes = {
     "--btn-bg-active": "#cccccc",
     "--btn-outline-hover": "#222222",
     "--btn-outline-active": "#222222",
+    "--btn-outline-disabled": "#555555",
   },
   "Dark": {
     "--bg-color": "#181818",
@@ -299,6 +299,7 @@ var themes = {
     "--btn-bg-active": "#1e1e1e",
     "--btn-outline-hover": "#cccccc",
     "--btn-outline-active": "#aaaaaa",
+    "--btn-outline-disabled": "#555555",
   }
 }
 
@@ -327,12 +328,16 @@ window.mobileAndTabletCheck = function () {
 };
 
 // project and event stuff
+function titleToId(title, type) {
+  return camelCase(`${title} ${type}`);
+}
+
 function generateIds(type, object) {
   for (let i in object) {
     i = object[i];
 
     // Create and check ids
-    i.id = camelCase(`${i.title} ${type}`);
+    i.id = titleToId(i.title, type);
     if (object[i.id] != i) {
       console.log(`${type} ${i.id} with title ${i.title} is not in ${type}s. ${type} titles must match the ${type}'s name in ${type}s`);
       // to prevent errors
@@ -340,7 +345,7 @@ function generateIds(type, object) {
     }
 
     // Create descriptions
-    if(typeof i.description == "function") {
+    if (typeof i.description == "function") {
       i.description = i.description();
     }
   }
@@ -350,12 +355,12 @@ function resetEventDiv() {
   getEl("eventTitle").innerHTML = "";
   getEl("eventDescription").innerHTML = "";
   getEl("eventButtons").innerHTML = "";
-  getEl("closeButton").hidden = false;
+  getEl("eventCloseButton").hidden = false;
 }
 
 function trigger(thing) {
   if (typeof thing.trigger == "function") {
-      return thing.trigger();
+    return thing.trigger();
   }
   return thing.trigger;
 }

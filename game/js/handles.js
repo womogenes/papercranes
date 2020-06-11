@@ -67,7 +67,7 @@ function buyPaper(n) {
 
 function closeEvent() {
   if (pendingEvents.length) {
-    displayNextEvent()
+    displayEvent();
   } else {
     resetEventDiv();
     getEl("eventDiv").hidden = true;
@@ -80,5 +80,5 @@ function changeTheme() {
 }
 
 function restart() {
-  events.restartEvent.trigger = true;
+  displayEvent(otherThings.restartEvent);
 }

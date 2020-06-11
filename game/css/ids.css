@@ -51,7 +51,7 @@
 	position: absolute;
 }
 
-#closeButton {
+#eventCloseButton {
 	right: 10px;
 	top: 15px;
 	position: absolute;
@@ -63,7 +63,7 @@
 	touch-action: manipulation;
 }
 
-#closeButton:hover {
+#eventCloseButton:hover {
 	text-rendering: var(--btn-outline-hover);
 	text-decoration: underline;
 	cursor: pointer;
@@ -161,7 +161,7 @@
 		width: 100%;
 	}
 
-	#closeButton {
+	#eventCloseButton {
 		right: 0px;
 	}
 }

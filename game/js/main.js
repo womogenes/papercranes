@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   // Only have button ripple on mobile.
   if (window.mobileAndTabletCheck()) {
     Array.from(document.getElementsByTagName("button")).forEach(button => {
-      if (button.id != "closeButton") {
+      if (button.id != "eventCloseButton") {
         button.addEventListener("click", createRipple);
       }
     });
@@ -328,7 +328,7 @@ function manageEvents() {
     let event = events[eventId];
     if (trigger(event) && event.uses != 0) {
       if (event.notifyPlayer) {
-        pendingEvents.push(event);
+        pendingEvents.push(event.id);
       }
       eventBaseEffect(event)
       event.effect();
@@ -336,17 +336,27 @@ function manageEvents() {
   }
 
   if (pendingEvents.length > 0 && getEl("eventDiv").hidden) {
-    displayNextEvent();
+    displayEvent();
   }
 }
 
-function displayNextEvent() {
+function displayEvent(event) {
+  // If event is not passed, displayed next event
+  // If event is passed, moves the currently displayed event back to pendingEvents
+  // and replaces it with event
+  if (event) {
+    if (!getEl("eventDiv").hidden) {
+      pendingEvents.push(titleToId(getEl("eventTitle").innerHTML, "event"));
+    }
+  } else {
+    let id = pendingEvents.pop();
+    event = events.hasOwnProperty(id) ? events[id] : otherThings[id];
+  }
   resetEventDiv();
-  event = pendingEvents.pop();
   getEl("eventTitle").innerHTML = event.title.toTitleCase();
   getEl("eventDescription").innerHTML = event.description;
   if (event.noCloseButton) {
-    getEl("closeButton").hidden = true;
+    getEl("eventCloseButton").hidden = true;
   }
   if (event.buttons) {
     for (let buttonText in event.buttons) {

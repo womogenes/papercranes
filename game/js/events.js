@@ -20,7 +20,6 @@ var events = {
       this.loadEffect();
     },
     loadEffect: function () {
-      console.log("loading things");
       unhide("prestigeColumn");
     }
   },
@@ -49,19 +48,16 @@ var events = {
     effect: function () {
       debt = maxDebt;
     }
-  },
+  }
+}
+
+// for things that use the eventDiv but are not events
+var otherThings = {
   restartEvent: {
     title: "restart",
     description: "Are you sure you want to restart? \nThis will clear all your progress.",
-    trigger: function () {
-      return false;
-    },
-    uses: -1,
-    flag: false,
     notifyPlayer: true,
-    effect: function () {
-      this.trigger = false;
-    },
+    effect: function () {},
     buttons: {
       "restart": function () {
         localStorage.clear();
@@ -76,3 +72,4 @@ var events = {
 }
 
 generateIds("event", events);
+generateIds("event", otherThings);

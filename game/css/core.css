@@ -22,7 +22,7 @@ div {
 
 div.scroll {
 	overflow: auto;
-	border: 1px solid #000;
+	border: 1px solid var(--outline-color);
 }
 
 hr {
@@ -78,7 +78,7 @@ button .ripple {
 
 .button:disabled {
 	opacity: 0.6;
-	border: 1px solid #555;
+	border: 1px solid var(--btn-outline-disabled);
 	cursor: auto;
 }
 
@@ -110,7 +110,7 @@ button .ripple {
 
 .projectButton:disabled {
 	opacity: 0.6;
-	border: 1px solid #555;
+	border: 1px solid var(--btn-outline-disabled);
 	cursor: auto;
 }
 
@@ -130,8 +130,8 @@ button .ripple {
 .toolTip .toolTipText {
 	visibility: hidden;
 	width: 160px;
-	background-color: #c8c8c8;
-	color: #000;
+	background-color: var(--fill-color);
+	color: var(--outline-color);
 	text-align: center;
 	padding: 5px 0;
 	border-radius: 10px;
