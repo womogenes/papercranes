@@ -80,5 +80,8 @@ function changeTheme() {
 }
 
 function restart() {
-  displayEvent(otherThings.restartEvent);
+  if (otherThings.restartEvent.uses) {
+    otherThings.restartEvent.uses -= 1;
+    displayEvent(otherThings.restartEvent);
+  }
 }

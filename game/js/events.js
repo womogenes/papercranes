@@ -57,13 +57,14 @@ var otherThings = {
     title: "restart",
     description: "Are you sure you want to restart? \nThis will clear all your progress.",
     notifyPlayer: true,
-    effect: function () {},
+    uses: 1,
     buttons: {
       "restart": function () {
         localStorage.clear();
         location.reload();
       },
       "cancel": function () {
+        this.uses += 1;
         closeEvent();
       }
     },

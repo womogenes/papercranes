@@ -367,5 +367,8 @@ function displayEvent(event) {
       getEl("eventButtons").appendChild(newButton);
     }
   }
-  unhide("eventDiv");
+  if (getEl("eventDiv").hidden) {
+    unhide("eventDiv");
+  }
+
 }
