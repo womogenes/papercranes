@@ -81,7 +81,7 @@ function save() {
   localStorage.setItem("savedActiveProjects", JSON.stringify(savedActiveProjects));
 
   // Deal with events.
-  var savedEventData = {};
+  let savedEventData = {};
   for (let eventId in events) {
     let event = events[eventId];
     savedEventData[event.id] = {

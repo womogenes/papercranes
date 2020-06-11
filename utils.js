@@ -55,7 +55,7 @@ function spellf(userInput) {
   var numToWorkOn;
 
   if (userInput < 0) {
-    console.log("Error, value less than 0");
+    console.error("Error, value less than 0");
     return userInput.toString();
   }
 
@@ -339,7 +339,7 @@ function generateIdsAndDescriptions(type, object) {
     // Create and check ids
     i.id = titleToId(i.title, type);
     if (object[i.id] != i) {
-      console.log(`${type} ${i.id} with title ${i.title} is not in ${type}s. ${type} titles must match the ${type}'s name in ${type}s`);
+      console.error(`${type} ${i.id} with title ${i.title} is not in ${type}s. ${type} titles must match the ${type}'s name in ${type}s`);
       // to prevent errors
       object[i.id] = i;
     }

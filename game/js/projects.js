@@ -120,7 +120,7 @@ var projects = {
 		flag: false,
 		element: null,
 		effect: function () {
-			highSchoolerBoost *= fasterAmount;
+			highSchoolerBoost *= this.fasterAmount;
 			highSchoolerWage *= 2;
 			displayMessage("When they work harder, you gotta pay them more.");
 		}
