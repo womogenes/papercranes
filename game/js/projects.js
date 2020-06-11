@@ -61,26 +61,6 @@ var projects = {
 			unhide("foldingColumn");
 		}
 	},
-	bankAccountProject: {
-		title: "bank account",
-		costs: {
-			money: 10
-		},
-		description: "Be able to borrow money!",
-		trigger: function () {
-			return money >= 5 && projects.learnToFoldCranesProject.flag;
-		},
-		uses: 1,
-		flag: false,
-		element: null,
-		effect: function () {
-			displayMessage("Bank account opened. You can now borrow money $20 at a time.");
-			this.loadEffect();
-		},
-		loadEffect: function () {
-			unhide("bankDiv");
-		}
-	},
 
 	// Manufacturing projects
 	fasterHighSchoolersProject: {
@@ -184,6 +164,47 @@ var projects = {
 		}
 	},
 
+	// Buisness projects
+	bankAccountProject: {
+		title: "bank account",
+		costs: {
+			money: 10
+		},
+		description: "Be able to borrow money!",
+		trigger: function () {
+			return money >= 5 && projects.learnToFoldCranesProject.flag;
+		},
+		uses: 1,
+		flag: false,
+		element: null,
+		effect: function () {
+			displayMessage("Bank account opened. You can now borrow money $20 at a time.");
+			this.loadEffect();
+		},
+		loadEffect: function () {
+			unhide("bankDiv");
+		}
+	},
+	unlockAdvertisingProject: {
+		title: "unlock advertising",
+		costs: {
+			money: 100
+		},
+		description: "Buy advertising to increase demand for cranes",
+		trigger: function () {
+			return money >= 20 && cranes >= 50;
+		},
+		uses: 1,
+		flag: false,
+		element: null,
+		effect: function () {
+			this.loadEffect();
+		},
+		loadEffect: function () {
+			unhide("advertisingDiv");
+		}
+	},
+
 	// Paper projects
 	paperBuyerProject: {
 		title: "paper buyer",
@@ -266,4 +287,4 @@ var projects = {
 	},
 }
 
-generateIds("project", projects);
+generateIdsAndDescriptions("project", projects);

@@ -72,5 +72,5 @@ var otherThings = {
   }
 }
 
-generateIds("event", events);
-generateIds("event", otherThings);
+generateIdsAndDescriptions("event", events);
+generateIdsAndDescriptions("event", otherThings);

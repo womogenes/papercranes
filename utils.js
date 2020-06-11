@@ -332,7 +332,7 @@ function titleToId(title, type) {
   return camelCase(`${title} ${type}`);
 }
 
-function generateIds(type, object) {
+function generateIdsAndDescriptions(type, object) {
   for (let i in object) {
     i = object[i];
 
