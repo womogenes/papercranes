@@ -156,7 +156,7 @@ var projects = {
 		},
 		description: "Be able to borrow money!",
 		trigger: function () {
-			return money >= 5;
+			return money >= 5 && cranes >= 20;
 		},
 		uses: 1,
 		flag: false,

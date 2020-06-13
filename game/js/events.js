@@ -6,9 +6,22 @@ function eventBaseEffect(event) {
 }
 
 var events = {
+  projectsUnlockedEvent: {
+    trigger: function () {
+      return cranes >= 15 && events.buyingPaperUnlockedEvent.flag;
+    },
+    uses: 1,
+    flag: false,
+    notifyPlayer: false,
+    effect: function () {
+      this.loadEffect();
+    },
+    loadEffect: function () {
+      unhide("projectsColumn");
+    }
+  },
   prestigeUnlockedEvent: {
     trigger: function () {
-      // return true;
       return cranes >= 1000;
     },
     uses: 1,

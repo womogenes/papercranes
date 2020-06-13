@@ -88,7 +88,6 @@ function restart() {
 
 function learnToFoldCranes() {
   learnedToFoldCranes = true;
-  unhide("projectsColumn");
   unhide("foldingColumn");
   getEl("learnColumn").hidden = true;
 }
