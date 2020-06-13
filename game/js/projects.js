@@ -172,9 +172,9 @@ var projects = {
 		costs: {
 			money: 10
 		},
-		description: "Get statistics and adjust the price of cranes",
+		description: "Sell your cranes",
 		trigger: function () {
-			return money >= 5 && cranes >= 20;
+			return money >= 5 && events.buyingPaperUnlockedEvent.flag;
 		},
 		uses: 1,
 		flag: false,

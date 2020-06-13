@@ -5,7 +5,7 @@ var unsoldCranes = 0;
 var cranePriceSliderLoc = 0.1;
 var learnedToFoldCranes;
 
-var money = 20;
+var money = 40;
 var debt = 0;
 var maxDebt = 1e3;
 var interestRate = 0.01;
@@ -201,7 +201,11 @@ window.setInterval(function () {
   // Make cranes before selling them.
   makeCrane((highSchoolers * highSchoolerBoost) / 500);
   makeCrane(professionals);
-  sellCranes();
+  if (projects.buisnessManagementProject.flag) {
+    console.log("selling");
+    sellCranes();
+  }
+
 
   cranePrice = (Math.pow(101, getEl("priceSlider").value) - 1) / 10 + 0.01;
 
