@@ -32,6 +32,10 @@ hr {
 	background-color: var(--outline-color);
 }
 
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}
+
 .button {
 	font-size: 13px;
 	border-radius: 5px;
@@ -46,6 +50,22 @@ hr {
 
 	overflow: hidden;
 	position: relative;
+}
+.button:hover {
+	background: var(--btn-bg-hover);
+	border: 1px solid var(--btn-outline-hover);
+	cursor: pointer;
+}
+
+.button:active {
+	background: var(--btn-bg-active);
+	border: 1px solid var(--btn-outline-active);
+}
+
+.button:disabled {
+	opacity: 0.6;
+	border: 1px solid var(--btn-outline-disabled);
+	cursor: auto;
 }
 
 button .ripple {
@@ -64,23 +84,6 @@ button .ripple {
 	}
 }
 
-.button:hover {
-	background: var(--btn-bg-hover);
-	border: 1px solid var(--btn-outline-hover);
-	cursor: pointer;
-}
-
-.button:active {
-	background: var(--btn-bg-active);
-	border: 1px solid var(--btn-outline-active);
-	outline: none;
-}
-
-.button:disabled {
-	opacity: 0.6;
-	border: 1px solid var(--btn-outline-disabled);
-	cursor: auto;
-}
 
 .projectButton {
 	font-size: 13px;
