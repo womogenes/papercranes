@@ -73,34 +73,8 @@
 	margin-top: 30px;
 }
 
-#prestigeColumn {
-	float: left;
-	width: 275px;
-	margin-right: 15px;
-	margin-bottom: 10px;
-	overflow-wrap: break-word;
-}
-
-#buisnessColumn {
-	float: left;
-	width: 275px;
-	margin-right: 15px;
-	margin-bottom: 10px;
-	overflow-wrap: break-word;
-}
-
-#foldingColumn {
-	float: left;
-	width: 275px;
-	margin-right: 15px;
-	margin-bottom: 10px;
-	overflow-wrap: break-word;
-}
-
 #projectsColumn {
 	float: right;
-	width: 275px;
-	margin-right: 15px;
 	margin-bottom: 50px;
 }
 
@@ -144,13 +118,6 @@
 
 	#consoleMsg {
 		font-size: 15px;
-	}
-
-	#prestigeColumn,
-	#buisnessColumn,
-	#foldingColumn,
-	#projectsColumn {
-		width: 100%;
 	}
 
 	#happinessDiv {

@@ -53,10 +53,16 @@
 
 	</div>
 
-	<div id="prestigeColumn" hidden>
+	<div id="learnColumn" class="column">
+		<h4>test</h4>
+		<hr>
+		<button class="button" onclick="learnToFoldCranes()">Learn to fold cranes</button>
+	</div>
+
+	<div id="prestigeColumn" class="column" hidden>
 
 		<div id="wishDiv">
-			<strong>Prestige</strong>
+			<h4>Prestige</h4>
 			<hr>
 
 			<div class="toolTip">
@@ -71,10 +77,10 @@
 
 	</div>
 
-	<div id="buisnessColumn" hidden>
+	<div id="buisnessColumn" class="column" hidden>
 
 		<div id="businessDiv">
-			<strong>Business</strong>
+			<h4>Business</h4>
 			<hr>
 			<p>Unsold Inventory: </p><span id="unsoldCranes">0</span><br>
 
@@ -95,7 +101,7 @@
 		<br>
 
 		<div id="bankDiv" hidden>
-			<strong>Bank</strong>
+			<h4>Bank</h4>
 			<hr>
 			<p>Debt: $</p><span id="debt">0</span><br>
 			<p>Interest Rate: </p><span id="interestRate">1</span>%<br>
@@ -106,10 +112,10 @@
 
 	</div>
 
-	<div id="foldingColumn" hidden>
+	<div id="foldingColumn" class="column" hidden>
 
 		<div id="manufacturingDiv">
-			<strong>Manufacturing</strong>
+			<h4>Manufacturing</h4>
 			<hr>
 
 			<button class="button" id="btnMakeCrane" onClick="makeCrane(1)">
@@ -119,23 +125,23 @@
 
 			<p>Cranes per Second: </p><span id="cranemakerRate">0</span>
 			<br>
-
 			<br>
+			<div id="paperDiv" hidden>
+				<div id="paperBuyerDiv" hidden>
+					<button class="button" id="btnPaperBuyer" onclick="togglePaperBuyer()">PaperBuyer</button>
+					<span id="paperBuyer">OFF</span><br>
+				</div>
 
-			<div id="paperBuyerDiv" hidden>
-				<button class="button" id="btnPaperBuyer" onclick="togglePaperBuyer()">PaperBuyer</button>
-				<span id="paperBuyer">OFF</span><br>
+				<button class="button" id="btnBuyPaper" onclick="buyPaper(1)">Paper</button>
+				<span id="paper">1,000</span> sq. m <br>
+				<p>Cost: $</p><span id="paperPrice">5</span><br>
+				<br>
 			</div>
-
-			<button class="button" id="btnBuyPaper" onclick="buyPaper(1)">Paper</button>
-			<span id="paper">1,000</span> sq. m <br>
-			<p>Cost: $</p><span id="paperPrice">5</span><br>
-			<br>
 
 		</div>
 
-		<div id="workerDiv">
-			<strong>Workers</strong>
+		<div id="workerDiv" hidden>
+			<h4>Workers</h4>
 			<hr>
 
 			<div id="highSchoolerDiv">
@@ -159,8 +165,8 @@
 
 	</div>
 
-	<div id="projectsColumn">
-		<strong>Projects</strong><br>
+	<div id="projectsColumn" class="column" hidden>
+		<h4>Projects</h4>
 		<hr>
 		<div id="projectsDiv">
 		</div>

@@ -40,32 +40,26 @@ function canAffordProject(project) {
 	)
 }
 var projects = {
-	learnToFoldCranesProject: {
-		title: "learn to fold cranes",
+	// Worker projects
+	unlockWorkersProject: {
+		description: "Be able to hire workers to fold for you.",
 		costs: {
-			money: 1
+			money: 10
 		},
-		description: "Learn how to fold origami cranes",
 		trigger: function () {
-			return true;
+			return money >= 5 && cranes >= 20;
 		},
 		uses: 1,
 		flag: false,
-		element: null,
 		effect: function () {
-			displayMessage('Buy some paper using the "Paper" button, then click "Fold Crane" to start making cranes.');
 			this.loadEffect();
 		},
 		loadEffect: function () {
-			unhide("buisnessColumn");
-			unhide("foldingColumn");
+			unhide("workerDiv");
 		}
 	},
-
-	// Manufacturing projects
 	fasterHighSchoolersProject: {
 		fasterPercent: 25,
-		title: "faster high schoolers",
 		description: function () {
 			return `High Schoolers work ${this.fasterPercent}% faster.`;
 		},
@@ -77,7 +71,6 @@ var projects = {
 		},
 		uses: 1,
 		flag: false,
-		element: null,
 		effect: function () {
 			highSchoolerBoost *= percentToMultiplier(this.fasterPercent);
 			displayMessage(`High schoolers now work ${this.fasterPercent}% as fast.`);
@@ -85,7 +78,6 @@ var projects = {
 	},
 	evenFasterHighSchoolersProject: {
 		fasterPercent: 50,
-		title: "even faster high schoolers",
 		costs: {
 			money: 20
 		},
@@ -98,7 +90,6 @@ var projects = {
 		},
 		uses: 1,
 		flag: false,
-		element: null,
 		effect: function () {
 			highSchoolerBoost *= percentToMultiplier(this.fasterPercent);
 			interestRate *= 2;
@@ -106,7 +97,6 @@ var projects = {
 	},
 	highlySkilledStudentsProject: {
 		fasterAmount: 2,
-		title: "highly skilled students",
 		costs: {
 			money: 40
 		},
@@ -118,7 +108,6 @@ var projects = {
 		},
 		uses: 1,
 		flag: false,
-		element: null,
 		effect: function () {
 			highSchoolerBoost *= this.fasterAmount;
 			highSchoolerWage *= 2;
@@ -126,7 +115,6 @@ var projects = {
 		}
 	},
 	professionalsProject: {
-		title: "professionals",
 		costs: {
 			wishes: 10
 		},
@@ -138,7 +126,6 @@ var projects = {
 		},
 		uses: 1,
 		flag: false,
-		element: null,
 		effect: function () {
 			displayMessage("100x more powerful than a high schooler.");
 			this.loadEffect();
@@ -148,7 +135,6 @@ var projects = {
 		}
 	},
 	lowerWagesProject: {
-		title: "lower wages",
 		costs: {
 			money: 10000000
 		},
@@ -158,7 +144,6 @@ var projects = {
 		},
 		uses: 1,
 		flag: false,
-		element: null,
 		effect: function () {
 			highSchoolerWage = 0;
 		}
@@ -166,17 +151,15 @@ var projects = {
 
 	// Buisness projects
 	bankAccountProject: {
-		title: "bank account",
 		costs: {
 			money: 10
 		},
 		description: "Be able to borrow money!",
 		trigger: function () {
-			return money >= 5 && projects.learnToFoldCranesProject.flag;
+			return money >= 5;
 		},
 		uses: 1,
 		flag: false,
-		element: null,
 		effect: function () {
 			displayMessage("Bank account opened. You can now borrow money $20 at a time.");
 			this.loadEffect();
@@ -185,8 +168,24 @@ var projects = {
 			unhide("bankDiv");
 		}
 	},
+	buisnessManagementProject: {
+		costs: {
+			money: 10
+		},
+		description: "Get statistics and adjust the price of cranes",
+		trigger: function () {
+			return money >= 5 && cranes >= 20;
+		},
+		uses: 1,
+		flag: false,
+		effect: function () {
+			this.loadEffect();
+		},
+		loadEffect: function () {
+			unhide("buisnessColumn");
+		}
+	},
 	unlockAdvertisingProject: {
-		title: "unlock advertising",
 		costs: {
 			money: 100
 		},
@@ -196,7 +195,6 @@ var projects = {
 		},
 		uses: 1,
 		flag: false,
-		element: null,
 		effect: function () {
 			this.loadEffect();
 		},
@@ -207,7 +205,6 @@ var projects = {
 
 	// Paper projects
 	paperBuyerProject: {
-		title: "paper buyer",
 		costs: {
 			highSchoolers: 100
 		},
@@ -217,7 +214,6 @@ var projects = {
 		},
 		uses: 1,
 		flag: false,
-		element: null,
 		effect: function () {
 			this.loadEffect();
 		},
@@ -227,7 +223,6 @@ var projects = {
 	},
 	paperEfficiencyProject: {
 		increasePercent: 50,
-		title: "paper efficiency",
 		costs: {
 			money: 200
 		},
@@ -239,7 +234,6 @@ var projects = {
 		},
 		uses: 1,
 		flag: false,
-		element: null,
 		effect: function () {
 			paperAmount = Math.round(paperAmount * percentToMultiplier(this.increasePercent));
 			basePaperPrice = Math.round(basePaperPrice * percentToMultiplier(this.increasePercent));
@@ -247,7 +241,6 @@ var projects = {
 	},
 	thinnerSheetsProject: {
 		increasePercent: 75,
-		title: "thinner sheets",
 		costs: {
 			money: 400
 		},
@@ -259,7 +252,6 @@ var projects = {
 		},
 		uses: 1,
 		flag: false,
-		element: null,
 		effect: function () {
 			paperAmount = Math.round(paperAmount * percentToMultiplier(this.increasePercent));
 			basePaperPrice = Math.round(basePaperPrice * 1.5);
@@ -267,7 +259,6 @@ var projects = {
 	},
 	bigPaperProject: {
 		increasePercent: 1000,
-		title: "big paper",
 		costs: {
 			money: 800
 		},
@@ -279,7 +270,6 @@ var projects = {
 		},
 		uses: 1,
 		flag: false,
-		element: null,
 		effect: function () {
 			paperAmount = Math.round(paperAmount * percentToMultiplier(this.increasePercent));
 			basePaperPrice = Math.round(basePaperPrice * 1.5);
@@ -287,4 +277,4 @@ var projects = {
 	},
 }
 
-generateIdsAndDescriptions("project", projects);
+generateInformation("project", projects);

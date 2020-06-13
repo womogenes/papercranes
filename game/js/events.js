@@ -7,8 +7,6 @@ function eventBaseEffect(event) {
 
 var events = {
   prestigeUnlockedEvent: {
-    title: "prestige unlocked",
-    description: "Prestige column gets unhidden.",
     trigger: function () {
       // return true;
       return cranes >= 1000;
@@ -23,9 +21,21 @@ var events = {
       unhide("prestigeColumn");
     }
   },
+  buyingPaperUnlockedEvent: {
+    trigger: function () {
+      return paper <= 0;
+    },
+    uses: 1,
+    flag: false,
+    notifyPlayer: false,
+    effect: function () {
+      this.loadEffect();
+    },
+    loadEffect: function () {
+      unhide("paperDiv");
+    }
+  },
   autoBuyPaperEvent: {
-    title: "auto buy paper",
-    description: "Automatically buy paper when it runs out.",
     trigger: function () {
       return paper <= 0 && paperBuyerOn;
     },
@@ -37,8 +47,6 @@ var events = {
     }
   },
   capDebtEvent: {
-    title: "cap debt",
-    description: "Automatically cap debt at maxDebt.",
     trigger: function () {
       return debt > maxDebt;
     },
@@ -54,7 +62,6 @@ var events = {
 // for things that use the eventDiv but are not events
 var otherThings = {
   restartEvent: {
-    title: "restart",
     description: "Are you sure you want to restart? \nThis will clear all your progress.",
     notifyPlayer: true,
     uses: 1,
@@ -72,5 +79,5 @@ var otherThings = {
   }
 }
 
-generateIdsAndDescriptions("event", events);
-generateIdsAndDescriptions("event", otherThings);
+generateInformation("event", events);
+generateInformation("event", otherThings);

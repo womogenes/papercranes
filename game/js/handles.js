@@ -85,3 +85,10 @@ function restart() {
     displayEvent(otherThings.restartEvent);
   }
 }
+
+function learnToFoldCranes() {
+  learnedToFoldCranes = true;
+  unhide("projectsColumn");
+  unhide("foldingColumn");
+  getEl("learnColumn").hidden = true;
+}

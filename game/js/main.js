@@ -3,6 +3,7 @@ var cranes = 0;
 var wishes = 0;
 var unsoldCranes = 0;
 var cranePriceSliderLoc = 0.1;
+var learnedToFoldCranes;
 
 var money = 20;
 var debt = 0;
@@ -15,7 +16,7 @@ var advertisingLevel = 1;
 var basePaperPrice = 15;
 var paperPrice = 15;
 var paperAmount = 1000;
-var paper = 0;
+var paper = 10;
 var paperBuyerOn = false;
 
 var highSchoolerWage = 5;
@@ -58,6 +59,7 @@ function save() {
     wishes: wishes,
 
     paperBuyerOn: paperBuyerOn,
+    learnedToFoldCranes: learnedToFoldCranes,
   };
 
   localStorage.setItem("savedGame", JSON.stringify(savedGame));
@@ -106,6 +108,9 @@ function load() {
   wishes = savedGame.wishes;
   unsoldCranes = savedGame.unsoldCranes;
   cranePriceSliderLoc = savedGame.cranePriceSliderLoc;
+  if (savedGame.learnedToFoldCranes) {
+    learnToFoldCranes();
+  }
 
   money = savedGame.money;
   debt = savedGame.debt;
@@ -267,7 +272,7 @@ function updateDom() {
   getEl("happinessAmount").innerHTML = happiness.toFixed(2);
 
   // Disable buttons which player cannot use
-  getEl("btnMakeCrane").disabled = paper < 1 || !projects.learnToFoldCranesProject.flag;
+  getEl("btnMakeCrane").disabled = paper < 1;
   getEl("btnBuyPaper").disabled = paperPrice > money;
   getEl("btnAdvertising").disabled = advertisingPrice > money;
   getEl("btnHireHighSchooler").disabled = money < highSchoolerWage;

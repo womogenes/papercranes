@@ -199,10 +199,20 @@ function commify(n) {
   });
 }
 
-function camelCase(str) {
-  return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
-    return index == 0 ? word.toLowerCase() : word.toUpperCase();
-  }).replace(/\s+/g, '');
+function camelize(text) {
+  return text.replace(/^([A-Z])|[\s-_]+(\w)/g, function (match, p1, p2, offset) {
+    if (p2) return p2.toUpperCase();
+    return p1.toLowerCase();
+  });
+}
+
+function decamelize(str, separator) {
+  separator = typeof separator === "undefined" ? " " : separator;
+
+  return str
+    .replace(/([a-z\d])([A-Z])/g, "$1" + separator + "$2")
+    .replace(/([A-Z]+)([A-Z][a-z\d]+)/g, "$1" + separator + "$2")
+    .toLowerCase();
 }
 
 // Display stuff
@@ -329,22 +339,14 @@ window.mobileAndTabletCheck = function () {
 
 // project and event stuff
 function titleToId(title, type) {
-  return camelCase(`${title} ${type}`);
+  return camelize(`${title} ${type}`);
 }
 
-function generateIdsAndDescriptions(type, object) {
-  for (let i in object) {
-    i = object[i];
-
-    // Create and check ids
-    i.id = titleToId(i.title, type);
-    if (object[i.id] != i) {
-      console.error(`${type} ${i.id} with title ${i.title} is not in ${type}s. ${type} titles must match the ${type}'s name in ${type}s`);
-      // to prevent errors
-      object[i.id] = i;
-    }
-
-    // Create descriptions
+function generateInformation(type, object) {
+  for (let id in object) {
+    i = object[id];
+    i.id = id;
+    i.title = decamelize(id).split(" ").slice(0, -1).join(" ");
     if (typeof i.description == "function") {
       i.description = i.description();
     }
