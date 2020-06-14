@@ -192,6 +192,23 @@ document.addEventListener("DOMContentLoaded", function (event) {
       }
     });
   }
+
+  document.onkeydown = function (e) {
+    if ((window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+      if (e.keyCode == 83) { // ctrl + s
+        save();
+        e.preventDefault();
+      } else if (e.keyCode == 82) { // ctrl + r
+        save();
+      } else if (e.keyCode == 81) { // ctrl + q
+        changeTheme();
+      }
+    }
+  };
+
+  window.addEventListener("beforeunload", function (e) {
+    save();
+  });
 });
 
 // Game loop!
