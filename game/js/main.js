@@ -3,7 +3,7 @@ var cranes = 0;
 var wishes = 0;
 var unsoldCranes = 0;
 var cranePriceSliderLoc = 0.1;
-var learnedToFoldCranes;
+var learnedToFoldCranes = false;
 
 var money = 40;
 var debt = 0;
@@ -15,7 +15,7 @@ var advertisingLevel = 1;
 
 var basePaperPrice = 15;
 var paperPrice = 15;
-var paperAmount = 1000;
+var paperPurchaseAmount = 1000;
 var paper = 10;
 var paperBuyerOn = false;
 
@@ -43,7 +43,7 @@ function save() {
     advertisingPrice: advertisingPrice,
     cranePriceSliderLoc: getEl("priceSlider").value,
     paperPrice: paperPrice,
-    paperAmount: paperAmount,
+    paperPurchaseAmount: paperPurchaseAmount,
     paper: paper,
     advertisingLevel: advertisingLevel,
     highSchoolers: highSchoolers,
@@ -120,7 +120,7 @@ function load() {
   advertisingLevel = savedGame.advertisingLevel;
 
   paperPrice = savedGame.paperPrice;
-  paperAmount = savedGame.paperAmount;
+  paperPurchaseAmount = savedGame.paperPurchaseAmount;
   paper = savedGame.paper;
   basePaperPrice = savedGame.basePaperPrice;
   paperBuyerOn = savedGame.paperBuyerOn;
@@ -205,10 +205,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
   };
-
-  window.addEventListener("beforeunload", function (e) {
-    save();
-  });
 });
 
 // Game loop!

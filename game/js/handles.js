@@ -61,7 +61,7 @@ function buyPaper(n) {
     return;
   }
   // Buys paper! May be upgraded.
-  paper += Math.round(paperAmount * n);
+  paper += Math.round(paperPurchaseAmount * n);
   money -= Math.round(paperPrice * n);
 }
 

@@ -244,7 +244,7 @@ var projects = {
 		uses: 1,
 		flag: false,
 		effect: function () {
-			paperAmount = Math.round(paperAmount * percentToMultiplier(this.increasePercent));
+			paperPurchaseAmount = Math.round(paperPurchaseAmount * percentToMultiplier(this.increasePercent));
 			basePaperPrice = Math.round(basePaperPrice * percentToMultiplier(this.increasePercent));
 		}
 	},
@@ -262,7 +262,7 @@ var projects = {
 		uses: 1,
 		flag: false,
 		effect: function () {
-			paperAmount = Math.round(paperAmount * percentToMultiplier(this.increasePercent));
+			paperPurchaseAmount = Math.round(paperPurchaseAmount * percentToMultiplier(this.increasePercent));
 			basePaperPrice = Math.round(basePaperPrice * 1.5);
 		}
 	},
@@ -280,7 +280,7 @@ var projects = {
 		uses: 1,
 		flag: false,
 		effect: function () {
-			paperAmount = Math.round(paperAmount * percentToMultiplier(this.increasePercent));
+			paperPurchaseAmount = Math.round(paperPurchaseAmount * percentToMultiplier(this.increasePercent));
 			basePaperPrice = Math.round(basePaperPrice * 1.5);
 		}
 	},
