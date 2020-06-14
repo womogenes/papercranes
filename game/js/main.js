@@ -68,25 +68,25 @@ function save() {
   var savedActiveProjects = [];
   var savedProjectData = {};
 
-  for (let projectId in projects) {
-    let project = projects[projectId];
-    savedProjectData[project.id] = {
+  for (let projectName in projects) {
+    let project = projects[projectName];
+    savedProjectData[projectName] = {
       flag: project.flag,
       uses: project.uses
     }
   }
 
   for (let i = 0; i < activeProjects.length; i++) {
-    savedActiveProjects[i] = activeProjects[i].id;
+    savedActiveProjects[i] = activeProjects[i].title.camelize();
   }
   localStorage.setItem("savedProjectData", JSON.stringify(savedProjectData));
   localStorage.setItem("savedActiveProjects", JSON.stringify(savedActiveProjects));
 
   // Deal with events.
   let savedEventData = {};
-  for (let eventId in events) {
-    let event = events[eventId];
-    savedEventData[event.id] = {
+  for (let eventName in events) {
+    let event = events[eventName];
+    savedEventData[eventName] = {
       flag: event.flag,
       uses: event.uses
     }
@@ -134,32 +134,32 @@ function load() {
 
   // Load projects and events
   var savedProjectData = JSON.parse(localStorage.getItem("savedProjectData"));
-  for (let savedProjectId in savedProjectData) {
-    let savedProject = savedProjectData[savedProjectId];
-    let project = projects[savedProjectId];
+  for (let savedProjectName in savedProjectData) {
+    let savedProject = savedProjectData[savedProjectName];
+    let project = projects[savedProjectName];
     project.uses = savedProject.uses;
     project.flag = savedProject.flag;
   }
-  for (let projectId in projects) {
+  for (let projectName in projects) {
     let savedActiveProjects = JSON.parse(localStorage.getItem("savedActiveProjects"));
-    let project = projects[projectId];
-    if (savedActiveProjects.indexOf(project.id) >= 0) {
+    let project = projects[projectName];
+    if (savedActiveProjects.indexOf(project.title.camelize()) >= 0) {
       displayProjects(project);
       activeProjects.push(project);
     }
   }
 
   var savedEventData = JSON.parse(localStorage.getItem("savedEventData"));
-  for (let eventId in savedEventData) {
-    let savedEvent = savedEventData[eventId];
-    let event = events[eventId];
+  for (let eventName in savedEventData) {
+    let savedEvent = savedEventData[eventName];
+    let event = events[eventName];
     event.uses = savedEvent.uses;
     event.flag = savedEvent.flag;
   }
 
   [projects, events].forEach(object => {
-    for (let id in object) {
-      let thing = object[id];
+    for (let name in object) {
+      let thing = object[name];
       if (thing.flag && thing.hasOwnProperty("loadEffect")) {
         thing.loadEffect();
       }
@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   // Only have button ripple on mobile.
   if (window.mobileAndTabletCheck()) {
     Array.from(document.getElementsByTagName("button")).forEach(button => {
-      if (button.id != "eventCloseButton") {
+      if (getComputedStyle(button).getPropertyValue("--ripple").trim() === "true") {
         button.addEventListener("click", createRipple);
       }
     });
@@ -201,8 +201,7 @@ window.setInterval(function () {
   // Make cranes before selling them.
   makeCrane((highSchoolers * highSchoolerBoost) / 500);
   makeCrane(professionals);
-  if (projects.buisnessManagementProject.flag) {
-    console.log("selling");
+  if (projects.buisnessManagement.flag) {
     sellCranes();
   }
 
@@ -294,7 +293,7 @@ function updateDom() {
 function displayProjects(project) {
   project.element = document.createElement("button");
   project.element.style.opacity = 0;
-  project.element.setAttribute("id", project.id);
+  project.element.setAttribute("id", project.title.camelize());
 
   project.element.onclick = function () {
     projectBaseEffect(project);
@@ -318,8 +317,8 @@ function displayProjects(project) {
 }
 
 function manageProjects() {
-  for (let projectId in projects) {
-    let project = projects[projectId];
+  for (let projectName in projects) {
+    let project = projects[projectName];
     if (trigger(project) && project.uses > 0) {
       displayProjects(project);
       project.uses--;
@@ -333,11 +332,11 @@ function manageProjects() {
 }
 
 function manageEvents() {
-  for (let eventId in events) {
-    let event = events[eventId];
+  for (let eventName in events) {
+    let event = events[eventName];
     if (trigger(event) && event.uses != 0) {
       if (event.notifyPlayer) {
-        pendingEvents.push(event.id);
+        pendingEvents.push(event.title.camelize());
       }
       eventBaseEffect(event)
       event.effect();
@@ -355,11 +354,11 @@ function displayEvent(event) {
   // and replaces it with event
   if (event) {
     if (!getEl("eventDiv").hidden) {
-      pendingEvents.push(titleToId(getEl("eventTitle").innerHTML, "event"));
+      pendingEvents.push(getEl("eventTitle").innerHTML.camelize());
     }
   } else {
-    let id = pendingEvents.pop();
-    event = events.hasOwnProperty(id) ? events[id] : otherThings[id];
+    let eventName = pendingEvents.pop();
+    event = events.hasOwnProperty(eventName) ? events[eventName] : otherThings[eventName];
   }
   resetEventDiv();
   getEl("eventTitle").innerHTML = event.title.toTitleCase();

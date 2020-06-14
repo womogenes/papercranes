@@ -6,9 +6,9 @@ function eventBaseEffect(event) {
 }
 
 var events = {
-  projectsUnlockedEvent: {
+  projectsUnlocked: {
     trigger: function () {
-      return cranes >= 15 && events.buyingPaperUnlockedEvent.flag;
+      return cranes >= 15 && events.buyingPaperUnlocked.flag;
     },
     uses: 1,
     flag: false,
@@ -20,7 +20,7 @@ var events = {
       unhide("projectsColumn");
     }
   },
-  prestigeUnlockedEvent: {
+  prestigeUnlocked: {
     trigger: function () {
       return cranes >= 1000;
     },
@@ -34,7 +34,7 @@ var events = {
       unhide("prestigeColumn");
     }
   },
-  buyingPaperUnlockedEvent: {
+  buyingPaperUnlocked: {
     trigger: function () {
       return paper <= 0;
     },
@@ -48,7 +48,7 @@ var events = {
       unhide("paperDiv");
     }
   },
-  autoBuyPaperEvent: {
+  autoBuyPaper: {
     trigger: function () {
       return paper <= 0 && paperBuyerOn;
     },
@@ -59,7 +59,7 @@ var events = {
       buyPaper(1);
     }
   },
-  capDebtEvent: {
+  capDebt: {
     trigger: function () {
       return debt > maxDebt;
     },
@@ -74,7 +74,7 @@ var events = {
 
 // for things that use the eventDiv but are not events
 var otherThings = {
-  restartEvent: {
+  restart: {
     description: "Are you sure you want to restart? \nThis will clear all your progress.",
     notifyPlayer: true,
     uses: 1,

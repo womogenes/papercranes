@@ -180,6 +180,22 @@ String.prototype.toTitleCase = function () {
   });
 };
 
+String.prototype.camelize = function () {
+  return this.replace(/^([A-Z])|[\s-_]+(\w)/g, function (match, p1, p2, offset) {
+    if (p2) return p2.toUpperCase();
+    return p1.toLowerCase();
+  });
+}
+
+String.prototype.decamelize = function (separator) {
+  separator = typeof separator === "undefined" ? " " : separator;
+
+  return this
+    .replace(/([a-z\d])([A-Z])/g, "$1" + separator + "$2")
+    .replace(/([A-Z]+)([A-Z][a-z\d]+)/g, "$1" + separator + "$2")
+    .toLowerCase();
+}
+
 function monify(n) {
   if (n >= 0) {
     return n.toLocaleString("en", {
@@ -199,21 +215,6 @@ function commify(n) {
   });
 }
 
-function camelize(text) {
-  return text.replace(/^([A-Z])|[\s-_]+(\w)/g, function (match, p1, p2, offset) {
-    if (p2) return p2.toUpperCase();
-    return p1.toLowerCase();
-  });
-}
-
-function decamelize(str, separator) {
-  separator = typeof separator === "undefined" ? " " : separator;
-
-  return str
-    .replace(/([a-z\d])([A-Z])/g, "$1" + separator + "$2")
-    .replace(/([A-Z]+)([A-Z][a-z\d]+)/g, "$1" + separator + "$2")
-    .toLowerCase();
-}
 
 // Display stuff
 var domElements = {}
@@ -338,15 +339,10 @@ window.mobileAndTabletCheck = function () {
 };
 
 // project and event stuff
-function titleToId(title, type) {
-  return camelize(`${title} ${type}`);
-}
-
 function generateInformation(type, object) {
-  for (let id in object) {
-    i = object[id];
-    i.id = id;
-    i.title = decamelize(id).split(" ").slice(0, -1).join(" ");
+  for (let name in object) {
+    let i = object[name];
+    i.title = name.decamelize();
     if (typeof i.description == "function") {
       i.description = i.description();
     }

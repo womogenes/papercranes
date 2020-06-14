@@ -50,6 +50,7 @@ hr {
 
 	overflow: hidden;
 	position: relative;
+	--ripple: true;
 }
 .button:hover {
 	background: var(--btn-bg-hover);

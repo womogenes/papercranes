@@ -61,6 +61,7 @@
 	background: none;
 	text-rendering: var(--outline-color);
 	touch-action: manipulation;
+	--ripple: false;
 }
 
 #eventCloseButton:hover {

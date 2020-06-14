@@ -41,7 +41,7 @@ function canAffordProject(project) {
 }
 var projects = {
 	// Worker projects
-	unlockWorkersProject: {
+	unlockWorkers: {
 		description: "Be able to hire workers to fold for you.",
 		costs: {
 			money: 10
@@ -58,7 +58,7 @@ var projects = {
 			unhide("workerDiv");
 		}
 	},
-	fasterHighSchoolersProject: {
+	fasterHighSchoolers: {
 		fasterPercent: 25,
 		description: function () {
 			return `High Schoolers work ${this.fasterPercent}% faster.`;
@@ -76,7 +76,7 @@ var projects = {
 			displayMessage(`High schoolers now work ${this.fasterPercent}% as fast.`);
 		}
 	},
-	evenFasterHighSchoolersProject: {
+	evenFasterHighSchoolers: {
 		fasterPercent: 50,
 		costs: {
 			money: 20
@@ -86,7 +86,7 @@ var projects = {
 		},
 		purchaseMessage: "Speedy high schoolers!",
 		trigger: function () {
-			return money >= 10 && projects.fasterHighSchoolersProject.flag;
+			return money >= 10 && projects.fasterHighSchoolers.flag;
 		},
 		uses: 1,
 		flag: false,
@@ -95,7 +95,7 @@ var projects = {
 			interestRate *= 2;
 		}
 	},
-	highlySkilledStudentsProject: {
+	highlySkilledStudents: {
 		fasterAmount: 2,
 		costs: {
 			money: 40
@@ -104,7 +104,7 @@ var projects = {
 			return `Double hire price, high schoolers work ${this.fasterAmount} times as fast.`;
 		},
 		trigger: function () {
-			return money >= 20 && projects.evenFasterHighSchoolersProject.flag;
+			return money >= 20 && projects.evenFasterHighSchoolers.flag;
 		},
 		uses: 1,
 		flag: false,
@@ -114,7 +114,7 @@ var projects = {
 			displayMessage("When they work harder, you gotta pay them more.");
 		}
 	},
-	professionalsProject: {
+	professionals: {
 		costs: {
 			wishes: 10
 		},
@@ -134,7 +134,7 @@ var projects = {
 			unhide("professionalDiv");
 		}
 	},
-	lowerWagesProject: {
+	lowerWages: {
 		costs: {
 			money: 10000000
 		},
@@ -150,7 +150,7 @@ var projects = {
 	},
 
 	// Buisness projects
-	bankAccountProject: {
+	bankAccount: {
 		costs: {
 			money: 10
 		},
@@ -168,13 +168,13 @@ var projects = {
 			unhide("bankDiv");
 		}
 	},
-	buisnessManagementProject: {
+	buisnessManagement: {
 		costs: {
 			money: 10
 		},
 		description: "Sell your cranes",
 		trigger: function () {
-			return money >= 5 && events.buyingPaperUnlockedEvent.flag;
+			return money >= 5 && events.buyingPaperUnlocked.flag;
 		},
 		uses: 1,
 		flag: false,
@@ -185,7 +185,7 @@ var projects = {
 			unhide("buisnessColumn");
 		}
 	},
-	unlockAdvertisingProject: {
+	unlockAdvertising: {
 		costs: {
 			money: 100
 		},
@@ -204,7 +204,7 @@ var projects = {
 	},
 
 	// Paper projects
-	paperBuyerProject: {
+	paperBuyer: {
 		costs: {
 			highSchoolers: 100
 		},
@@ -221,7 +221,7 @@ var projects = {
 			unhide("paperBuyerDiv");
 		}
 	},
-	paperEfficiencyProject: {
+	paperEfficiency: {
 		increasePercent: 50,
 		costs: {
 			money: 200
@@ -239,7 +239,7 @@ var projects = {
 			basePaperPrice = Math.round(basePaperPrice * percentToMultiplier(this.increasePercent));
 		}
 	},
-	thinnerSheetsProject: {
+	thinnerSheets: {
 		increasePercent: 75,
 		costs: {
 			money: 400
@@ -248,7 +248,7 @@ var projects = {
 			return `Gain ${this.increasePercent}% more paper from each purchase.`;
 		},
 		trigger: function () {
-			return projects.paperEfficiencyProject.flag;
+			return projects.paperEfficiency.flag;
 		},
 		uses: 1,
 		flag: false,
@@ -257,7 +257,7 @@ var projects = {
 			basePaperPrice = Math.round(basePaperPrice * 1.5);
 		}
 	},
-	bigPaperProject: {
+	bigPaper: {
 		increasePercent: 1000,
 		costs: {
 			money: 800
@@ -266,7 +266,7 @@ var projects = {
 			return `${this.increasePercent}% more paper from each purchase.`;
 		},
 		trigger: function () {
-			return projects.thinnerSheetsProject.flag;
+			return projects.thinnerSheets.flag;
 		},
 		uses: 1,
 		flag: false,
