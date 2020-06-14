@@ -72,8 +72,11 @@ var projects = {
 		uses: 1,
 		flag: false,
 		effect: function () {
-			highSchoolerBoost *= percentToMultiplier(this.fasterPercent);
+			this.loadEffect();
 			displayMessage(`High schoolers now work ${this.fasterPercent}% as fast.`);
+		},
+		loadEffect: function () {
+			highSchoolerBoost *= percentToMultiplier(this.fasterPercent);
 		}
 	},
 	evenFasterHighSchoolers: {
@@ -91,8 +94,11 @@ var projects = {
 		uses: 1,
 		flag: false,
 		effect: function () {
-			highSchoolerBoost *= percentToMultiplier(this.fasterPercent);
+			this.loadEffect();
 			interestRate *= 2;
+		},
+		loadEffect: function () {
+			highSchoolerBoost *= percentToMultiplier(this.fasterPercent);
 		}
 	},
 	highlySkilledStudents: {
@@ -109,9 +115,12 @@ var projects = {
 		uses: 1,
 		flag: false,
 		effect: function () {
-			highSchoolerBoost *= this.fasterAmount;
+			this.loadEffect();
 			highSchoolerWage *= 2;
 			displayMessage("When they work harder, you gotta pay them more.");
+		},
+		loadEffect: function () {
+			highSchoolerBoost *= this.fasterAmount;
 		}
 	},
 	professionals: {

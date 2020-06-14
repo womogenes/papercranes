@@ -48,7 +48,6 @@ function save() {
     advertisingLevel: advertisingLevel,
     highSchoolers: highSchoolers,
     highSchoolerWage: highSchoolerWage,
-    highSchoolerBoost: highSchoolerBoost,
     debt: debt,
     maxDebt: maxDebt,
     interestRate: interestRate,
@@ -128,7 +127,6 @@ function load() {
 
   highSchoolers = savedGame.highSchoolers;
   highSchoolerWage = savedGame.highSchoolerWage;
-  highSchoolerBoost = savedGame.highSchoolerBoost;
   professionals = savedGame.professionals;
   professionalWage = savedGame.professionalWage;
 
