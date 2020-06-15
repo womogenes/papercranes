@@ -16,10 +16,11 @@ function borrowMoney(x) {
   debt += x;
 }
 
-function payBack(x) {
+function payBackLoan(x) {
   var max = Math.min(debt, money);
-  debt -= max;
-  money -= max;
+  var payAmount = x ? Math.min(x, max) : max;
+  debt -= payAmount;
+  money -= payAmount;
 }
 
 function togglePaperBuyer() {

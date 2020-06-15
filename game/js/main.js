@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 });
 
 // Game loop!
-window.setInterval(function () {
+setInterval(function () {
   // Make cranes before selling them.
   makeCrane((highSchoolers * highSchoolerBoost) / 500);
   makeCrane(professionals);
@@ -227,21 +227,23 @@ window.setInterval(function () {
 }, 10);
 
 // Slower one, every second.
-window.setInterval(function () {
+setInterval(function () {
   getEl("cranemakerRate").innerHTML = commify(Math.round(cranes - prevCranes));
   prevCranes = cranes;
 }, 1000);
 
 // A slower on, every 5 seconds.
-window.setInterval(function () {
+setInterval(function () {
   save();
 
   // Fluctuate price.
   paperPrice = Math.floor(Math.sin(tick / 10) * 4) + basePaperPrice;
   getEl("paperPrice").innerHTML = monify(paperPrice);
-
-  debt = Math.ceil(debt * (1 + interestRate) * 100) / 100;
 }, 5000);
+
+setInterval(function () {
+  debt = Math.ceil(debt * (1 + interestRate) * 100) / 100;
+}, 10000);
 
 function sellCranes() {
   var demand = (0.08 / cranePrice) * Math.pow(1.3, advertisingLevel - 1);
@@ -281,7 +283,7 @@ function updateDom() {
   getEl("professionals").innerHTML = commify(professionals);
   getEl("professionalWage").innerHTML = monify(professionalWage);
 
-  var happiness = money >= 0.1 ? Math.log(money + wishes) : 0
+  var happiness = money - debt > 0 ? Math.log(money + wishes - debt) : 0
   getEl("happinessMeter").style.width = happiness + "%"
   getEl("happinessAmount").innerHTML = happiness.toFixed(2);
 
@@ -290,7 +292,7 @@ function updateDom() {
   getEl("btnBuyPaper").disabled = paperPrice > money;
   getEl("btnAdvertising").disabled = advertisingPrice > money;
   getEl("btnHireHighSchooler").disabled = money < highSchoolerWage;
-  getEl("btnPayBack").disabled = money <= 0 || debt <= 0;
+  getEl("btnpayBackLoan").disabled = money <= 0 || debt <= 0;
   getEl("btnBorrowMoney").disabled = debt >= maxDebt;
   getEl("btnHireProfessional").disabled = professionalWage > money;
 
@@ -378,12 +380,14 @@ function displayEvent(event) {
     getEl("eventCloseButton").hidden = true;
   }
   if (event.buttons) {
+    event.buttonEls = {};
     for (let buttonText in event.buttons) {
       let newButton = document.createElement("button");
       newButton.className = "button";
       newButton.innerHTML = buttonText.toTitleCase();
       newButton.onclick = event.buttons[buttonText];
       getEl("eventButtons").appendChild(newButton);
+      event.buttonEls[buttonText] = newButton;
     }
   }
   if (getEl("eventDiv").hidden) {

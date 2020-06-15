@@ -26,7 +26,7 @@ function projectPriceTag(project) {
 	if (project.costs.wishes) {
 		costs.push(`${project.costs.wishes} wish${project.costs.wishes != 0 ? "es" : ""}`);
 	}
-	if (project.highSchoolerCost) {
+	if (project.costs.highSchoolers) {
 		costs.push(`${project.costs.highSchoolers} high schooler${project.costs.highSchoolers != 0 ? "s" : ""}`);
 	}
 	return `(${costs.join(", ")})`;
@@ -175,6 +175,20 @@ var projects = {
 		},
 		loadEffect: function () {
 			unhide("bankDiv");
+		}
+	},
+	increaseMaxDebt: {
+		costs: {
+			money: 1000
+		},
+		description: "Increase maximum debt by 500",
+		trigger: function () {
+			return debt >= 200;
+		},
+		uses: 1,
+		flag: false,
+		effect: function () {
+			maxDebt += 500;
 		}
 	},
 	buisnessManagement: {
