@@ -78,6 +78,10 @@ button .ripple {
 	animation: ripple 0.6s linear;
 }
 
+#eventButtons>button {
+  margin-right: 15px;
+}
+
 @keyframes ripple {
 	to {
 		transform: scale(2.5);
@@ -96,6 +100,7 @@ button .ripple {
 	height: 70px;
 	width: 100%;
 	margin-top: 10px;
+  padding: 10px;
 	transition: all 0.3s ease;
 
 	touch-action: manipulation;
