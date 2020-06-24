@@ -36,7 +36,7 @@ hr {
 	outline: none;
 }
 
-.button {
+button {
 	font-size: 13px;
 	border-radius: 5px;
 	border: 1px solid var(--outline-color);
@@ -53,18 +53,18 @@ hr {
 	--ripple: true;
 }
 
-.button:hover {
+button:hover {
 	background: var(--btn-bg-hover);
 	border: 1px solid var(--btn-outline-hover);
 	cursor: pointer;
 }
 
-.button:active {
+button:active {
 	background: var(--btn-bg-active);
 	border: 1px solid var(--btn-outline-active);
 }
 
-.button:disabled {
+button:disabled {
 	opacity: 0.6;
 	border: 1px solid var(--btn-outline-disabled);
 	cursor: auto;
@@ -143,11 +143,7 @@ h4 {
 		font-size: 16px;
 	}
 
-	.button {
-		font-size: 14px;
-	}
-
-	#projectsDiv>.button {
+	button {
 		font-size: 14px;
 	}
 

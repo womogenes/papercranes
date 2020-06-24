@@ -313,8 +313,6 @@ function displayProjects(project) {
     project.effect();
   };
 
-  project.element.setAttribute("class", "button");
-
   getEl("projectsDiv").appendChild(project.element, getEl("projectsDiv").firstChild);
 
   var span = document.createElement("span");
@@ -383,7 +381,6 @@ function displayEvent(event) {
     event.buttonEls = {};
     for (let buttonText in event.buttons) {
       let newButton = document.createElement("button");
-      newButton.className = "button";
       newButton.innerHTML = buttonText.toTitleCase();
       newButton.onclick = event.buttons[buttonText];
       getEl("eventButtons").appendChild(newButton);
@@ -393,5 +390,4 @@ function displayEvent(event) {
   if (getEl("eventDiv").hidden) {
     unhide("eventDiv");
   }
-
 }

@@ -56,7 +56,7 @@
 	<div id="learnColumn" class="column">
 		<h4>Cranes</h4>
 		<hr>
-		<button class="button" onclick="learnToFoldCranes()">Learn to fold cranes</button>
+		<button onclick="learnToFoldCranes()">Learn to fold cranes</button>
 	</div>
 
 	<div id="prestigeColumn" class="column" hidden>
@@ -93,7 +93,7 @@
 			<p>Public demand: </p><span id="demand">10</span>%<br>
 			<br>
 			<div id="advertisingDiv" hidden>
-				<button class="button" id="btnAdvertising" onclick="increaseAdvertising()">Advertising</button>
+				<button id="btnAdvertising" onclick="increaseAdvertising()">Advertising</button>
 				<p>Level: </p><span id="advertisingLevel">1</span><br>
 				<p>Cost: $</p><span id="advertisingPrice">40.00</span><br>
 			</div>
@@ -105,8 +105,8 @@
 			<hr>
 			<p>Debt: $</p><span id="debt">0</span><br>
 			<p>Interest rate: </p><span id="interestRate">1</span>%<br>
-			<button class="button" id="btnBorrowMoney" onclick="borrowMoney(20)">Borrow</button>
-			<button class="button" id="btnpayBackLoan" onclick="payBackLoan()">Pay Back</button><br>
+			<button id="btnBorrowMoney" onclick="borrowMoney(20)">Borrow</button>
+			<button id="btnpayBackLoan" onclick="payBackLoan()">Pay Back</button><br>
 		</div>
 		<br>
 
@@ -118,7 +118,7 @@
 			<h4>Manufacturing</h4>
 			<hr>
 
-			<button class="button" id="btnMakeCrane" onClick="makeCrane(1)">
+			<button id="btnMakeCrane" onClick="makeCrane(1)">
 				<p>Fold crane</p>
 			</button>
 			<br>
@@ -128,11 +128,11 @@
 			<br>
 			<div id="paperDiv" hidden>
 				<div id="paperBuyerDiv" hidden>
-					<button class="button" id="btnPaperBuyer" onclick="togglePaperBuyer()">PaperBuyer</button>
+					<button id="btnPaperBuyer" onclick="togglePaperBuyer()">PaperBuyer</button>
 					<span id="paperBuyer">OFF</span><br>
 				</div>
 
-				<button class="button" id="btnBuyPaper" onclick="buyPaper(1)">Paper</button>
+				<button id="btnBuyPaper" onclick="buyPaper(1)">Paper</button>
 				<span id="paper">1,000</span> sq. m <br>
 				<p>Cost: $</p><span id="paperPrice">5</span><br>
 				<br>
@@ -145,7 +145,7 @@
 			<hr>
 
 			<div id="highSchoolerDiv">
-				<button class="button" id="btnHireHighSchooler" onclick="hireHighSchooler()">Hire</button>
+				<button id="btnHireHighSchooler" onclick="hireHighSchooler()">Hire</button>
 				<span id="highSchoolers">0</span> high schoolers<br>
 				<p>Cost: $</p><span id="highSchoolerWage">5.00</span>
 				<br>
@@ -154,7 +154,7 @@
 			<br>
 
 			<div id="professionalDiv" hidden>
-				<button class="button" id="btnHireProfessional" onclick="hireProfessional()">Hire</button>
+				<button id="btnHireProfessional" onclick="hireProfessional()">Hire</button>
 				<span id="professionals">0</span> professionals<br>
 				<p>Cost: $</p><span id="professionalWage">100.00</span>
 			</div>
@@ -175,9 +175,9 @@
 	</div>
 
 	<div id="menuDiv">
-		<button class="button" id="btnSave" onclick="save()">Save</button>
-		<button class="button" id="btnRestart" onclick="restart()">Restart</button>
-		<button class="button" id="btnChangeTheme" onclick="changeTheme()">Theme</button>
+		<button id="btnSave" onclick="save()">Save</button>
+		<button id="btnRestart" onclick="restart()">Restart</button>
+		<button id="btnChangeTheme" onclick="changeTheme()">Theme</button>
 	</div>
 
 </body>
