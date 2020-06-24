@@ -300,4 +300,4 @@ var projects = {
 	},
 }
 
-generateInformation("project", projects);
+generateInformation(projects);

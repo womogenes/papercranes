@@ -127,5 +127,5 @@ var otherThings = {
   }
 }
 
-generateInformation("event", events);
-generateInformation("event", otherThings);
+generateInformation(events);
+generateInformation(otherThings);

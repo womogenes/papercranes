@@ -337,7 +337,7 @@ window.mobileAndTabletCheck = function () {
 };
 
 // project and event stuff
-function generateInformation(type, object) {
+function generateInformation(object) {
   for (let name in object) {
     let i = object[name];
     i.title = name.decamelize();

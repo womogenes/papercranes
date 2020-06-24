@@ -70,7 +70,6 @@ hr {
 	cursor: auto;
 }
 
-
 button .ripple {
 	border: none;
 	border-radius: 50%;
@@ -148,7 +147,7 @@ h4 {
 		font-size: 14px;
 	}
 
-	.projectButton {
+	#projectsDiv>.button {
 		font-size: 14px;
 	}
 
