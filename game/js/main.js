@@ -243,7 +243,7 @@ setInterval(function () {
 
 setInterval(function () {
   debt = Math.ceil(debt * (1 + interestRate) * 100) / 100;
-}, 10000);
+}, 15000);
 
 function sellCranes() {
   var demand = (0.08 / cranePrice) * Math.pow(1.3, advertisingLevel - 1);
@@ -283,9 +283,9 @@ function updateDom() {
   getEl("professionals").innerHTML = commify(professionals);
   getEl("professionalWage").innerHTML = monify(professionalWage);
 
-  var happiness = money - debt > 0 ? Math.log(money + wishes - debt) : 0
+  var happiness = money - debt > 0 ? Math.min(Math.log(money + wishes - debt), 100) : 0
   getEl("happinessMeter").style.width = happiness + "%"
-  getEl("happinessAmount").innerHTML = happiness.toFixed(2);
+  getEl("happinessAmount").innerHTML = happiness.toFixed(2) + "%";
 
   // Disable buttons which player cannot use
   getEl("btnMakeCrane").disabled = paper < 1;
@@ -313,7 +313,7 @@ function displayProjects(project) {
     project.effect();
   };
 
-  project.element.setAttribute("class", "projectButton");
+  project.element.setAttribute("class", "button");
 
   getEl("projectsDiv").appendChild(project.element, getEl("projectsDiv").firstChild);
 

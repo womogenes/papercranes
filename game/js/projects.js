@@ -179,7 +179,7 @@ var projects = {
 	},
 	increaseMaxDebt: {
 		costs: {
-			money: 1000
+			money: 2000
 		},
 		description: "Increase maximum debt by 500",
 		trigger: function () {

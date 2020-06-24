@@ -33,7 +33,7 @@ hr {
 }
 
 .js-focus-visible :focus:not(.focus-visible) {
-  outline: none;
+	outline: none;
 }
 
 .button {
@@ -52,6 +52,7 @@ hr {
 	position: relative;
 	--ripple: true;
 }
+
 .button:hover {
 	background: var(--btn-bg-hover);
 	border: 1px solid var(--btn-outline-hover);
@@ -69,6 +70,7 @@ hr {
 	cursor: auto;
 }
 
+
 button .ripple {
 	border: none;
 	border-radius: 50%;
@@ -78,49 +80,11 @@ button .ripple {
 	animation: ripple 0.6s linear;
 }
 
-#eventButtons>button {
-  margin-right: 15px;
-}
-
 @keyframes ripple {
 	to {
 		transform: scale(2.5);
 		opacity: 0;
 	}
-}
-
-
-.projectButton {
-	font-size: 13px;
-	border-radius: 10px;
-	border: 1px solid var(--outline-color);
-	background: var(--btn-bg-on);
-	display: block;
-
-	height: 70px;
-	width: 100%;
-	margin-top: 10px;
-  padding: 10px;
-	transition: all 0.3s ease;
-
-	touch-action: manipulation;
-}
-
-.projectButton:hover {
-	background: var(--btn-bg-hover);
-	border: 1px solid var(--btn-outline-hover);
-	cursor: pointer;
-}
-
-.projectButton:active {
-	background: var(--btn-bg-active);
-	border: 1px solid var(--btn-outline-active);
-}
-
-.projectButton:disabled {
-	opacity: 0.6;
-	border: 1px solid var(--btn-outline-disabled);
-	cursor: auto;
 }
 
 .pulsate {
@@ -170,8 +134,8 @@ button .ripple {
 }
 
 h4 {
-  margin-top: 0;
-  margin-bottom: 0;
+	margin-top: 0;
+	margin-bottom: 0;
 }
 
 @media only screen and (max-width: 550px) {
