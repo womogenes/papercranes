@@ -7,11 +7,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 });
 
 function resizeCraneImage() {
-  let width = document.documentElement.clientWidth / 2;
-  let height = document.documentElement.clientHeight / 2;
-  let imgSize = Math.max(Math.min(width, height, 300), 50);
+  const width = document.documentElement.clientWidth / 2;
+  const height = document.documentElement.clientHeight / 2;
+  const imgSize = Math.max(Math.min(width, height, 300), 50);
 
-  let craneImageEl = document.getElementById('craneImage');
+  const craneImageEl = getEl('craneImage');
   craneImageEl.width = imgSize;
   craneImageEl.height = imgSize;
 }

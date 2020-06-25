@@ -1,5 +1,5 @@
 // Yoy!
-var activeProjects = [];
+let activeProjects = [];
 
 function projectBaseEffect(project) {
   project.flag = true;
@@ -39,7 +39,7 @@ function canAffordProject(project) {
     (project.costs.highSchoolers ? highSchoolers >= project.costs.highSchoolers : true)
   );
 }
-var projects = {
+const projects = {
   // Worker projects
   unlockWorkers: {
     description: 'Be able to hire workers to fold for you.',

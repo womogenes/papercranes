@@ -5,70 +5,70 @@ function eventBaseEffect(event) {
   event.uses -= 1;
 }
 
-var events = {
+const events = {
   projectsUnlocked: {
-    trigger: function() {
+    trigger: function () {
       return cranes >= 15 && events.buyingPaperUnlocked.flag;
     },
     uses: 1,
     flag: false,
     notifyPlayer: false,
-    effect: function() {
+    effect: function () {
       this.loadEffect();
     },
-    loadEffect: function() {
+    loadEffect: function () {
       unhide('projectsColumn');
     },
   },
   prestigeUnlocked: {
-    trigger: function() {
+    trigger: function () {
       return cranes >= 1000;
     },
     uses: 1,
     flag: false,
     notifyPlayer: false,
-    effect: function() {
+    effect: function () {
       this.loadEffect();
     },
-    loadEffect: function() {
+    loadEffect: function () {
       unhide('prestigeColumn');
     },
   },
   buyingPaperUnlocked: {
-    trigger: function() {
+    trigger: function () {
       return paper <= 0;
     },
     uses: 1,
     flag: false,
     notifyPlayer: false,
-    effect: function() {
+    effect: function () {
       this.loadEffect();
     },
-    loadEffect: function() {
+    loadEffect: function () {
       unhide('paperDiv');
     },
   },
   autoBuyPaper: {
-    trigger: function() {
+    trigger: function () {
       return paper <= 0 && paperBuyerOn;
     },
     uses: -1,
     flag: false,
     notifyPlayer: false,
-    effect: function() {
+    effect: function () {
       buyPaper(1);
     },
   },
   maxedDebt: {
-    description: 'You have reached max debt. The bank wants 50% of it paid now.',
-    trigger: function() {
+    description: 'You have reached max debt. The bank wants 50% of it paid.',
+    trigger: function () {
       return debt >= maxDebt;
     },
     uses: 1,
     flag: false,
     notifyPlayer: true,
-    effect: function() {
-      events.maxedDebt.update = setInterval(function() {
+    effect: function () {
+      events.maxedDebt.update = setInterval(function () {
         if (debt <= maxDebt * .5) {
           this.uses = 1;
           this.flag = false;
@@ -82,15 +82,15 @@ var events = {
         buttonEls['default on loan'].disabled = (money || highSchoolers || professionals);
       }, 10);
     },
-    loadEffect: function() {
+    loadEffect: function () {
       this.effect();
       displayEvent(this);
     },
     buttons: {
-      'pay $100': function() {
+      'pay $100': function () {
         payBackLoan(100);
       },
-      'sell a worker': function() {
+      'sell a worker': function () {
         if (professionals) {
           professionals -= 1;
           debt -= professionalWage;
@@ -99,7 +99,7 @@ var events = {
           debt -= highSchoolerWage;
         }
       },
-      'default on loan': function() {
+      'default on loan': function () {
         debt = 0;
         maxDebt -= 500;
       },
@@ -109,17 +109,17 @@ var events = {
 };
 
 // for things that use the eventDiv but are not events
-var otherThings = {
+const otherThings = {
   restart: {
     description: 'Are you sure you want to restart? \nThis will clear all your progress.',
     notifyPlayer: true,
     uses: 1,
     buttons: {
-      'restart': function() {
+      'restart': function () {
         localStorage.clear();
         location.reload();
       },
-      'cancel': function() {
+      'cancel': function () {
         this.uses += 1;
         closeEvent();
       },

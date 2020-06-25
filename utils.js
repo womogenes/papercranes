@@ -1,55 +1,55 @@
 // String stuff
-{
-  var oneToTen = [
-      'zero', 'one', 'two', 'three', 'four',
-      'five', 'six', 'seven', 'eight', 'nine',
-    ],
-    elevenToNineteen = [
-      'ten', 'eleven', 'twelve', 'thirteen', 'fourteen',
-      'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen',
-    ],
-    multipleOfTen = [
-      '', '', 'twenty', 'thirty', 'forty',
-      'fifty', 'sixty', 'seventy', 'eighty', 'ninety',
-    ],
-    placeValue = [
-      '', ' thousand ', ' million ', ' billion ', ' trillion ', ' quadrillion ',
-      ' quintillion ', ' sextillion ', ' septillion ', ' octillion ',
-      ' nonillion ', ' decillion ', ' undecillion ', ' duodecillion ',
-      ' tredecillion ', ' quattuordecillion ', ' quindecillion ',
-      ' sexdecillion ', ' septendecillion ', ' octodecillion ',
-      ' novemdecillion  ', ' vigintillion ', ' unvigintillion ',
-      ' duovigintillion ', ' trevigintillion ', ' quattuorvigintillion ',
-      ' quinvigintillion ', ' sexvigintillion ', ' septenvigintillion ',
-      ' octovigintillion ', ' novemvigintillion ', ' trigintillion ',
-      ' untrigintillion ', ' duotrigintillion ', ' tretrigintillion ',
-      ' quattuortrigintillion ', ' quintrigintillion ', ' sextrigintillion ',
-      ' septentrigintillion ', ' octotrigintillion ', ' novemtrigintillion ',
-      ' quadragintillion ', ' unquadragintillion ', ' duoquadragintillion ',
-      ' trequadragintillion ', ' quattuorquadragintillion ',
-      ' quinquadragintillion ', ' sexquadragintillion ',
-      ' septenquadragintillion ', ' octoquadragintillion ',
-      ' novemquadragintillion ', ' quinquagintillion ', ' unquinquagintillion ',
-      ' duoquinquagintillion ', ' trequinquagintillion ',
-      ' quattuorquinquagintillion ', ' quinquinquagintillion ',
-      ' sexquinquagintillion ', ' septenquinquagintillion ',
-      ' octoquinquagintillion ', ' novemquinquagintillion ', ' sexagintillion ',
-      ' unsexagintillion ', ' duosexagintillion ', ' tresexagintillion ',
-      ' quattuorsexagintillion ', ' quinsexagintillion ', ' sexsexagintillion ',
-      ' septsexagintillion ', ' octosexagintillion ', ' octosexagintillion ',
-      ' septuagintillion ', ' unseptuagintillion ', ' duoseptuagintillion ',
-      ' treseptuagintillion ', ' quinseptuagintillion', ' sexseptuagintillion',
-      ' septseptuagintillion', ' octoseptuagintillion',
-      ' novemseptuagintillion', ' octogintillion', ' unoctogintillion',
-      ' duooctogintillion', ' treoctogintillion', ' quattuoroctogintillion',
-      ' quinoctogintillion', ' sexoctogintillion', ' septoctogintillion',
-      ' octooctogintillion', ' novemoctogintillion', ' nonagintillion',
-      ' unnonagintillion', ' duononagintillion', ' trenonagintillion ',
-      ' quattuornonagintillion ', ' quinnonagintillion ', ' sexnonagintillion ',
-      ' septnonagintillion ', ' octononagintillion ', ' novemnonagintillion ',
-      ' centillion',
-    ];
-}
+
+const oneToTen = [
+  'zero', 'one', 'two', 'three', 'four',
+  'five', 'six', 'seven', 'eight', 'nine',
+];
+const elevenToNineteen = [
+  'ten', 'eleven', 'twelve', 'thirteen', 'fourteen',
+  'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen',
+];
+const multipleOfTen = [
+  '', '', 'twenty', 'thirty', 'forty',
+  'fifty', 'sixty', 'seventy', 'eighty', 'ninety',
+];
+const placeValue = [
+  '', ' thousand ', ' million ', ' billion ', ' trillion ', ' quadrillion ',
+  ' quintillion ', ' sextillion ', ' septillion ', ' octillion ',
+  ' nonillion ', ' decillion ', ' undecillion ', ' duodecillion ',
+  ' tredecillion ', ' quattuordecillion ', ' quindecillion ',
+  ' sexdecillion ', ' septendecillion ', ' octodecillion ',
+  ' novemdecillion  ', ' vigintillion ', ' unvigintillion ',
+  ' duovigintillion ', ' trevigintillion ', ' quattuorvigintillion ',
+  ' quinvigintillion ', ' sexvigintillion ', ' septenvigintillion ',
+  ' octovigintillion ', ' novemvigintillion ', ' trigintillion ',
+  ' untrigintillion ', ' duotrigintillion ', ' tretrigintillion ',
+  ' quattuortrigintillion ', ' quintrigintillion ', ' sextrigintillion ',
+  ' septentrigintillion ', ' octotrigintillion ', ' novemtrigintillion ',
+  ' quadragintillion ', ' unquadragintillion ', ' duoquadragintillion ',
+  ' trequadragintillion ', ' quattuorquadragintillion ',
+  ' quinquadragintillion ', ' sexquadragintillion ',
+  ' septenquadragintillion ', ' octoquadragintillion ',
+  ' novemquadragintillion ', ' quinquagintillion ', ' unquinquagintillion ',
+  ' duoquinquagintillion ', ' trequinquagintillion ',
+  ' quattuorquinquagintillion ', ' quinquinquagintillion ',
+  ' sexquinquagintillion ', ' septenquinquagintillion ',
+  ' octoquinquagintillion ', ' novemquinquagintillion ', ' sexagintillion ',
+  ' unsexagintillion ', ' duosexagintillion ', ' tresexagintillion ',
+  ' quattuorsexagintillion ', ' quinsexagintillion ', ' sexsexagintillion ',
+  ' septsexagintillion ', ' octosexagintillion ', ' octosexagintillion ',
+  ' septuagintillion ', ' unseptuagintillion ', ' duoseptuagintillion ',
+  ' treseptuagintillion ', ' quinseptuagintillion', ' sexseptuagintillion',
+  ' septseptuagintillion', ' octoseptuagintillion',
+  ' novemseptuagintillion', ' octogintillion', ' unoctogintillion',
+  ' duooctogintillion', ' treoctogintillion', ' quattuoroctogintillion',
+  ' quinoctogintillion', ' sexoctogintillion', ' septoctogintillion',
+  ' octooctogintillion', ' novemoctogintillion', ' nonagintillion',
+  ' unnonagintillion', ' duononagintillion', ' trenonagintillion ',
+  ' quattuornonagintillion ', ' quinnonagintillion ', ' sexnonagintillion ',
+  ' septnonagintillion ', ' octononagintillion ', ' novemnonagintillion ',
+  ' centillion',
+];
+
 
 function spellf(userInput) {
   let numToWorkOn;
@@ -70,9 +70,9 @@ function spellf(userInput) {
   }
 
   if (numToWorkOn.indexOf('e+') !== -1) {
-    let splittedExponentNum = numToWorkOn.split('e+'),
-      exponent = splittedExponentNum[1],
-      str = '';
+    const splittedExponentNum = numToWorkOn.split('e+');
+    let exponent = splittedExponentNum[1];
+    let str = '';
     if (numToWorkOn.indexOf('.') !== -1) {
       numToWorkOn = splittedExponentNum[0].split('.');
       exponent -= numToWorkOn[1].length;
@@ -85,7 +85,7 @@ function spellf(userInput) {
     }
     numToWorkOn += str;
   } else if (numToWorkOn.indexOf('.') !== -1) {
-    let splittedDecimal = numToWorkOn.split('.');
+    const splittedDecimal = numToWorkOn.split('.');
     numToWorkOn = splittedDecimal[0];
   }
 
@@ -103,16 +103,16 @@ function spellf(userInput) {
       return '0';
     }
 
-    let result = '',
-      unitLookup = 0,
-      strLength = stringEquivalent.length;
+    let result = '';
+    let unitLookup = 0;
+    let strLength = stringEquivalent.length;
     for (let k = strLength; k > 0; k = k - 3) {
       if (k - 3 <= 0) {
-        let subStr = stringEquivalent.substring(k, k - 3);
-        let pronounce = pronounceNum(subStr);
+        const subStr = stringEquivalent.substring(k, k - 3);
+        const pronounce = pronounceNum(subStr);
 
         if (pronounce.toUpperCase() != 'zero') {
-          let num = Number(
+          const num = Number(
             subStr + '.' +
             stringEquivalent.substring(subStr.length, subStr.length + 2),
           );
@@ -140,8 +140,8 @@ function spellf(userInput) {
   // Pronounces any number less than 1000
   function numLessThan1000(val) {
     val = Number(val);
-    let hundredPlace = parseInt(val / 100),
-      result;
+    let hundredPlace = parseInt(val / 100);
+    let result;
     if (val % 100 == 0) {
       result = oneToTen[hundredPlace] + ' hundred ';
     } else {
@@ -153,8 +153,8 @@ function spellf(userInput) {
   // Pronounces any number less than 99
   function numLessThan99(val) {
     val = Number(val);
-    let tenthPlace = parseInt(val / 10),
-      result;
+    let tenthPlace = parseInt(val / 10);
+    let result;
     if (tenthPlace !== 1) {
       result = multipleOfTen[tenthPlace];
       if (val % 10) {
@@ -173,18 +173,18 @@ function spellf(userInput) {
   }
 }
 
-String.prototype.toTitleCase = function() {
+String.prototype.toTitleCase = function () {
   return this.charAt(0).toUpperCase() + this.substr(1).toLowerCase();
 };
 
-String.prototype.camelize = function() {
-  return this.replace(/^([A-Z])|[\s-_]+(\w)/g, function(match, p1, p2, offset) {
+String.prototype.camelize = function () {
+  return this.replace(/^([A-Z])|[\s-_]+(\w)/g, function (match, p1, p2, offset) {
     if (p2) return p2.toUpperCase();
     return p1.toLowerCase();
   });
 };
 
-String.prototype.decamelize = function(separator) {
+String.prototype.decamelize = function (separator) {
   separator = typeof separator === 'undefined' ? ' ' : separator;
 
   return this
@@ -214,7 +214,7 @@ function commify(n) {
 
 
 // Display stuff
-var domElements = {};
+const domElements = {};
 
 function getEl(id) {
   if (!domElements[id]) {
@@ -224,9 +224,9 @@ function getEl(id) {
 }
 
 function fade(element, targetOpacity) {
-  var fadeCounter = -1;
+  let fadeCounter = -1;
 
-  var handle = window.setInterval(function() {
+  const handle = window.setInterval(function () {
     toggleVisibility(element);
   }, 30);
 
@@ -242,24 +242,24 @@ function fade(element, targetOpacity) {
 }
 
 function unhide(id) {
-  var el = getEl(id);
+  const el = getEl(id);
   el.style.opacity = 0;
   el.hidden = false;
   fade(el, 1.0);
 }
 
 function createRipple(e) {
-  let circle = document.createElement('div');
+  const circle = document.createElement('div');
   this.appendChild(circle);
-  let d = Math.max(this.clientWidth, this.clientHeight);
+  const d = Math.max(this.clientWidth, this.clientHeight);
   circle.style.width = circle.style.height = d + 'px';
 
-  let rect = this.getBoundingClientRect();
+  const rect = this.getBoundingClientRect();
   circle.style.left = e.clientX - rect.left - d / 2 + 'px';
   circle.style.top = e.clientY - rect.top - d / 2 + 'px';
 
   circle.classList.add('ripple');
-  circle.addEventListener('animationend', function(e) {
+  circle.addEventListener('animationend', function (e) {
     this.parentNode.removeChild(this);
   });
 }
@@ -268,7 +268,7 @@ function displayMessage(msg, dontSave) {
   if (!dontSave) {
     consoleHistory.push(msg);
   }
-  let newMsgEl = document.createElement('div');
+  const newMsgEl = document.createElement('div');
   newMsgEl.setAttribute('class', 'consoleMsg');
   newMsgEl.setAttribute('id', 'consoleMsg');
   newMsgEl.innerHTML = msg;
@@ -278,7 +278,7 @@ function displayMessage(msg, dontSave) {
   getEl('readoutDiv').prepend(newMsgEl, getEl('readoutDiv').firstChild);
 }
 
-var themes = {
+const themes = {
   'Light': {
     '--bg-color': '#ffffff',
     '--outline-color': '#000000',
@@ -322,14 +322,14 @@ function loadTheme() {
 
 function applyTheme(theme) {
   // Sets theme colors.
-  for (let i in themes[theme]) {
+  for (const i in themes[theme]) {
     document.documentElement.style.setProperty(i, themes[theme][i]);
   }
 }
 
-window.mobileAndTabletCheck = function() {
+window.mobileAndTabletCheck = function () {
   let check = false;
-  (function(a) {
+  (function (a) {
     if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
   })(navigator.userAgent || navigator.vendor || window.opera);
   return check;
@@ -337,8 +337,8 @@ window.mobileAndTabletCheck = function() {
 
 // project and event stuff
 function generateInformation(object) {
-  for (let name in object) {
-    let i = object[name];
+  for (const name in object) {
+    const i = object[name];
     i.title = name.decamelize();
     if (typeof i.description == 'function') {
       i.description = i.description();
@@ -370,9 +370,9 @@ function percentToMultiplier(percent) {
 function applyFocusVisiblePolyfill(scope) {
   let hadKeyboardEvent = true;
   let hadFocusVisibleRecently = false;
-  var hadFocusVisibleRecentlyTimeout = null;
+  let hadFocusVisibleRecentlyTimeout = null;
 
-  let inputTypesWhitelist = {
+  const inputTypesWhitelist = {
     'text': true,
     'search': true,
     'url': true,
@@ -415,8 +415,8 @@ function applyFocusVisiblePolyfill(scope) {
    * @return {boolean}
    */
   function focusTriggersKeyboardModality(el) {
-    var type = el.type;
-    var tagName = el.tagName;
+    const type = el.type;
+    const tagName = el.tagName;
 
     if (tagName === 'INPUT' && inputTypesWhitelist[type] && !el.readOnly) {
       return true;
@@ -509,7 +509,7 @@ function applyFocusVisiblePolyfill(scope) {
       // regular focus change.
       hadFocusVisibleRecently = true;
       window.clearTimeout(hadFocusVisibleRecentlyTimeout);
-      hadFocusVisibleRecentlyTimeout = window.setTimeout(function() {
+      hadFocusVisibleRecentlyTimeout = window.setTimeout(function () {
         hadFocusVisibleRecently = false;
       }, 100);
       removeFocusVisibleClass(e.target);
@@ -583,7 +583,7 @@ function applyFocusVisiblePolyfill(scope) {
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   window.applyFocusVisiblePolyfill = applyFocusVisiblePolyfill;
 
-  var event;
+  let event;
   try {
     event = new CustomEvent('focus-visible-polyfill-ready');
   } catch (error) {

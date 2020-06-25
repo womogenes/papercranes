@@ -17,8 +17,8 @@ function borrowMoney(x) {
 }
 
 function payBackLoan(x) {
-  let max = Math.min(debt, money);
-  let payAmount = x ? Math.min(x, max) : max;
+  const max = Math.min(debt, money);
+  const payAmount = x ? Math.min(x, max) : max;
   debt -= payAmount;
   money -= payAmount;
 }

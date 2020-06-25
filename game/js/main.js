@@ -1,40 +1,40 @@
 // Yoy!
-var cranes = 0;
-var wishes = 0;
-var unsoldCranes = 0;
-var cranePriceSliderLoc = 0.1;
-var learnedToFoldCranes = false;
+let cranes = 0;
+let wishes = 0;
+let unsoldCranes = 0;
+let cranePriceSliderLoc = 0.1;
+let learnedToFoldCranes = false;
 
-var money = 40;
-var debt = 0;
-var maxDebt = 1e3;
-var interestRate = 0.01;
+let money = 40;
+let debt = 0;
+let maxDebt = 1e3;
+let interestRate = 0.01;
 
-var advertisingPrice = 40.0;
-var advertisingLevel = 1;
+let advertisingPrice = 40.0;
+let advertisingLevel = 1;
 
-var basePaperPrice = 15;
-var paperPrice = 15;
-var paperPurchaseAmount = 1000;
-var paper = 10;
-var paperBuyerOn = false;
+let basePaperPrice = 15;
+let paperPrice = 15;
+let paperPurchaseAmount = 1000;
+let paper = 10;
+let paperBuyerOn = false;
 
-var highSchoolerWage = 5;
-var highSchoolers = 0;
-var highSchoolerBoost = 1;
-var professionals = 0;
-var professionalWage = 100;
+let highSchoolerWage = 5;
+let highSchoolers = 0;
+let highSchoolerBoost = 1;
+let professionals = 0;
+let professionalWage = 100;
 
-var prevCranes = cranes;
-var tick = 0;
+let prevCranes = cranes;
+let tick = 0;
 
-var consoleHistory = [];
-var pendingEvents = [];
+let consoleHistory = [];
+let pendingEvents = [];
 
-var theme;
+let theme;
 
 function save() {
-  let savedGame = {
+  const savedGame = {
     cranes: cranes,
     unsoldCranes: unsoldCranes,
     money: money,
@@ -66,8 +66,8 @@ function save() {
   let savedActiveProjects = [];
   let savedProjectData = {};
 
-  for (let projectName in projects) {
-    let project = projects[projectName];
+  for (const projectName in projects) {
+    const project = projects[projectName];
     savedProjectData[projectName] = {
       flag: project.flag,
       uses: project.uses,
@@ -81,9 +81,9 @@ function save() {
   localStorage.setItem('savedActiveProjects', JSON.stringify(savedActiveProjects));
 
   // Deal with events.
-  let savedEventData = {};
-  for (let eventName in events) {
-    let event = events[eventName];
+  const savedEventData = {};
+  for (const eventName in events) {
+    const event = events[eventName];
     savedEventData[eventName] = {
       flag: event.flag,
       uses: event.uses,
@@ -130,33 +130,33 @@ function load() {
   professionalWage = savedGame.professionalWage;
 
   // Load projects and events
-  let savedProjectData = JSON.parse(localStorage.getItem('savedProjectData'));
+  const savedProjectData = JSON.parse(localStorage.getItem('savedProjectData'));
   for (let savedProjectName in savedProjectData) {
     let savedProject = savedProjectData[savedProjectName];
     let project = projects[savedProjectName];
     project.uses = savedProject.uses;
     project.flag = savedProject.flag;
   }
-  let savedActiveProjects = JSON.parse(localStorage.getItem('savedActiveProjects'));
-  for (let projectName in projects) {
-    let project = projects[projectName];
+  const savedActiveProjects = JSON.parse(localStorage.getItem('savedActiveProjects'));
+  for (const projectName in projects) {
+    const project = projects[projectName];
     if (savedActiveProjects.indexOf(project.title.camelize()) >= 0) {
       displayProjects(project);
       activeProjects.push(project);
     }
   }
 
-  let savedEventData = JSON.parse(localStorage.getItem('savedEventData'));
+  const savedEventData = JSON.parse(localStorage.getItem('savedEventData'));
   for (let eventName in savedEventData) {
-    let savedEvent = savedEventData[eventName];
-    let event = events[eventName];
+    const savedEvent = savedEventData[eventName];
+    const event = events[eventName];
     event.uses = savedEvent.uses;
     event.flag = savedEvent.flag;
   }
 
   [projects, events].forEach((object) => {
-    for (let name in object) {
-      let thing = object[name];
+    for (const name in object) {
+      const thing = object[name];
       if (thing.flag && thing.hasOwnProperty('loadEffect')) {
         thing.loadEffect();
       }
@@ -245,7 +245,7 @@ setInterval(function () {
 }, 15000);
 
 function sellCranes() {
-  var demand = (0.08 / cranePrice) * Math.pow(1.3, advertisingLevel - 1);
+  const demand = (0.08 / cranePrice) * Math.pow(1.3, advertisingLevel - 1);
   getEl('demand').innerHTML = commify(Math.floor(demand * 100));
 
   if (Math.random() * 50 < demand || (cranePrice <= 0.01 && Math.random() > 0.7)) {
@@ -268,7 +268,6 @@ function updateDom() {
   getEl('wishes').innerHTML = commify(Math.floor(wishes));
 
   getEl('unsoldCranes').innerHTML = commify(Math.floor(unsoldCranes));
-  getEl('craneCountCrunched').innerHTML = spellf(Math.round(cranes));
   getEl('cranePrice').innerHTML = monify(parseFloat(cranePrice));
 
   getEl('money').innerHTML = monify(money);
@@ -379,8 +378,8 @@ function displayEvent(event) {
   }
   if (event.buttons) {
     event.buttonEls = {};
-    for (let buttonText in event.buttons) {
-      let newButton = document.createElement('button');
+    for (const buttonText in event.buttons) {
+      const newButton = document.createElement('button');
       newButton.innerHTML = buttonText.toTitleCase();
       newButton.onclick = event.buttons[buttonText];
       getEl('eventButtons').appendChild(newButton);
