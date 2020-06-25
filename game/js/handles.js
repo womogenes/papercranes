@@ -6,7 +6,7 @@ function increaseAdvertising() {
   money -= advertisingPrice;
 
   advertisingPrice = Math.round(advertisingPrice * 2);
-  getEl("advertisingLevel").innerHTML = commify(advertisingLevel);
+  getEl('advertisingLevel').innerHTML = commify(advertisingLevel);
 }
 
 
@@ -17,15 +17,15 @@ function borrowMoney(x) {
 }
 
 function payBackLoan(x) {
-  var max = Math.min(debt, money);
-  var payAmount = x ? Math.min(x, max) : max;
+  let max = Math.min(debt, money);
+  let payAmount = x ? Math.min(x, max) : max;
   debt -= payAmount;
   money -= payAmount;
 }
 
 function togglePaperBuyer() {
-  paperBuyerOn = !paperBuyerOn
-  getEl("paperBuyer").innerHTML = paperBuyerOn ? "ON" : "OFF";
+  paperBuyerOn = !paperBuyerOn;
+  getEl('paperBuyer').innerHTML = paperBuyerOn ? 'ON' : 'OFF';
 }
 
 function hireHighSchooler() {
@@ -46,7 +46,7 @@ function hireProfessional() {
 }
 
 function makeCrane(n) {
-  n = Math.min(n, paper)
+  n = Math.min(n, paper);
 
   wishes += n / 1000;
 
@@ -54,7 +54,7 @@ function makeCrane(n) {
   unsoldCranes += n;
   paper -= n;
 
-  getEl("cranes").innerHTML = commify(Math.floor(cranes));
+  getEl('cranes').innerHTML = commify(Math.floor(cranes));
 }
 
 function buyPaper(n) {
@@ -71,12 +71,12 @@ function closeEvent() {
     displayEvent();
   } else {
     resetEventDiv();
-    getEl("eventDiv").hidden = true;
+    getEl('eventDiv').hidden = true;
   }
 }
 
 function changeTheme() {
-  theme = theme == "Light" ? "Dark" : "Light"
+  theme = theme == 'Light' ? 'Dark' : 'Light';
   applyTheme(theme);
 }
 
@@ -89,6 +89,6 @@ function restart() {
 
 function learnToFoldCranes() {
   learnedToFoldCranes = true;
-  unhide("foldingColumn");
-  getEl("learnColumn").hidden = true;
+  unhide('foldingColumn');
+  getEl('learnColumn').hidden = true;
 }

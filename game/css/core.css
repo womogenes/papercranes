@@ -1,5 +1,5 @@
 * {
-	font-family: "Inconsolata", "Consolas", monospace;
+	font-family: 'Inconsolata', 'Consolas', monospace;
 	color: var(--text-color);
 	touch-action: manipulation;
 }

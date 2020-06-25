@@ -6,7 +6,7 @@ html, body {
 }
 
 p {
-  font-family: "Inconsolata", "Consolas", monospaced, sans-serif;
+  font-family: 'Inconsolata', 'Consolas', monospaced, sans-serif;
   color: var(--text-color);
 }
 

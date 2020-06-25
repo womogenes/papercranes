@@ -2,7 +2,10 @@
 test.py
 Pipfile
 Pipfile.lock
-__pycache
 serve.py
 /game/js/inline-console-min.js
 __pycache__
+node_modules
+.eslintrc.json
+package.json
+package-lock.json
