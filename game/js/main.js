@@ -264,7 +264,6 @@ function sellCranes() {
 
 function updateDom() {
   // Update elements to have correct values
-  getEl('cranes').innerHTML = commify(Math.round(cranes));
   getEl('wishes').innerHTML = commify(Math.floor(wishes));
 
   getEl('unsoldCranes').innerHTML = commify(Math.floor(unsoldCranes));

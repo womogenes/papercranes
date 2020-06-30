@@ -53,8 +53,6 @@ function makeCrane(n) {
   cranes += n;
   unsoldCranes += n;
   paper -= n;
-
-  getEl('cranes').innerHTML = commify(Math.floor(cranes));
 }
 
 function buyPaper(n) {
