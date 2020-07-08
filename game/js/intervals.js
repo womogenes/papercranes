@@ -7,7 +7,6 @@ setInterval(function () {
     sellCranes();
   }
 
-
   cranePrice = (Math.pow(101, getEl('priceSlider').value) - 1) / 10 + 0.01;
 
   manageProjects();
