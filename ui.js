@@ -192,10 +192,10 @@ function displayProjects(project) {
   };
 
   getEl('projectsDiv').appendChild(project.element, getEl('projectsDiv').firstChild);
-  
+
   let titleDiv = document.createElement('div');
   titleDiv.setAttribute('class', 'titleDiv');
-  
+
   let title = document.createElement('b');
   titleDiv.appendChild(title);
 

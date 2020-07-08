@@ -78,7 +78,7 @@ const events = {
         }
         const buttonEls = events.maxedDebt.buttonEls;
         buttonEls[0].disabled = !money;
-        buttonEls[0].innerHTML = `Pay ${monify(money/2)}`;
+        buttonEls[0].innerHTML = `Pay $${monify(money/2)}`;
         buttonEls[1].disabled = !(highSchoolers || professionals);
         buttonEls[2].disabled = (money || highSchoolers || professionals);
       }, 10);
