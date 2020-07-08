@@ -94,8 +94,8 @@
 	transition: all 0.3s ease;
 }
 
-#projectsDiv>button>b {
-  margin-bottom: 10px;
+#projectsDiv>button>div.titleDiv {
+  margin-bottom: 5px;
 }
 
 #menuDiv {
