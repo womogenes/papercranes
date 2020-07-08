@@ -192,12 +192,16 @@ function displayProjects(project) {
   };
 
   getEl('projectsDiv').appendChild(project.element, getEl('projectsDiv').firstChild);
+  
+  let titleDiv = document.createElement('div');
+  titleDiv.setAttribute('class', 'titleDiv');
+  
+  let title = document.createElement('b');
+  titleDiv.appendChild(title);
 
-  let span = document.createElement('b');
-  project.element.appendChild(span);
-
-  span.appendChild(document.createTextNode(project.title.toTitleCase()));
-  project.element.appendChild(document.createTextNode(' ' + projectPriceTag(project)));
+  title.appendChild(document.createTextNode(project.title.toTitleCase()));
+  titleDiv.appendChild(document.createTextNode(' ' + projectPriceTag(project)));
+  project.element.appendChild(titleDiv);
 
   project.element.appendChild(document.createElement('div'));
   project.element.appendChild(document.createTextNode(project.description));

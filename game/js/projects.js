@@ -42,7 +42,7 @@ function canAffordProject(project) {
 const projects = {
   // Worker projects
   unlockWorkers: {
-    description: 'Be able to hire workers to fold for you.',
+    description: 'Hire workers to fold for you.',
     costs: {
       money: 10,
     },
