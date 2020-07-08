@@ -167,17 +167,17 @@ function displayEvent(event) {
     getEl('eventCloseButton').hidden = true;
   }
   if (event.buttons) {
-    event.buttonEls = {};
-    for (const buttonText in event.buttons) {
+    event.buttonEls = [];
+    event.buttons.forEach((button) => {
       const newButton = document.createElement('button');
-      newButton.innerHTML = buttonText.toTitleCase();
-      newButton.onclick = event.buttons[buttonText];
+      newButton.innerHTML = button.text.toTitleCase();
+      newButton.onclick = button.onClick;
       getEl('eventButtons').appendChild(newButton);
-      event.buttonEls[buttonText] = newButton;
+      event.buttonEls.push(newButton);
+    });
+    if (getEl('eventDiv').hidden) {
+      unhide('eventDiv');
     }
-  }
-  if (getEl('eventDiv').hidden) {
-    unhide('eventDiv');
   }
 }
 

@@ -78,30 +78,39 @@ const events = {
         }
         const buttonEls = events.maxedDebt.buttonEls;
         buttonEls[0].disabled = !money;
+        buttonEls[0].innerHTML = `Pay ${monify(money/2)}`;
         buttonEls[1].disabled = !(highSchoolers || professionals);
-        buttonEls[1].disabled = (money || highSchoolers || professionals);
+        buttonEls[2].disabled = (money || highSchoolers || professionals);
       }, 10);
     },
     loadEffect: function () {
       this.effect();
       displayEvent(this);
     },
-    buttons: [
-      function () {
-        payBackLoan(money / 2);
+    buttons: [{
+        text: 'pay money',
+        onClick: function () {
+          payBackLoan(money / 2);
+        },
       },
-      function () {
-        if (professionals) {
-          professionals -= 1;
-          debt -= professionalWage;
-        } else if (highSchoolers) {
-          highSchoolers -= 1;
-          debt -= highSchoolerWage;
-        }
+      {
+        text: 'sell a worker',
+        onClick: function () {
+          if (professionals) {
+            professionals -= 1;
+            debt -= professionalWage;
+          } else if (highSchoolers) {
+            highSchoolers -= 1;
+            debt -= highSchoolerWage;
+          }
+        },
       },
-      function () {
-        debt = 0;
-        maxDebt -= 500;
+      {
+        text: 'default on loan',
+        onClick: function () {
+          debt = 0;
+          maxDebt -= 500;
+        },
       },
     ],
     noCloseButton: true,
@@ -114,16 +123,21 @@ const otherThings = {
     description: 'Are you sure you want to restart? \nThis will clear all your progress.',
     notifyPlayer: true,
     uses: 1,
-    buttons: {
-      'restart': function () {
-        localStorage.clear();
-        location.reload();
+    buttons: [{
+        text: 'restart',
+        onClick: function () {
+          localStorage.clear();
+          location.reload();
+        },
       },
-      'cancel': function () {
-        this.uses += 1;
-        closeEvent();
+      {
+        text: 'cancel',
+        onClick: function () {
+          this.uses += 1;
+          closeEvent();
+        },
       },
-    },
+    ],
     noCloseButton: true,
   },
 };
