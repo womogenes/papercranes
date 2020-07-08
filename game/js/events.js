@@ -77,20 +77,20 @@ const events = {
           return;
         }
         const buttonEls = events.maxedDebt.buttonEls;
-        buttonEls['pay $100'].disabled = !money;
-        buttonEls['sell a worker'].disabled = !(highSchoolers || professionals);
-        buttonEls['default on loan'].disabled = (money || highSchoolers || professionals);
+        buttonEls[0].disabled = !money;
+        buttonEls[1].disabled = !(highSchoolers || professionals);
+        buttonEls[1].disabled = (money || highSchoolers || professionals);
       }, 10);
     },
     loadEffect: function () {
       this.effect();
       displayEvent(this);
     },
-    buttons: {
-      'pay $100': function () {
-        payBackLoan(100);
+    buttons: [
+      function () {
+        payBackLoan(money / 2);
       },
-      'sell a worker': function () {
+      function () {
         if (professionals) {
           professionals -= 1;
           debt -= professionalWage;
@@ -99,11 +99,11 @@ const events = {
           debt -= highSchoolerWage;
         }
       },
-      'default on loan': function () {
+      function () {
         debt = 0;
         maxDebt -= 500;
       },
-    },
+    ],
     noCloseButton: true,
   },
 };
