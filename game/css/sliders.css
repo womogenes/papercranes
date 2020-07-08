@@ -9,7 +9,6 @@ input[type=range] {
   --thumb-border-radius: 15px;
   --thumb-cursor: pointer;
 
-
   -webkit-appearance: none;
   margin: 10px 0;
   margin-bottom: 7px;
@@ -32,15 +31,14 @@ input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: var(--thumb-height);
   width: var(--thumb-width);
-  border: var(--thumb-border);
   border-radius: var(--thumb-border-radius);
   background: var(--slider-thumb-color);
   cursor: var(--thumb-cursor);
   margin-top: -5px;
 }
 
-input[type=range]:focus::-webkit-slider-runnable-track {
-  background: var(--slider-focus-bg-color);
+input[type=range]:focus::-webkit-slider-thumb {
+  border: var(--thumb-border);
 }
 
 input[type=range]::-moz-range-track {
