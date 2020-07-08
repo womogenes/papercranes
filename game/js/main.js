@@ -206,33 +206,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
   };
 });
 
-
-
 // Project management functions.
-function displayProjects(project) {
-  project.element = document.createElement('button');
-  project.element.style.opacity = 0;
-  project.element.setAttribute('id', project.title.camelize());
-
-  project.element.onclick = function () {
-    projectBaseEffect(project);
-    project.effect();
-  };
-
-  getEl('projectsDiv').appendChild(project.element, getEl('projectsDiv').firstChild);
-
-  let span = document.createElement('b');
-  project.element.appendChild(span);
-
-  span.appendChild(document.createTextNode(project.title.toTitleCase()));
-  project.element.appendChild(document.createTextNode(' ' + projectPriceTag(project)));
-
-  project.element.appendChild(document.createElement('div'));
-  project.element.appendChild(document.createTextNode(project.description));
-
-  fade(project.element, canAffordProject(project) ? 1.0 : 0.6);
-}
-
 function manageProjects() {
   for (let projectName in projects) {
     let project = projects[projectName];
@@ -262,38 +236,5 @@ function manageEvents() {
 
   if (pendingEvents.length > 0 && getEl('eventDiv').hidden) {
     displayEvent();
-  }
-}
-
-function displayEvent(event) {
-  // If event is not passed, displayed next event
-  // If event is passed, moves the currently displayed event back to pendingEvents
-  // and replaces it with event
-  if (event) {
-    if (!getEl('eventDiv').hidden) {
-      pendingEvents.push(getEl('eventTitle').innerHTML.camelize());
-    }
-  } else {
-    let eventName = pendingEvents.pop();
-    event = events.hasOwnProperty(eventName) ? events[eventName] : otherThings[eventName];
-  }
-  resetEventDiv();
-  getEl('eventTitle').innerHTML = event.title.toTitleCase();
-  getEl('eventDescription').innerHTML = event.description;
-  if (event.noCloseButton) {
-    getEl('eventCloseButton').hidden = true;
-  }
-  if (event.buttons) {
-    event.buttonEls = {};
-    for (const buttonText in event.buttons) {
-      const newButton = document.createElement('button');
-      newButton.innerHTML = buttonText.toTitleCase();
-      newButton.onclick = event.buttons[buttonText];
-      getEl('eventButtons').appendChild(newButton);
-      event.buttonEls[buttonText] = newButton;
-    }
-  }
-  if (getEl('eventDiv').hidden) {
-    unhide('eventDiv');
   }
 }
