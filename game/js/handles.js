@@ -56,7 +56,7 @@ function makeCrane(n) {
 }
 
 function sellCranes() {
-  const demand = (0.08 / cranePrice) * Math.pow(1.3, advertisingLevel - 1);
+  const demand = (0.1 / cranePrice) * Math.pow(1.2, advertisingLevel - 1);
   getEl('demand').innerHTML = commify(Math.floor(demand * 100));
 
   if (Math.random() * 50 < demand || (cranePrice <= 0.01 && Math.random() > 0.7)) {
