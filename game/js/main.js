@@ -206,62 +206,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
   };
 });
 
-// Game loop!
-setInterval(function () {
-  // Make cranes before selling them.
-  makeCrane((highSchoolers * highSchoolerBoost) / 500);
-  makeCrane(professionals);
-  if (projects.buisnessManagement.flag) {
-    sellCranes();
-  }
-
-
-  cranePrice = (Math.pow(101, getEl('priceSlider').value) - 1) / 10 + 0.01;
-
-  manageProjects();
-  manageEvents();
-
-  updateDom();
-  tick++;
-}, 10);
-
-// Slower one, every second.
-setInterval(function () {
-  getEl('cranemakerRate').innerHTML = commify(Math.round(cranes - prevCranes));
-  prevCranes = cranes;
-}, 1000);
-
-// A slower on, every 5 seconds.
-setInterval(function () {
-  save();
-
-  // Fluctuate price.
-  paperPrice = Math.floor(Math.sin(tick / 10) * 4) + basePaperPrice;
-  getEl('paperPrice').innerHTML = monify(paperPrice);
-}, 5000);
-
-setInterval(function () {
-  debt = Math.ceil(debt * (1 + interestRate) * 100) / 100;
-}, 15000);
-
-function sellCranes() {
-  const demand = (0.08 / cranePrice) * Math.pow(1.3, advertisingLevel - 1);
-  getEl('demand').innerHTML = commify(Math.floor(demand * 100));
-
-  if (Math.random() * 50 < demand || (cranePrice <= 0.01 && Math.random() > 0.7)) {
-    let amount = Math.ceil(demand);
-    if (cranePrice <= 0.01) {
-      amount = Math.ceil(unsoldCranes / 10);
-    }
-    amount = Math.min(amount, unsoldCranes);
-    if (unsoldCranes < 1) {
-      amount = 0;
-    }
-    unsoldCranes -= amount;
-    money += cranePrice * amount;
-  }
-}
-
 function updateDom() {
   // Update elements to have correct values
   getEl('wishes').innerHTML = commify(Math.floor(wishes));
@@ -312,7 +256,7 @@ function displayProjects(project) {
 
   getEl('projectsDiv').appendChild(project.element, getEl('projectsDiv').firstChild);
 
-  var span = document.createElement('b');
+  let span = document.createElement('b');
   project.element.appendChild(span);
 
   span.appendChild(document.createTextNode(project.title.toTitleCase()));

@@ -55,6 +55,24 @@ function makeCrane(n) {
   paper -= n;
 }
 
+function sellCranes() {
+  const demand = (0.08 / cranePrice) * Math.pow(1.3, advertisingLevel - 1);
+  getEl('demand').innerHTML = commify(Math.floor(demand * 100));
+
+  if (Math.random() * 50 < demand || (cranePrice <= 0.01 && Math.random() > 0.7)) {
+    let amount = Math.ceil(demand);
+    if (cranePrice <= 0.01) {
+      amount = Math.ceil(unsoldCranes / 10);
+    }
+    amount = Math.min(amount, unsoldCranes);
+    if (unsoldCranes < 1) {
+      amount = 0;
+    }
+    unsoldCranes -= amount;
+    money += cranePrice * amount;
+  }
+}
+
 function buyPaper(n) {
   if (money < paperPrice * n) {
     return;
