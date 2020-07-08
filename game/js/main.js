@@ -312,8 +312,7 @@ function displayProjects(project) {
 
   getEl('projectsDiv').appendChild(project.element, getEl('projectsDiv').firstChild);
 
-  let span = document.createElement('span');
-  span.style.fontWeight = 'bold';
+  var span = document.createElement('b');
   project.element.appendChild(span);
 
   span.appendChild(document.createTextNode(project.title.toTitleCase()));

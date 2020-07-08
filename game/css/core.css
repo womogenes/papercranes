@@ -86,6 +86,44 @@ button .ripple {
 	}
 }
 
+.projectButton {
+	font-size: 13px;
+	border-radius: 10px;
+	border: 1px solid var(--outline-color);
+	background: var(--btn-bg-on);
+	display: block;
+
+	height: 70px;
+	width: 100%;
+	margin-top: 10px;
+  padding: 10px;
+	transition: all 0.3s ease;
+
+	touch-action: manipulation;
+}
+
+.projectButton:hover {
+	background: var(--btn-bg-hover);
+	border: 1px solid var(--btn-outline-hover);
+	cursor: pointer;
+}
+
+.projectButton:active {
+	background: var(--btn-bg-active);
+	border: 1px solid var(--btn-outline-active);
+}
+
+.projectButton:disabled {
+	opacity: 0.6;
+	border: 1px solid var(--btn-outline-disabled);
+	cursor: auto;
+}
+
+.projectButton>b {
+  display: none;
+  margin-bottom: 10px;
+}
+
 .pulsate {
 	animation: pulsate 0.7s ease-out;
 	-webkit-animation: pulsate 0.7s ease-out;
