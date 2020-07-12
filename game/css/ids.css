@@ -12,8 +12,9 @@
 #readoutDiv {
   display: block;
   height: 900px;
-  max-height: 84vh;
+  max-height: 80vh;
 	padding: 5px;
+  margin-bottom: 0;
 	border: 1px solid var(--outline-color);
 	overflow: auto;
 }

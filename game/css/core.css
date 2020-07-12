@@ -125,6 +125,7 @@ button .ripple {
 	margin-top: 15px;
 	margin-right: 20px;
 	margin-bottom: 20px;
+  overflow-y: auto;
 	overflow-wrap: break-word;
 }
 
