@@ -62,25 +62,24 @@ const events = {
   maxedDebt: {
     description: 'You have reached max debt. The bank wants 50% of it paid.',
     trigger: function () {
-      return debt >= maxDebt;
+      return debt >= maxDebt && !this.flag;
     },
-    uses: 1,
+    uses: -1,
     flag: false,
     notifyPlayer: true,
     effect: function () {
       events.maxedDebt.update = setInterval(function () {
         if (debt <= maxDebt * .5) {
-          this.uses = 1;
-          this.flag = false;
+          events.maxedDebt.flag = false;
           clearInterval(events.maxedDebt.update);
           closeEvent();
           return;
         }
         const buttonEls = events.maxedDebt.buttonEls;
-        buttonEls[0].disabled = !money;
-        buttonEls[0].innerHTML = `Pay $${monify(money/2)}`;
+        buttonEls[0].disabled = money < 0.01;
+        buttonEls[0].innerHTML = `Pay $${monify(Math.min(money / 2, debt - maxDebt / 2))}`;
         buttonEls[1].disabled = !(highSchoolers || professionals);
-        buttonEls[2].disabled = (money || highSchoolers || professionals);
+        buttonEls[2].disabled = (money > 0.01 || highSchoolers || professionals);
       }, 10);
     },
     loadEffect: function () {
@@ -90,7 +89,7 @@ const events = {
     buttons: [{
         text: 'pay money',
         onClick: function () {
-          payBackLoan(money / 2);
+          payBackLoan(Math.min(money / 2, debt - maxDebt / 2));
         },
       },
       {
@@ -122,7 +121,7 @@ const otherThings = {
   restart: {
     description: 'Are you sure you want to restart? \nThis will clear all your progress.',
     notifyPlayer: true,
-    uses: 1,
+    flag: false,
     buttons: [{
         text: 'restart',
         onClick: function () {
@@ -133,7 +132,7 @@ const otherThings = {
       {
         text: 'cancel',
         onClick: function () {
-          this.uses += 1;
+          otherThings.restart.flag = false;
           closeEvent();
         },
       },
