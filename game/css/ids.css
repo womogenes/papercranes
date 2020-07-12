@@ -1,12 +1,13 @@
 #consoleMsg {
-	font-size: 13px;
 	overflow: hidden;
-	margin-bottom: 5px;
+	margin-bottom: 15px;
 }
 
 #readoutDiv {
+  display: block;
+  height: 900px;
+  max-height: 84vh;
 	padding: 5px;
-	height: 100%;
 	border: 1px solid var(--outline-color);
 	overflow: auto;
 }
@@ -128,7 +129,7 @@
 	}
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 621px) {
 
 	#consoleMsg {
 		font-size: 15px;
@@ -141,4 +142,17 @@
 	#eventCloseButton {
 		right: 0px;
 	}
+  
+  #readoutDiv {
+    height: 200px;
+    width: 100%;
+    margin-right: 15px;
+    padding: 5px;
+    border: 1px solid var(--outline-color);
+    overflow: scroll;
+    
+    -moz-box-sizing: border-box; 
+    -webkit-box-sizing: border-box; 
+    box-sizing: border-box; 
+  }
 }
