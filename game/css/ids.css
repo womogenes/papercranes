@@ -4,6 +4,12 @@
 	margin-bottom: 5px;
 }
 
+#centerDiv {
+	width: 80%;
+	max-width: 1500px;
+	margin: 0 auto;
+}
+
 #readoutDiv {
 	padding: 5px;
 	height: 100%;
@@ -69,7 +75,9 @@
 }
 
 #moneyDiv {
+	width: fit-content;
 	margin-top: 30px;
+	margin-bottom: 20px;
 }
 
 #projectsColumn {
@@ -89,7 +97,7 @@
 }
 
 #projectsDiv>button>div.titleDiv {
-  margin-bottom: 5px;
+	margin-bottom: 5px;
 }
 
 #menuDiv {
@@ -129,6 +137,9 @@
 }
 
 @media only screen and (max-width: 550px) {
+	#centerDiv {
+		width: 275px;
+	}
 
 	#consoleMsg {
 		font-size: 15px;
