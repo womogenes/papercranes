@@ -32,7 +32,7 @@ function updateDom() {
   // Change favicon and title to show notifications
   let notificationCount = pendingEvents.length + (getEl('eventDiv').hidden ? 0 : 1);
   document.title = `${notificationCount ? `(${notificationCount}) ` : ''}Paper Cranes`;
-  getEl('icon').setAttribute('href', notificationCount ? '../favicon_notification.svg' : '../favicon_crane.svg');
+  getEl('icon').setAttribute('href', notificationCount ? '../images/favicon_notification.svg' : '../images/favicon_crane.svg');
 }
 
 const domElements = {};
