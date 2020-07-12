@@ -31,7 +31,7 @@ const events = {
       this.loadEffect();
     },
     loadEffect: function () {
-      unhide('prestigeColumn');
+      unhide('wishDiv');
     },
   },
   buyingPaperUnlocked: {

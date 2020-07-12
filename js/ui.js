@@ -1,5 +1,6 @@
 function updateDom() {
   // Update elements to have correct values
+  getEl('cranes').innerHTML = commify(Math.floor(cranes));
   getEl('wishes').innerHTML = commify(Math.floor(wishes));
 
   getEl('unsoldCranes').innerHTML = commify(Math.floor(unsoldCranes));

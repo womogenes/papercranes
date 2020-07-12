@@ -106,5 +106,6 @@ function restart() {
 function learnToFoldCranes() {
   learnedToFoldCranes = true;
   unhide('foldingColumn');
+  unhide('prestigeColumn');
   getEl('learnColumn').hidden = true;
 }
