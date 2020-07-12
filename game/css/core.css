@@ -20,11 +20,6 @@ div {
 	touch-action: manipulation;
 }
 
-div.scroll {
-	overflow: auto;
-	border: 1px solid var(--outline-color);
-}
-
 hr {
 	margin-top: 4px;
 	margin-bottom: 3px;
