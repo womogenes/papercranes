@@ -143,20 +143,6 @@ const projects = {
       unhide('professionalDiv');
     },
   },
-  lowerWages: {
-    costs: {
-      money: 10000000,
-    },
-    description: 'Lobby the lawmakers to reduce minimum wage.',
-    trigger: function() {
-      return highSchoolers > 250;
-    },
-    uses: 1,
-    flag: false,
-    effect: function() {
-      highSchoolerWage = 0;
-    },
-  },
 
   // Buisness projects
   bankAccount: {
