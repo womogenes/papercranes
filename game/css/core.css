@@ -14,6 +14,7 @@ body {
 p {
 	display: inline;
 	margin: 1px auto;
+  line-height: 120%;
 }
 
 div {

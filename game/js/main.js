@@ -25,6 +25,9 @@ let highSchoolerBoost = 1;
 let professionals = 0;
 let professionalWage = 100;
 
+let factoryCount = 0;
+let factoryBoost = 1;
+
 let prevCranes = cranes;
 let tick = 0;
 
@@ -55,6 +58,8 @@ function save() {
     professionalWage: professionalWage,
     basePaperPrice: basePaperPrice,
     wishes: wishes,
+    factoryCount: factoryCount,
+    factoryBoost: factoryBoost,
 
     paperBuyerOn: paperBuyerOn,
     learnedToFoldCranes: learnedToFoldCranes,
@@ -128,6 +133,9 @@ function load() {
   highSchoolerWage = savedGame.highSchoolerWage;
   professionals = savedGame.professionals;
   professionalWage = savedGame.professionalWage;
+  factoryCount = savedGame.factoryCount;
+  factoryBoost = savedGame.factoryBoost;
+  
 
   // Load projects and events
   const savedProjectData = JSON.parse(localStorage.getItem('savedProjectData'));
