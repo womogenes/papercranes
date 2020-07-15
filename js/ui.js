@@ -159,7 +159,7 @@ function displayEvent(event) {
     }
   } else {
     let eventName = pendingEvents.pop();
-    event = events.hasOwnProperty(eventName) ? events[eventName] : otherThings[eventName];
+    event = events.hasOwnProperty(eventName) ? events[eventName] : otherEvents[eventName];
   }
   resetEventDiv();
   getEl('eventTitle').innerHTML = event.title.toTitleCase();

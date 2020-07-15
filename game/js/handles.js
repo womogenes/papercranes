@@ -97,9 +97,9 @@ function changeTheme() {
 }
 
 function restart() {
-  if (!otherThings.restart.flag) {
-    otherThings.restart.flag = true;
-    displayEvent(otherThings.restart);
+  if (!otherEvents.restart.flag) {
+    otherEvents.restart.flag = true;
+    displayEvent(otherEvents.restart);
   }
 }
 

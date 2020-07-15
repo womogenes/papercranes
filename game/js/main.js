@@ -93,17 +93,17 @@ function save() {
     };
   }
   localStorage.setItem('savedEventData', JSON.stringify(savedEventData));
-  const savedOtherThingsData = {};
-  for (const eventName in otherThings) {
-    const event = otherThings[eventName];
+  const savedOtherEventsData = {};
+  for (const eventName in otherEvents) {
+    const event = otherEvents[eventName];
     if (event.save != undefined) {
-      savedOtherThingsData[eventName] = {};
+      savedOtherEventsData[eventName] = {};
       event.save.forEach((propertyName) => {
-        savedOtherThingsData[eventName][propertyName] = event[propertyName];
+        savedOtherEventsData[eventName][propertyName] = event[propertyName];
       });
     }
   }
-  localStorage.setItem('savedOtherThingsData', JSON.stringify(savedOtherThingsData));
+  localStorage.setItem('savedOtherEventsData', JSON.stringify(savedOtherEventsData));
 
   localStorage.setItem('consoleHistory', JSON.stringify(consoleHistory));
   localStorage.setItem('theme', JSON.stringify(theme));
@@ -168,16 +168,16 @@ function load() {
     event.flag = savedEvent.flag;
   }
 
-  const savedOtherThingsData = JSON.parse(localStorage.getItem('savedOtherThingsData'));
-  for (const eventName in savedOtherThingsData) {
-    const savedData = savedOtherThingsData[eventName];
-    const event = otherThings[eventName];
+  const savedOtherEventsData = JSON.parse(localStorage.getItem('savedOtherEventsData'));
+  for (const eventName in savedOtherEventsData) {
+    const savedData = savedOtherEventsData[eventName];
+    const event = otherEvents[eventName];
     for (const propertyName in savedData) {
       event[propertyName] = savedData[propertyName];
     }
   }
 
-  [projects, events, otherThings].forEach((object) => {
+  [projects, events, otherEvents].forEach((object) => {
     for (const name in object) {
       const thing = object[name];
       if (thing.flag && thing.hasOwnProperty('loadEffect')) {

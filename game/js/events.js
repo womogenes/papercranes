@@ -117,7 +117,7 @@ const events = {
 };
 
 // events that don't need to be checked each interval
-const otherThings = {
+const otherEvents = {
   restart: {
     description: 'Are you sure you want to restart? \nThis will clear all your progress.',
     notifyPlayer: true,
@@ -132,7 +132,7 @@ const otherThings = {
       {
         text: 'cancel',
         onClick: function () {
-          otherThings.restart.flag = false;
+          otherEvents.restart.flag = false;
           closeEvent();
         },
       },
@@ -156,4 +156,4 @@ const otherThings = {
 };
 
 generateInformation(events);
-generateInformation(otherThings);
+generateInformation(otherEvents);
