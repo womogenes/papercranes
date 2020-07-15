@@ -103,13 +103,6 @@ function restart() {
   }
 }
 
-function learnToFoldCranes() {
-  learnedToFoldCranes = true;
-  unhide('foldingColumn');
-  unhide('prestigeColumn');
-  getEl('learnColumn').hidden = true;
-}
-
 function highSchoolersFold() {
   if (paper > 0) {
     money -= highSchoolerWage * highSchoolers / 1000000;

@@ -116,7 +116,7 @@ const events = {
   },
 };
 
-// for things that use the eventDiv but are not events
+// events that don't need to be checked each interval
 const otherThings = {
   restart: {
     description: 'Are you sure you want to restart? \nThis will clear all your progress.',
@@ -138,6 +138,20 @@ const otherThings = {
       },
     ],
     noCloseButton: true,
+  },
+  learnedToFoldCranes: {
+    flag: false,
+    save: ['flag'],
+    notifyPlayer: false,
+    effect: function () {
+      this.flag = true;
+      this.loadEffect();
+    },
+    loadEffect: function () {
+      unhide('foldingColumn');
+      unhide('prestigeColumn');
+      getEl('learnColumn').hidden = true;
+    },
   },
 };
 

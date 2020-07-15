@@ -3,7 +3,6 @@ let cranes = 0;
 let wishes = 0;
 let unsoldCranes = 0;
 let cranePriceSliderLoc = 0.1;
-let learnedToFoldCranes = false;
 
 let money = 40;
 let debt = 0;
@@ -62,7 +61,6 @@ function save() {
     factoryBoost: factoryBoost,
 
     paperBuyerOn: paperBuyerOn,
-    learnedToFoldCranes: learnedToFoldCranes,
   };
 
   localStorage.setItem('savedGame', JSON.stringify(savedGame));
@@ -95,6 +93,17 @@ function save() {
     };
   }
   localStorage.setItem('savedEventData', JSON.stringify(savedEventData));
+  const savedOtherThingsData = {};
+  for (const eventName in otherThings) {
+    const event = otherThings[eventName];
+    if (event.save != undefined) {
+      savedOtherThingsData[eventName] = {};
+      event.save.forEach((propertyName) => {
+        savedOtherThingsData[eventName][propertyName] = event[propertyName];
+      });
+    }
+  }
+  localStorage.setItem('savedOtherThingsData', JSON.stringify(savedOtherThingsData));
 
   localStorage.setItem('consoleHistory', JSON.stringify(consoleHistory));
   localStorage.setItem('theme', JSON.stringify(theme));
@@ -111,9 +120,6 @@ function load() {
   wishes = savedGame.wishes;
   unsoldCranes = savedGame.unsoldCranes;
   cranePriceSliderLoc = savedGame.cranePriceSliderLoc;
-  if (savedGame.learnedToFoldCranes) {
-    learnToFoldCranes();
-  }
 
   money = savedGame.money;
   debt = savedGame.debt;
@@ -135,7 +141,7 @@ function load() {
   professionalWage = savedGame.professionalWage;
   factoryCount = savedGame.factoryCount;
   factoryBoost = savedGame.factoryBoost;
-  
+
 
   // Load projects and events
   const savedProjectData = JSON.parse(localStorage.getItem('savedProjectData'));
@@ -155,14 +161,23 @@ function load() {
   }
 
   const savedEventData = JSON.parse(localStorage.getItem('savedEventData'));
-  for (let eventName in savedEventData) {
+  for (const eventName in savedEventData) {
     const savedEvent = savedEventData[eventName];
     const event = events[eventName];
     event.uses = savedEvent.uses;
     event.flag = savedEvent.flag;
   }
 
-  [projects, events].forEach((object) => {
+  const savedOtherThingsData = JSON.parse(localStorage.getItem('savedOtherThingsData'));
+  for (const eventName in savedOtherThingsData) {
+    const savedData = savedOtherThingsData[eventName];
+    const event = otherThings[eventName];
+    for (const propertyName in savedData) {
+      event[propertyName] = savedData[propertyName];
+    }
+  }
+
+  [projects, events, otherThings].forEach((object) => {
     for (const name in object) {
       const thing = object[name];
       if (thing.flag && thing.hasOwnProperty('loadEffect')) {
