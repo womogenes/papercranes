@@ -96,13 +96,6 @@ function changeTheme() {
   applyTheme(theme);
 }
 
-function restart() {
-  if (!otherEvents.restart.flag) {
-    otherEvents.restart.flag = true;
-    displayEvent(otherEvents.restart);
-  }
-}
-
 function highSchoolersFold() {
   if (paper > 0) {
     money -= highSchoolerWage * highSchoolers / 1000000;

@@ -122,6 +122,12 @@ const otherEvents = {
     description: 'Are you sure you want to restart? \nThis will clear all your progress.',
     notifyPlayer: true,
     flag: false,
+    effect: function () {
+      if (!this.flag) {
+        this.flag = true;
+        displayEvent(this);
+      }
+    },
     buttons: [{
         text: 'restart',
         onClick: function () {
