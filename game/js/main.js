@@ -24,6 +24,10 @@ let highSchoolerBoost = 1;
 let professionals = 0;
 let professionalWage = 100;
 
+let energyPrice = 15;
+let energy = 0;
+let energyPurchaseAmount = 10;
+
 let factoryCount = 0;
 let factoryBoost = 1;
 
@@ -57,6 +61,10 @@ function save() {
     professionalWage: professionalWage,
     basePaperPrice: basePaperPrice,
     wishes: wishes,
+
+    energy: energy,
+    energyPrice: energyPrice,
+    energyPurchaseAmount: energyPurchaseAmount,
     factoryCount: factoryCount,
     factoryBoost: factoryBoost,
 
@@ -139,6 +147,10 @@ function load() {
   highSchoolerWage = savedGame.highSchoolerWage;
   professionals = savedGame.professionals;
   professionalWage = savedGame.professionalWage;
+
+  energy = savedGame.energy;
+  energyPrice = savedGame.energyPrice;
+  energyPurchaseAmount = savedGame.energyPurchaseAmount;
   factoryCount = savedGame.factoryCount;
   factoryBoost = savedGame.factoryBoost;
 

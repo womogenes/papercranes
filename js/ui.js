@@ -2,9 +2,11 @@ function updateDom() {
   // Update elements to have correct values
   getEl('cranes').innerHTML = commify(Math.floor(cranes));
   getEl('wishes').innerHTML = commify(Math.floor(wishes));
+  getEl('energy').innerHTML = commify(Math.floor(energy));
 
   getEl('unsoldCranes').innerHTML = commify(Math.floor(unsoldCranes));
   getEl('cranePrice').innerHTML = monify(parseFloat(cranePrice));
+  getEl('energyPrice').innerHTML = monify(parseFloat(energyPrice));
 
   getEl('money').innerHTML = monify(money);
   getEl('advertisingPrice').innerHTML = monify(advertisingPrice);
@@ -24,6 +26,7 @@ function updateDom() {
   // Disable buttons which player cannot use
   getEl('btnMakeCrane').disabled = paper < 1;
   getEl('btnBuyPaper').disabled = paperPrice > money;
+  getEl('btnBuyEnergy').disabled = energyPrice > money;
   getEl('btnAdvertising').disabled = advertisingPrice > money;
   getEl('btnHireHighSchooler').disabled = money < highSchoolerWage;
   getEl('btnpayBackLoan').disabled = money <= 0 || debt <= 0;

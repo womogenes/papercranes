@@ -82,6 +82,13 @@ function buyPaper(n) {
   money -= Math.round(paperPrice * n);
 }
 
+function buyEnergy(n) {
+  if (money > energyPrice * n) {
+    energy += Math.round(energyPurchaseAmount * n);
+    money -= Math.round(energyPrice * n);
+  }
+}
+
 function closeEvent() {
   if (pendingEvents.length) {
     displayEvent();

@@ -284,6 +284,26 @@ const projects = {
       basePaperPrice = Math.round(basePaperPrice * 1.5);
     },
   },
+
+  // Energy projects
+  unlockEnergy: {
+    costs: {
+      money: 1000,
+      wishes: 2,
+    },
+    description: 'Unlock energy to power factories',
+    trigger: function() {
+      return money >= 500 && wishes >= 1 && cranes > 1000;
+    },
+    uses: 1,
+    flag: false,
+    effect: function() {
+      this.loadEffect();
+    },
+    loadEffect: function() {
+      unhide('energyColumn');
+    },
+  },
 };
 
 generateInformation(projects);
