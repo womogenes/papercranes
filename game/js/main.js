@@ -24,12 +24,13 @@ let highSchoolerBoost = 1;
 let professionals = 0;
 let professionalWage = 100;
 
-let energyPrice = 15;
+let energyPrice = 150;
 let energy = 0;
-let energyPurchaseAmount = 10;
+let energyPurchaseAmount = 100;
 
 let factoryCount = 0;
 let factoryBoost = 1;
+let factoryCost = 1000;
 
 let prevCranes = cranes;
 let tick = 0;
@@ -67,6 +68,7 @@ function save() {
     energyPurchaseAmount: energyPurchaseAmount,
     factoryCount: factoryCount,
     factoryBoost: factoryBoost,
+    factoryCost: factoryCost,
 
     paperBuyerOn: paperBuyerOn,
   };
@@ -153,6 +155,7 @@ function load() {
   energyPurchaseAmount = savedGame.energyPurchaseAmount;
   factoryCount = savedGame.factoryCount;
   factoryBoost = savedGame.factoryBoost;
+  factoryCost = savedGame.factoryCost;
 
 
   // Load projects and events

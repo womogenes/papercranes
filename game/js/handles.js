@@ -46,9 +46,13 @@ function hireProfessional() {
   professionalWage = Math.ceil(professionalWage * 1.1 * 100) / 100;
 }
 
+function buyFactory() {
+  factoryCount++;
+  money -= factoryCost;
+}
+
 function makeCrane(n) {
   n = Math.min(n, paper);
-
   wishes += n / 1000;
 
   cranes += n;
@@ -108,5 +112,14 @@ function highSchoolersFold() {
   if (paper > 0) {
     money -= highSchoolerWage * highSchoolers / 1000000;
     makeCrane((highSchoolers * highSchoolerBoost) / 500);
+  }
+}
+
+function factoryFold() {
+  if (factoryCount > 0 && energy > 1) {
+    let factoryEnergyUse = 0.1
+    let factoriesCanPower = Math.min(energy / factoryEnergyUse, factoryCount);
+    energy -= factoriesCanPower * factoryEnergyUse;
+    makeCrane(factoriesCanPower * 5 * factoryBoost);
   }
 }

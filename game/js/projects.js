@@ -288,8 +288,8 @@ const projects = {
   // Energy projects
   unlockEnergy: {
     costs: {
-      money: 1000,
-      wishes: 2,
+      money: 500,
+      wishes: 1,
     },
     description: 'Unlock energy to power factories',
     trigger: function() {
@@ -302,6 +302,24 @@ const projects = {
     },
     loadEffect: function() {
       unhide('energyColumn');
+    },
+  },
+  unlockFactories: {
+    costs: {
+      money: 1000,
+      wishes: 2,
+    },
+    description: 'Start building factories to fold',
+    trigger: function() {
+      return projects.unlockEnergy.flag;
+    },
+    uses: 1,
+    flag: false,
+    effect: function() {
+      this.loadEffect();
+    },
+    loadEffect: function() {
+      unhide('factoryDiv');
     },
   },
 };
