@@ -1,9 +1,5 @@
 // Game loop!
 setInterval(function () {
-  // Make cranes before selling them.
-  
-  // Pay the workers.
-  
   highSchoolersFold();
   makeCrane(professionals);
   if (projects.buisnessManagement.flag) {
@@ -14,11 +10,13 @@ setInterval(function () {
 
   manageProjects();
   manageEvents();
-
-  updateDom();
   tick++;
-  
 }, 10);
+
+// Slower because its starting to lag things
+setInterval(function () {
+  updateDom();
+}, 100);
 
 // Slower one, every second.
 setInterval(function () {
