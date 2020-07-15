@@ -32,7 +32,7 @@ function hireHighSchooler() {
   // Hires a highSchooler!
   highSchoolers++;
   money -= highSchoolerWage;
-  highSchoolerWage = Math.ceil(highSchoolerWage * 1.01 * 100) / 100;
+  highSchoolerWage = Math.ceil(highSchoolerWage * 1.001 * 100) / 100;
 }
 
 function hireProfessional() {
@@ -108,4 +108,11 @@ function learnToFoldCranes() {
   unhide('foldingColumn');
   unhide('prestigeColumn');
   getEl('learnColumn').hidden = true;
+}
+
+function highSchoolersFold() {
+  if (paper > 0) {
+    money -= highSchoolerWage * highSchoolers / 1000000;
+    makeCrane((highSchoolers * highSchoolerBoost) / 500);
+  }
 }

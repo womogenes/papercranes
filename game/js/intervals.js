@@ -1,7 +1,10 @@
 // Game loop!
 setInterval(function () {
   // Make cranes before selling them.
-  makeCrane((highSchoolers * highSchoolerBoost) / 500);
+  
+  // Pay the workers.
+  
+  highSchoolersFold();
   makeCrane(professionals);
   if (projects.buisnessManagement.flag) {
     sellCranes();
@@ -14,6 +17,7 @@ setInterval(function () {
 
   updateDom();
   tick++;
+  
 }, 10);
 
 // Slower one, every second.
