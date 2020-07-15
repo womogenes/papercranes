@@ -41,6 +41,7 @@ function hireProfessional() {
     return;
   }
   professionals++;
+  highSchoolers--;
   money -= professionalWage;
   professionalWage = Math.ceil(professionalWage * 1.1 * 100) / 100;
 }

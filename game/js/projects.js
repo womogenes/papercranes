@@ -42,7 +42,7 @@ function canAffordProject(project) {
 const projects = {
   // Worker projects
   unlockWorkers: {
-    description: 'Hire workers to fold for you.',
+    description: 'Hire workers to fold for you for an hourly wage.',
     costs: {
       money: 10,
     },
@@ -128,7 +128,7 @@ const projects = {
       wishes: 10,
     },
     description: function() {
-      return `Use ${this.costs.wishes} wishes to start hiring Professionals, the best folders.`;
+      return `Use ${this.costs.wishes} wishes to start turning your high schoolers into Professionals, the best folders.`;
     },
     trigger: function() {
       return highSchoolers >= 100;
