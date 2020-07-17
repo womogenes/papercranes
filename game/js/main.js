@@ -59,6 +59,7 @@ function save() {
     paper: paper,
     advertisingLevel: advertisingLevel,
     highSchoolers: highSchoolers,
+    highSchoolerBoost: highSchoolerBoost,
     highSchoolerWage: highSchoolerWage,
     debt: debt,
     maxDebt: maxDebt,
@@ -157,6 +158,7 @@ function load() {
   paperBuyerOn = savedGame.paperBuyerOn;
 
   highSchoolers = savedGame.highSchoolers;
+  highSchoolerBoost = savedGame.highSchoolerBoost;
   highSchoolerWage = savedGame.highSchoolerWage;
   professionals = savedGame.professionals;
   professionalWage = savedGame.professionalWage;
