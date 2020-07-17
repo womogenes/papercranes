@@ -24,19 +24,29 @@ let highSchoolerBoost = 1;
 let professionals = 0;
 let professionalWage = 100;
 
-let energyPrice = 150;
-let energy = 0;
-let energyPurchaseAmount = 100;
+let energy = {
+  amount: 0,
+  price: 150,
+  purchaseAmount: 100,
+};
+let coal = {
+  amount: 0,
+  price: 200,
+  purchaseAmount: 50,
+};
 
-let coal = 0;
-let coalPrice = 200;
-let coalPurchaseAmount = 50;
-let powerPlants = 0;
-let powerPlantPrice = 1000;
-
-let factories = 0;
-let factoryBoost = 1;
-let factoryPrice = 1000;
+let powerPlants = {
+  amount: 0,
+  price: 1000,
+  boost: 1,
+  coalUse: 0.1,
+};
+let factories = {
+  amount: 0,
+  price: 1000,
+  boost: 1,
+  energyUse: 0.1,
+};
 
 let prevCranes = cranes;
 let tick = 0;
@@ -71,16 +81,9 @@ function save() {
     wishes: wishes,
 
     energy: energy,
-    energyPrice: energyPrice,
-    energyPurchaseAmount: energyPurchaseAmount,
     coal: coal,
-    coalPrice: coalPrice,
-    coalPurchaseAmount: coalPurchaseAmount,
     powerPlants: powerPlants,
-    powerPlantPrice: powerPlantPrice,
     factories: factories,
-    factoryBoost: factoryBoost,
-    factoryPrice: factoryPrice,
 
     paperBuyerOn: paperBuyerOn,
   };
@@ -164,17 +167,9 @@ function load() {
   professionalWage = savedGame.professionalWage;
 
   energy = savedGame.energy;
-  energyPrice = savedGame.energyPrice;
-  energyPurchaseAmount = savedGame.energyPurchaseAmount;
   coal = savedGame.coal;
-  coalPrice = savedGame.coalPrice;
-  coalPurchaseAmount = savedGame.coalPurchaseAmount;
   powerPlants = savedGame.powerPlants;
-  powerPlantPrice = savedGame.powerPlantPrice;
   factories = savedGame.factories;
-  factoryBoost = savedGame.factoryBoost;
-  factoryPrice = savedGame.factoryPrice;
-
 
   // Load projects and events
   const savedProjectData = JSON.parse(localStorage.getItem('savedProjectData'));

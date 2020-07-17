@@ -44,13 +44,13 @@ function hireProfessional() {
 }
 
 function buyFactory() {
-  factories++;
-  money -= factoryPrice;
+  factories.amount++;
+  money -= factories.price;
 }
 
 function buyPowerPlant() {
-  powerPlants++;
-  money -= powerPlantPrice;
+  powerPlants.amount++;
+  money -= powerPlants.price;
 }
 
 //  Resources
@@ -64,16 +64,16 @@ function buyPaper(n) {
 }
 
 function buyEnergy(n) {
-  if (money > energyPrice * n) {
-    energy += Math.round(energyPurchaseAmount * n);
-    money -= Math.round(energyPrice * n);
+  if (money > energy.price * n) {
+    energy.amount += Math.round(energy.purchaseAmount * n);
+    money -= Math.round(energy.price * n);
   }
 }
 
 function buyCoal(amount) {
-  if (money > coalPrice * amount) {
-    coal += Math.round(coalPurchaseAmount * amount);
-    money -= Math.round(coalPrice * amount);
+  if (money > coal.price * amount) {
+    coal.amount += Math.round(coal.purchaseAmount * amount);
+    money -= Math.round(coal.price * amount);
   }
 }
 
@@ -115,20 +115,18 @@ function highSchoolersFold() {
 }
 
 function factoryFold() {
-  if (factories > 0 && energy > 1) {
-    let factoryEnergyUse = 0.1;
-    let factoriesCanPower = Math.min(energy / factoryEnergyUse, factories);
-    energy -= factoriesCanPower * factoryEnergyUse;
-    makeCrane(factoriesCanPower * 5 * factoryBoost);
+  if (factories.amount > 0 && energy.amount > 1) {
+    let factoriesCanPower = Math.min(energy.amount / factories.energyUse, factories.amount);
+    energy.amount -= factoriesCanPower * factories.energyUse;
+    makeCrane(factoriesCanPower * 5 * factories.boost);
   }
 }
 
 function generatePower() {
-  if (powerPlants > 0 && coal > 1) {
-    let plantCoalUse = 0.1;
-    let plantsCanPower = Math.min(coal / plantCoalUse, powerPlants);
-    coal -= plantsCanPower * plantCoalUse;
-    energy += plantsCanPower * 5;
+  if (powerPlants.amount > 0 && coalamount > 0.1) {
+    let plantsCanPower = Math.min(coal.amount / powerPlants.coalUse, powerPlants.amount);
+    coal.amount -= plantsCanPower * powerPlants.coalUse;
+    energy.amount += plantsCanPower * 5;
   }
 }
 

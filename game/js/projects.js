@@ -304,7 +304,7 @@ const projects = {
     },
     description: 'Use coal to generate energy using a power plant',
     trigger: function () {
-      return projects.unlockEnergy.flag && factories > 3;
+      return projects.unlockEnergy.flag && factories.amount > 3;
     },
     uses: 1,
     flag: false,

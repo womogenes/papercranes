@@ -2,11 +2,11 @@ function updateDom() {
   // Update elements to have correct values
   getEl('cranes').innerHTML = commify(Math.floor(cranes));
   getEl('wishes').innerHTML = commify(Math.floor(wishes));
-  getEl('energy').innerHTML = commify(Math.floor(energy));
+  getEl('energy').innerHTML = commify(Math.floor(energy.amount));
 
   getEl('unsoldCranes').innerHTML = commify(Math.floor(unsoldCranes));
   getEl('cranePrice').innerHTML = monify(parseFloat(cranePrice));
-  getEl('energyPrice').innerHTML = monify(parseFloat(energyPrice));
+  getEl('energyPrice').innerHTML = monify(parseFloat(energy.price));
 
   getEl('money').innerHTML = monify(money);
   getEl('advertisingPrice').innerHTML = monify(advertisingPrice);
@@ -18,12 +18,12 @@ function updateDom() {
   getEl('highSchoolerWage').innerHTML = monify(highSchoolerWage);
   getEl('professionals').innerHTML = commify(professionals);
   getEl('professionalWage').innerHTML = monify(professionalWage);
-  getEl('coal').innerHTML = commify(coal);
-  getEl('coalPrice').innerHTML = monify(coalPrice);
-  getEl('powerPlants').innerHTML = commify(powerPlants);
-  getEl('powerPlantPrice').innerHTML = monify(powerPlantPrice);
-  getEl('factories').innerHTML = commify(factories);
-  getEl('factoryPrice').innerHTML = monify(factoryPrice);
+  getEl('coal').innerHTML = commify(coal.amount);
+  getEl('coalPrice').innerHTML = monify(coal.price);
+  getEl('powerPlants').innerHTML = commify(powerPlants.amount);
+  getEl('powerPlantPrice').innerHTML = monify(powerPlants.price);
+  getEl('factories').innerHTML = commify(factories.amount);
+  getEl('factoryPrice').innerHTML = monify(factories.price);
 
   let happiness = money - debt > 0 ? Math.min(Math.log(money + wishes - debt), 100) : 0;
   getEl('happinessMeter').style.width = happiness + '%';
@@ -32,12 +32,12 @@ function updateDom() {
   // Disable buttons which player cannot use
   getEl('btnMakeCrane').disabled = paper < 1;
   getEl('btnBuyPaper').disabled = paperPrice > money;
-  getEl('btnBuyEnergy').disabled = energyPrice > money;
-  getEl('btnBuyCoal').disabled = coalPrice > money;
-  getEl('btnBuyPowerPlant').disabled = powerPlantPrice > money;
+  getEl('btnBuyEnergy').disabled = energy.price > money;
+  getEl('btnBuyCoal').disabled = coal.price > money;
+  getEl('btnBuyPowerPlant').disabled = powerPlants.price > money;
   getEl('btnAdvertising').disabled = advertisingPrice > money;
   getEl('btnHireHighSchooler').disabled = money < highSchoolerWage;
-  getEl('btnBuyFactory').disabled = money < factoryPrice;
+  getEl('btnBuyFactory').disabled = money < factories.price;
   getEl('btnpayBackLoan').disabled = money <= 0 || debt <= 0;
   getEl('btnBorrowMoney').disabled = debt >= maxDebt;
   getEl('btnHireProfessional').disabled = professionalWage > money;
