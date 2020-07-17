@@ -113,6 +113,11 @@
 	z-index: 3;
 }
 
+#money {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
 #happinessDiv {
 	width: 275px;
 	margin-right: 13px;
@@ -133,7 +138,7 @@
 	border: none;
 }
 
-@media only screen and (max-width: 899px) {
+@media only screen and (max-width: 1151px) {
 	#projectsColumn {
 		float: left;
 	}
@@ -141,7 +146,7 @@
 
 @media only screen and (max-width: 621px) {
 	#centerDiv {
-		width: 275px;
+		width: 90%;
 	}
 
 	#consoleMsg {

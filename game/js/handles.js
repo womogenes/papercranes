@@ -109,10 +109,10 @@ function changeTheme() {
 }
 
 function highSchoolersFold() {
-  if (paper > 0) {
-    money -= highSchoolerWage * highSchoolers / 1000000;
-    makeCrane((highSchoolers * highSchoolerBoost) / 500);
+  if (!tick % 50) {
+    money -= highSchoolerWage * highSchoolers;
   }
+  makeCrane((highSchoolers * highSchoolerBoost) / 500);
 }
 
 function factoryFold() {
