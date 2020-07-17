@@ -59,7 +59,11 @@ function displayEvent(event) {
   // Get the event to display
   if (event) {
     if (!getEl('eventDiv').hidden) {
-      pendingEvents.push(getEl('eventTitle').innerHTML.camelize());
+      let currentEventName = getEl('eventTitle').innerHTML.camelize();
+      pendingEvents.push(currentEventName);
+      if (events[currentEventName].onClose) {
+        events[currentEventName].onClose();
+      }
     }
   } else {
     event = events[pendingEvents.pop()];
@@ -83,7 +87,7 @@ function displayEvent(event) {
     });
   }
 
-  if(event.onDisplay) {
+  if (event.onDisplay) {
     event.onDisplay();
   }
   if (getEl('eventDiv').hidden) {

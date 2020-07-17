@@ -125,6 +125,7 @@ function save() {
 
 
   localStorage.setItem('consoleHistory', JSON.stringify(consoleHistory));
+  localStorage.setItem('pendingEvents', JSON.stringify(pendingEvents.concat([getEl('eventTitle').innerHTML.camelize()])));
   localStorage.setItem('theme', JSON.stringify(theme));
 }
 
@@ -196,6 +197,7 @@ function load() {
 
 
   consoleHistory = JSON.parse(localStorage.getItem('consoleHistory'));
+  pendingEvents = JSON.parse(localStorage.getItem('pendingEvents'));
   consoleHistory.forEach((message) => {
     displayMessage(message, true);
   });

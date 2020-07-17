@@ -8,8 +8,8 @@ const events = {
     flag: false,
     notifyPlayer: false,
     effect: function () {
-      event.flag = true;
-      event.uses -= 1;
+      this.flag = true;
+      this.uses -= 1;
       this.loadEffect();
     },
     loadEffect: function () {
@@ -25,8 +25,8 @@ const events = {
     flag: false,
     notifyPlayer: false,
     effect: function () {
-      event.flag = true;
-      event.uses -= 1;
+      this.flag = true;
+      this.uses -= 1;
       this.loadEffect();
     },
     loadEffect: function () {
@@ -35,6 +35,7 @@ const events = {
   },
   outOfMoney: {
     trigger: function () {
+      // cannot make money so they player has to restart
       return !projects.buisnessManagement.flag && !canAffordProject(projects.buisnessManagement) && !projects.bankAccount.flag;
     },
     save: ['flag', 'uses'],
@@ -43,10 +44,16 @@ const events = {
     flag: false,
     notifyPlayer: true,
     effect: function () {
-      event.flag = true;
-      event.uses -= 1;
+      this.flag = true;
+      this.uses -= 1;
     },
-    loadEffect: function () {},
+    buttons: [{
+      text: 'restart',
+      onClick: function () {
+        events.restart.buttons[0].onClick();
+      },
+    }],
+    noCloseButton: true,
   },
   buyingPaperUnlocked: {
     trigger: function () {
@@ -57,7 +64,8 @@ const events = {
     flag: false,
     notifyPlayer: false,
     effect: function () {
-      event.flag = true;
+      this.uses -= 1;
+      this.flag = true;
       this.loadEffect();
     },
     loadEffect: function () {
@@ -100,11 +108,8 @@ const events = {
         buttonEls[2].disabled = (money > 0.01 || highSchoolers.amount || professionals.amount);
       }, 10);
     },
-    loadEffect: function () {
-      displayEvent(this);
-    },
     onClose: function () {
-      clearInterval(this.update);
+      clearInterval(events.maxedDebt.update);
     },
     buttons: [{
         text: 'pay money',
