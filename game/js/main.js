@@ -114,23 +114,15 @@ function save() {
   const savedEventData = {};
   for (const eventName in events) {
     const event = events[eventName];
-    savedEventData[eventName] = {
-      flag: event.flag,
-      uses: event.uses,
-    };
-  }
-  localStorage.setItem('savedEventData', JSON.stringify(savedEventData));
-  const savedOtherEventsData = {};
-  for (const eventName in otherEvents) {
-    const event = otherEvents[eventName];
     if (event.save != undefined) {
-      savedOtherEventsData[eventName] = {};
+      savedEventData[eventName] = {};
       event.save.forEach((propertyName) => {
-        savedOtherEventsData[eventName][propertyName] = event[propertyName];
+        savedEventData[eventName][propertyName] = event[propertyName];
       });
     }
   }
-  localStorage.setItem('savedOtherEventsData', JSON.stringify(savedOtherEventsData));
+  localStorage.setItem('savedEventData', JSON.stringify(savedEventData));
+
 
   localStorage.setItem('consoleHistory', JSON.stringify(consoleHistory));
   localStorage.setItem('theme', JSON.stringify(theme));
@@ -188,20 +180,12 @@ function load() {
   for (const eventName in savedEventData) {
     const savedEvent = savedEventData[eventName];
     const event = events[eventName];
-    event.uses = savedEvent.uses;
-    event.flag = savedEvent.flag;
-  }
-
-  const savedOtherEventsData = JSON.parse(localStorage.getItem('savedOtherEventsData'));
-  for (const eventName in savedOtherEventsData) {
-    const savedData = savedOtherEventsData[eventName];
-    const event = otherEvents[eventName];
-    for (const propertyName in savedData) {
-      event[propertyName] = savedData[propertyName];
+    for (const propertyName in savedEvent) {
+      event[propertyName] = savedEvent[propertyName];
     }
   }
 
-  [projects, events, otherEvents].forEach((object) => {
+  [projects, events].forEach((object) => {
     for (const name in object) {
       const thing = object[name];
       if (thing.flag && thing.hasOwnProperty('loadEffect')) {
@@ -276,7 +260,6 @@ function manageEvents() {
       if (event.notifyPlayer) {
         pendingEvents.push(event.title.camelize());
       }
-      eventBaseEffect(event);
       if (event.effect) {
         event.effect();
       }

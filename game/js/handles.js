@@ -88,8 +88,7 @@ function makeCrane(n) {
 }
 
 function closeEvent() {
-  let eventName = getEl('eventTitle').innerHTML.camelize();
-  event = events.hasOwnProperty(eventName) ? events[eventName] : otherEvents[eventName];
+  let event = events[getEl('eventTitle').innerHTML.camelize()];
   if (event.onClose) {
     event.onClose();
   }

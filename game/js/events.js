@@ -1,19 +1,15 @@
-// Custom event stuff!
-
-function eventBaseEffect(event) {
-  event.flag = true;
-  event.uses -= 1;
-}
-
 const events = {
   projectsUnlocked: {
     trigger: function () {
       return cranes >= 15 && events.buyingPaperUnlocked.flag;
     },
+    save: ['flag', 'uses'],
     uses: 1,
     flag: false,
     notifyPlayer: false,
     effect: function () {
+      event.flag = true;
+      event.uses -= 1;
       this.loadEffect();
     },
     loadEffect: function () {
@@ -24,10 +20,13 @@ const events = {
     trigger: function () {
       return cranes >= 1000;
     },
+    save: ['flag', 'uses'],
     uses: 1,
     flag: false,
     notifyPlayer: false,
     effect: function () {
+      event.flag = true;
+      event.uses -= 1;
       this.loadEffect();
     },
     loadEffect: function () {
@@ -38,21 +37,27 @@ const events = {
     trigger: function () {
       return !projects.buisnessManagement.flag && !canAffordProject(projects.buisnessManagement) && !projects.bankAccount.flag;
     },
+    save: ['flag', 'uses'],
     description: 'Without buisness management you can\'t make money. Buy it before other things next time.',
     uses: 1,
     flag: false,
     notifyPlayer: true,
-    effect: function () {},
+    effect: function () {
+      event.flag = true;
+      event.uses -= 1;
+    },
     loadEffect: function () {},
   },
   buyingPaperUnlocked: {
     trigger: function () {
       return paper.amount <= 0;
     },
+    save: ['flag', 'uses'],
     uses: 1,
     flag: false,
     notifyPlayer: false,
     effect: function () {
+      event.flag = true;
       this.loadEffect();
     },
     loadEffect: function () {
@@ -63,9 +68,8 @@ const events = {
     trigger: function () {
       return paper.amount <= 0 && paperBuyerOn;
     },
-    uses: -1,
-    flag: false,
     notifyPlayer: false,
+    uses: -1,
     effect: function () {
       buyPaper(1);
     },
@@ -75,9 +79,13 @@ const events = {
     trigger: function () {
       return debt >= maxDebt && !this.flag;
     },
+    save: ['flag'],
     uses: -1,
     flag: false,
     notifyPlayer: true,
+    effect: function () {
+      this.flag = true;
+    },
     onDisplay: function () {
       events.maxedDebt.update = setInterval(function () {
         if (debt <= maxDebt * .5) {
@@ -126,10 +134,8 @@ const events = {
     ],
     noCloseButton: true,
   },
-};
 
-// events that don't need to be checked each interval
-const otherEvents = {
+  // events that don't need to be checked each interval
   restart: {
     description: 'Are you sure you want to restart? \nThis will clear all your progress.',
     notifyPlayer: true,
@@ -150,7 +156,7 @@ const otherEvents = {
       {
         text: 'cancel',
         onClick: function () {
-          otherEvents.restart.flag = false;
+          events.restart.flag = false;
           closeEvent();
         },
       },
@@ -174,4 +180,3 @@ const otherEvents = {
 };
 
 generateInformation(events);
-generateInformation(otherEvents);

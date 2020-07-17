@@ -62,8 +62,7 @@ function displayEvent(event) {
       pendingEvents.push(getEl('eventTitle').innerHTML.camelize());
     }
   } else {
-    let eventName = pendingEvents.pop();
-    event = events.hasOwnProperty(eventName) ? events[eventName] : otherEvents[eventName];
+    event = events[pendingEvents.pop()];
   }
 
   // update eventdiv with event information
