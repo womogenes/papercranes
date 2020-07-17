@@ -14,6 +14,7 @@ setInterval(function () {
   manageProjects();
   manageEvents();
   tick++;
+  
 }, 10);
 
 // Slower because its starting to lag things

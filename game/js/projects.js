@@ -101,28 +101,6 @@ const projects = {
       highSchoolerBoost *= percentToMultiplier(this.fasterPercent);
     },
   },
-  highlySkilledStudents: {
-    fasterAmount: 2,
-    costs: {
-      money: 40,
-    },
-    description: function() {
-      return `Double hire price, high schoolers work ${this.fasterAmount} times as fast.`;
-    },
-    trigger: function() {
-      return money >= 20 && projects.evenFasterHighSchoolers.flag;
-    },
-    uses: 1,
-    flag: false,
-    effect: function() {
-      this.loadEffect();
-      highSchoolerWage *= 2;
-      displayMessage('When they work harder, you gotta pay them more.');
-    },
-    loadEffect: function() {
-      highSchoolerBoost *= this.fasterAmount;
-    },
-  },
   professionals: {
     costs: {
       wishes: 10,

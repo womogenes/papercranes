@@ -5,7 +5,7 @@ function increaseAdvertising() {
   advertisingLevel += 1;
   money -= advertisingPrice;
 
-  advertisingPrice = Math.round(advertisingPrice * 2);
+  advertisingPrice = Math.round(advertisingPrice * 1.01);
   getEl('advertisingLevel').innerHTML = commify(advertisingLevel);
 }
 
@@ -32,7 +32,6 @@ function hireHighSchooler() {
   // Hires a highSchooler!
   highSchoolers++;
   money -= highSchoolerWage;
-  highSchoolerWage = Math.ceil(highSchoolerWage * 1.001 * 100) / 100;
 }
 
 function hireProfessional() {
@@ -109,10 +108,12 @@ function changeTheme() {
 }
 
 function highSchoolersFold() {
-  if (!tick % 50) {
-    money -= highSchoolerWage * highSchoolers;
+  if (money > 0) {
+    if (tick % 100 == 0 && paper > 0) {
+      money -= highSchoolerWage * highSchoolers;
+    }
+    makeCrane((highSchoolers * highSchoolerBoost) / 200);
   }
-  makeCrane((highSchoolers * highSchoolerBoost) / 500);
 }
 
 function factoryFold() {
