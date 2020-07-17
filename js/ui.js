@@ -17,9 +17,13 @@ function updateDom() {
   getEl('highSchoolers').innerHTML = commify(highSchoolers);
   getEl('highSchoolerWage').innerHTML = monify(highSchoolerWage);
   getEl('professionals').innerHTML = commify(professionals);
-  getEl('professionalWage').innerHTML = monify(professionalWage);   
-  getEl('factoryCount').innerHTML = commify(factoryCount);
-  getEl('factoryCost').innerHTML = monify(factoryCost);
+  getEl('professionalWage').innerHTML = monify(professionalWage);
+  getEl('coal').innerHTML = commify(coal);
+  getEl('coalPrice').innerHTML = monify(coalPrice);
+  getEl('powerPlants').innerHTML = commify(powerPlants);
+  getEl('powerPlantPrice').innerHTML = monify(powerPlantPrice);
+  getEl('factories').innerHTML = commify(factories);
+  getEl('factoryPrice').innerHTML = monify(factoryPrice);
 
   let happiness = money - debt > 0 ? Math.min(Math.log(money + wishes - debt), 100) : 0;
   getEl('happinessMeter').style.width = happiness + '%';
@@ -29,9 +33,11 @@ function updateDom() {
   getEl('btnMakeCrane').disabled = paper < 1;
   getEl('btnBuyPaper').disabled = paperPrice > money;
   getEl('btnBuyEnergy').disabled = energyPrice > money;
+  getEl('btnBuyCoal').disabled = coalPrice > money;
+  getEl('btnBuyPowerPlant').disabled = powerPlantPrice > money;
   getEl('btnAdvertising').disabled = advertisingPrice > money;
   getEl('btnHireHighSchooler').disabled = money < highSchoolerWage;
-  getEl('btnBuyFactory').disabled = money < factoryCost;
+  getEl('btnBuyFactory').disabled = money < factoryPrice;
   getEl('btnpayBackLoan').disabled = money <= 0 || debt <= 0;
   getEl('btnBorrowMoney').disabled = debt >= maxDebt;
   getEl('btnHireProfessional').disabled = professionalWage > money;

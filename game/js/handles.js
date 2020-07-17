@@ -47,8 +47,13 @@ function hireProfessional() {
 }
 
 function buyFactory() {
-  factoryCount++;
-  money -= factoryCost;
+  factories++;
+  money -= factoryPrice;
+}
+
+function buyPowerPlant() {
+  powerPlants++;
+  money -= powerPlantPrice;
 }
 
 function makeCrane(n) {
@@ -58,6 +63,15 @@ function makeCrane(n) {
   cranes += n;
   unsoldCranes += n;
   paper -= n;
+}
+
+function generatePower() {
+  if (powerPlants > 0 && coal > 1) {
+    let plantCoalUse = 0.1;
+    let plantsCanPower = Math.min(coal / plantCoalUse, powerPlants);
+    coal -= plantsCanPower * plantCoalUse;
+    energy += plantsCanPower * 5;
+  }
 }
 
 function sellCranes() {
@@ -116,10 +130,17 @@ function highSchoolersFold() {
 }
 
 function factoryFold() {
-  if (factoryCount > 0 && energy > 1) {
-    let factoryEnergyUse = 0.1
-    let factoriesCanPower = Math.min(energy / factoryEnergyUse, factoryCount);
+  if (factories > 0 && energy > 1) {
+    let factoryEnergyUse = 0.1;
+    let factoriesCanPower = Math.min(energy / factoryEnergyUse, factories);
     energy -= factoriesCanPower * factoryEnergyUse;
     makeCrane(factoriesCanPower * 5 * factoryBoost);
+  }
+}
+
+function buyCoal(amount) {
+  if (money > coalPrice * amount) {
+    coal += Math.round(coalPurchaseAmount * amount);
+    money -= Math.round(coalPrice * amount);
   }
 }

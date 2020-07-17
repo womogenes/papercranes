@@ -24,10 +24,10 @@ function projectPriceTag(project) {
     costs.push(`\$${project.costs.money.toLocaleString()}`);
   }
   if (project.costs.wishes) {
-    costs.push(`${project.costs.wishes} wish${project.costs.wishes != 0 ? 'es' : ''}`);
+    costs.push(`${project.costs.wishes} wish${project.costs.wishes > 1 ? 'es' : ''}`);
   }
   if (project.costs.highSchoolers) {
-    costs.push(`${project.costs.highSchoolers} high schooler${project.costs.highSchoolers != 0 ? 's' : ''}`);
+    costs.push(`${project.costs.highSchoolers} high schooler${project.costs.highSchoolers > 1 ? 's' : ''}`);
   }
   return `(${costs.join(', ')})`;
 }
@@ -46,36 +46,36 @@ const projects = {
     costs: {
       money: 10,
     },
-    trigger: function() {
+    trigger: function () {
       return money >= 5 && cranes >= 20;
     },
     uses: 1,
     flag: false,
-    effect: function() {
+    effect: function () {
       this.loadEffect();
     },
-    loadEffect: function() {
+    loadEffect: function () {
       unhide('workerDiv');
     },
   },
   fasterHighSchoolers: {
     fasterPercent: 25,
-    description: function() {
+    description: function () {
       return `High Schoolers work ${this.fasterPercent}% faster.`;
     },
     costs: {
       money: 10,
     },
-    trigger: function() {
+    trigger: function () {
       return money >= 5 && highSchoolers > 0;
     },
     uses: 1,
     flag: false,
-    effect: function() {
+    effect: function () {
       this.loadEffect();
       displayMessage(`High schoolers now work ${this.fasterPercent}% as fast.`);
     },
-    loadEffect: function() {
+    loadEffect: function () {
       highSchoolerBoost *= percentToMultiplier(this.fasterPercent);
     },
   },
@@ -84,20 +84,20 @@ const projects = {
     costs: {
       money: 20,
     },
-    description: function() {
+    description: function () {
       return `Double interest rate, and high schoolers are ${this.fasterPercent}% faster.`;
     },
     purchaseMessage: 'Speedy high schoolers!',
-    trigger: function() {
+    trigger: function () {
       return money >= 10 && projects.fasterHighSchoolers.flag;
     },
     uses: 1,
     flag: false,
-    effect: function() {
+    effect: function () {
       this.loadEffect();
       interestRate *= 2;
     },
-    loadEffect: function() {
+    loadEffect: function () {
       highSchoolerBoost *= percentToMultiplier(this.fasterPercent);
     },
   },
@@ -106,20 +106,20 @@ const projects = {
     costs: {
       money: 40,
     },
-    description: function() {
+    description: function () {
       return `Double hire price, high schoolers work ${this.fasterAmount} times as fast.`;
     },
-    trigger: function() {
+    trigger: function () {
       return money >= 20 && projects.evenFasterHighSchoolers.flag;
     },
     uses: 1,
     flag: false,
-    effect: function() {
+    effect: function () {
       this.loadEffect();
       highSchoolerWage *= 2;
       displayMessage('When they work harder, you gotta pay them more.');
     },
-    loadEffect: function() {
+    loadEffect: function () {
       highSchoolerBoost *= this.fasterAmount;
     },
   },
@@ -127,19 +127,19 @@ const projects = {
     costs: {
       wishes: 10,
     },
-    description: function() {
+    description: function () {
       return `Use ${this.costs.wishes} wishes to start turning your high schoolers into Professionals, the best folders.`;
     },
-    trigger: function() {
+    trigger: function () {
       return highSchoolers >= 100;
     },
     uses: 1,
     flag: false,
-    effect: function() {
+    effect: function () {
       displayMessage('100x more powerful than a high schooler.');
       this.loadEffect();
     },
-    loadEffect: function() {
+    loadEffect: function () {
       unhide('professionalDiv');
     },
   },
@@ -150,16 +150,16 @@ const projects = {
       money: 10,
     },
     description: 'Be able to borrow money!',
-    trigger: function() {
+    trigger: function () {
       return money >= 5 && cranes >= 20;
     },
     uses: 1,
     flag: false,
-    effect: function() {
+    effect: function () {
       displayMessage('Bank account opened. You can now borrow money $20 at a time.');
       this.loadEffect();
     },
-    loadEffect: function() {
+    loadEffect: function () {
       unhide('bankDiv');
     },
   },
@@ -168,12 +168,12 @@ const projects = {
       money: 2000,
     },
     description: 'Increase maximum debt by 500',
-    trigger: function() {
+    trigger: function () {
       return debt >= 200;
     },
     uses: 1,
     flag: false,
-    effect: function() {
+    effect: function () {
       maxDebt += 500;
     },
   },
@@ -182,15 +182,15 @@ const projects = {
       money: 10,
     },
     description: 'Sell your cranes',
-    trigger: function() {
+    trigger: function () {
       return money >= 5 && events.buyingPaperUnlocked.flag;
     },
     uses: 1,
     flag: false,
-    effect: function() {
+    effect: function () {
       this.loadEffect();
     },
-    loadEffect: function() {
+    loadEffect: function () {
       unhide('buisnessColumn');
     },
   },
@@ -199,15 +199,15 @@ const projects = {
       money: 100,
     },
     description: 'Buy advertising to increase demand for cranes',
-    trigger: function() {
+    trigger: function () {
       return money >= 20 && cranes >= 50;
     },
     uses: 1,
     flag: false,
-    effect: function() {
+    effect: function () {
       this.loadEffect();
     },
-    loadEffect: function() {
+    loadEffect: function () {
       unhide('advertisingDiv');
     },
   },
@@ -218,15 +218,15 @@ const projects = {
       highSchoolers: 100,
     },
     description: 'Auto-purchase paper when it runs out.',
-    trigger: function() {
+    trigger: function () {
       return cranes >= 10000;
     },
     uses: 1,
     flag: false,
-    effect: function() {
+    effect: function () {
       this.loadEffect();
     },
-    loadEffect: function() {
+    loadEffect: function () {
       unhide('paperBuyerDiv');
     },
   },
@@ -235,15 +235,15 @@ const projects = {
     costs: {
       money: 200,
     },
-    description: function() {
+    description: function () {
       return `Gain ${this.increasePercent}% more paper from each purchase.`;
     },
-    trigger: function() {
+    trigger: function () {
       return cranes >= 5000;
     },
     uses: 1,
     flag: false,
-    effect: function() {
+    effect: function () {
       paperPurchaseAmount = Math.round(paperPurchaseAmount * percentToMultiplier(this.increasePercent));
       basePaperPrice = Math.round(basePaperPrice * percentToMultiplier(this.increasePercent));
     },
@@ -253,15 +253,15 @@ const projects = {
     costs: {
       money: 400,
     },
-    description: function() {
+    description: function () {
       return `Gain ${this.increasePercent}% more paper from each purchase.`;
     },
-    trigger: function() {
+    trigger: function () {
       return projects.paperEfficiency.flag;
     },
     uses: 1,
     flag: false,
-    effect: function() {
+    effect: function () {
       paperPurchaseAmount = Math.round(paperPurchaseAmount * percentToMultiplier(this.increasePercent));
       basePaperPrice = Math.round(basePaperPrice * 1.5);
     },
@@ -271,15 +271,15 @@ const projects = {
     costs: {
       money: 800,
     },
-    description: function() {
+    description: function () {
       return `${this.increasePercent}% more paper from each purchase.`;
     },
-    trigger: function() {
+    trigger: function () {
       return projects.thinnerSheets.flag;
     },
     uses: 1,
     flag: false,
-    effect: function() {
+    effect: function () {
       paperPurchaseAmount = Math.round(paperPurchaseAmount * percentToMultiplier(this.increasePercent));
       basePaperPrice = Math.round(basePaperPrice * 1.5);
     },
@@ -292,16 +292,52 @@ const projects = {
       wishes: 1,
     },
     description: 'Unlock energy to power factories',
-    trigger: function() {
+    trigger: function () {
       return money >= 500 && wishes >= 1 && cranes > 1000;
     },
     uses: 1,
     flag: false,
-    effect: function() {
+    effect: function () {
       this.loadEffect();
     },
-    loadEffect: function() {
+    loadEffect: function () {
       unhide('energyColumn');
+    },
+  },
+  unlockCoal: {
+    costs: {
+      money: 500,
+      wishes: 1,
+    },
+    description: 'Use coal to generate energy using a power plant',
+    trigger: function () {
+      return projects.unlockEnergy.flag && factories > 3;
+    },
+    uses: 1,
+    flag: false,
+    effect: function () {
+      this.loadEffect();
+    },
+    loadEffect: function () {
+      unhide('coalDiv');
+    },
+  },
+  unlockPowerPlants: {
+    costs: {
+      money: 2000,
+      wishes: 1,
+    },
+    description: 'Use power plants to generate energy',
+    trigger: function () {
+      return projects.unlockCoal.flag;
+    },
+    uses: 1,
+    flag: false,
+    effect: function () {
+      this.loadEffect();
+    },
+    loadEffect: function () {
+      unhide('powerPlantDiv');
     },
   },
   unlockFactories: {
@@ -310,15 +346,15 @@ const projects = {
       wishes: 2,
     },
     description: 'Start building factories to fold',
-    trigger: function() {
+    trigger: function () {
       return projects.unlockEnergy.flag;
     },
     uses: 1,
     flag: false,
-    effect: function() {
+    effect: function () {
       this.loadEffect();
     },
-    loadEffect: function() {
+    loadEffect: function () {
       unhide('factoryDiv');
     },
   },

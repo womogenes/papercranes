@@ -3,6 +3,7 @@ let domUpdate;
 setInterval(function () {
   highSchoolersFold();
   makeCrane(professionals);
+  generatePower();
   factoryFold();
   if (projects.buisnessManagement.flag) {
     sellCranes();

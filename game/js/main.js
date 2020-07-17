@@ -28,9 +28,15 @@ let energyPrice = 150;
 let energy = 0;
 let energyPurchaseAmount = 100;
 
-let factoryCount = 0;
+let coal = 0;
+let coalPrice = 200;
+let coalPurchaseAmount = 50;
+let powerPlants = 0;
+let powerPlantPrice = 1000;
+
+let factories = 0;
 let factoryBoost = 1;
-let factoryCost = 1000;
+let factoryPrice = 1000;
 
 let prevCranes = cranes;
 let tick = 0;
@@ -66,9 +72,14 @@ function save() {
     energy: energy,
     energyPrice: energyPrice,
     energyPurchaseAmount: energyPurchaseAmount,
-    factoryCount: factoryCount,
+    coal: coal,
+    coalPrice: coalPrice,
+    coalPurchaseAmount: coalPurchaseAmount,
+    powerPlants: powerPlants,
+    powerPlantPrice: powerPlantPrice,
+    factories: factories,
     factoryBoost: factoryBoost,
-    factoryCost: factoryCost,
+    factoryPrice: factoryPrice,
 
     paperBuyerOn: paperBuyerOn,
   };
@@ -153,9 +164,14 @@ function load() {
   energy = savedGame.energy;
   energyPrice = savedGame.energyPrice;
   energyPurchaseAmount = savedGame.energyPurchaseAmount;
-  factoryCount = savedGame.factoryCount;
+  coal = savedGame.coal;
+  coalPrice = savedGame.coalPrice;
+  coalPurchaseAmount = savedGame.coalPurchaseAmount;
+  powerPlants = savedGame.powerPlants;
+  powerPlantPrice = savedGame.powerPlantPrice;
+  factories = savedGame.factories;
   factoryBoost = savedGame.factoryBoost;
-  factoryCost = savedGame.factoryCost;
+  factoryPrice = savedGame.factoryPrice;
 
 
   // Load projects and events
