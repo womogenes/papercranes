@@ -34,6 +34,17 @@ const events = {
       unhide('wishDiv');
     },
   },
+  outOfMoney: {
+    trigger: function () {
+      return !projects.buisnessManagement.flag && !canAffordProject(projects.buisnessManagement) && !projects.bankAccount.flag;
+    },
+    description: 'Without buisness management you can\'t make money. Buy it before other things next time.',
+    uses: 1,
+    flag: false,
+    notifyPlayer: true,
+    effect: function () {},
+    loadEffect: function () {},
+  },
   buyingPaperUnlocked: {
     trigger: function () {
       return paper.amount <= 0;
@@ -67,15 +78,14 @@ const events = {
     uses: -1,
     flag: false,
     notifyPlayer: true,
-    effect: function () {
+    onDisplay: function () {
       events.maxedDebt.update = setInterval(function () {
         if (debt <= maxDebt * .5) {
           events.maxedDebt.flag = false;
-          clearInterval(events.maxedDebt.update);
           closeEvent();
           return;
         }
-        const buttonEls = events.maxedDebt.buttonEls;
+        const buttonEls = getEl('eventButtons').children;
         buttonEls[0].disabled = money < 0.01;
         buttonEls[0].innerHTML = `Pay $${monify(Math.min(money / 2, debt - maxDebt / 2))}`;
         buttonEls[1].disabled = !(highSchoolers.amount || professionals.amount);
@@ -83,8 +93,10 @@ const events = {
       }, 10);
     },
     loadEffect: function () {
-      this.effect();
       displayEvent(this);
+    },
+    onClose: function () {
+      clearInterval(this.update);
     },
     buttons: [{
         text: 'pay money',
@@ -108,7 +120,7 @@ const events = {
         text: 'default on loan',
         onClick: function () {
           debt = 0;
-          maxDebt -= 500;
+          maxDebt *= .5;
         },
       },
     ],

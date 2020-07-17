@@ -4,7 +4,7 @@ let wishes = 0;
 let unsoldCranes = 0;
 let cranePriceSliderLoc = 0.1;
 
-let money = 25;
+let money = 35;
 let debt = 0;
 let maxDebt = 1e3;
 let interestRate = 0.01;
@@ -277,7 +277,9 @@ function manageEvents() {
         pendingEvents.push(event.title.camelize());
       }
       eventBaseEffect(event);
-      event.effect();
+      if (event.effect) {
+        event.effect();
+      }
     }
   }
 

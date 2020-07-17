@@ -232,6 +232,11 @@ function generateInformation(object) {
 }
 
 function trigger(thing) {
+  // no trigger means it isn't supposed to be checked in the interval
+  if (!thing.hasOwnProperty('trigger')) {
+    return false;
+  }
+
   if (typeof thing.trigger == 'function') {
     return thing.trigger();
   }

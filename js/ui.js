@@ -52,9 +52,11 @@ function updateDom() {
 
 // Events and projects
 function displayEvent(event) {
-  // If event is not passed, displayed next event
+  // If event is not passed, displays next event
   // If event is passed, moves the currently displayed event back to pendingEvents
   // and replaces it with event
+
+  // Get the event to display
   if (event) {
     if (!getEl('eventDiv').hidden) {
       pendingEvents.push(getEl('eventTitle').innerHTML.camelize());
@@ -63,24 +65,30 @@ function displayEvent(event) {
     let eventName = pendingEvents.pop();
     event = events.hasOwnProperty(eventName) ? events[eventName] : otherEvents[eventName];
   }
+
+  // update eventdiv with event information
   resetEventDiv();
   getEl('eventTitle').innerHTML = event.title.toTitleCase();
   getEl('eventDescription').innerHTML = event.description;
   if (event.noCloseButton) {
     getEl('eventCloseButton').hidden = true;
   }
+
+  // add event buttons
   if (event.buttons) {
-    event.buttonEls = [];
     event.buttons.forEach((button) => {
       const newButton = document.createElement('button');
       newButton.innerHTML = button.text.toTitleCase();
       newButton.onclick = button.onClick;
       getEl('eventButtons').appendChild(newButton);
-      event.buttonEls.push(newButton);
     });
-    if (getEl('eventDiv').hidden) {
-      unhide('eventDiv');
-    }
+  }
+
+  if(event.onDisplay) {
+    event.onDisplay();
+  }
+  if (getEl('eventDiv').hidden) {
+    unhide('eventDiv');
   }
 }
 
@@ -121,6 +129,7 @@ function resetEventDiv() {
 
 // Manipuating elements
 const domElements = {};
+
 function getEl(id) {
   if (!domElements[id]) {
     domElements[id] = document.getElementById(id);
