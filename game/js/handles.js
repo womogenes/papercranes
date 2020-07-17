@@ -27,20 +27,20 @@ function increaseAdvertising() {
 
 function hireHighSchooler() {
   // Hires a highSchooler!
-  highSchoolers++;
-  money -= highSchoolerWage;
-  highSchoolerWage = Math.ceil(highSchoolerWage * 1.001 * 100) / 100;
+  highSchoolers.amount++;
+  money -= highSchoolers.wage;
+  highSchoolers.wage = Math.ceil(highSchoolers.wage * 1.001 * 100) / 100;
 }
 
 function hireProfessional() {
   // Hires one Professional
-  if (money < professionalWage) {
+  if (money < professionals.wage) {
     return;
   }
-  professionals++;
-  highSchoolers--;
-  money -= professionalWage;
-  professionalWage = Math.ceil(professionalWage * 1.1 * 100) / 100;
+  professionals.amount++;
+  highSchoolers.amount--;
+  money -= professionals.wage;
+  professionals.wage = Math.ceil(professionals.wage * 1.1 * 100) / 100;
 }
 
 function buyFactory() {
@@ -55,12 +55,12 @@ function buyPowerPlant() {
 
 //  Resources
 function buyPaper(n) {
-  if (money < paperPrice * n) {
+  if (money < paper.price * n) {
     return;
   }
   // Buys paper! May be upgraded.
-  paper += Math.round(paperPurchaseAmount * n);
-  money -= Math.round(paperPrice * n);
+  paper.amount += Math.round(paper.purchaseAmount * n);
+  money -= Math.round(paper.price * n);
 }
 
 function buyEnergy(n) {
@@ -79,12 +79,12 @@ function buyCoal(amount) {
 
 // Buttons
 function makeCrane(n) {
-  n = Math.min(n, paper);
+  n = Math.min(n, paper.amount);
   wishes += n / 1000;
 
   cranes += n;
   unsoldCranes += n;
-  paper -= n;
+  paper.amount -= n;
 }
 
 function closeEvent() {
@@ -108,9 +108,9 @@ function changeTheme() {
 
 // Interval functions
 function highSchoolersFold() {
-  if (paper > 0) {
-    money -= highSchoolerWage * highSchoolers / 1000000;
-    makeCrane((highSchoolers * highSchoolerBoost) / 500);
+  if (paper.amount > 0) {
+    money -= highSchoolers.wage * highSchoolers.amount / 1000000;
+    makeCrane((highSchoolers.amount * highSchoolers.boost) / 500);
   }
 }
 

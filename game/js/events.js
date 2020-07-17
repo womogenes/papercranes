@@ -36,7 +36,7 @@ const events = {
   },
   buyingPaperUnlocked: {
     trigger: function () {
-      return paper <= 0;
+      return paper.amount <= 0;
     },
     uses: 1,
     flag: false,
@@ -50,7 +50,7 @@ const events = {
   },
   autoBuyPaper: {
     trigger: function () {
-      return paper <= 0 && paperBuyerOn;
+      return paper.amount <= 0 && paperBuyerOn;
     },
     uses: -1,
     flag: false,
@@ -78,8 +78,8 @@ const events = {
         const buttonEls = events.maxedDebt.buttonEls;
         buttonEls[0].disabled = money < 0.01;
         buttonEls[0].innerHTML = `Pay $${monify(Math.min(money / 2, debt - maxDebt / 2))}`;
-        buttonEls[1].disabled = !(highSchoolers || professionals);
-        buttonEls[2].disabled = (money > 0.01 || highSchoolers || professionals);
+        buttonEls[1].disabled = !(highSchoolers.amount || professionals.amount);
+        buttonEls[2].disabled = (money > 0.01 || highSchoolers.amount || professionals.amount);
       }, 10);
     },
     loadEffect: function () {
@@ -95,12 +95,12 @@ const events = {
       {
         text: 'sell a worker',
         onClick: function () {
-          if (professionals) {
-            professionals -= 1;
-            debt -= professionalWage;
-          } else if (highSchoolers) {
-            highSchoolers -= 1;
-            debt -= highSchoolerWage;
+          if (professionals.amount) {
+            professionals.amount -= 1;
+            debt -= professionals.wage;
+          } else if (highSchoolers.amount) {
+            highSchoolers.amount -= 1;
+            debt -= highSchoolers.wage;
           }
         },
       },

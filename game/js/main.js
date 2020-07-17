@@ -12,17 +12,25 @@ let interestRate = 0.01;
 let advertisingPrice = 40.0;
 let advertisingLevel = 1;
 
-let basePaperPrice = 15;
-let paperPrice = 15;
-let paperPurchaseAmount = 1000;
-let paper = 10;
-let paperBuyerOn = false;
+let highSchoolers = {
+  amount: 0,
+  wage: 5,
+  boost: 1,
+};
+let professionals = {
+  amount: 0,
+  wage: 100,
+  boost: 1,
+};
 
-let highSchoolerWage = 5;
-let highSchoolers = 0;
-let highSchoolerBoost = 1;
-let professionals = 0;
-let professionalWage = 100;
+
+let paper = {
+  amount: 10,
+  price: 15,
+  basePrice: 15,
+  purchaseAmount: 1000,
+};
+let paperBuyerOn = false;
 
 let energy = {
   amount: 0,
@@ -64,20 +72,14 @@ function save() {
     cranePrice: cranePrice,
     advertisingPrice: advertisingPrice,
     cranePriceSliderLoc: getEl('priceSlider').value,
-    paperPrice: paperPrice,
-    paperPurchaseAmount: paperPurchaseAmount,
     paper: paper,
     advertisingLevel: advertisingLevel,
     highSchoolers: highSchoolers,
-    highSchoolerBoost: highSchoolerBoost,
-    highSchoolerWage: highSchoolerWage,
     debt: debt,
     maxDebt: maxDebt,
     interestRate: interestRate,
 
     professionals: professionals,
-    professionalWage: professionalWage,
-    basePaperPrice: basePaperPrice,
     wishes: wishes,
 
     energy: energy,
@@ -154,17 +156,11 @@ function load() {
   advertisingPrice = savedGame.advertisingPrice;
   advertisingLevel = savedGame.advertisingLevel;
 
-  paperPrice = savedGame.paperPrice;
-  paperPurchaseAmount = savedGame.paperPurchaseAmount;
   paper = savedGame.paper;
-  basePaperPrice = savedGame.basePaperPrice;
   paperBuyerOn = savedGame.paperBuyerOn;
 
   highSchoolers = savedGame.highSchoolers;
-  highSchoolerBoost = savedGame.highSchoolerBoost;
-  highSchoolerWage = savedGame.highSchoolerWage;
   professionals = savedGame.professionals;
-  professionalWage = savedGame.professionalWage;
 
   energy = savedGame.energy;
   coal = savedGame.coal;
@@ -224,7 +220,7 @@ function load() {
 document.addEventListener('DOMContentLoaded', function (event) {
   load();
 
-  getEl('paperPrice').innerHTML = monify(paperPrice);
+  getEl('paperPrice').innerHTML = monify(paper.price);
   getEl('advertisingLevel').innerHTML = commify(advertisingLevel);
   getEl('paperBuyer').innerHTML = paperBuyerOn ? 'ON' : 'OFF';
   getEl('priceSlider').value = cranePriceSliderLoc;
@@ -257,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
   };
 });
 
-// Project management functions.
+// Project/event management functions.
 function manageProjects() {
   for (let projectName in projects) {
     let project = projects[projectName];

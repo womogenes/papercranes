@@ -14,7 +14,7 @@ function projectBaseEffect(project) {
     wishes -= project.costs.wishes;
   }
   if (project.costs.highSchoolers) {
-    highSchoolers -= project.costs.highSchoolers;
+    highSchoolers.amount -= project.costs.highSchoolers;
   }
 }
 
@@ -36,9 +36,10 @@ function canAffordProject(project) {
   return (
     (project.costs.money ? money >= project.costs.money : true) &&
     (project.costs.wishes ? wishes >= project.costs.wishes : true) &&
-    (project.costs.highSchoolers ? highSchoolers >= project.costs.highSchoolers : true)
+    (project.costs.highSchoolers ? highSchoolers.amount >= project.costs.highSchoolers : true)
   );
 }
+
 const projects = {
   // Worker projects
   unlockWorkers: {
@@ -67,12 +68,12 @@ const projects = {
       money: 10,
     },
     trigger: function () {
-      return money >= 5 && highSchoolers > 0;
+      return money >= 5 && highSchoolers.amount > 0;
     },
     uses: 1,
     flag: false,
     effect: function () {
-      highSchoolerBoost *= percentToMultiplier(this.fasterPercent);
+      highSchoolers.boost *= percentToMultiplier(this.fasterPercent);
       displayMessage(`High schoolers now work ${this.fasterPercent}% as fast.`);
     },
   },
@@ -91,7 +92,7 @@ const projects = {
     uses: 1,
     flag: false,
     effect: function () {
-      highSchoolerBoost *= percentToMultiplier(this.fasterPercent);
+      highSchoolers.boost *= percentToMultiplier(this.fasterPercent);
       interestRate *= 2;
     },
     loadEffect: function () {},
@@ -111,8 +112,8 @@ const projects = {
     flag: false,
     effect: function () {
       this.loadEffect();
-      highSchoolerWage *= 2;
-      highSchoolerBoost *= this.fasterAmount;
+      highSchoolers.wage *= 2;
+      highSchoolers.boost *= this.fasterAmount;
       displayMessage('When they work harder, you gotta pay them more.');
     },
   },
@@ -124,7 +125,7 @@ const projects = {
       return `Use ${this.costs.wishes} wishes to start turning your high schoolers into Professionals, the best folders.`;
     },
     trigger: function () {
-      return highSchoolers >= 100;
+      return highSchoolers.amount >= 100;
     },
     uses: 1,
     flag: false,
@@ -237,7 +238,7 @@ const projects = {
     uses: 1,
     flag: false,
     effect: function () {
-      paperPurchaseAmount = Math.round(paperPurchaseAmount * percentToMultiplier(this.increasePercent));
+      paper.purchaseAmount = Math.round(paper.purchaseAmount * percentToMultiplier(this.increasePercent));
       basePaperPrice = Math.round(basePaperPrice * percentToMultiplier(this.increasePercent));
     },
   },
@@ -255,7 +256,7 @@ const projects = {
     uses: 1,
     flag: false,
     effect: function () {
-      paperPurchaseAmount = Math.round(paperPurchaseAmount * percentToMultiplier(this.increasePercent));
+      paper.purchaseAmount = Math.round(paper.purchaseAmount * percentToMultiplier(this.increasePercent));
       basePaperPrice = Math.round(basePaperPrice * 1.5);
     },
   },
@@ -273,7 +274,7 @@ const projects = {
     uses: 1,
     flag: false,
     effect: function () {
-      paperPurchaseAmount = Math.round(paperPurchaseAmount * percentToMultiplier(this.increasePercent));
+      paper.purchaseAmount = Math.round(paper.purchaseAmount * percentToMultiplier(this.increasePercent));
       basePaperPrice = Math.round(basePaperPrice * 1.5);
     },
   },

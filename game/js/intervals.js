@@ -2,7 +2,7 @@ let domUpdate;
 // Game loop!
 setInterval(function () {
   highSchoolersFold();
-  makeCrane(professionals);
+  makeCrane(professionals.amount);
   generatePower();
   factoryFold();
   if (projects.buisnessManagement.flag) {
@@ -42,8 +42,8 @@ setInterval(function () {
   save();
 
   // Fluctuate price.
-  paperPrice = Math.floor(Math.sin(tick / 10) * 4) + basePaperPrice;
-  getEl('paperPrice').innerHTML = monify(paperPrice);
+  paper.price = Math.floor(Math.sin(tick / 10) * 4) + paper.basePrice;
+  getEl('paperPrice').innerHTML = monify(paper.price);
 }, 5000);
 
 setInterval(function () {
