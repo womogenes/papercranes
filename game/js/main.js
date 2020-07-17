@@ -4,12 +4,12 @@ let wishes = 0;
 let unsoldCranes = 0;
 let cranePriceSliderLoc = 0.1;
 
-let money = 40;
+let money = 25;
 let debt = 0;
 let maxDebt = 1e3;
 let interestRate = 0.01;
 
-let advertisingPrice = 40.0;
+let advertisingPrice = 20.0;
 let advertisingLevel = 1;
 
 let highSchoolers = {

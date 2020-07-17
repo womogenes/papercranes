@@ -21,7 +21,7 @@ function increaseAdvertising() {
   advertisingLevel += 1;
   money -= advertisingPrice;
 
-  advertisingPrice = Math.round(advertisingPrice * 2);
+  advertisingPrice = Math.round(advertisingPrice * 1.01);
   getEl('advertisingLevel').innerHTML = commify(advertisingLevel);
 }
 
@@ -108,9 +108,11 @@ function changeTheme() {
 
 // Interval functions
 function highSchoolersFold() {
-  if (paper.amount > 0) {
-    money -= highSchoolers.wage * highSchoolers.amount / 1000000;
-    makeCrane((highSchoolers.amount * highSchoolers.boost) / 500);
+  if (money > 0) {
+    if (tick % 100 == 0 && paper.amount > 0) {
+      money -= highSchoolers.wage * highSchoolers.amount;
+    }
+    makeCrane((highSchooler.amount * highSchoolers.boost) / 200);
   }
 }
 

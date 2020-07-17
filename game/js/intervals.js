@@ -1,4 +1,5 @@
 let domUpdate;
+
 // Game loop!
 setInterval(function () {
   highSchoolersFold();
@@ -14,12 +15,14 @@ setInterval(function () {
   manageProjects();
   manageEvents();
   tick++;
+  
 }, 10);
 
 // Slower because its starting to lag things
 domUpdate = setInterval(function () {
   updateDom();
 }, 100);
+
 // Don't update if the tab is hidden
 document.addEventListener('visibilitychange', function () {
   if (document.hidden) {
