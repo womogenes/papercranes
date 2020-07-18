@@ -112,10 +112,8 @@ let resources = {
 
 let prevCranes = cranes;
 let tick = 0;
-
 let consoleHistory = [];
 let pendingEvents = [];
-
 let theme;
 
 function save() {
@@ -126,23 +124,11 @@ function save() {
     cranePrice: cranePrice,
     advertisingPrice: advertisingPrice,
     cranePriceSliderLoc: getEl('priceSlider').value,
-    paper: paper,
     advertisingLevel: advertisingLevel,
-    highSchoolers: highSchoolers,
     debt: debt,
     maxDebt: maxDebt,
     interestRate: interestRate,
-
-    professionals: professionals,
     wishes: wishes,
-
-    energy: energy,
-    coal: coal,
-    powerPlants: powerPlants,
-    factories: factories,
-    wood: wood,
-    paperMills: paperMills,
-
     paperBuyerOn: paperBuyerOn,
   };
   for (resourceName in resources) {
