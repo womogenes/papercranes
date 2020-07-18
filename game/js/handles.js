@@ -28,8 +28,12 @@ function increaseAdvertising() {
 function hireHighSchooler() {
   // Hires a highSchooler!
   highSchoolers.amount++;
-  money.amount -= highSchoolers.wage;
   highSchoolers.wage = Math.ceil(highSchoolers.wage * 1.001 * 100) / 100;
+}
+
+function fireHighSchooler() {
+  // Hires a highSchooler!
+  highSchoolers.amount--;
 }
 
 function hireProfessional() {
