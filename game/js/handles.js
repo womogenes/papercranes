@@ -113,8 +113,8 @@ function closeEvent() {
 }
 
 function togglePaperBuyer() {
-  paperBuyerOn = !paperBuyerOn;
-  getEl('paperBuyer').innerHTML = paperBuyerOn ? 'ON' : 'OFF';
+  autoBuyPaper.flag = !autoBuyPaper.flag;
+  getEl('paperBuyer').innerHTML = autoBuyPaper.flag ? 'ON' : 'OFF';
 }
 
 function changeTheme() {

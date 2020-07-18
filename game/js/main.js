@@ -37,7 +37,6 @@ let paper = {
   basePrice: 15,
   purchaseAmount: 1000,
 };
-let paperBuyerOn = false;
 let wood = {
   amount: 0,
   amountEl: 'wood',
@@ -129,7 +128,6 @@ function save() {
     maxDebt: maxDebt,
     interestRate: interestRate,
     wishes: wishes,
-    paperBuyerOn: paperBuyerOn,
   };
   for (resourceName in resources) {
     resource = resources[resourceName];
@@ -202,7 +200,6 @@ function load() {
 
   advertisingPrice = savedGame.advertisingPrice;
   advertisingLevel = savedGame.advertisingLevel;
-  paperBuyerOn = savedGame.paperBuyerOn;
 
   // load resources
   for (property in savedGame) {
@@ -260,7 +257,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
   getEl('paperPrice').innerHTML = monify(paper.price);
   getEl('advertisingLevel').innerHTML = commify(advertisingLevel);
-  getEl('paperBuyer').innerHTML = paperBuyerOn ? 'ON' : 'OFF';
   getEl('priceSlider').value = cranePriceSliderLoc;
 
   // Initial message.

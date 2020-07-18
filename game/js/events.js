@@ -91,12 +91,17 @@ const events = {
   },
   autoBuyPaper: {
     trigger: function () {
-      return paper.amount <= 0 && paperBuyerOn;
+      return paper.amount <= 0 && this.flag;
     },
     notifyPlayer: false,
     uses: -1,
+    flag: false, // indicates if paperbuyer is on
+    save: ['flag'],
     effect: function () {
       buyPaper(1);
+    },
+    loadEffect: function () {
+      getEl('paperBuyer').innerHTML = 'ON';
     },
   },
   maxedDebt: {
