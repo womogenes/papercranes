@@ -2,16 +2,20 @@
 let cranes = 0;
 let wishes = 0;
 let unsoldCranes = 0;
-let cranePriceSliderLoc = 0.1;
 
 let money = 35;
 let debt = 0;
 let maxDebt = 1e3;
 let interestRate = 0.01;
 
-let advertisingPrice = 20.0;
-let advertisingLevel = 1;
-
+// resources
+let advertising = {
+  amount: 1, // level
+  amountEl: 'advertisingLevel',
+  price: 20,
+  priceEl: 'advertisingPrice',
+  purchaseEl: 'btnAdvertising',
+};
 let highSchoolers = {
   amount: 0,
   amountEl: 'highSchoolers',
@@ -107,9 +111,12 @@ let resources = {
   coal: coal,
   powerPlants: powerPlants,
   carbonDioxide: carbonDioxide,
+  advertising: advertising,
 };
 
+// things that aren't resources
 let prevCranes = cranes;
+let cranePriceSliderLoc = 0.1;
 let tick = 0;
 let consoleHistory = [];
 let pendingEvents = [];
@@ -121,9 +128,7 @@ function save() {
     unsoldCranes: unsoldCranes,
     money: money,
     cranePrice: cranePrice,
-    advertisingPrice: advertisingPrice,
     cranePriceSliderLoc: getEl('priceSlider').value,
-    advertisingLevel: advertisingLevel,
     debt: debt,
     maxDebt: maxDebt,
     interestRate: interestRate,
@@ -198,9 +203,6 @@ function load() {
   maxDebt = savedGame.maxDebt;
   interestRate = savedGame.interestRate;
 
-  advertisingPrice = savedGame.advertisingPrice;
-  advertisingLevel = savedGame.advertisingLevel;
-
   // load resources
   for (property in savedGame) {
     if (resources.hasOwnProperty(property)) {
@@ -254,9 +256,6 @@ function load() {
 
 document.addEventListener('DOMContentLoaded', function (event) {
   load();
-
-  getEl('paperPrice').innerHTML = monify(paper.price);
-  getEl('advertisingLevel').innerHTML = commify(advertisingLevel);
   getEl('priceSlider').value = cranePriceSliderLoc;
 
   // Initial message.

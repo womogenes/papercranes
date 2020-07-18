@@ -15,14 +15,14 @@ function payBackLoan(x) {
 // Buying things
 //  Production
 function increaseAdvertising() {
-  if (money < advertisingPrice) {
+  if (money < advertising.price) {
     return;
   }
-  advertisingLevel += 1;
-  money -= advertisingPrice;
+  advertising.amount += 1;
+  money -= advertising.price;
 
-  advertisingPrice = Math.round(advertisingPrice * 1.01);
-  getEl('advertisingLevel').innerHTML = commify(advertisingLevel);
+  advertising.price = Math.toPrecision(advertising.price * 1.01, 2);
+  getEl('advertisingLevel').innerHTML = commify(advertising.amount);
 }
 
 function hireHighSchooler() {
@@ -161,7 +161,7 @@ function generatePower() {
 }
 
 function sellCranes() {
-  const demand = (0.1 / cranePrice) * Math.pow(1.2, advertisingLevel - 1);
+  const demand = (0.1 / cranePrice) * Math.pow(1.2, advertising.amount - 1);
   getEl('demand').innerHTML = commify(Math.floor(demand * 100));
 
   if (Math.random() * 50 < demand || (cranePrice <= 0.01 && Math.random() > 0.7)) {

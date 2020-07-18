@@ -7,7 +7,6 @@ function updateDom() {
   getEl('cranePrice').innerHTML = monify(cranePrice);
 
   getEl('money').innerHTML = monify(money);
-  getEl('advertisingPrice').innerHTML = monify(advertisingPrice);
   getEl('debt').innerHTML = monify(debt);
   getEl('interestRate').innerHTML = interestRate * 100;
 
@@ -34,7 +33,6 @@ function updateDom() {
   getEl('happinessAmount').innerHTML = happiness.toFixed(2) + '%';
 
   // Disable buttons which player cannot use
-  getEl('btnAdvertising').disabled = advertisingPrice > money;
   getEl('btnpayBackLoan').disabled = money <= 0 || debt <= 0;
   getEl('btnBorrowMoney').disabled = debt >= maxDebt;
   getEl('btnMakeCrane').disabled = paper.amount < 1;
