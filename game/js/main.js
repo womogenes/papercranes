@@ -14,63 +14,101 @@ let advertisingLevel = 1;
 
 let highSchoolers = {
   amount: 0,
+  amountEl: 'highSchoolers',
   wage: 5,
+  wageEl: 'highSchoolerWage',
+  purchaseEl: 'btnHireHighSchooler',
   boost: 1,
 };
 let professionals = {
   amount: 0,
+  amountEl: 'professionals',
   wage: 100,
+  wageEl: 'professionalWage',
+  purchaseEl: 'btnHireProfessional',
   boost: 1,
 };
-
-
 let paper = {
   amount: 10,
+  amountEl: 'paper',
   price: 15,
+  priceEl: 'paperPrice',
+  purchaseEl: 'btnBuyPaper',
   basePrice: 15,
   purchaseAmount: 1000,
 };
 let paperBuyerOn = false;
 let wood = {
   amount: 0,
+  amountEl: 'wood',
   price: 50,
+  priceEl: 'woodPrice',
+  purchaseEl: 'btnBuyWood',
   purchaseAmount: 500,
 };
 let paperMills = {
   amount: 0,
+  amountEl: 'paperMills',
   price: 500,
+  priceEl: 'paperMillPrice',
+  purchaseEl: 'btnBuyPaperMill',
   boost: 1,
   woodUse: 0.5,
   energyUse: 0.1,
   emissions: 0.001,
 };
-
 let energy = {
   amount: 0,
+  amountEl: 'energy',
   price: 150,
+  priceEl: 'energyPrice',
+  purchaseEl: 'btnBuyEnergy',
   purchaseAmount: 100,
 };
 let coal = {
   amount: 0,
+  amountEl: 'coal',
   price: 200,
+  priceEl: 'coalPrice',
+  purchaseEl: 'btnBuyCoal',
   purchaseAmount: 50,
 };
-
 let powerPlants = {
   amount: 0,
+  amountEl: 'powerPlants',
   price: 1000,
+  priceEl: 'powerPlantPrice',
+  purchaseEl: 'btnBuyPowerPlant',
   boost: 1,
   coalUse: 0.1,
   emissions: 0.001,
 };
 let factories = {
   amount: 0,
+  amountEl: 'factories',
   price: 1000,
+  priceEl: 'factoryPrice',
+  purchaseEl: 'btnBuyFactory',
   boost: 1,
   energyUse: 0.1,
   emissions: 0.001,
 };
-let carbonDioxide = 300;
+let carbonDioxide = {
+  amount: 300,
+  amountEl: 'carbonDioxide',
+};
+let resources = {
+  highSchoolers: highSchoolers,
+  professionals: professionals,
+  paper: paper,
+  wood: wood,
+  paperMills: paperMills,
+  energy: energy,
+  factories: factories,
+  coal: coal,
+  powerPlants: powerPlants,
+  carbonDioxide: carbonDioxide,
+};
 
 let prevCranes = cranes;
 let tick = 0;
@@ -104,10 +142,21 @@ function save() {
     factories: factories,
     wood: wood,
     paperMills: paperMills,
-    carbonDioxide: carbonDioxide,
 
     paperBuyerOn: paperBuyerOn,
   };
+  for (resourceName in resources) {
+    resource = resources[resourceName];
+    savedGame[resourceName] = {};
+    for (propertyName in resource) {
+      property = resource[propertyName];
+      if (!propertyName.endsWith('El') && typeof property != 'function') {
+        // properties ending with el are used for updating the dom and so shouldn't be saved
+        // functions are for game logic and also should not be saved
+        savedGame[resourceName][propertyName] = resource[propertyName];
+      }
+    }
+  }
 
   localStorage.setItem('savedGame', JSON.stringify(savedGame));
 
@@ -167,21 +216,15 @@ function load() {
 
   advertisingPrice = savedGame.advertisingPrice;
   advertisingLevel = savedGame.advertisingLevel;
-
-  paper = savedGame.paper;
   paperBuyerOn = savedGame.paperBuyerOn;
 
-  highSchoolers = savedGame.highSchoolers;
-  professionals = savedGame.professionals;
+  // load resources
+  for (property in savedGame) {
+    if (resources.hasOwnProperty(property)) {
+      update(resources[property], savedGame[property]);
+    }
+  }
 
-  energy = savedGame.energy;
-  coal = savedGame.coal;
-  powerPlants = savedGame.powerPlants;
-  factories = savedGame.factories;
-  wood = savedGame.wood;
-  paperMills = savedGame.paperMills;
-
-  carbonDioxide = savedGame.carbonDioxide;
 
   // Load projects and events
   const savedProjectData = JSON.parse(localStorage.getItem('savedProjectData'));

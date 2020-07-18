@@ -3,50 +3,38 @@ function updateDom() {
   // Update elements to have correct values
   getEl('cranes').innerHTML = commify(Math.floor(cranes));
   getEl('wishes').innerHTML = commify(Math.floor(wishes));
-  getEl('energy').innerHTML = commify(Math.floor(energy.amount));
-
   getEl('unsoldCranes').innerHTML = commify(Math.floor(unsoldCranes));
-  getEl('cranePrice').innerHTML = monify(parseFloat(cranePrice));
-  getEl('energyPrice').innerHTML = monify(parseFloat(energy.price));
+  getEl('cranePrice').innerHTML = monify(cranePrice);
 
   getEl('money').innerHTML = monify(money);
   getEl('advertisingPrice').innerHTML = monify(advertisingPrice);
   getEl('debt').innerHTML = monify(debt);
   getEl('interestRate').innerHTML = interestRate * 100;
-  getEl('paper').innerHTML = commify(Math.floor(paper.amount));
 
-  getEl('highSchoolers').innerHTML = commify(highSchoolers.amount);
-  getEl('highSchoolerWage').innerHTML = monify(highSchoolers.wage);
-  getEl('professionals').innerHTML = commify(professionals.amount);
-  getEl('professionalWage').innerHTML = monify(professionals.wage);
-  getEl('coal').innerHTML = commify(coal.amount);
-  getEl('coalPrice').innerHTML = monify(coal.price);
-  getEl('powerPlants').innerHTML = commify(powerPlants.amount);
-  getEl('powerPlantPrice').innerHTML = monify(powerPlants.price);
-  getEl('wood').innerHTML = commify(wood.amount);
-  getEl('woodPrice').innerHTML = monify(wood.price);
-  getEl('paperMills').innerHTML = commify(paperMills.amount);
-  getEl('paperMillPrice').innerHTML = monify(paperMills.price);
-  getEl('factories').innerHTML = commify(factories.amount);
-  getEl('factoryPrice').innerHTML = monify(factories.price);
-  getEl('carbonDioxide').innerHTML = carbonDioxide.toFixed(2);
+  for (resourceName in resources) {
+    resource = resources[resourceName];
+    if (resource.amountEl) {
+      getEl(resource.amountEl).innerHTML = commify(resource.amount);
+    }
+    if (resource.priceEl) {
+      getEl(resource.priceEl).innerHTML = monify(resource.price);
+    }
+    if (resource.wageEl) {
+      getEl(resource.wageEl).innerHTML = monify(resource.wage);
+    }
+    if (resource.purchaseEl && resource.price != undefined) {
+      getEl(resource.purchaseEl).disabled = money < resource.price;
+    } else if (resource.purchaseEl && resource.wage != undefined) {
+      getEl(resource.purchaseEl).disabled = money < resource.wage;
+    }
+  }
 
   let happiness = money - debt > 0 ? Math.min(Math.log(money + wishes - debt), 100) : 0;
   getEl('happinessMeter').style.width = happiness + '%';
   getEl('happinessAmount').innerHTML = happiness.toFixed(2) + '%';
 
   // Disable buttons which player cannot use
-  getEl('btnBuyPaper').disabled = paper.price > money;
-  getEl('btnBuyEnergy').disabled = energy.price > money;
-  getEl('btnBuyCoal').disabled = coal.price > money;
-  getEl('btnBuyFactory').disabled = factories.price > money;
-  getEl('btnBuyPowerPlant').disabled = powerPlants.price > money;
-  getEl('btnBuyWood').disabled = wood.price > money;
-  getEl('btnBuyPaperMill').disabled = paperMills.price > money;
   getEl('btnAdvertising').disabled = advertisingPrice > money;
-  getEl('btnHireHighSchooler').disabled = money < highSchoolers.wage;
-  getEl('btnHireProfessional').disabled = money < professionals.wage;
-
   getEl('btnpayBackLoan').disabled = money <= 0 || debt <= 0;
   getEl('btnBorrowMoney').disabled = debt >= maxDebt;
   getEl('btnMakeCrane').disabled = paper.amount < 1;

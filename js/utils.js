@@ -247,3 +247,9 @@ function percentToMultiplier(percent) {
   return 1 + (percent / 100);
 }
 
+function update(base, other) {
+  // Updates the values of base with other's values
+  for (propertyName in other) {
+    base[propertyName] = other[propertyName];
+  }
+}
