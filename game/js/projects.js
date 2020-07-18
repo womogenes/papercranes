@@ -48,7 +48,7 @@ const projects = {
       money: 10,
     },
     trigger: function () {
-      return money >= 5 && cranes >= 20;
+      return money >= 5 && lifetimeCranes >= 20;
     },
     uses: 1,
     flag: false,
@@ -125,7 +125,7 @@ const projects = {
     },
     description: 'Be able to borrow money!',
     trigger: function () {
-      return money >= 5 && cranes >= 20;
+      return money >= 5 && lifetimeCranes >= 20;
     },
     uses: 1,
     flag: false,
@@ -174,7 +174,7 @@ const projects = {
     },
     description: 'Buy advertising to increase demand for cranes',
     trigger: function () {
-      return money >= 20 && cranes >= 50;
+      return money >= 20 && lifetimeCranes >= 50;
     },
     uses: 1,
     flag: false,
@@ -193,7 +193,7 @@ const projects = {
     },
     description: 'Auto-purchase paper when it runs out.',
     trigger: function () {
-      return cranes >= 10000;
+      return lifetimeCranes >= 10000;
     },
     uses: 1,
     flag: false,
@@ -213,7 +213,7 @@ const projects = {
       return `Gain ${this.increasePercent}% more paper from each purchase.`;
     },
     trigger: function () {
-      return cranes >= 5000;
+      return lifetimeCranes >= 5000;
     },
     uses: 1,
     flag: false,
@@ -303,7 +303,7 @@ const projects = {
     },
     description: 'Unlock energy to power factories',
     trigger: function () {
-      return money >= 500 && wishes >= 1 && cranes > 1000;
+      return money >= 500 && wishes >= 1 && lifetimeCranes > 1000;
     },
     uses: 1,
     flag: false,

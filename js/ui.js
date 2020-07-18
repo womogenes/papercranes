@@ -1,7 +1,7 @@
 // Game stuff
 function updateDom() {
   // Update elements to have correct values
-  getEl('cranes').innerHTML = commify(Math.floor(cranes));
+  getEl('lifetimeCranes').innerHTML = commify(Math.floor(lifetimeCranes));
   getEl('wishes').innerHTML = commify(Math.floor(wishes));
   getEl('unsoldCranes').innerHTML = commify(Math.floor(unsoldCranes));
   getEl('cranePrice').innerHTML = monify(cranePrice);

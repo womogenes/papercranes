@@ -1,11 +1,11 @@
 // Yoy!
-let cranes = 0;
+let lifetimeCranes = 0;
 let wishes = 0;
 let unsoldCranes = 0;
 
 let money = 35;
 let debt = 0;
-let maxDebt = 1e3;
+let maxDebt = 1000;
 let interestRate = 0.01;
 
 // resources
@@ -193,7 +193,7 @@ function load() {
     return;
   }
   let savedGame = JSON.parse(localStorage.getItem('savedGame'));
-  cranes = savedGame.cranes;
+  lifetimeCranes = savedGame.lifetimeCranes;
   wishes = savedGame.wishes;
   unsoldCranes = savedGame.unsoldCranes;
   cranePriceSliderLoc = savedGame.cranePriceSliderLoc;

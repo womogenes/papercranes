@@ -94,7 +94,7 @@ function makeCrane(n) {
   n = Math.min(n, paper.amount);
   wishes += n / 1000;
 
-  cranes += n;
+  lifetimeCranes += n;
   unsoldCranes += n;
   paper.amount -= n;
 }

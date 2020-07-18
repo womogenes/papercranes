@@ -1,7 +1,7 @@
 const events = {
   projectsUnlocked: {
     trigger: function () {
-      return cranes >= 15 && events.buyingPaperUnlocked.flag;
+      return lifetimeCranes >= 15 && events.buyingPaperUnlocked.flag;
     },
     save: ['flag', 'uses'],
     uses: 1,
@@ -18,7 +18,7 @@ const events = {
   },
   prestigeUnlocked: {
     trigger: function () {
-      return cranes >= 1000;
+      return lifetimeCranes >= 1000;
     },
     save: ['flag', 'uses'],
     uses: 1,
