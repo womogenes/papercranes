@@ -40,7 +40,7 @@ let highSchoolers = {
   wageEl: 'highSchoolerWage',
   purchaseEl: 'btnHireHighSchooler',
   boost: 1,
-  toPrice: function(amount) {
+  toPrice: function (amount) {
     return `${amount} high schooler${amount > 1 ? 's' : ''}`;
   },
 };
@@ -202,7 +202,11 @@ function save() {
 
 
   localStorage.setItem('consoleHistory', JSON.stringify(consoleHistory));
-  localStorage.setItem('pendingEvents', JSON.stringify(pendingEvents.concat([getEl('eventTitle').innerHTML.camelize()])));
+  // saves the currently displayed event if there is one
+  localStorage.setItem('pendingEvents', JSON.stringify((
+    getEl('eventDiv').hidden ?
+    pendingEvents : pendingEvents.concat([getEl('eventTitle').innerHTML.camelize()])
+  )));
   localStorage.setItem('theme', JSON.stringify(theme));
 }
 

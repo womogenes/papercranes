@@ -153,7 +153,7 @@ const projects = {
       maxDebt += 500;
     },
   },
-  
+
   businessManagement: {
     costs: {
       money: 10,

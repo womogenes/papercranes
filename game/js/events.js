@@ -74,7 +74,7 @@ const events = {
   },
   pollution: {
     trigger: function () {
-      return carbonDioxide >= 310;
+      return carbonDioxide.amount >= 310;
     },
     save: ['flag', 'uses'],
     uses: 1,
