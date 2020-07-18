@@ -57,6 +57,7 @@ const projects = {
       unhide('workerDiv');
     },
   },
+  
   fasterHighSchoolers: {
     fasterPercent: 25,
     description: function () {
@@ -75,6 +76,7 @@ const projects = {
       displayMessage(`High schoolers now work ${this.fasterPercent}% as fast.`);
     },
   },
+  
   evenFasterHighSchoolers: {
     fasterPercent: 50,
     costs: {
@@ -95,6 +97,7 @@ const projects = {
     },
     loadEffect: function () {},
   },
+  
   professionals: {
     costs: {
       wishes: 10,
@@ -135,6 +138,7 @@ const projects = {
       unhide('bankDiv');
     },
   },
+  
   increaseMaxDebt: {
     costs: {
       money: 2000,
@@ -149,6 +153,7 @@ const projects = {
       maxDebt += 500;
     },
   },
+  
   buisnessManagement: {
     costs: {
       money: 10,
@@ -166,6 +171,7 @@ const projects = {
       unhide('buisnessColumn');
     },
   },
+  
   unlockAdvertising: {
     costs: {
       money: 100,
@@ -202,6 +208,7 @@ const projects = {
       unhide('paperBuyerDiv');
     },
   },
+  
   paperEfficiency: {
     increasePercent: 50,
     costs: {
@@ -220,6 +227,7 @@ const projects = {
       paper.basePrice = Math.round(paper.basePrice * percentToMultiplier(this.increasePercent));
     },
   },
+  
   thinnerSheets: {
     increasePercent: 75,
     costs: {
@@ -238,6 +246,7 @@ const projects = {
       paper.basePrice = Math.round(paper.basePrice * 1.5);
     },
   },
+  
   bigPaper: {
     increasePercent: 1000,
     costs: {
@@ -256,6 +265,7 @@ const projects = {
       paper.basePrice = Math.round(paper.basePrice * 1.5);
     },
   },
+  
   unlockWood: {
     costs: {
       money: 500,
@@ -274,6 +284,7 @@ const projects = {
       unhide('woodDiv');
     },
   },
+  
   unlockPaperMills: {
     costs: {
       money: 2000,
@@ -312,6 +323,7 @@ const projects = {
       unhide('energyColumn');
     },
   },
+  
   unlockCoal: {
     costs: {
       money: 500,
@@ -330,6 +342,7 @@ const projects = {
       unhide('coalDiv');
     },
   },
+  
   unlockPowerPlants: {
     costs: {
       money: 2000,
@@ -348,6 +361,7 @@ const projects = {
       unhide('powerPlantDiv');
     },
   },
+  
   unlockFactories: {
     costs: {
       money: 1000,
