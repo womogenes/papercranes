@@ -53,6 +53,7 @@ function displayEvent(event) {
     if (!getEl('eventDiv').hidden) {
       let currentEventName = getEl('eventTitle').innerHTML.camelize();
       pendingEvents.push(currentEventName);
+      
       if (events[currentEventName].onClose) {
         events[currentEventName].onClose();
       }

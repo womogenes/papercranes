@@ -268,7 +268,6 @@ function load() {
     }
   });
 
-
   consoleHistory = JSON.parse(localStorage.getItem('consoleHistory'));
   pendingEvents = JSON.parse(localStorage.getItem('pendingEvents'));
   consoleHistory.forEach((message) => {
@@ -336,7 +335,7 @@ function manageEvents() {
       }
     }
   }
-
+  
   if (pendingEvents.length > 0 && getEl('eventDiv').hidden) {
     displayEvent();
   }
