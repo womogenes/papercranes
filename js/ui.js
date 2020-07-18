@@ -2,7 +2,6 @@
 function updateDom() {
   // Update elements to have correct values
   getEl('lifetimeCranes').innerHTML = commify(Math.floor(lifetimeCranes));
-  getEl('wishes').innerHTML = commify(Math.floor(wishes));
   getEl('unsoldCranes').innerHTML = commify(Math.floor(unsoldCranes));
   getEl('cranePrice').innerHTML = monify(cranePrice);
 
@@ -28,7 +27,7 @@ function updateDom() {
     }
   }
 
-  let happiness = money.amount - debt > 0 ? Math.min(Math.log(money.amount + wishes - debt), 100) : 0;
+  let happiness = money.amount - debt > 0 ? Math.min(Math.log(money.amount + wishes.amount - debt), 100) : 0;
   getEl('happinessMeter').style.width = happiness + '%';
   getEl('happinessAmount').innerHTML = happiness.toFixed(2) + '%';
 

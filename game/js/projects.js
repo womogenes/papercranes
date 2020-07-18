@@ -11,7 +11,7 @@ function projectBaseEffect(project) {
     money -= project.costs.money;
   }
   if (project.costs.wishes) {
-    wishes -= project.costs.wishes;
+    wishes.amount -= project.costs.wishes;
   }
   if (project.costs.highSchoolers) {
     highSchoolers.amount -= project.costs.highSchoolers;
@@ -35,7 +35,7 @@ function projectPriceTag(project) {
 function canAffordProject(project) {
   return (
     (project.costs.money ? money.amount >= project.costs.money : true) &&
-    (project.costs.wishes ? wishes >= project.costs.wishes : true) &&
+    (project.costs.wishes ? wishes.amount >= project.costs.wishes : true) &&
     (project.costs.highSchoolers ? highSchoolers.amount >= project.costs.highSchoolers : true)
   );
 }
@@ -303,7 +303,7 @@ const projects = {
     },
     description: 'Unlock energy to power factories',
     trigger: function () {
-      return money.amount >= 500 && wishes >= 1 && lifetimeCranes > 1000;
+      return money.amount >= 500 && wishes.amount >= 1 && lifetimeCranes > 1000;
     },
     uses: 1,
     flag: false,

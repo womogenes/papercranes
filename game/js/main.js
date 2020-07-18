@@ -1,8 +1,6 @@
 // Yoy!
 let lifetimeCranes = 0;
-let wishes = 0;
 let unsoldCranes = 0;
-
 let debt = 0;
 let maxDebt = 1000;
 let interestRate = 0.01;
@@ -13,6 +11,13 @@ let money = {
   amountEl: 'money',
   formattedAmount: function () {
     return monify(this.amount);
+  },
+};
+let wishes = {
+  amount: 0,
+  amountEl: 'wishes',
+  formattedAmount: function() {
+    return Math.floor(this.amount);
   },
 };
 let advertising = {
@@ -119,6 +124,7 @@ let resources = {
   carbonDioxide: carbonDioxide,
   advertising: advertising,
   money: money,
+  wishes: wishes,
 };
 
 // things that aren't resources
@@ -138,7 +144,6 @@ function save() {
     debt: debt,
     maxDebt: maxDebt,
     interestRate: interestRate,
-    wishes: wishes,
   };
   for (resourceName in resources) {
     resource = resources[resourceName];
@@ -200,7 +205,6 @@ function load() {
   }
   let savedGame = JSON.parse(localStorage.getItem('savedGame'));
   lifetimeCranes = savedGame.lifetimeCranes;
-  wishes = savedGame.wishes;
   unsoldCranes = savedGame.unsoldCranes;
   cranePriceSliderLoc = savedGame.cranePriceSliderLoc;
 

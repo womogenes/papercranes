@@ -92,7 +92,7 @@ function buyPaperMill() {
 // Buttons
 function makeCrane(n) {
   n = Math.min(n, paper.amount);
-  wishes += n / 1000;
+  wishes.amount += n / 1000;
 
   lifetimeCranes += n;
   unsoldCranes += n;
