@@ -11,14 +11,16 @@ function projectBaseEffect(project) {
 
 function priceTag(costs) {
   let costStrings = [];
-  if (costs.money) {
-    costStrings.push(`\$${costs.money.toLocaleString()}`);
-  }
-  if (costs.wishes) {
-    costStrings.push(`${costs.wishes} wish${costs.wishes > 1 ? 'es' : ''}`);
-  }
-  if (costs.highSchoolers) {
-    costStrings.push(`${costs.highSchoolers} high schooler${costs.highSchoolers > 1 ? 's' : ''}`);
+  for (resourceName in costs) {
+    if (!resources.hasOwnProperty(resourceName)) {
+      console.error(`invalid cost ${resourceName}`);
+      return;
+    }
+    if (resources[resourceName].toPrice) {
+      costStrings.push(resources[resourceName].toPrice(costs[resourceName]));
+    } else {
+      costStrings.push(costs[resourceName] + ' ' + resourceName);
+    }
   }
   return costStrings.join(', ');
 }

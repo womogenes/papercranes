@@ -9,15 +9,21 @@ let interestRate = 0.01;
 let money = {
   amount: 35,
   amountEl: 'money',
-  formattedAmount: function () {
-    return monify(this.amount);
+  formattedAmount: function (amount) {
+    return monify(amount);
+  },
+  toPrice: function (amount) {
+    return '$' + this.formattedAmount(amount);
   },
 };
 let wishes = {
   amount: 0,
   amountEl: 'wishes',
-  formattedAmount: function () {
-    return Math.floor(this.amount);
+  formattedAmount: function (amount) {
+    return Math.floor(amount);
+  },
+  toPrice: function (amount) {
+    return `${this.formattedAmount(amount)} wish${Math.floor(amount) > 1 ? 'es' : ''}`;
   },
 };
 let advertising = {
@@ -34,6 +40,9 @@ let highSchoolers = {
   wageEl: 'highSchoolerWage',
   purchaseEl: 'btnHireHighSchooler',
   boost: 1,
+  toPrice: function(amount) {
+    return `${amount} high schooler${amount > 1 ? 's' : ''}`;
+  },
 };
 let professionals = {
   amount: 0,
@@ -332,7 +341,8 @@ function manageEvents() {
 function pay(costs) {
   for (resourceName in costs) {
     if (!resources.hasOwnProperty(resourceName)) {
-      console.error(`invalid cost {resourceName}`);
+      console.error(`invalid cost ${resourceName}`);
+      return;
     }
     resources[resourceName].amount -= costs[resourceName];
   }

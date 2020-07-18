@@ -11,7 +11,7 @@ function updateDom() {
   for (resourceName in resources) {
     resource = resources[resourceName];
     if (resource.amountEl) {
-      let amount = resource.formattedAmount ? resource.formattedAmount() : commify(resource.amount);
+      let amount = resource.formattedAmount ? resource.formattedAmount(resource.amount) : commify(resource.amount);
       getEl(resource.amountEl).innerHTML = amount;
     }
     if (resource.priceEl) {
