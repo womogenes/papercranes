@@ -106,7 +106,7 @@ function displayProjects(project) {
   titleDiv.appendChild(title);
 
   title.appendChild(document.createTextNode(project.title.toTitleCase()));
-  titleDiv.appendChild(document.createTextNode(' ' + projectPriceTag(project)));
+  titleDiv.appendChild(document.createTextNode(` (${priceTag(project.costs)})`));
   project.element.appendChild(titleDiv);
 
   project.element.appendChild(document.createElement('div'));

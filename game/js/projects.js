@@ -9,18 +9,18 @@ function projectBaseEffect(project) {
   pay(project.costs);
 }
 
-function projectPriceTag(project) {
-  let costs = [];
-  if (project.costs.money) {
-    costs.push(`\$${project.costs.money.toLocaleString()}`);
+function priceTag(costs) {
+  let costStrings = [];
+  if (costs.money) {
+    costStrings.push(`\$${costs.money.toLocaleString()}`);
   }
-  if (project.costs.wishes) {
-    costs.push(`${project.costs.wishes} wish${project.costs.wishes > 1 ? 'es' : ''}`);
+  if (costs.wishes) {
+    costStrings.push(`${costs.wishes} wish${costs.wishes > 1 ? 'es' : ''}`);
   }
-  if (project.costs.highSchoolers) {
-    costs.push(`${project.costs.highSchoolers} high schooler${project.costs.highSchoolers > 1 ? 's' : ''}`);
+  if (costs.highSchoolers) {
+    costStrings.push(`${costs.highSchoolers} high schooler${costs.highSchoolers > 1 ? 's' : ''}`);
   }
-  return `(${costs.join(', ')})`;
+  return costStrings.join(', ');
 }
 
 function canAffordProject(project) {
