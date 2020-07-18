@@ -7,7 +7,7 @@ setInterval(function () {
   highSchoolersFold();
   makeCrane(professionals.amount);
   factoryFold();
-  if (projects.buisnessManagement.flag) {
+  if (projects.businessManagement.flag) {
     sellCranes();
   }
 

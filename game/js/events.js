@@ -39,7 +39,7 @@ const events = {
       return !projects.buisnessManagement.flag && !canAffordProject(projects.buisnessManagement.costs) && !projects.bankAccount.flag;
     },
     save: ['flag', 'uses'],
-    description: 'Without buisness management you can\'t make money. Buy it before other things next time.',
+    description: 'Without business management you can\'t make money. Buy it before other things next time.',
     uses: 1,
     flag: false,
     notifyPlayer: true,
@@ -52,7 +52,7 @@ const events = {
       onClick: function () {
         events.restart.buttons[0].onClick();
       },
-    }],
+    }],canAffordProject
     noCloseButton: true,
   },
   buyingPaperUnlocked: {
