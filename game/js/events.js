@@ -36,7 +36,7 @@ const events = {
   outOfMoney: {
     trigger: function () {
       // cannot make money so the player has to restart
-      return !projects.buisnessManagement.flag && !canAffordProject(projects.buisnessManagement.costs) && !projects.bankAccount.flag;
+      return !projects.buisnessManagement.flag && !canAffordProject(projects.businessManagement.costs) && !projects.bankAccount.flag;
     },
     save: ['flag', 'uses'],
     description: 'Without business management you can\'t make money. Buy it before other things next time.',
@@ -52,7 +52,7 @@ const events = {
       onClick: function () {
         events.restart.buttons[0].onClick();
       },
-    }],canAffordProject
+    }],
     noCloseButton: true,
   },
   buyingPaperUnlocked: {
