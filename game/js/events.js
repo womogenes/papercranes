@@ -36,10 +36,10 @@ const events = {
   outOfMoney: {
     trigger: function () {
       // cannot make money so the player has to restart
-      return !projects.buisnessManagement.flag && !canAffordProject(projects.buisnessManagement) && !projects.bankAccount.flag;
+      return !projects.businessManagement.flag && !canAffordProject(projects.businessManagement) && !projects.bankAccount.flag;
     },
     save: ['flag', 'uses'],
-    description: 'Without buisness management you can\'t make money. Buy it before other things next time.',
+    description: 'Without business management you can\'t make money. Buy it before other things next time.',
     uses: 1,
     flag: false,
     notifyPlayer: true,

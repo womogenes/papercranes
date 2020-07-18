@@ -46,7 +46,7 @@ const projects = {
       money: 10,
     },
     trigger: function () {
-      return money.amount >= 5 && lifetimeCranes >= 20;
+      return money.amount >= 5 && lifetimeCranes >= 20 && projects.businessManagement.flag;
     },
     uses: 1,
     flag: false,
@@ -119,14 +119,14 @@ const projects = {
     },
   },
 
-  // Buisness projects
+  // business projects
   bankAccount: {
     costs: {
       money: 10,
     },
     description: 'Be able to borrow money!',
     trigger: function () {
-      return money.amount >= 5 && lifetimeCranes >= 20;
+      return money.amount >= 5 && lifetimeCranes >= 20 && projects.businessManagement.flag;
     },
     uses: 1,
     flag: false,
@@ -154,7 +154,7 @@ const projects = {
     },
   },
   
-  buisnessManagement: {
+  businessManagement: {
     costs: {
       money: 10,
     },
@@ -168,7 +168,7 @@ const projects = {
       this.loadEffect();
     },
     loadEffect: function () {
-      unhide('buisnessColumn');
+      unhide('businessColumn');
     },
   },
   
