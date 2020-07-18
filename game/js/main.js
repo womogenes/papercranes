@@ -16,7 +16,7 @@ let money = {
 let wishes = {
   amount: 0,
   amountEl: 'wishes',
-  formattedAmount: function() {
+  formattedAmount: function () {
     return Math.floor(this.amount);
   },
 };
@@ -326,5 +326,14 @@ function manageEvents() {
 
   if (pendingEvents.length > 0 && getEl('eventDiv').hidden) {
     displayEvent();
+  }
+}
+
+function pay(costs) {
+  for (resourceName in costs) {
+    if (!resources.hasOwnProperty(resourceName)) {
+      console.error(`invalid cost {resourceName}`);
+    }
+    resources[resourceName].amount -= costs[resourceName];
   }
 }

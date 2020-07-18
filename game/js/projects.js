@@ -6,16 +6,7 @@ function projectBaseEffect(project) {
   project.element.parentNode.removeChild(project.element);
   let index = activeProjects.indexOf(project);
   activeProjects.splice(index, 1);
-
-  if (project.costs.money) {
-    money -= project.costs.money;
-  }
-  if (project.costs.wishes) {
-    wishes.amount -= project.costs.wishes;
-  }
-  if (project.costs.highSchoolers) {
-    highSchoolers.amount -= project.costs.highSchoolers;
-  }
+  pay(project.costs);
 }
 
 function projectPriceTag(project) {
