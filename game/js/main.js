@@ -48,13 +48,16 @@ let powerPlants = {
   price: 1000,
   boost: 1,
   coalUse: 0.1,
+  emissions: 0.001,
 };
 let factories = {
   amount: 0,
   price: 1000,
   boost: 1,
   energyUse: 0.1,
+  emissions: 0.001,
 };
+let carbonDioxide = 300;
 
 let prevCranes = cranes;
 let tick = 0;
@@ -86,6 +89,7 @@ function save() {
     coal: coal,
     powerPlants: powerPlants,
     factories: factories,
+    carbonDioxide: carbonDioxide,
 
     paperBuyerOn: paperBuyerOn,
   };
@@ -159,6 +163,7 @@ function load() {
   coal = savedGame.coal;
   powerPlants = savedGame.powerPlants;
   factories = savedGame.factories;
+  carbonDioxide = savedGame.carbonDioxide;
 
   // Load projects and events
   const savedProjectData = JSON.parse(localStorage.getItem('savedProjectData'));

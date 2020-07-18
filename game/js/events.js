@@ -35,7 +35,7 @@ const events = {
   },
   outOfMoney: {
     trigger: function () {
-      // cannot make money so they player has to restart
+      // cannot make money so the player has to restart
       return !projects.buisnessManagement.flag && !canAffordProject(projects.buisnessManagement) && !projects.bankAccount.flag;
     },
     save: ['flag', 'uses'],
@@ -70,6 +70,23 @@ const events = {
     },
     loadEffect: function () {
       unhide('paperDiv');
+    },
+  },
+  pollution: {
+    trigger: function () {
+      return carbonDioxide >= 310;
+    },
+    save: ['flag', 'uses'],
+    uses: 1,
+    flag: false,
+    notifyPlayer: false,
+    effect: function () {
+      this.flag = true;
+      this.uses -= 1;
+      this.loadEffect();
+    },
+    loadEffect: function () {
+      unhide('carbonDioxideDiv');
     },
   },
   autoBuyPaper: {

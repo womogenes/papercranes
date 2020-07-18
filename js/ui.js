@@ -25,6 +25,7 @@ function updateDom() {
   getEl('powerPlantPrice').innerHTML = monify(powerPlants.price);
   getEl('factories').innerHTML = commify(factories.amount);
   getEl('factoryPrice').innerHTML = monify(factories.price);
+  getEl('carbonDioxide').innerHTML = carbonDioxide.toFixed(2);
 
   let happiness = money - debt > 0 ? Math.min(Math.log(money + wishes - debt), 100) : 0;
   getEl('happinessMeter').style.width = happiness + '%';

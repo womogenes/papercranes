@@ -124,14 +124,16 @@ function factoryFold() {
   if (factories.amount > 0 && energy.amount > 1) {
     let factoriesCanPower = Math.min(energy.amount / factories.energyUse, factories.amount);
     energy.amount -= factoriesCanPower * factories.energyUse;
+    carbonDioxide += factories.emissions * factoriesCanPower;
     makeCrane(factoriesCanPower * 5 * factories.boost);
   }
 }
 
 function generatePower() {
-  if (powerPlants.amount > 0 && coalamount > 0.1) {
+  if (powerPlants.amount > 0 && coal.amount > 0.1) {
     let plantsCanPower = Math.min(coal.amount / powerPlants.coalUse, powerPlants.amount);
     coal.amount -= plantsCanPower * powerPlants.coalUse;
+    carbonDioxide += powerPlants.emissions * plantsCanPower;
     energy.amount += plantsCanPower * 5;
   }
 }
