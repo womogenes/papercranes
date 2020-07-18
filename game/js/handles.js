@@ -1,25 +1,25 @@
 // Bank
 function borrowMoney(x) {
   x = Math.min(x, maxDebt - debt);
-  money += x;
+  money.amount += x;
   debt += x;
 }
 
 function payBackLoan(x) {
-  const max = Math.min(debt, money);
+  const max = Math.min(debt, money.amount);
   const payAmount = x ? Math.min(x, max) : max;
   debt -= payAmount;
-  money -= payAmount;
+  money.amount -= payAmount;
 }
 
 // Buying things
 //  Production
 function increaseAdvertising() {
-  if (money < advertising.price) {
+  if (money.amount < advertising.price) {
     return;
   }
   advertising.amount += 1;
-  money -= advertising.price;
+  money.amount -= advertising.price;
 
   advertising.price = Math.toPrecision(advertising.price * 1.01, 2);
   getEl('advertisingLevel').innerHTML = commify(advertising.amount);
@@ -28,65 +28,65 @@ function increaseAdvertising() {
 function hireHighSchooler() {
   // Hires a highSchooler!
   highSchoolers.amount++;
-  money -= highSchoolers.wage;
+  money.amount -= highSchoolers.wage;
   highSchoolers.wage = Math.ceil(highSchoolers.wage * 1.001 * 100) / 100;
 }
 
 function hireProfessional() {
   // Hires one Professional
-  if (money < professionals.wage) {
+  if (money.amount < professionals.wage) {
     return;
   }
   professionals.amount++;
   highSchoolers.amount--;
-  money -= professionals.wage;
+  money.amount -= professionals.wage;
   professionals.wage = Math.ceil(professionals.wage * 1.1 * 100) / 100;
 }
 
 function buyFactory() {
   factories.amount++;
-  money -= factories.price;
+  money.amount -= factories.price;
 }
 
 function buyPowerPlant() {
   powerPlants.amount++;
-  money -= powerPlants.price;
+  money.amount -= powerPlants.price;
 }
 
 //  Resources
 function buyPaper(n) {
-  if (money < paper.price * n) {
+  if (money.amount < paper.price * n) {
     return;
   }
   // Buys paper! May be upgraded.
   paper.amount += Math.round(paper.purchaseAmount * n);
-  money -= Math.round(paper.price * n);
+  money.amount -= Math.round(paper.price * n);
 }
 
 function buyEnergy(n) {
-  if (money > energy.price * n) {
+  if (money.amount > energy.price * n) {
     energy.amount += Math.round(energy.purchaseAmount * n);
-    money -= Math.round(energy.price * n);
+    money.amount -= Math.round(energy.price * n);
   }
 }
 
 function buyCoal(amount) {
-  if (money > coal.price * amount) {
+  if (money.amount > coal.price * amount) {
     coal.amount += Math.round(coal.purchaseAmount * amount);
-    money -= Math.round(coal.price * amount);
+    money.amount -= Math.round(coal.price * amount);
   }
 }
 
 function buyWood(amount) {
-  if (money > wood.price * amount) {
+  if (money.amount > wood.price * amount) {
     wood.amount += Math.round(wood.purchaseAmount * amount);
-    money -= Math.round(wood.price * amount);
+    money.amount -= Math.round(wood.price * amount);
   }
 }
 
 function buyPaperMill() {
   paperMills.amount++;
-  money -= paperMills.price;
+  money.amount -= paperMills.price;
 }
 
 // Buttons
@@ -124,9 +124,9 @@ function changeTheme() {
 
 // Interval functions
 function highSchoolersFold() {
-  if (money > 0) {
+  if (money.amount > 0) {
     if (tick % 100 == 0 && paper.amount > 0) {
-      money -= highSchoolers.wage * highSchoolers.amount;
+      money.amount -= highSchoolers.wage * highSchoolers.amount;
     }
     makeCrane((highSchoolers.amount * highSchoolers.boost) / 200);
   }
@@ -174,6 +174,6 @@ function sellCranes() {
       amount = 0;
     }
     unsoldCranes -= amount;
-    money += cranePrice * amount;
+    money.amount += cranePrice * amount;
   }
 }

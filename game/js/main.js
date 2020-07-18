@@ -3,12 +3,18 @@ let lifetimeCranes = 0;
 let wishes = 0;
 let unsoldCranes = 0;
 
-let money = 35;
 let debt = 0;
 let maxDebt = 1000;
 let interestRate = 0.01;
 
 // resources
+let money = {
+  amount: 35,
+  amountEl: 'money',
+  formattedAmount: function () {
+    return monify(this.amount);
+  },
+};
 let advertising = {
   amount: 1, // level
   amountEl: 'advertisingLevel',
@@ -112,10 +118,11 @@ let resources = {
   powerPlants: powerPlants,
   carbonDioxide: carbonDioxide,
   advertising: advertising,
+  money: money,
 };
 
 // things that aren't resources
-let prevCranes = cranes;
+let prevCranes = lifetimeCranes;
 let cranePriceSliderLoc = 0.1;
 let tick = 0;
 let consoleHistory = [];
@@ -124,9 +131,8 @@ let theme;
 
 function save() {
   const savedGame = {
-    cranes: cranes,
+    lifetimeCranes: lifetimeCranes,
     unsoldCranes: unsoldCranes,
-    money: money,
     cranePrice: cranePrice,
     cranePriceSliderLoc: getEl('priceSlider').value,
     debt: debt,
@@ -198,7 +204,6 @@ function load() {
   unsoldCranes = savedGame.unsoldCranes;
   cranePriceSliderLoc = savedGame.cranePriceSliderLoc;
 
-  money = savedGame.money;
   debt = savedGame.debt;
   maxDebt = savedGame.maxDebt;
   interestRate = savedGame.interestRate;

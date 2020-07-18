@@ -124,10 +124,10 @@ const events = {
           return;
         }
         const buttonEls = getEl('eventButtons').children;
-        buttonEls[0].disabled = money < 0.01;
-        buttonEls[0].innerHTML = `Pay $${monify(Math.min(money / 2, debt - maxDebt / 2))}`;
+        buttonEls[0].disabled = money.amount < 0.01;
+        buttonEls[0].innerHTML = `Pay $${monify(Math.min(money.amount / 2, debt - maxDebt / 2))}`;
         buttonEls[1].disabled = !(highSchoolers.amount || professionals.amount);
-        buttonEls[2].disabled = (money > 0.01 || highSchoolers.amount || professionals.amount);
+        buttonEls[2].disabled = (money.amount > 0.01 || highSchoolers.amount || professionals.amount);
       }, 10);
     },
     onClose: function () {
@@ -136,7 +136,7 @@ const events = {
     buttons: [{
         text: 'pay money',
         onClick: function () {
-          payBackLoan(Math.min(money / 2, debt - maxDebt / 2));
+          payBackLoan(Math.min(money.amount / 2, debt - maxDebt / 2));
         },
       },
       {

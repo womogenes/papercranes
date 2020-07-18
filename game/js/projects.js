@@ -34,7 +34,7 @@ function projectPriceTag(project) {
 
 function canAffordProject(project) {
   return (
-    (project.costs.money ? money >= project.costs.money : true) &&
+    (project.costs.money ? money.amount >= project.costs.money : true) &&
     (project.costs.wishes ? wishes >= project.costs.wishes : true) &&
     (project.costs.highSchoolers ? highSchoolers.amount >= project.costs.highSchoolers : true)
   );
@@ -48,7 +48,7 @@ const projects = {
       money: 10,
     },
     trigger: function () {
-      return money >= 5 && lifetimeCranes >= 20;
+      return money.amount >= 5 && lifetimeCranes >= 20;
     },
     uses: 1,
     flag: false,
@@ -68,7 +68,7 @@ const projects = {
       money: 10,
     },
     trigger: function () {
-      return money >= 5 && highSchoolers.amount > 0;
+      return money.amount >= 5 && highSchoolers.amount > 0;
     },
     uses: 1,
     flag: false,
@@ -87,7 +87,7 @@ const projects = {
     },
     purchaseMessage: 'Speedy high schoolers!',
     trigger: function () {
-      return money >= 10 && projects.fasterHighSchoolers.flag;
+      return money.amount >= 10 && projects.fasterHighSchoolers.flag;
     },
     uses: 1,
     flag: false,
@@ -125,7 +125,7 @@ const projects = {
     },
     description: 'Be able to borrow money!',
     trigger: function () {
-      return money >= 5 && lifetimeCranes >= 20;
+      return money.amount >= 5 && lifetimeCranes >= 20;
     },
     uses: 1,
     flag: false,
@@ -157,7 +157,7 @@ const projects = {
     },
     description: 'Sell your cranes to make money',
     trigger: function () {
-      return money >= 5 && events.buyingPaperUnlocked.flag;
+      return money.amount >= 5 && events.buyingPaperUnlocked.flag;
     },
     uses: 1,
     flag: false,
@@ -174,7 +174,7 @@ const projects = {
     },
     description: 'Buy advertising to increase demand for cranes',
     trigger: function () {
-      return money >= 20 && lifetimeCranes >= 50;
+      return money.amount >= 20 && lifetimeCranes >= 50;
     },
     uses: 1,
     flag: false,
@@ -303,7 +303,7 @@ const projects = {
     },
     description: 'Unlock energy to power factories',
     trigger: function () {
-      return money >= 500 && wishes >= 1 && lifetimeCranes > 1000;
+      return money.amount >= 500 && wishes >= 1 && lifetimeCranes > 1000;
     },
     uses: 1,
     flag: false,

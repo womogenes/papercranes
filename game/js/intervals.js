@@ -37,7 +37,7 @@ document.addEventListener('visibilitychange', function () {
 // Slower one, every second.
 setInterval(function () {
   getEl('cranemakerRate').innerHTML = commify(Math.round(lifetimeCranes - prevCranes));
-  prevCranes = cranes;
+  prevCranes = lifetimeCranes;
 }, 1000);
 
 // A slower on, every 5 seconds.

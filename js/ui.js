@@ -6,14 +6,14 @@ function updateDom() {
   getEl('unsoldCranes').innerHTML = commify(Math.floor(unsoldCranes));
   getEl('cranePrice').innerHTML = monify(cranePrice);
 
-  getEl('money').innerHTML = monify(money);
   getEl('debt').innerHTML = monify(debt);
   getEl('interestRate').innerHTML = interestRate * 100;
 
   for (resourceName in resources) {
     resource = resources[resourceName];
     if (resource.amountEl) {
-      getEl(resource.amountEl).innerHTML = commify(resource.amount);
+      let amount = resource.formattedAmount ? resource.formattedAmount() : commify(resource.amount);
+      getEl(resource.amountEl).innerHTML = amount;
     }
     if (resource.priceEl) {
       getEl(resource.priceEl).innerHTML = monify(resource.price);
@@ -22,18 +22,18 @@ function updateDom() {
       getEl(resource.wageEl).innerHTML = monify(resource.wage);
     }
     if (resource.purchaseEl && resource.price != undefined) {
-      getEl(resource.purchaseEl).disabled = money < resource.price;
+      getEl(resource.purchaseEl).disabled = money.amount < resource.price;
     } else if (resource.purchaseEl && resource.wage != undefined) {
-      getEl(resource.purchaseEl).disabled = money < resource.wage;
+      getEl(resource.purchaseEl).disabled = money.amount < resource.wage;
     }
   }
 
-  let happiness = money - debt > 0 ? Math.min(Math.log(money + wishes - debt), 100) : 0;
+  let happiness = money.amount - debt > 0 ? Math.min(Math.log(money.amount + wishes - debt), 100) : 0;
   getEl('happinessMeter').style.width = happiness + '%';
   getEl('happinessAmount').innerHTML = happiness.toFixed(2) + '%';
 
   // Disable buttons which player cannot use
-  getEl('btnpayBackLoan').disabled = money <= 0 || debt <= 0;
+  getEl('btnpayBackLoan').disabled = money.amount <= 0 || debt <= 0;
   getEl('btnBorrowMoney').disabled = debt >= maxDebt;
   getEl('btnMakeCrane').disabled = paper.amount < 1;
 
