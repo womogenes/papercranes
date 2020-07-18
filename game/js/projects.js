@@ -25,12 +25,17 @@ function priceTag(costs) {
   return costStrings.join(', ');
 }
 
-function canAffordProject(project) {
-  return (
-    (project.costs.money ? money.amount >= project.costs.money : true) &&
-    (project.costs.wishes ? wishes.amount >= project.costs.wishes : true) &&
-    (project.costs.highSchoolers ? highSchoolers.amount >= project.costs.highSchoolers : true)
-  );
+function canAffordProject(costs) {
+  for (resourceName in costs) {
+    if (!resources.hasOwnProperty(resourceName)) {
+      console.error(`invalid cost ${resourceName}`);
+      return;
+    }
+    if (resources[resourceName].amount < costs[resourceName]) {
+      return false;
+    }
+  }
+  return true;
 }
 
 const projects = {
