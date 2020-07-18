@@ -2,9 +2,10 @@ let domUpdate;
 
 // Game loop!
 setInterval(function () {
+  generatePower();
+  makePaper();
   highSchoolersFold();
   makeCrane(professionals.amount);
-  generatePower();
   factoryFold();
   if (projects.buisnessManagement.flag) {
     sellCranes();

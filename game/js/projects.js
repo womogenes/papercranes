@@ -155,7 +155,7 @@ const projects = {
     costs: {
       money: 10,
     },
-    description: 'Sell your cranes',
+    description: 'Sell your cranes to make money',
     trigger: function () {
       return money >= 5 && events.buyingPaperUnlocked.flag;
     },
@@ -219,7 +219,7 @@ const projects = {
     flag: false,
     effect: function () {
       paper.purchaseAmount = Math.round(paper.purchaseAmount * percentToMultiplier(this.increasePercent));
-      basePaperPrice = Math.round(basePaperPrice * percentToMultiplier(this.increasePercent));
+      paper.basePrice = Math.round(paper.basePrice * percentToMultiplier(this.increasePercent));
     },
   },
   thinnerSheets: {
@@ -237,7 +237,7 @@ const projects = {
     flag: false,
     effect: function () {
       paper.purchaseAmount = Math.round(paper.purchaseAmount * percentToMultiplier(this.increasePercent));
-      basePaperPrice = Math.round(basePaperPrice * 1.5);
+      paper.basePrice = Math.round(paper.basePrice * 1.5);
     },
   },
   bigPaper: {
@@ -255,7 +255,43 @@ const projects = {
     flag: false,
     effect: function () {
       paper.purchaseAmount = Math.round(paper.purchaseAmount * percentToMultiplier(this.increasePercent));
-      basePaperPrice = Math.round(basePaperPrice * 1.5);
+      paper.basePrice = Math.round(paper.basePrice * 1.5);
+    },
+  },
+  unlockWood: {
+    costs: {
+      money: 500,
+      wishes: 1,
+    },
+    description: 'Use wood to manufacture your own paper',
+    trigger: function () {
+      return projects.bigPaper.flag && projects.unlockEnergy.flag;
+    },
+    uses: 1,
+    flag: false,
+    effect: function () {
+      this.loadEffect();
+    },
+    loadEffect: function () {
+      unhide('woodDiv');
+    },
+  },
+  unlockPaperMills: {
+    costs: {
+      money: 2000,
+      wishes: 1,
+    },
+    description: 'Turn wood into origami paper',
+    trigger: function () {
+      return projects.unlockWood.flag;
+    },
+    uses: 1,
+    flag: false,
+    effect: function () {
+      this.loadEffect();
+    },
+    loadEffect: function () {
+      unhide('paperMillDiv');
     },
   },
 

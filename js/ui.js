@@ -23,6 +23,10 @@ function updateDom() {
   getEl('coalPrice').innerHTML = monify(coal.price);
   getEl('powerPlants').innerHTML = commify(powerPlants.amount);
   getEl('powerPlantPrice').innerHTML = monify(powerPlants.price);
+  getEl('wood').innerHTML = commify(wood.amount);
+  getEl('woodPrice').innerHTML = monify(wood.price);
+  getEl('paperMills').innerHTML = commify(paperMills.amount);
+  getEl('paperMillPrice').innerHTML = monify(paperMills.price);
   getEl('factories').innerHTML = commify(factories.amount);
   getEl('factoryPrice').innerHTML = monify(factories.price);
   getEl('carbonDioxide').innerHTML = carbonDioxide.toFixed(2);
@@ -35,8 +39,10 @@ function updateDom() {
   getEl('btnBuyPaper').disabled = paper.price > money;
   getEl('btnBuyEnergy').disabled = energy.price > money;
   getEl('btnBuyCoal').disabled = coal.price > money;
-  getEl('btnBuyFactory').disabled = money < factories.price;
+  getEl('btnBuyFactory').disabled = factories.price > money;
   getEl('btnBuyPowerPlant').disabled = powerPlants.price > money;
+  getEl('btnBuyWood').disabled = wood.price > money;
+  getEl('btnBuyPaperMill').disabled = paperMills.price > money;
   getEl('btnAdvertising').disabled = advertisingPrice > money;
   getEl('btnHireHighSchooler').disabled = money < highSchoolers.wage;
   getEl('btnHireProfessional').disabled = money < professionals.wage;

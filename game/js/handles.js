@@ -77,6 +77,18 @@ function buyCoal(amount) {
   }
 }
 
+function buyWood(amount) {
+  if (money > wood.price * amount) {
+    wood.amount += Math.round(wood.purchaseAmount * amount);
+    money -= Math.round(wood.price * amount);
+  }
+}
+
+function buyPaperMill() {
+  paperMills.amount++;
+  money -= paperMills.price;
+}
+
 // Buttons
 function makeCrane(n) {
   n = Math.min(n, paper.amount);
@@ -126,6 +138,16 @@ function factoryFold() {
     energy.amount -= factoriesCanPower * factories.energyUse;
     carbonDioxide += factories.emissions * factoriesCanPower;
     makeCrane(factoriesCanPower * 5 * factories.boost);
+  }
+}
+
+function makePaper() {
+  if (paperMills.amount > 0 && energy.amount > 1) {
+    let millsCanPower = Math.min(energy.amount / paperMills.energyUse, paperMills.amount);
+    energy.amount -= millsCanPower * paperMills.energyUse;
+    wood.amount -= millsCanPower * paperMills.woodUse;
+    carbonDioxide += paperMills.emissions * millsCanPower;
+    paper.amount += millsCanPower * 2000 * paperMills.boost;
   }
 }
 

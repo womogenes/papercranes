@@ -31,6 +31,19 @@ let paper = {
   purchaseAmount: 1000,
 };
 let paperBuyerOn = false;
+let wood = {
+  amount: 0,
+  price: 50,
+  purchaseAmount: 500,
+};
+let paperMills = {
+  amount: 0,
+  price: 500,
+  boost: 1,
+  woodUse: 0.5,
+  energyUse: 0.1,
+  emissions: 0.001,
+};
 
 let energy = {
   amount: 0,
@@ -89,6 +102,8 @@ function save() {
     coal: coal,
     powerPlants: powerPlants,
     factories: factories,
+    wood: wood,
+    paperMills: paperMills,
     carbonDioxide: carbonDioxide,
 
     paperBuyerOn: paperBuyerOn,
@@ -163,6 +178,9 @@ function load() {
   coal = savedGame.coal;
   powerPlants = savedGame.powerPlants;
   factories = savedGame.factories;
+  wood = savedGame.wood;
+  paperMills = savedGame.paperMills;
+
   carbonDioxide = savedGame.carbonDioxide;
 
   // Load projects and events
