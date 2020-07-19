@@ -28,7 +28,7 @@ function increaseAdvertising() {
 function hireHighSchooler() {
   // Hires a highSchooler!
   highSchoolers.amount++;
-  highSchoolers.wage = Math.ceil(highSchoolers.wage * 1.001 * 100) / 100;
+  // highSchoolers.wage = Math.ceil(highSchoolers.wage * 1.001 * 100) / 100;
 }
 
 function fireHighSchooler() {
@@ -129,7 +129,7 @@ function changeTheme() {
 // Interval functions
 function highSchoolersFold() {
   if (money.amount > 0) {
-    if (tick % 100 == 0 && paper.amount > 0) {
+    if (tick % 1000 == 0 && paper.amount > 0) {
       money.amount -= highSchoolers.wage * highSchoolers.amount;
     }
     makeCrane((highSchoolers.amount * highSchoolers.boost) / 200);

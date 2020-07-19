@@ -36,7 +36,7 @@ let advertising = {
 let highSchoolers = {
   amount: 0,
   amountEl: 'highSchoolers',
-  wage: 5,
+  wage: 0.01,
   wageEl: 'highSchoolerWage',
   purchaseEl: 'btnHireHighSchooler',
   boost: 1,

@@ -35,6 +35,8 @@ function updateDom() {
   getEl('btnpayBackLoan').disabled = money.amount <= 0 || debt <= 0;
   getEl('btnBorrowMoney').disabled = debt >= maxDebt;
   getEl('btnMakeCrane').disabled = paper.amount < 1;
+  getEl('btnHireHighSchooler').disabled = money.amount < highSchoolers.wage;
+  getEl('btnFireHighSchooler').disabled = highSchoolers.amount <= 0;
 
   // Change favicon and title to show notifications
   let notificationCount = pendingEvents.length + (getEl('eventDiv').hidden ? 0 : 1);
