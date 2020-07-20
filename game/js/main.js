@@ -6,7 +6,7 @@ let maxDebt = 1000;
 let interestRate = 0.01;
 
 // resources
-let money = {
+const money = {
   amount: 35,
   amountEl: 'money',
   formattedAmount: function (amount) {
@@ -16,7 +16,7 @@ let money = {
     return '$' + this.formattedAmount(amount);
   },
 };
-let wishes = {
+const wishes = {
   amount: 0,
   amountEl: 'wishes',
   formattedAmount: function (amount) {
@@ -26,14 +26,14 @@ let wishes = {
     return `${this.formattedAmount(amount)} wish${Math.floor(amount) > 1 ? 'es' : ''}`;
   },
 };
-let advertising = {
+const advertising = {
   amount: 1, // level
   amountEl: 'advertisingLevel',
   price: 20,
   priceEl: 'advertisingPrice',
   purchaseEl: 'btnAdvertising',
 };
-let highSchoolers = {
+const highSchoolers = {
   amount: 0,
   amountEl: 'highSchoolers',
   wage: 0.01,
@@ -44,7 +44,7 @@ let highSchoolers = {
     return `${amount} high schooler${amount > 1 ? 's' : ''}`;
   },
 };
-let professionals = {
+const professionals = {
   amount: 0,
   amountEl: 'professionals',
   wage: 100,
@@ -52,7 +52,7 @@ let professionals = {
   purchaseEl: 'btnHireProfessional',
   boost: 1,
 };
-let paper = {
+const paper = {
   amount: 10,
   amountEl: 'paper',
   price: 15,
@@ -61,7 +61,7 @@ let paper = {
   basePrice: 15,
   purchaseAmount: 1000,
 };
-let wood = {
+const wood = {
   amount: 0,
   amountEl: 'wood',
   price: 50,
@@ -69,7 +69,7 @@ let wood = {
   purchaseEl: 'btnBuyWood',
   purchaseAmount: 500,
 };
-let paperMills = {
+const paperMills = {
   amount: 0,
   amountEl: 'paperMills',
   price: 500,
@@ -80,7 +80,7 @@ let paperMills = {
   energyUse: 0.1,
   emissions: 0.001,
 };
-let energy = {
+const energy = {
   amount: 0,
   amountEl: 'energy',
   price: 150,
@@ -88,7 +88,7 @@ let energy = {
   purchaseEl: 'btnBuyEnergy',
   purchaseAmount: 100,
 };
-let coal = {
+const coal = {
   amount: 0,
   amountEl: 'coal',
   price: 200,
@@ -96,7 +96,7 @@ let coal = {
   purchaseEl: 'btnBuyCoal',
   purchaseAmount: 50,
 };
-let powerPlants = {
+const powerPlants = {
   amount: 0,
   amountEl: 'powerPlants',
   price: 1000,
@@ -106,7 +106,7 @@ let powerPlants = {
   coalUse: 0.1,
   emissions: 0.001,
 };
-let factories = {
+const factories = {
   amount: 0,
   amountEl: 'factories',
   price: 1000,
@@ -116,11 +116,11 @@ let factories = {
   energyUse: 0.1,
   emissions: 0.001,
 };
-let carbonDioxide = {
+const carbonDioxide = {
   amount: 300,
   amountEl: 'carbonDioxide',
 };
-let resources = {
+const resources = {
   highSchoolers: highSchoolers,
   professionals: professionals,
   paper: paper,
@@ -181,11 +181,8 @@ function save() {
     };
   }
 
-  for (let i = 0; i < activeProjects.length; i++) {
-    savedActiveProjects[i] = activeProjects[i].title.camelize();
-  }
   localStorage.setItem('savedProjectData', JSON.stringify(savedProjectData));
-  localStorage.setItem('savedActiveProjects', JSON.stringify(savedActiveProjects));
+  localStorage.setItem('savedActiveProjects', JSON.stringify(activeProjects));
 
   // Deal with events.
   const savedEventData = {};
@@ -239,9 +236,9 @@ function load() {
     update(projects[savedProjectName], savedProjectData[savedProjectName]);
   }
   activeProjects = JSON.parse(localStorage.getItem('savedActiveProjects'));
-  for (const projectName in activeProjects) {
+  activeProjects.forEach((projectName) => {
     displayProject(projects[projectName]);
-  }
+  });
 
   const savedEventData = JSON.parse(localStorage.getItem('savedEventData'));
   for (const eventName in savedEventData) {
@@ -303,11 +300,12 @@ function manageProjects() {
     if (trigger(project) && project.uses > 0) {
       displayProject(project);
       project.uses--;
-      activeProjects.push(project);
+      activeProjects.push(project.title.camelize());
     }
   }
 
-  activeProjects.forEach((project) => {
+  activeProjects.forEach((projectName) => {
+    project = projects[projectName];
     project.element.disabled = !canAffordProject(project.costs);
   });
 }

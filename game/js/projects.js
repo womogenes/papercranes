@@ -4,7 +4,7 @@ let activeProjects = [];
 function projectBaseEffect(project) {
   project.flag = true;
   project.element.parentNode.removeChild(project.element);
-  let index = activeProjects.indexOf(project);
+  let index = activeProjects.indexOf(project.title.camelize());
   activeProjects.splice(index, 1);
   pay(project.costs);
 }
