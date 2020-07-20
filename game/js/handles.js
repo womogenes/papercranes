@@ -15,13 +15,13 @@ function payBackLoan(x) {
 // Buying things
 //  Production
 function increaseAdvertising() {
-  if (money.amount < advertising.price) {
+  if (money.amount < advertising.cost) {
     return;
   }
   advertising.amount += 1;
-  money.amount -= advertising.price;
+  money.amount -= advertising.cost;
 
-  advertising.price = Math.toPrecision(advertising.price * 1.01, 2);
+  advertising.cost = Math.toPrecision(advertising.cost * 1.01, 2);
   getEl('advertisingLevel').innerHTML = commify(advertising.amount);
 }
 
@@ -49,50 +49,50 @@ function hireProfessional() {
 function buyFactory() {
   // buys a factory
   factories.amount++;
-  money.amount -= factories.price;
+  money.amount -= factories.cost;
 }
 
 function buyPowerPlant() {
   powerPlants.amount++;
-  money.amount -= powerPlants.price;
+  money.amount -= powerPlants.cost;
 }
 
 //  Resources
 function buyPaper(n) {
   // buys paper.amount paper
-  if (money.amount < paper.price * n) {
+  if (money.amount < paper.cost * n) {
     return;
   }
   // Buys paper! May be upgraded.
   paper.amount += Math.round(paper.purchaseAmount * n);
-  money.amount -= Math.round(paper.price * n);
+  money.amount -= Math.round(paper.cost * n);
 }
 
 function buyEnergy(n) {
   // buys energy
-  if (money.amount > energy.price * n) {
+  if (money.amount > energy.cost * n) {
     energy.amount += Math.round(energy.purchaseAmount * n);
-    money.amount -= Math.round(energy.price * n);
+    money.amount -= Math.round(energy.cost * n);
   }
 }
 
 function buyCoal(amount) {
-  if (money.amount > coal.price * amount) {
+  if (money.amount > coal.cost * amount) {
     coal.amount += Math.round(coal.purchaseAmount * amount);
-    money.amount -= Math.round(coal.price * amount);
+    money.amount -= Math.round(coal.cost * amount);
   }
 }
 
 function buyWood(amount) {
-  if (money.amount > wood.price * amount) {
+  if (money.amount > wood.cost * amount) {
     wood.amount += Math.round(wood.purchaseAmount * amount);
-    money.amount -= Math.round(wood.price * amount);
+    money.amount -= Math.round(wood.cost * amount);
   }
 }
 
 function buyPaperMill() {
   paperMills.amount++;
-  money.amount -= paperMills.price;
+  money.amount -= paperMills.cost;
 }
 
 // Buttons

@@ -16,8 +16,8 @@ function priceTag(costs) {
       console.error(`invalid cost ${resourceName}`);
       return;
     }
-    if (resources[resourceName].toPrice) {
-      costStrings.push(resources[resourceName].toPrice(costs[resourceName]));
+    if (resources[resourceName].toCost) {
+      costStrings.push(resources[resourceName].toCost(costs[resourceName]));
     } else {
       costStrings.push(costs[resourceName] + ' ' + resourceName);
     }
@@ -224,7 +224,7 @@ const projects = {
     flag: false,
     effect: function () {
       paper.purchaseAmount = Math.round(paper.purchaseAmount * percentToMultiplier(this.increasePercent));
-      paper.basePrice = Math.round(paper.basePrice * percentToMultiplier(this.increasePercent));
+      paper.baseCost = Math.round(paper.baseCost * percentToMultiplier(this.increasePercent));
     },
   },
 
@@ -243,7 +243,7 @@ const projects = {
     flag: false,
     effect: function () {
       paper.purchaseAmount = Math.round(paper.purchaseAmount * percentToMultiplier(this.increasePercent));
-      paper.basePrice = Math.round(paper.basePrice * 1.5);
+      paper.baseCost = Math.round(paper.baseCost * 1.5);
     },
   },
 
@@ -262,7 +262,7 @@ const projects = {
     flag: false,
     effect: function () {
       paper.purchaseAmount = Math.round(paper.purchaseAmount * percentToMultiplier(this.increasePercent));
-      paper.basePrice = Math.round(paper.basePrice * 1.5);
+      paper.baseCost = Math.round(paper.baseCost * 1.5);
     },
   },
 

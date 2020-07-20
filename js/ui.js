@@ -14,14 +14,14 @@ function updateDom() {
       let amount = resource.formattedAmount ? resource.formattedAmount(resource.amount) : commify(resource.amount);
       getEl(resource.amountEl).innerHTML = amount;
     }
-    if (resource.priceEl) {
-      getEl(resource.priceEl).innerHTML = monify(resource.price);
+    if (resource.costEl) {
+      getEl(resource.costEl).innerHTML = monify(resource.cost);
     }
     if (resource.wageEl) {
       getEl(resource.wageEl).innerHTML = monify(resource.wage);
     }
-    if (resource.purchaseEl && resource.price != undefined) {
-      getEl(resource.purchaseEl).disabled = money.amount < resource.price;
+    if (resource.purchaseEl && resource.cost != undefined) {
+      getEl(resource.purchaseEl).disabled = money.amount < resource.cost;
     } else if (resource.purchaseEl && resource.wage != undefined) {
       getEl(resource.purchaseEl).disabled = money.amount < resource.wage;
     }

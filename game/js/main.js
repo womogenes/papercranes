@@ -12,7 +12,7 @@ const money = {
   formattedAmount: function (amount) {
     return monify(amount);
   },
-  toPrice: function (amount) {
+  toCost: function (amount) {
     return '$' + this.formattedAmount(amount);
   },
 };
@@ -22,15 +22,18 @@ const wishes = {
   formattedAmount: function (amount) {
     return Math.floor(amount);
   },
-  toPrice: function (amount) {
+  toCost: function (amount) {
     return `${this.formattedAmount(amount)} wish${Math.floor(amount) > 1 ? 'es' : ''}`;
   },
 };
 const advertising = {
   amount: 1, // level
   amountEl: 'advertisingLevel',
-  price: 20,
-  priceEl: 'advertisingPrice',
+  cost: 20,
+  costs: {
+    money: 20,
+  },
+  costEl: 'advertisingCost',
   purchaseEl: 'btnAdvertising',
 };
 const highSchoolers = {
@@ -40,7 +43,7 @@ const highSchoolers = {
   wageEl: 'highSchoolerWage',
   purchaseEl: 'btnHireHighSchooler',
   boost: 1,
-  toPrice: function (amount) {
+  toCost: function (amount) {
     return `${amount} high schooler${amount > 1 ? 's' : ''}`;
   },
 };
@@ -55,25 +58,25 @@ const professionals = {
 const paper = {
   amount: 10,
   amountEl: 'paper',
-  price: 15,
-  priceEl: 'paperPrice',
+  cost: 15,
+  costEl: 'paperCost',
   purchaseEl: 'btnBuyPaper',
-  basePrice: 15,
+  baseCost: 15,
   purchaseAmount: 1000,
 };
 const wood = {
   amount: 0,
   amountEl: 'wood',
-  price: 50,
-  priceEl: 'woodPrice',
+  cost: 50,
+  costEl: 'woodCost',
   purchaseEl: 'btnBuyWood',
   purchaseAmount: 500,
 };
 const paperMills = {
   amount: 0,
   amountEl: 'paperMills',
-  price: 500,
-  priceEl: 'paperMillPrice',
+  cost: 500,
+  costEl: 'paperMillCost',
   purchaseEl: 'btnBuyPaperMill',
   boost: 1,
   woodUse: 0.5,
@@ -83,24 +86,24 @@ const paperMills = {
 const energy = {
   amount: 0,
   amountEl: 'energy',
-  price: 150,
-  priceEl: 'energyPrice',
+  cost: 150,
+  costEl: 'energyCost',
   purchaseEl: 'btnBuyEnergy',
   purchaseAmount: 100,
 };
 const coal = {
   amount: 0,
   amountEl: 'coal',
-  price: 200,
-  priceEl: 'coalPrice',
+  cost: 200,
+  costEl: 'coalCost',
   purchaseEl: 'btnBuyCoal',
   purchaseAmount: 50,
 };
 const powerPlants = {
   amount: 0,
   amountEl: 'powerPlants',
-  price: 1000,
-  priceEl: 'powerPlantPrice',
+  cost: 1000,
+  costEl: 'powerPlantCost',
   purchaseEl: 'btnBuyPowerPlant',
   boost: 1,
   coalUse: 0.1,
@@ -109,8 +112,8 @@ const powerPlants = {
 const factories = {
   amount: 0,
   amountEl: 'factories',
-  price: 1000,
-  priceEl: 'factoryPrice',
+  cost: 1000,
+  costEl: 'factoryCost',
   purchaseEl: 'btnBuyFactory',
   boost: 1,
   energyUse: 0.1,
@@ -149,7 +152,7 @@ function save() {
     lifetimeCranes: lifetimeCranes,
     unsoldCranes: unsoldCranes,
     cranePrice: cranePrice,
-    cranePriceSliderLoc: getEl('priceSlider').value,
+    cranePriceSliderLoc: getEl('cranePriceSlider').value,
     debt: debt,
     maxDebt: maxDebt,
     interestRate: interestRate,
@@ -170,7 +173,6 @@ function save() {
   localStorage.setItem('savedGame', JSON.stringify(savedGame));
 
   // Deal with project stuff.
-  let savedActiveProjects = [];
   let savedProjectData = {};
 
   for (const projectName in projects) {
@@ -223,9 +225,9 @@ function load() {
   interestRate = savedGame.interestRate;
 
   // load resources
-  for (property in savedGame) {
-    if (resources.hasOwnProperty(property)) {
-      update(resources[property], savedGame[property]);
+  for (resource in savedGame) {
+    if (resources.hasOwnProperty(resource)) {
+      update(resources[resource], savedGame[resource]);
     }
   }
 
@@ -263,7 +265,7 @@ function load() {
 
 document.addEventListener('DOMContentLoaded', function (event) {
   load();
-  getEl('priceSlider').value = cranePriceSliderLoc;
+  getEl('cranePriceSlider').value = cranePriceSliderLoc;
 
   // Initial message.
   if (consoleHistory.length == 0) {

@@ -11,7 +11,7 @@ setInterval(function () {
     sellCranes();
   }
 
-  cranePrice = (Math.pow(101, getEl('priceSlider').value) - 1) / 10 + 0.01;
+  cranePrice = (Math.pow(101, getEl('cranePriceSlider').value) - 1) / 10 + 0.01;
 
   manageProjects();
   manageEvents();
@@ -44,9 +44,9 @@ setInterval(function () {
 setInterval(function () {
   save();
 
-  // Fluctuate price.
-  paper.price = Math.floor(Math.sin(tick / 10) * 4) + paper.basePrice;
-  getEl('paperPrice').innerHTML = monify(paper.price);
+  // Fluctuate cost.
+  paper.cost = Math.floor(Math.sin(tick / 10) * 4) + paper.baseCost;
+  getEl('paperCost').innerHTML = monify(paper.cost);
 }, 5000);
 
 setInterval(function () {

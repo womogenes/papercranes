@@ -80,7 +80,7 @@
 				<hr>
 				<p>Unsold inventory: </p><span id="unsoldCranes">0</span><br>
 
-				<input id="priceSlider" type="range" min="0" max="1" value="0.25" step="0.01">
+				<input id="cranePriceSlider" type="range" min="0" max="1" value="0.25" step="0.01">
 
 				<br>
 				<p>Crane price: $</p><span id="cranePrice">0.25</span>
@@ -91,7 +91,7 @@
 				<div id="advertisingDiv" hidden>
 					<button id="btnAdvertising" onclick="increaseAdvertising()">Advertising</button>
 					<p>Level: </p><span id="advertisingLevel">1</span><br>
-					<p>Cost: $</p><span id="advertisingPrice">40.00</span><br>
+					<p>Cost: $</p><span id="advertisingCost">40.00</span><br>
 				</div>
 			</div>
 			<br>
@@ -130,17 +130,17 @@
 
 					<button id="btnBuyPaper" onclick="buyPaper(1)">Paper</button>
 					<span id="paper">10</span> sq. m <br>
-					<p>Cost: $</p><span id="paperPrice">5</span><br>
+					<p>Cost: $</p><span id="paperCost">5</span><br>
 					<br>
 					<div id="woodDiv" hidden>
 						<button id="btnBuyWood" onclick="buyWood(1)">Wood</button>
 						<span id="wood">0</span> logs <br>
-						<p>Cost: $</p><span id="woodPrice">5</span><br>
+						<p>Cost: $</p><span id="woodCost">5</span><br>
 					</div>
 					<div id="paperMillDiv" hidden>
 						<button id="btnBuyPaperMill" onclick="buyPaperMill(1)">Paper Mill</button>
 						<span id="paperMills">0</span> mills <br>
-						<p>Cost: $</p><span id="paperMillPrice">5</span><br>
+						<p>Cost: $</p><span id="paperMillCost">5</span><br>
 					</div>
 				</div>
 			</div>
@@ -151,7 +151,7 @@
 
 				<div id="highSchoolerDiv">
 					<button id="btnHireHighSchooler" onclick="hireHighSchooler()">Hire</button>
-          <button id="btnFireHighSchooler" onclick="fireHighSchooler()">Fire</button>
+					<button id="btnFireHighSchooler" onclick="fireHighSchooler()">Fire</button>
 					<span id="highSchoolers">0</span> high schoolers<br>
 					<p>Wage: $</p><span id="highSchoolerWage">5.00</span>
 					<br>
@@ -176,27 +176,27 @@
 			<div id="energyDiv">
 				<button id="btnBuyEnergy" onclick="buyEnergy(1)">Buy Energy</button>
 				<span id="energy">0</span> watts<br>
-				<p>Cost: $</p><span id="energyPrice">5</span><br><br>
+				<p>Cost: $</p><span id="energyCost">5</span><br><br>
 			</div>
 
 			<div id="coalDiv" hidden>
 				<button id="btnBuyCoal" onclick="buyCoal(1)">Buy Coal</button>
 				<span id="coal">0</span> lbs.<br>
-				<p>Cost: $</p><span id="coalPrice">5</span><br>
+				<p>Cost: $</p><span id="coalCost">5</span><br>
 				<br>
 			</div>
 
 			<div id="powerPlantDiv" hidden>
 				<button id="btnBuyPowerPlant" onclick="buyPowerPlant()">Buy Power Plant</button>
 				<span id="powerPlants">0</span> plants.<br>
-				<p>Cost: $</p><span id="powerPlantPrice">5</span><br>
+				<p>Cost: $</p><span id="powerPlantCost">5</span><br>
 				<br>
 			</div>
 
 			<div id="factoryDiv" hidden>
 				<button id="btnBuyFactory" onclick="buyFactory()">Buy</button>
 				<span id="factories">0</span> factories<br>
-				<p>Cost: $</p><span id="factoryPrice">1000.00</span>
+				<p>Cost: $</p><span id="factoryCost">1000.00</span>
 				<br>
 				<br>
 			</div>
