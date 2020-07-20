@@ -115,7 +115,7 @@ function displayProject(project) {
   project.element.appendChild(document.createElement('div'));
   project.element.appendChild(document.createTextNode(project.description));
 
-  fade(project.element, canAffordProject(project.costs) ? 1.0 : 0.6);
+  fade(project.element, canAfford(project.costs) ? 1.0 : 0.6);
 }
 
 function resetEventDiv() {

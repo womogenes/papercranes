@@ -9,35 +9,6 @@ function projectBaseEffect(project) {
   pay(project.costs);
 }
 
-function priceTag(costs) {
-  let costStrings = [];
-  for (resourceName in costs) {
-    if (!resources.hasOwnProperty(resourceName)) {
-      console.error(`invalid cost ${resourceName}`);
-      return;
-    }
-    if (resources[resourceName].toCost) {
-      costStrings.push(resources[resourceName].toCost(costs[resourceName]));
-    } else {
-      costStrings.push(costs[resourceName] + ' ' + resourceName);
-    }
-  }
-  return costStrings.join(', ');
-}
-
-function canAffordProject(costs) {
-  for (resourceName in costs) {
-    if (!resources.hasOwnProperty(resourceName)) {
-      console.error(`invalid cost ${resourceName}`);
-      return;
-    }
-    if (resources[resourceName].amount < costs[resourceName]) {
-      return false;
-    }
-  }
-  return true;
-}
-
 const projects = {
   // Worker projects
   unlockWorkers: {

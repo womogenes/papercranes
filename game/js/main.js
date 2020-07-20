@@ -308,7 +308,7 @@ function manageProjects() {
 
   activeProjects.forEach((projectName) => {
     project = projects[projectName];
-    project.element.disabled = !canAffordProject(project.costs);
+    project.element.disabled = !canAfford(project.costs);
   });
 }
 

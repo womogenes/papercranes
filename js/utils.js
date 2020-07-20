@@ -253,3 +253,32 @@ function update(base, other) {
     base[propertyName] = other[propertyName];
   }
 }
+
+function priceTag(costs) {
+  let costStrings = [];
+  for (resourceName in costs) {
+    if (!resources.hasOwnProperty(resourceName)) {
+      console.error(`invalid cost ${resourceName}`);
+      return;
+    }
+    if (resources[resourceName].toCost) {
+      costStrings.push(resources[resourceName].toCost(costs[resourceName]));
+    } else {
+      costStrings.push(costs[resourceName] + ' ' + resourceName);
+    }
+  }
+  return costStrings.join(', ');
+}
+
+function canAfford(costs) {
+  for (resourceName in costs) {
+    if (!resources.hasOwnProperty(resourceName)) {
+      console.error(`invalid cost ${resourceName}`);
+      return;
+    }
+    if (resources[resourceName].amount < costs[resourceName]) {
+      return false;
+    }
+  }
+  return true;
+}
