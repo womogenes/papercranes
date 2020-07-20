@@ -45,8 +45,7 @@ setInterval(function () {
   save();
 
   // Fluctuate cost.
-  paper.cost = Math.floor(Math.sin(tick / 10) * 4) + paper.baseCost;
-  getEl('paperCost').innerHTML = monify(paper.cost);
+  paper.costs.money = Math.floor(Math.sin(tick / 10) * 4) + paper.baseCost;
 }, 5000);
 
 setInterval(function () {

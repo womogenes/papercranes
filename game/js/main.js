@@ -29,7 +29,6 @@ const wishes = {
 const advertising = {
   amount: 1, // level
   amountEl: 'advertisingLevel',
-  cost: 20,
   costs: {
     money: 20,
   },
@@ -58,7 +57,9 @@ const professionals = {
 const paper = {
   amount: 10,
   amountEl: 'paper',
-  cost: 15,
+  costs: {
+    money: 15,
+  },
   costEl: 'paperCost',
   purchaseEl: 'btnBuyPaper',
   baseCost: 15,
@@ -67,7 +68,9 @@ const paper = {
 const wood = {
   amount: 0,
   amountEl: 'wood',
-  cost: 50,
+  costs: {
+    money: 50,
+  },
   costEl: 'woodCost',
   purchaseEl: 'btnBuyWood',
   purchaseAmount: 500,
@@ -75,7 +78,9 @@ const wood = {
 const paperMills = {
   amount: 0,
   amountEl: 'paperMills',
-  cost: 500,
+  costs: {
+    money: 500,
+  },
   costEl: 'paperMillCost',
   purchaseEl: 'btnBuyPaperMill',
   boost: 1,
@@ -86,7 +91,9 @@ const paperMills = {
 const energy = {
   amount: 0,
   amountEl: 'energy',
-  cost: 150,
+  costs: {
+    money: 150,
+  },
   costEl: 'energyCost',
   purchaseEl: 'btnBuyEnergy',
   purchaseAmount: 100,
@@ -94,7 +101,9 @@ const energy = {
 const coal = {
   amount: 0,
   amountEl: 'coal',
-  cost: 200,
+  costs: {
+    money: 200,
+  },
   costEl: 'coalCost',
   purchaseEl: 'btnBuyCoal',
   purchaseAmount: 50,
@@ -102,7 +111,9 @@ const coal = {
 const powerPlants = {
   amount: 0,
   amountEl: 'powerPlants',
-  cost: 1000,
+  costs: {
+    money: 1000,
+  },
   costEl: 'powerPlantCost',
   purchaseEl: 'btnBuyPowerPlant',
   boost: 1,
@@ -112,7 +123,9 @@ const powerPlants = {
 const factories = {
   amount: 0,
   amountEl: 'factories',
-  cost: 1000,
+  costs: {
+    money: 1000,
+  },
   costEl: 'factoryCost',
   purchaseEl: 'btnBuyFactory',
   boost: 1,
@@ -327,15 +340,5 @@ function manageEvents() {
 
   if (pendingEvents.length > 0 && getEl('eventDiv').hidden) {
     displayEvent();
-  }
-}
-
-function pay(costs) {
-  for (resourceName in costs) {
-    if (!resources.hasOwnProperty(resourceName)) {
-      console.error(`invalid cost ${resourceName}`);
-      return;
-    }
-    resources[resourceName].amount -= costs[resourceName];
   }
 }

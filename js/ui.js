@@ -15,13 +15,13 @@ function updateDom() {
       getEl(resource.amountEl).innerHTML = amount;
     }
     if (resource.costEl) {
-      getEl(resource.costEl).innerHTML = monify(resource.cost);
+      getEl(resource.costEl).innerHTML = priceTag(resource.costs);
     }
     if (resource.wageEl) {
       getEl(resource.wageEl).innerHTML = monify(resource.wage);
     }
-    if (resource.purchaseEl && resource.cost != undefined) {
-      getEl(resource.purchaseEl).disabled = money.amount < resource.cost;
+    if (resource.purchaseEl && resource.costs != undefined) {
+      getEl(resource.purchaseEl).disabled = !canAfford(resource.costs);
     } else if (resource.purchaseEl && resource.wage != undefined) {
       getEl(resource.purchaseEl).disabled = money.amount < resource.wage;
     }

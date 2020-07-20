@@ -254,12 +254,32 @@ function update(base, other) {
   }
 }
 
+// costs stuff
+// these all use an object of costs eg. {money: 10, wishes: 1}
+// which can have anything in resources
+function pay(costs, amount) {
+  // amount is optional
+  if (!canAfford(costs)) {
+    return;
+  }
+  if (amount == undefined) {
+    amount = 1;
+  }
+  for (resourceName in costs) {
+    if (!resources.hasOwnProperty(resourceName)) {
+      console.error(`invalid cost ${resourceName}`);
+      continue;
+    }
+    resources[resourceName].amount -= costs[resourceName] * amount;
+  }
+}
+
 function priceTag(costs) {
   let costStrings = [];
   for (resourceName in costs) {
     if (!resources.hasOwnProperty(resourceName)) {
       console.error(`invalid cost ${resourceName}`);
-      return;
+      continue;
     }
     if (resources[resourceName].toCost) {
       costStrings.push(resources[resourceName].toCost(costs[resourceName]));
@@ -274,7 +294,7 @@ function canAfford(costs) {
   for (resourceName in costs) {
     if (!resources.hasOwnProperty(resourceName)) {
       console.error(`invalid cost ${resourceName}`);
-      return;
+      continue;
     }
     if (resources[resourceName].amount < costs[resourceName]) {
       return false;
