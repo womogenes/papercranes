@@ -56,26 +56,22 @@ function buyPaper(amount) {
   // buys paper.amount paper
   pay(paper.costs, amount);
   paper.amount += Math.round(paper.purchaseAmount * amount);
-
 }
 
 function buyEnergy(amount) {
   // buys energy
   pay(energy.costs, amount);
   energy.amount += Math.round(energy.purchaseAmount * amount);
-
 }
 
 function buyCoal(amount) {
   pay(coal.costs, amount);
   coal.amount += Math.round(coal.purchaseAmount * amount);
-
 }
 
 function buyWood(amount) {
   pay(wood.costs, amount);
   wood.amount += Math.round(wood.purchaseAmount * amount);
-
 }
 
 function buyPaperMill() {
@@ -97,9 +93,8 @@ function makeCrane(n) {
 function closeEvent() {
   // closes the currently displayed event and displays the next if there is one
   let event = events[getEl('eventTitle').innerHTML.camelize()];
-  if (event.onClose) {
-    event.onClose();
-  }
+  event.onClose?.();
+
   if (pendingEvents.length) {
     displayEvent();
   } else {

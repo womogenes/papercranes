@@ -4,10 +4,10 @@ function updateDom() {
   getEl('lifetimeCranes').innerHTML = commify(Math.floor(lifetimeCranes));
   getEl('unsoldCranes').innerHTML = commify(Math.floor(unsoldCranes));
   getEl('cranePrice').innerHTML = monify(cranePrice);
-
   getEl('debt').innerHTML = monify(debt);
   getEl('interestRate').innerHTML = interestRate * 100;
 
+  // updates resources
   for (resourceName in resources) {
     resource = resources[resourceName];
     if (resource.amountEl) {
@@ -27,6 +27,7 @@ function updateDom() {
     }
   }
 
+  // update hapiness
   let happiness = money.amount - debt > 0 ? Math.min(Math.log(money.amount + wishes.amount - debt), 100) : 0;
   getEl('happinessMeter').style.width = happiness + '%';
   getEl('happinessAmount').innerHTML = happiness.toFixed(2) + '%';
@@ -53,12 +54,10 @@ function displayEvent(event) {
   // Get the event to display
   if (event) {
     if (!getEl('eventDiv').hidden) {
+      // save the currently displayed event for later
       let currentEventName = getEl('eventTitle').innerHTML.camelize();
       pendingEvents.push(currentEventName);
-
-      if (events[currentEventName].onClose) {
-        events[currentEventName].onClose();
-      }
+      events[currentEventName].onClose?.();
     }
   } else {
     event = events[pendingEvents.pop()];
@@ -82,9 +81,8 @@ function displayEvent(event) {
     });
   }
 
-  if (event.onDisplay) {
-    event.onDisplay();
-  }
+  event.onDisplay?.();
+
   if (getEl('eventDiv').hidden) {
     unhide('eventDiv');
   }
@@ -171,7 +169,7 @@ function createRipple(e) {
   circle.style.top = e.clientY - rect.top - d / 2 + 'px';
 
   circle.classList.add('ripple');
-  circle.addEventListener('animationend', function (e) {
+  circle.addEventListener('animationend', function (el) {
     this.parentNode.removeChild(this);
   });
 }

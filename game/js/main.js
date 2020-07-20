@@ -1,59 +1,10 @@
 // Yoy!
-let lifetimeCranes = 0;
-let unsoldCranes = 0;
-let debt = 0;
-let maxDebt = 1000;
-let interestRate = 0.01;
 
-// resources
-const money = {
-  amount: 35,
-  amountEl: 'money',
-  formattedAmount: function (amount) {
-    return monify(amount);
-  },
-  toCost: function (amount) {
-    return '$' + this.formattedAmount(amount);
-  },
-};
-const wishes = {
-  amount: 0,
-  amountEl: 'wishes',
-  formattedAmount: function (amount) {
-    return Math.floor(amount);
-  },
-  toCost: function (amount) {
-    return `${this.formattedAmount(amount)} wish${Math.floor(amount) > 1 ? 'es' : ''}`;
-  },
-};
-const advertising = {
-  amount: 1, // level
-  amountEl: 'advertisingLevel',
-  costs: {
-    money: 20,
-  },
-  costEl: 'advertisingCost',
-  purchaseEl: 'btnAdvertising',
-};
-const highSchoolers = {
-  amount: 0,
-  amountEl: 'highSchoolers',
-  wage: 0.01,
-  wageEl: 'highSchoolerWage',
-  purchaseEl: 'btnHireHighSchooler',
-  boost: 1,
-  toCost: function (amount) {
-    return `${amount} high schooler${amount > 1 ? 's' : ''}`;
-  },
-};
-const professionals = {
-  amount: 0,
-  amountEl: 'professionals',
-  wage: 100,
-  wageEl: 'professionalWage',
-  purchaseEl: 'btnHireProfessional',
-  boost: 1,
-};
+// Resources
+// if you make a new resource, remember to add it to resources
+// resources will automatically save and load
+
+// materials
 const paper = {
   amount: 10,
   amountEl: 'paper',
@@ -65,6 +16,7 @@ const paper = {
   baseCost: 15,
   purchaseAmount: 1000,
 };
+
 const wood = {
   amount: 0,
   amountEl: 'wood',
@@ -75,6 +27,77 @@ const wood = {
   purchaseEl: 'btnBuyWood',
   purchaseAmount: 500,
 };
+
+const energy = {
+  amount: 0,
+  amountEl: 'energy',
+  costs: {
+    money: 150,
+  },
+  costEl: 'energyCost',
+  purchaseEl: 'btnBuyEnergy',
+  purchaseAmount: 100,
+};
+
+const coal = {
+  amount: 0,
+  amountEl: 'coal',
+  costs: {
+    money: 200,
+  },
+  costEl: 'coalCost',
+  purchaseEl: 'btnBuyCoal',
+  purchaseAmount: 50,
+};
+
+// manufacturing
+const highSchoolers = {
+  amount: 0,
+  amountEl: 'highSchoolers',
+  wage: 0.01,
+  wageEl: 'highSchoolerWage',
+  purchaseEl: 'btnHireHighSchooler',
+  boost: 1,
+  toCost: function (amount) {
+    return `${amount} high schooler${amount > 1 ? 's' : ''}`;
+  },
+};
+
+const professionals = {
+  amount: 0,
+  amountEl: 'professionals',
+  wage: 100,
+  wageEl: 'professionalWage',
+  purchaseEl: 'btnHireProfessional',
+  boost: 1,
+};
+
+const powerPlants = {
+  amount: 0,
+  amountEl: 'powerPlants',
+  costs: {
+    money: 1000,
+  },
+  costEl: 'powerPlantCost',
+  purchaseEl: 'btnBuyPowerPlant',
+  boost: 1,
+  coalUse: 0.1,
+  emissions: 0.001,
+};
+
+const factories = {
+  amount: 0,
+  amountEl: 'factories',
+  costs: {
+    money: 1000,
+  },
+  costEl: 'factoryCost',
+  purchaseEl: 'btnBuyFactory',
+  boost: 1,
+  energyUse: 0.1,
+  emissions: 0.001,
+};
+
 const paperMills = {
   amount: 0,
   amountEl: 'paperMills',
@@ -88,54 +111,45 @@ const paperMills = {
   energyUse: 0.1,
   emissions: 0.001,
 };
-const energy = {
-  amount: 0,
-  amountEl: 'energy',
-  costs: {
-    money: 150,
-  },
-  costEl: 'energyCost',
-  purchaseEl: 'btnBuyEnergy',
-  purchaseAmount: 100,
-};
-const coal = {
-  amount: 0,
-  amountEl: 'coal',
-  costs: {
-    money: 200,
-  },
-  costEl: 'coalCost',
-  purchaseEl: 'btnBuyCoal',
-  purchaseAmount: 50,
-};
-const powerPlants = {
-  amount: 0,
-  amountEl: 'powerPlants',
-  costs: {
-    money: 1000,
-  },
-  costEl: 'powerPlantCost',
-  purchaseEl: 'btnBuyPowerPlant',
-  boost: 1,
-  coalUse: 0.1,
-  emissions: 0.001,
-};
-const factories = {
-  amount: 0,
-  amountEl: 'factories',
-  costs: {
-    money: 1000,
-  },
-  costEl: 'factoryCost',
-  purchaseEl: 'btnBuyFactory',
-  boost: 1,
-  energyUse: 0.1,
-  emissions: 0.001,
-};
+
+// misc.
 const carbonDioxide = {
   amount: 300,
   amountEl: 'carbonDioxide',
 };
+
+const money = {
+  amount: 35,
+  amountEl: 'money',
+  formattedAmount: function (amount) {
+    return monify(amount);
+  },
+  toCost: function (amount) {
+    return '$' + this.formattedAmount(amount);
+  },
+};
+
+const wishes = {
+  amount: 0,
+  amountEl: 'wishes',
+  formattedAmount: function (amount) {
+    return Math.floor(amount);
+  },
+  toCost: function (amount) {
+    return `${this.formattedAmount(amount)} wish${Math.floor(amount) > 1 ? 'es' : ''}`;
+  },
+};
+
+const advertising = {
+  amount: 1, // level
+  amountEl: 'advertisingLevel',
+  costs: {
+    money: 20,
+  },
+  costEl: 'advertisingCost',
+  purchaseEl: 'btnAdvertising',
+};
+
 const resources = {
   highSchoolers: highSchoolers,
   professionals: professionals,
@@ -153,6 +167,12 @@ const resources = {
 };
 
 // things that aren't resources
+let lifetimeCranes = 0;
+let unsoldCranes = 0;
+let debt = 0;
+let maxDebt = 1000;
+let interestRate = 0.01;
+
 let prevCranes = lifetimeCranes;
 let cranePriceSliderLoc = 0.1;
 let tick = 0;
@@ -162,6 +182,7 @@ let theme;
 
 function save() {
   const savedGame = {
+    // things that arent resources
     lifetimeCranes: lifetimeCranes,
     unsoldCranes: unsoldCranes,
     cranePrice: cranePrice,
@@ -170,14 +191,17 @@ function save() {
     maxDebt: maxDebt,
     interestRate: interestRate,
   };
+
+  // saving resources
   for (resourceName in resources) {
     resource = resources[resourceName];
     savedGame[resourceName] = {};
+
     for (propertyName in resource) {
       property = resource[propertyName];
       if (!propertyName.endsWith('El') && typeof property != 'function') {
         // properties ending with el are used for updating the dom and so shouldn't be saved
-        // functions are for game logic and also should not be saved
+        // functions are for game logic and also should not be saved since they may be changed
         savedGame[resourceName][propertyName] = resource[propertyName];
       }
     }
@@ -187,7 +211,6 @@ function save() {
 
   // Deal with project stuff.
   let savedProjectData = {};
-
   for (const projectName in projects) {
     const project = projects[projectName];
     savedProjectData[projectName] = {
@@ -213,10 +236,12 @@ function save() {
   localStorage.setItem('savedEventData', JSON.stringify(savedEventData));
 
 
+  // saving other stuff
   localStorage.setItem('consoleHistory', JSON.stringify(consoleHistory));
-  // saves the currently displayed event if there is one
+
   localStorage.setItem('pendingEvents', JSON.stringify((
     getEl('eventDiv').hidden ?
+    // saves the currently displayed event if there is one
     pendingEvents : pendingEvents.concat([getEl('eventTitle').innerHTML.camelize()])
   )));
   localStorage.setItem('theme', JSON.stringify(theme));
@@ -224,15 +249,17 @@ function save() {
 
 function load() {
   loadTheme();
+  // dont load if nothing to load
   if (localStorage.getItem('savedGame') == null) {
     save();
     return;
   }
+
+  // things that arent resources
   let savedGame = JSON.parse(localStorage.getItem('savedGame'));
   lifetimeCranes = savedGame.lifetimeCranes;
   unsoldCranes = savedGame.unsoldCranes;
   cranePriceSliderLoc = savedGame.cranePriceSliderLoc;
-
   debt = savedGame.debt;
   maxDebt = savedGame.maxDebt;
   interestRate = savedGame.interestRate;
@@ -310,6 +337,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
 // Project/event management functions.
 function manageProjects() {
+  // check if projects have been triggered
   for (let projectName in projects) {
     let project = projects[projectName];
     if (trigger(project) && project.uses > 0) {
@@ -319,6 +347,7 @@ function manageProjects() {
     }
   }
 
+  // check currently displayed projects
   activeProjects.forEach((projectName) => {
     project = projects[projectName];
     project.element.disabled = !canAfford(project.costs);
@@ -332,9 +361,7 @@ function manageEvents() {
       if (event.notifyPlayer) {
         pendingEvents.push(event.title.camelize());
       }
-      if (event.effect) {
-        event.effect();
-      }
+      event.effect?.();
     }
   }
 
