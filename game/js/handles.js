@@ -28,11 +28,10 @@ function increaseAdvertising() {
 function hireHighSchooler() {
   // Hires a highSchooler!
   highSchoolers.amount++;
-  // highSchoolers.wage = Math.ceil(highSchoolers.wage * 1.001 * 100) / 100;
 }
 
 function fireHighSchooler() {
-  // Hires a highSchooler!
+  // Fires a highSchooler
   highSchoolers.amount--;
 }
 
@@ -48,6 +47,7 @@ function hireProfessional() {
 }
 
 function buyFactory() {
+  // buys a factory
   factories.amount++;
   money.amount -= factories.price;
 }
@@ -59,6 +59,7 @@ function buyPowerPlant() {
 
 //  Resources
 function buyPaper(n) {
+  // buys paper.amount paper
   if (money.amount < paper.price * n) {
     return;
   }
@@ -68,6 +69,7 @@ function buyPaper(n) {
 }
 
 function buyEnergy(n) {
+  // buys energy
   if (money.amount > energy.price * n) {
     energy.amount += Math.round(energy.purchaseAmount * n);
     money.amount -= Math.round(energy.price * n);
@@ -95,6 +97,7 @@ function buyPaperMill() {
 
 // Buttons
 function makeCrane(n) {
+  // makes cranes
   n = Math.min(n, paper.amount);
   wishes.amount += n / 1000;
 
@@ -104,6 +107,7 @@ function makeCrane(n) {
 }
 
 function closeEvent() {
+  // closes the currently displayed event and displays the next if there is one
   let event = events[getEl('eventTitle').innerHTML.camelize()];
   if (event.onClose) {
     event.onClose();
@@ -122,12 +126,14 @@ function togglePaperBuyer() {
 }
 
 function changeTheme() {
+  // switches the theme
   theme = theme == 'Light' ? 'Dark' : 'Light';
   applyTheme(theme);
 }
 
 // Interval functions
 function highSchoolersFold() {
+  // highschoolers fold cranes
   if (money.amount > 0) {
     if (tick % 1000 == 0 && paper.amount > 0) {
       money.amount -= highSchoolers.wage * highSchoolers.amount;
@@ -137,6 +143,7 @@ function highSchoolersFold() {
 }
 
 function factoryFold() {
+  // factories fold cranes
   if (factories.amount > 0 && energy.amount > 1) {
     let factoriesCanPower = Math.min(energy.amount / factories.energyUse, factories.amount);
     energy.amount -= factoriesCanPower * factories.energyUse;
@@ -146,6 +153,7 @@ function factoryFold() {
 }
 
 function makePaper() {
+  // papermills make paper from wood
   if (paperMills.amount > 0 && energy.amount > 1) {
     let millsCanPower = Math.min(energy.amount / paperMills.energyUse, paperMills.amount);
     energy.amount -= millsCanPower * paperMills.energyUse;
@@ -156,6 +164,7 @@ function makePaper() {
 }
 
 function generatePower() {
+  // power plants make power from coal
   if (powerPlants.amount > 0 && coal.amount > 0.1) {
     let plantsCanPower = Math.min(coal.amount / powerPlants.coalUse, powerPlants.amount);
     coal.amount -= plantsCanPower * powerPlants.coalUse;
@@ -165,6 +174,7 @@ function generatePower() {
 }
 
 function sellCranes() {
+  // sells cranes
   const demand = (0.1 / cranePrice) * Math.pow(1.2, advertising.amount - 1);
   getEl('demand').innerHTML = commify(Math.floor(demand * 100));
 

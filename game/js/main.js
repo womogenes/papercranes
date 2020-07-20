@@ -236,27 +236,16 @@ function load() {
   // Load projects and events
   const savedProjectData = JSON.parse(localStorage.getItem('savedProjectData'));
   for (let savedProjectName in savedProjectData) {
-    let savedProject = savedProjectData[savedProjectName];
-    let project = projects[savedProjectName];
-    project.uses = savedProject.uses;
-    project.flag = savedProject.flag;
+    update(projects[savedProjectName], savedProjectData[savedProjectName]);
   }
-  const savedActiveProjects = JSON.parse(localStorage.getItem('savedActiveProjects'));
-  for (const projectName in projects) {
-    const project = projects[projectName];
-    if (savedActiveProjects.indexOf(project.title.camelize()) >= 0) {
-      displayProjects(project);
-      activeProjects.push(project);
-    }
+  activeProjects = JSON.parse(localStorage.getItem('savedActiveProjects'));
+  for (const projectName in activeProjects) {
+    displayProject(projects[projectName]);
   }
 
   const savedEventData = JSON.parse(localStorage.getItem('savedEventData'));
   for (const eventName in savedEventData) {
-    const savedEvent = savedEventData[eventName];
-    const event = events[eventName];
-    for (const propertyName in savedEvent) {
-      event[propertyName] = savedEvent[propertyName];
-    }
+    update(events[eventName], savedEventData[eventName]);
   }
 
   [projects, events].forEach((object) => {
@@ -312,7 +301,7 @@ function manageProjects() {
   for (let projectName in projects) {
     let project = projects[projectName];
     if (trigger(project) && project.uses > 0) {
-      displayProjects(project);
+      displayProject(project);
       project.uses--;
       activeProjects.push(project);
     }
@@ -335,7 +324,7 @@ function manageEvents() {
       }
     }
   }
-  
+
   if (pendingEvents.length > 0 && getEl('eventDiv').hidden) {
     displayEvent();
   }

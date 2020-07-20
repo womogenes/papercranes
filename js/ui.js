@@ -55,7 +55,7 @@ function displayEvent(event) {
     if (!getEl('eventDiv').hidden) {
       let currentEventName = getEl('eventTitle').innerHTML.camelize();
       pendingEvents.push(currentEventName);
-      
+
       if (events[currentEventName].onClose) {
         events[currentEventName].onClose();
       }
@@ -90,7 +90,7 @@ function displayEvent(event) {
   }
 }
 
-function displayProjects(project) {
+function displayProject(project) {
   project.element = document.createElement('button');
   project.element.style.opacity = 0;
   project.element.setAttribute('id', project.title.camelize());
