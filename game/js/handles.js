@@ -18,7 +18,7 @@ function increaseAdvertising() {
   pay(advertising.costs);
   advertising.amount += 1;
 
-  advertising.costs.money = Math.toPrecision(advertising.costs.money * 1.01, 2);
+  advertising.costs.money = advertising.costs.money * 1.01;
   getEl('advertisingLevel').innerHTML = commify(advertising.amount);
 }
 

@@ -31,6 +31,9 @@ function updateDom() {
   let happiness = money.amount - debt > 0 ? Math.min(Math.log(money.amount + wishes.amount - debt), 100) : 0;
   getEl('happinessMeter').style.width = happiness + '%';
   getEl('happinessAmount').innerHTML = happiness.toFixed(2) + '%';
+  if (happiness >= 100) {
+    displayMessage('You maxed out happiness');
+  }
 
   // Disable buttons which player cannot use
   getEl('btnpayBackLoan').disabled = money.amount <= 0 || debt <= 0;

@@ -44,7 +44,7 @@ const projects = {
     flag: false,
     effect: function () {
       highSchoolers.boost *= percentToMultiplier(this.fasterPercent);
-      displayMessage(`High schoolers now work ${this.fasterPercent}% as fast.`);
+      displayMessage(`High schoolers now work ${this.fasterPercent}% faster.`);
     },
   },
 

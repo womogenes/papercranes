@@ -11,12 +11,13 @@ const events = {
       this.flag = true;
       this.uses -= 1;
       this.loadEffect();
+      displayMessage('Use projects to unlock new things or get upgrades');
     },
     loadEffect: function () {
       unhide('projectsColumn');
     },
   },
-  prestigeUnlocked: {
+  wishesUnlocked: {
     trigger: function () {
       return lifetimeCranes >= 1000;
     },
@@ -28,6 +29,7 @@ const events = {
       this.flag = true;
       this.uses -= 1;
       this.loadEffect();
+      displayMessage('You get a wish every 1000 cranes you fold');
     },
     loadEffect: function () {
       unhide('wishDiv');
@@ -66,6 +68,7 @@ const events = {
     effect: function () {
       this.uses -= 1;
       this.flag = true;
+      displayMessage('You need paper to fold cranes, buy some using the button');
       this.loadEffect();
     },
     loadEffect: function () {
