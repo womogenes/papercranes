@@ -9,7 +9,7 @@ const paper = {
   amount: 10,
   amountEl: 'paper',
   formattedAmount: function (amount) {
-    return Math.floor(amount);
+    return commify(Math.floor(amount));
   },
   costs: {
     money: 15,

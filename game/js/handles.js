@@ -18,7 +18,7 @@ function increaseAdvertising() {
   pay(advertising.costs);
   advertising.amount += 1;
 
-  advertising.costs.money = advertising.costs.money * 1.01;
+  advertising.costs.money *= 1.5;
   getEl('advertisingLevel').innerHTML = commify(advertising.amount);
 }
 
@@ -104,8 +104,8 @@ function closeEvent() {
 }
 
 function togglePaperBuyer() {
-  autoBuyPaper.flag = !autoBuyPaper.flag;
-  getEl('paperBuyer').innerHTML = autoBuyPaper.flag ? 'ON' : 'OFF';
+  events.autoBuyPaper.flag = !events.autoBuyPaper.flag;
+  getEl('paperBuyer').innerHTML = events.autoBuyPaper.flag ? 'ON' : 'OFF';
 }
 
 function changeTheme() {
@@ -130,18 +130,18 @@ function factoryFold() {
   if (factories.amount > 0 && energy.amount > 1) {
     let factoriesCanPower = Math.min(energy.amount / factories.energyUse, factories.amount);
     energy.amount -= factoriesCanPower * factories.energyUse;
-    carbonDioxide += factories.emissions * factoriesCanPower;
+    carbonDioxide.amount += factories.emissions * factoriesCanPower;
     makeCrane(factoriesCanPower * 5 * factories.boost);
   }
 }
 
 function makePaper() {
   // papermills make paper from wood
-  if (paperMills.amount > 0 && energy.amount > 1) {
+  if (paperMills.amount > 0 && energy.amount > 1 && wood.amount > 1) {
     let millsCanPower = Math.min(energy.amount / paperMills.energyUse, paperMills.amount);
     energy.amount -= millsCanPower * paperMills.energyUse;
     wood.amount -= millsCanPower * paperMills.woodUse;
-    carbonDioxide += paperMills.emissions * millsCanPower;
+    carbonDioxide.amount += paperMills.emissions * millsCanPower;
     paper.amount += millsCanPower * 2000 * paperMills.boost;
   }
 }
@@ -151,7 +151,7 @@ function generatePower() {
   if (powerPlants.amount > 0 && coal.amount > 0.1) {
     let plantsCanPower = Math.min(coal.amount / powerPlants.coalUse, powerPlants.amount);
     coal.amount -= plantsCanPower * powerPlants.coalUse;
-    carbonDioxide += powerPlants.emissions * plantsCanPower;
+    carbonDioxide.amount += powerPlants.emissions * plantsCanPower;
     energy.amount += plantsCanPower * 5;
   }
 }
