@@ -41,7 +41,9 @@ function updateDom() {
   getEl('btnMakeCrane').disabled = paper.amount < 1;
   getEl('btnHireHighSchooler').disabled = money.amount < highSchoolers.wage;
   getEl('btnFireHighSchooler').disabled = highSchoolers.amount <= 0;
+}
 
+function updateTitle() {
   // Change favicon and title to show notifications
   let notificationCount = pendingEvents.length + (getEl('eventDiv').hidden ? 0 : 1);
   document.title = `${notificationCount ? `(${notificationCount}) ` : ''}Paper Cranes`;

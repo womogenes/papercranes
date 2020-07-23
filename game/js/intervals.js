@@ -23,6 +23,10 @@ domUpdate = setInterval(function () {
   updateDom();
 }, 100);
 
+setInterval(function () {
+  updateTitle();
+}, 100);
+
 // Don't update if the tab is hidden
 document.addEventListener('visibilitychange', function () {
   if (document.hidden) {
