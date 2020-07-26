@@ -244,8 +244,8 @@ function save() {
 
   localStorage.setItem('pendingEvents', JSON.stringify((
     getEl('eventDiv').hidden ?
-    // saves the currently displayed event if there is one
-    pendingEvents : pendingEvents.concat([getEl('eventTitle').innerHTML.camelize()])
+      // saves the currently displayed event if there is one
+      pendingEvents : pendingEvents.concat([getEl('eventTitle').innerHTML.camelize()])
   )));
   localStorage.setItem('theme', JSON.stringify(theme));
 }
@@ -278,7 +278,9 @@ function load() {
   // Load projects and events
   const savedProjectData = JSON.parse(localStorage.getItem('savedProjectData'));
   for (let savedProjectName in savedProjectData) {
-    update(projects[savedProjectName], savedProjectData[savedProjectName]);
+    if (projects[savedProjectName]) {
+      update(projects[savedProjectName], savedProjectData[savedProjectName]);
+    }
   }
   activeProjects = JSON.parse(localStorage.getItem('savedActiveProjects'));
   activeProjects.forEach((projectName) => {
