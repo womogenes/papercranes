@@ -3,6 +3,7 @@ function updateDom() {
   // Update elements to have correct values
   getEl('lifetimeCranes').innerHTML = commify(Math.floor(lifetimeCranes));
   getEl('unsoldCranes').innerHTML = commify(Math.floor(unsoldCranes));
+
   getEl('cranePrice').innerHTML = monify(cranePrice);
   getEl('debt').innerHTML = monify(debt);
   getEl('interestRate').innerHTML = interestRate * 100;
@@ -35,7 +36,7 @@ function updateDom() {
     displayMessage('You maxed out happiness');
   }
 
-  // Disable buttons which player cannot use
+  // Disable buttons which the player cannot use
   getEl('btnpayBackLoan').disabled = money.amount <= 0 || debt <= 0;
   getEl('btnBorrowMoney').disabled = debt >= maxDebt;
   getEl('btnMakeCrane').disabled = paper.amount < 1;

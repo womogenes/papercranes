@@ -37,7 +37,7 @@ const energy = {
   costs: {
     money: 150,
   },
-  costEl: 'energyCost',
+  costEl: 'energyCost', // These should have 'El' at the end.
   purchaseEl: 'btnBuyEnergy',
   purchaseAmount: 100,
 };
@@ -147,11 +147,21 @@ const advertising = {
   amount: 1, // level
   amountEl: 'advertisingLevel',
   costs: {
-    money: 20,
+    money: 20
   },
   costEl: 'advertisingCost',
   purchaseEl: 'btnAdvertising',
 };
+
+const userAdData = {
+  amount: 0,
+  amountEl: 'userAdDataEl',
+  costs: {
+    money: 10
+  },
+  costEl: 'userAdDataCostEl',
+  purchaseEl: 'btnUserAdData'
+}
 
 const resources = {
   highSchoolers: highSchoolers,

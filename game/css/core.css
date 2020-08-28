@@ -1,152 +1,152 @@
 * {
-	font-family: 'Inconsolata', 'Consolas', monospace;
-	color: var(--text-color);
-	touch-action: manipulation;
+  font-family: 'Inconsolata', 'Consolas', monospace;
+  color: var(--text-color);
+  touch-action: manipulation;
 }
 
 body {
-	background-color: var(--bg-color);
-	margin: auto 15px;
-	margin-bottom: 50px;
-	font-size: 14px;
+  background-color: var(--bg-color);
+  margin: auto 15px;
+  margin-bottom: 50px;
+  font-size: 14px;
 }
 
 p {
-	display: inline;
-	margin: 1px auto;
+  display: inline;
+  margin: 1px auto;
   line-height: 120%;
 }
 
 div {
-	touch-action: manipulation;
+  touch-action: manipulation;
 }
 
 hr {
-	margin-top: 4px;
-	margin-bottom: 3px;
-	border: 1px solid var(--outline-color);
-	background-color: var(--outline-color);
+  margin-top: 4px;
+  margin-bottom: 3px;
+  border: 1px solid var(--outline-color);
+  background-color: var(--outline-color);
 }
 
 .js-focus-visible :focus:not(.focus-visible) {
-	outline: none;
+  outline: none;
 }
 
 button {
-	font-size: 13px;
-	border-radius: 5px;
-	border: 1px solid var(--outline-color);
-	background: var(--btn-bg-on);
+  font-size: 13px;
+  border-radius: 5px;
+  border: 1px solid var(--outline-color);
+  background: var(--btn-bg-on);
 
-	margin: 3px 0;
-	margin-right: 4px;
-	padding: 2px 4px;
+  margin: 3px 0;
+  margin-right: 4px;
+  padding: 2px 4px;
 
-	touch-action: manipulation;
+  touch-action: manipulation;
 
-	overflow: hidden;
-	position: relative;
-	--ripple: true;
+  overflow: hidden;
+  position: relative;
+  --ripple: true;
 }
 
 button:hover {
-	background: var(--btn-bg-hover);
-	border: 1px solid var(--btn-outline-hover);
-	cursor: pointer;
+  background: var(--btn-bg-hover);
+  border: 1px solid var(--btn-outline-hover);
+  cursor: pointer;
 }
 
 button:active {
-	background: var(--btn-bg-active);
-	border: 1px solid var(--btn-outline-active);
+  background: var(--btn-bg-active);
+  border: 1px solid var(--btn-outline-active);
 }
 
 button:disabled {
-	opacity: 0.6;
-	border: 1px solid var(--btn-outline-disabled);
-	cursor: auto;
+  opacity: 0.6;
+  border: 1px solid var(--btn-outline-disabled);
+  cursor: auto;
 }
 
 button .ripple {
-	border: none;
-	border-radius: 50%;
-	background-color: var(--btn-outline-hover);
-	position: absolute;
-	transform: scale(0);
-	animation: ripple 0.6s linear;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--btn-outline-hover);
+  position: absolute;
+  transform: scale(0);
+  animation: ripple 0.6s linear;
 }
 
 @keyframes ripple {
-	to {
-		transform: scale(2.5);
-		opacity: 0;
-	}
+  to {
+    transform: scale(2.5);
+    opacity: 0;
+  }
 }
 
 .pulsate {
-	animation: pulsate 0.7s ease-out;
-	-webkit-animation: pulsate 0.7s ease-out;
-	-webkit-animation-iteration-count: infinite;
-	animation-iteration-count: infinite;
-	opacity: 0.0;
+  animation: pulsate 0.7s ease-out;
+  -webkit-animation: pulsate 0.7s ease-out;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  opacity: 0.0;
 }
 
 .toolTip {
-	position: relative;
-	display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .toolTip .toolTipText {
-	visibility: hidden;
-	width: 160px;
-	background-color: var(--fill-color);
-	color: var(--outline-color);
-	text-align: center;
-	padding: 5px 0;
-	border-radius: 10px;
-	margin-bottom: 13px;
+  visibility: hidden;
+  width: 160px;
+  background-color: var(--fill-color);
+  color: var(--outline-color);
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 10px;
+  margin-bottom: 13px;
 
-	position: absolute;
-	z-index: 1;
-	bottom: 75%;
-	left: 50%;
-	margin-left: 0px;
+  position: absolute;
+  z-index: 1;
+  bottom: 75%;
+  left: 50%;
+  margin-left: 0px;
 
-	opacity: 0;
-	transition: opacity 1s;
+  opacity: 0;
+  transition: opacity 1s;
 }
 
 .toolTip:hover .toolTipText {
-	visibility: visible;
-	opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 
 .column {
-	float: left;
-	width: 275px;
-	margin-top: 15px;
-	margin-right: 20px;
-	margin-bottom: 20px;
-  overflow-y: auto;
-	overflow-wrap: break-word;
-	padding-left: 3px;
+  float: left;
+  width: 275px;
+  margin-top: 15px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+	overflow-y: auto;
+  overflow-wrap: break-word;
+  padding-left: 3px;
 }
 
 h4 {
-	margin-top: 0;
-	margin-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 @media only screen and (max-width: 621px) {
 
-	body {
-		font-size: 16px;
-	}
+  body {
+    font-size: 16px;
+  }
 
-	button {
-		font-size: 14px;
-	}
+  button {
+    font-size: 14px;
+  }
 
-	.column {
-		width: 100%;
-	}
+  .column {
+    width: 100%;
+  }
 }

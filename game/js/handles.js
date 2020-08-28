@@ -22,6 +22,18 @@ function increaseAdvertising() {
   getEl('advertisingLevel').innerHTML = commify(advertising.amount);
 }
 
+function buyUserAdData() {
+  let newTracked = Math.ceil((Math.random() + 1) * Math.pow(1.1, advertising.amount));
+  if (money.amount < userAdData.costs.money) {
+    newTracked = Math.round(newTracked * money.amount / userAdData.costs.money);
+  }
+  userAdData.amount += newTracked;
+  userAdData.costs.money += newTracked * 2;
+
+  getEl(userAdData.amountEl).innerText = spellf(userAdData.amount);
+  getEl(userAdData.costEl).innerText = monify(userAdData.costs.money);
+}
+
 function hireHighSchooler() {
   // Hires a highSchooler!
   highSchoolers.amount++;

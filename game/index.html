@@ -80,7 +80,7 @@
 				<hr>
 				<p>Unsold inventory: </p><span id="unsoldCranes">0</span><br>
 
-				<input id="cranePriceSlider" type="range" min="0" max="1" value="0.25" step="0.01">
+				<input id="cranePriceSlider" type="range" min="0.01" max="2" value="0.25" step="0.01">
 
 				<br>
 				<p>Crane price: $</p><span id="cranePrice">0.25</span>
@@ -88,10 +88,15 @@
 
 				<p>Public demand: </p><span id="demand">10</span>%<br>
 				<br>
+
 				<div id="advertisingDiv" hidden>
 					<button id="btnAdvertising" onclick="increaseAdvertising()">Advertising</button>
 					<p>Level: </p><span id="advertisingLevel">1</span><br>
-					<p>Cost: </p><span id="advertisingCost">40.00</span><br>
+					<p>Cost: </p><span id="advertisingCost">40.00</span><br><br>
+
+					<button id="btnUserAdData" onclick="buyUserAdData()">Track</button>
+					<p>Tracked users: </p><span id="userAdDataEl">0</span><br>
+					<p>Cost: $</p><span id="userAdDataCostEl">0.00</span>
 				</div>
 			</div>
 			<br>
