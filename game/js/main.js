@@ -147,7 +147,7 @@ const advertising = {
   amount: 1, // level
   amountEl: 'advertisingLevel',
   costs: {
-    money: 20
+    money: 20,
   },
   costEl: 'advertisingCost',
   purchaseEl: 'btnAdvertising',
@@ -157,11 +157,11 @@ const userAdData = {
   amount: 0,
   amountEl: 'userAdDataEl',
   costs: {
-    money: 10
+    money: 10,
   },
   costEl: 'userAdDataCostEl',
-  purchaseEl: 'btnUserAdData'
-}
+  purchaseEl: 'btnUserAdData',
+};
 
 const resources = {
   highSchoolers: highSchoolers,

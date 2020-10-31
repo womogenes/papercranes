@@ -1,4 +1,4 @@
-// Manipuating elements
+// Manipulating elements
 const domElements = {};
 
 function getEl(id) {

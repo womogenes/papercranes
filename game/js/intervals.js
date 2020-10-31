@@ -24,9 +24,6 @@ setInterval(function () {
   updateTitle();
 }, 100);
 
-setInterval(function () {
-}, 100);
-
 // Slower one, every second.
 setInterval(function () {
   getEl('cranemakerRate').innerHTML = commify(Math.round(lifetimeCranes - prevCranes));

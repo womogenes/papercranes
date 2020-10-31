@@ -28,7 +28,7 @@ function updateDom() {
     }
   }
 
-  // update hapiness
+  // update happiness
   let happiness = money.amount - debt > 0 ? Math.min(Math.log(money.amount + wishes.amount - debt), 100) : 0;
   getEl('happinessMeter').style.width = happiness + '%';
   getEl('happinessAmount').innerHTML = happiness.toFixed(2) + '%';
