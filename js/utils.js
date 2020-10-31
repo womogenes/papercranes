@@ -173,18 +173,18 @@ function spellf(userInput) {
   }
 }
 
-String.prototype.toTitleCase = function () {
+toTitleCase = function () {
   return this.charAt(0).toUpperCase() + this.substr(1).toLowerCase();
 };
 
-String.prototype.camelize = function () {
+camelize = function () {
   return this.replace(/^([A-Z])|[\s-_]+(\w)/g, function (match, p1, p2, offset) {
     if (p2) return p2.toUpperCase();
     return p1.toLowerCase();
   });
 };
 
-String.prototype.decamelize = function (separator) {
+decamelize = function (separator) {
   separator = typeof separator === 'undefined' ? ' ' : separator;
 
   return this
@@ -224,7 +224,7 @@ window.mobileAndTabletCheck = function () {
 function generateInformation(object) {
   for (const name in object) {
     const i = object[name];
-    i.title = name.decamelize();
+    i.title = decamelize(name);
     if (typeof i.description == 'function') {
       i.description = i.description();
     }

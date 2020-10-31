@@ -61,7 +61,7 @@ function displayEvent(event) {
   if (event) {
     if (!getEl('eventDiv').hidden) {
       // save the currently displayed event for later
-      let currentEventName = getEl('eventTitle').innerHTML.camelize();
+      let currentEventName = camelize(getEl('eventTitle').innerHTML);
       pendingEvents.push(currentEventName);
       events[currentEventName].onClose?.();
     }
@@ -71,7 +71,7 @@ function displayEvent(event) {
 
   // update eventdiv with event information
   resetEventDiv();
-  getEl('eventTitle').innerHTML = event.title.toTitleCase();
+  getEl('eventTitle').innerHTML = toTitleCase(event.title);
   getEl('eventDescription').innerHTML = event.description;
   if (event.noCloseButton) {
     getEl('eventCloseButton').hidden = true;
@@ -81,7 +81,7 @@ function displayEvent(event) {
   if (event.buttons) {
     event.buttons.forEach((button) => {
       const newButton = document.createElement('button');
-      newButton.innerHTML = button.text.toTitleCase();
+      newButton.innerHTML = toTitleCase(button.text);
       newButton.onclick = button.onClick;
       getEl('eventButtons').appendChild(newButton);
     });
@@ -97,7 +97,7 @@ function displayEvent(event) {
 function displayProject(project) {
   project.element = document.createElement('button');
   project.element.style.opacity = 0;
-  project.element.setAttribute('id', project.title.camelize());
+  project.element.setAttribute('id', camelize(project.title));
 
   project.element.onclick = function () {
     projectBaseEffect(project);
@@ -112,7 +112,7 @@ function displayProject(project) {
   let title = document.createElement('b');
   titleDiv.appendChild(title);
 
-  title.appendChild(document.createTextNode(project.title.toTitleCase()));
+  title.appendChild(document.createTextNode(toTitleCase(project.title)));
   titleDiv.appendChild(document.createTextNode(` (${priceTag(project.costs)})`));
   project.element.appendChild(titleDiv);
 

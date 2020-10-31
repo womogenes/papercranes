@@ -255,7 +255,7 @@ function save() {
   localStorage.setItem('pendingEvents', JSON.stringify((
     getEl('eventDiv').hidden ?
       // saves the currently displayed event if there is one
-      pendingEvents : pendingEvents.concat([getEl('eventTitle').innerHTML.camelize()])
+      pendingEvents : pendingEvents.concat([camelize(getEl('eventTitle').innerHTML)])
   )));
   localStorage.setItem('theme', JSON.stringify(theme));
 }
@@ -358,7 +358,7 @@ function manageProjects() {
     if (trigger(project) && project.uses > 0) {
       displayProject(project);
       project.uses--;
-      activeProjects.push(project.title.camelize());
+      activeProjects.push(camelize(project.title));
     }
   }
 
@@ -374,7 +374,7 @@ function manageEvents() {
     let event = events[eventName];
     if (trigger(event) && event.uses != 0) {
       if (event.notifyPlayer) {
-        pendingEvents.push(event.title.camelize());
+        pendingEvents.push(camelize(event.title));
       }
       event.effect?.();
     }

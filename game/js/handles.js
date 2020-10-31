@@ -104,7 +104,7 @@ function makeCrane(n) {
 
 function closeEvent() {
   // closes the currently displayed event and displays the next if there is one
-  let event = events[getEl('eventTitle').innerHTML.camelize()];
+  let event = events[camelize(getEl('eventTitle').innerHTML)];
   event.onClose?.();
 
   if (pendingEvents.length) {
