@@ -1,5 +1,3 @@
-let domUpdate;
-
 // Game loop!
 setInterval(function () {
   generatePower();
@@ -19,24 +17,15 @@ setInterval(function () {
 }, 10);
 
 // Slower because its starting to lag things
-domUpdate = setInterval(function () {
-  updateDom();
-}, 100);
-
 setInterval(function () {
+  if (!document.hidden) {
+    updateDom();
+  }
   updateTitle();
 }, 100);
 
-// Don't update if the tab is hidden
-document.addEventListener('visibilitychange', function () {
-  if (document.hidden) {
-    clearInterval(domUpdate);
-  } else {
-    domUpdate = setInterval(function () {
-      updateDom();
-    }, 100);
-  }
-});
+setInterval(function () {
+}, 100);
 
 // Slower one, every second.
 setInterval(function () {
