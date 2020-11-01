@@ -1,4 +1,3 @@
-
 // Really basic JS but needs to be stored in a separate file.
 document.addEventListener('DOMContentLoaded', function(event) {
   loadTheme();
