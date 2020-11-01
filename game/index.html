@@ -53,11 +53,6 @@
 
 		<div id="readoutDiv" class="column">
 		</div>
-		<div id="learnColumn" class="column">
-			<h4>Cranes</h4>
-			<hr>
-			<button onclick="events.learnedToFoldCranes.effect()">Learn to fold cranes</button>
-		</div>
 
 		<div id="prestigeColumn" class="column" hidden>
 			<h4>Prestige</h4>
@@ -115,41 +110,47 @@
 
 		</div>
 
-		<div id="foldingColumn" class="column" hidden>
+		<div id="foldingColumn" class="column">
 
 			<div id="manufacturingDiv">
 				<h4>Manufacturing</h4>
 				<hr>
 
-				<button id="btnMakeCrane" onClick="makeCrane(1)">
-					<p>Fold crane</p>
-				</button>
-				<br>
-
-				<p>Cranes per second: </p><span id="cranemakerRate">0</span>
-				<br>
-				<br>
-				<div id="paperDiv" hidden>
-					<div id="paperBuyerDiv" hidden>
-						<button id="btnPaperBuyer" onclick="togglePaperBuyer()">PaperBuyer</button>
-						<span id="paperBuyer">OFF</span><br>
-					</div>
-
-					<button id="btnBuyPaper" onclick="buyPaper(1)">Paper</button>
-					<span id="paper">10</span> sq. m <br>
-					<p>Cost: </p><span id="paperCost">5</span><br>
-					<br>
-					<div id="woodDiv" hidden>
-						<button id="btnBuyWood" onclick="buyWood(1)">Wood</button>
-						<span id="wood">0</span> logs <br>
-						<p>Cost: </p><span id="woodCost">5</span><br>
-					</div>
-					<div id="paperMillDiv" hidden>
-						<button id="btnBuyPaperMill" onclick="buyPaperMill(1)">Paper Mill</button>
-						<span id="paperMills">0</span> mills <br>
-						<p>Cost: </p><span id="paperMillCost">5</span><br>
-					</div>
+				<div id="learn">
+					<button onclick="events.learnedToFoldCranes.effect()">Learn to fold cranes</button>
 				</div>
+				
+				<div id="postLearnManufacturing" hidden>
+					<button id="btnMakeCrane" onClick="makeCrane(1)">
+						<p>Fold crane</p>
+					</button>
+					<br>
+
+					<p>Cranes per second: </p><span id="cranemakerRate">0</span>
+					<br>
+					<br>
+					<div id="paperDiv" hidden>
+						<div id="paperBuyerDiv" hidden>
+							<button id="btnPaperBuyer" onclick="togglePaperBuyer()">PaperBuyer</button>
+							<span id="paperBuyer">OFF</span><br>
+						</div>
+
+						<button id="btnBuyPaper" onclick="buyPaper(1)">Paper</button>
+						<span id="paper">10</span> sq. m <br>
+						<p>Cost: </p><span id="paperCost">5</span><br>
+						<br>
+						<div id="woodDiv" hidden>
+							<button id="btnBuyWood" onclick="buyWood(1)">Wood</button>
+							<span id="wood">0</span> logs <br>
+							<p>Cost: </p><span id="woodCost">5</span><br>
+						</div>
+						<div id="paperMillDiv" hidden>
+							<button id="btnBuyPaperMill" onclick="buyPaperMill(1)">Paper Mill</button>
+							<span id="paperMills">0</span> mills <br>
+							<p>Cost: </p><span id="paperMillCost">5</span><br>
+						</div>
+					</div>
+			</div>
 			</div>
 			<br>
 			<div id="workerDiv" hidden>

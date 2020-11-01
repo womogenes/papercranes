@@ -204,7 +204,8 @@ const events = {
     loadEffect: function () {
       unhide('foldingColumn');
       unhide('prestigeColumn');
-      getEl('learnColumn').hidden = true;
+      getEl('learn').hidden = true;
+      getEl('postLearnManufacturing').hidden = false;
     },
   },
 };
