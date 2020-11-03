@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
   // Initial message.
   if (consoleHistory.length == 0) {
-    displayMessage('Hi');
+    displayMessage('Welcome.');
   }
 
   // Only have button ripple on mobile.

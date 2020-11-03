@@ -41,7 +41,7 @@ const events = {
       return !projects.businessManagement.flag && !canAfford(projects.businessManagement.costs) && !projects.bankAccount.flag;
     },
     save: ['flag', 'uses'],
-    description: 'Without business management you can\'t make money. Buy it before other things next time.',
+    description: 'Without business management, you can\'t make money. Buy it before other things next time.',
     uses: 1,
     flag: false,
     notifyPlayer: true,
@@ -68,7 +68,7 @@ const events = {
     effect: function () {
       this.uses -= 1;
       this.flag = true;
-      displayMessage('You need paper to fold cranes, buy some using the button');
+      displayMessage('You need paper to fold cranes.');
       this.loadEffect();
     },
     loadEffect: function () {
