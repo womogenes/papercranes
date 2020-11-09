@@ -1,4 +1,3 @@
-// Yoy!
 let activeProjects = [];
 
 function projectBaseEffect(project) {

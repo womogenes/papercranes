@@ -88,7 +88,7 @@ function displayEvent(event) {
   }
 
   event.onDisplay?.();
-
+  
   if (getEl('eventDiv').hidden) {
     unhide('eventDiv');
   }

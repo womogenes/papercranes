@@ -11,7 +11,6 @@ const events = {
       this.flag = true;
       this.uses -= 1;
       this.loadEffect();
-      displayMessage('Use projects to unlock new things or get upgrades');
     },
     loadEffect: function () {
       unhide('projectsColumn');
