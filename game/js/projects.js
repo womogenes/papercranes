@@ -94,7 +94,7 @@ const projects = {
     costs: {
       money: 10,
     },
-    description: 'Be able to borrow money!',
+    description: 'Your bank account is the basis for all future financing.',
     trigger: function () {
       return money.amount >= 5 && lifetimeCranes >= 20 && projects.businessManagement.flag;
     },

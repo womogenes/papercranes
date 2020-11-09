@@ -1,5 +1,5 @@
 * {
-  font-family: 'Inconsolata', 'Consolas', monospace;
+  font-family: 'Open Sans', 'Inconsolata', 'Consolas', monospace;
   color: var(--text-color);
   touch-action: manipulation;
 }
@@ -34,11 +34,15 @@ hr {
 }
 
 button {
+  display: inline-flex;
+  align-items: center;
+  
   font-size: 13px;
   border-radius: 5px;
   border: 1px solid var(--outline-color);
   background: var(--btn-bg-on);
 
+  height: 22px;
   margin: 3px 0;
   margin-right: 4px;
   padding: 2px 4px;
